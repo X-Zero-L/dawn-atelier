@@ -1,194 +1,163 @@
 <div align="center">
 
-<img src="web/brand/emblem.svg" width="76" alt="Dawn Atelier emblem">
+<img src="web/brand/emblem.svg" width="76" alt="黎明工坊">
 
 # 黎明工坊 · Dawn Atelier
 
 **把重复的准备工作交给预设，把时间留给冒险。**
 
-The Piper of Dawn 的本地存档工作台：一键方案、物品图鉴、可审阅的修改清单与自动备份。
+The Piper of Dawn 本地存档工具，支持一键补给、炼金调整、好感提升、农具升级和自动备份。
 
-[快速体验](#快速体验) · [连接游戏](#连接游戏) · [功能](#功能) · [演示视频](#演示视频) · [兼容性](docs/compatibility.md)
+[下载安装](#下载安装) · [功能介绍](#功能介绍) · [使用方法](#使用方法) · [观看演示](#观看演示) · [常见问题](#常见问题)
 
 </div>
 
-[![黎明工坊演示封面](docs/images/video-poster.png)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.0/dawn-atelier-demo.mp4)
+[![黎明工坊](docs/images/video-poster.png)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)
 
-## 功能
+## 功能介绍
 
-### 从一套方案开始
+### 选一套方案，按自己的节奏玩
 
-内置 **6 套方案、14 项可组合操作**。每套方案都能调整目标值、保存为自定义方案，并通过 JSON 导入或导出。
+内置 **6 套方案、14 项可组合操作**。目标数量可以调整，常用组合可以保存为自己的方案，也能导出分享。
 
-| 方案 | 默认配置 |
+| 方案 | 帮你准备什么 |
 | --- | --- |
-| 轻松开荒 | 金币补足到 10 万、已有种子补足到 30、天赋点补足到 10 |
-| 田园日常 | 种子与肥料补足到 99、四类农具升到 4 级、杂物耐久降到 1 |
-| 富足经营 | 金币补足到 100 万、日常物品补足到 99、员工恢复 SAN |
-| 炼金准备 | 材料与种子补足到 99、炼金沉淀物补足到 1000、天赋点补足到 30 |
-| 街坊好友 | 按每个 NPC 的配置提升到好感第 5 档、重置今日收礼次数 |
-| 充实储备 | 金币补足到 1000 万、日常物品补足到 999、筹码补足到 1000 |
+| 轻松开荒 | 10 万金币、30 份已有种子、10 点天赋 |
+| 田园日常 | 99 份种子与肥料、4 级农具，让杂物更容易清理 |
+| 富足经营 | 100 万金币、99 份日常物品，恢复员工 SAN |
+| 炼金准备 | 99 份材料与种子、1000 份炼金沉淀物、30 点天赋 |
+| 街坊好友 | 将 NPC 好感提升到各自第 5 档，恢复今日送礼次数 |
+| 充实储备 | 1000 万金币、999 份日常物品、1000 枚筹码 |
 
-补足操作保留更高的现值。背包补给按物品堆叠上限处理，跳过任务物品和独特道具；员工上限为 0 时保留原设定。方案预览会显示适用项、已达到目标的记录和跳过原因。
+补给会把**已有物品**补足到目标，数量更高时保留原值，并遵守堆叠上限。任务物品、独特道具和不适用的记录会跳过，具体结果可以在保存前查看。
 
 <details>
-<summary>查看完整方案页面</summary>
+<summary>查看全部方案</summary>
 
-![一键方案页面](docs/images/presets.png)
+![一键方案](docs/images/presets.png)
 
 </details>
 
-### 每个系统都有自己的操作界面
+### 想改哪一项，就直接改哪一项
+
+- **背包补给**：查看物品名称、数量和上限，单项补足或批量配置。
+- **炼金资源**：调整天赋点和沉淀物，支持自定义数量与快捷补足。
+- **NPC 好感**：查看当前档位，按每个角色的成长要求提升。
+- **农具升级**：直接选择等级，预览对应的作用范围。
+- **员工状态**：恢复 SAN，保留特殊员工的原有设定。
+- **物品图鉴**：搜索名称、用途或 ID，收藏常用物品。
+- **修改清单**：查看改动前后数值，逐项取消或撤销上一组操作。
+- **自动备份**：保存前备份原档，随时下载修改前的进度。
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/images/inventory.png" alt="背包补给卡片"><p align="center">背包数量、堆叠上限与单项补给</p></td>
-    <td width="50%"><img src="docs/images/relationships.png" alt="NPC 好感界面"><p align="center">NPC 好感档位与下一档目标</p></td>
+    <td width="50%"><img src="docs/images/inventory.png" alt="背包补给"><p align="center">整理背包，备足日常物品</p></td>
+    <td width="50%"><img src="docs/images/alchemy.png" alt="炼金沉淀物修改"><p align="center">直接调整炼金沉淀物与天赋点</p></td>
   </tr>
   <tr>
-    <td><img src="docs/images/tools.png" alt="农具等级界面"><p align="center">农具等级与作用范围直接点选</p></td>
-    <td><img src="docs/images/builder.png" alt="自定义方案编辑器"><p align="center">组合操作，保存自己的日常方案</p></td>
+    <td><img src="docs/images/relationships.png" alt="NPC 好感"><p align="center">查看好感，提升到下一档</p></td>
+    <td><img src="docs/images/tools.png" alt="农具升级"><p align="center">选择工具等级和作用范围</p></td>
   </tr>
 </table>
 
-- **图鉴与资料库**：中文搜索、物品收藏、详情侧栏、配置表检索。
-- **修改清单**：显示原值、目标值和修改来源；支持逐项移除与整组撤销。
-- **草稿恢复**：未保存清单绑定存档名称与 SHA-256；文件变化后不套用旧草稿。
-- **导出或直接应用**：两种方式都先备份。直接应用要求游戏已退出。
-- **原档下载**：操作记录中可取回修改前的存档。
-- **炼金沉淀物**：炼金页显示可用数量，支持直接编辑、100 / 1000 / 10000 快捷补足与自定义目标，保存时自动同步摘要。
-- **界面**：暖白与深绿主题、深色模式、430px 窄屏布局、`Ctrl+K` 搜索、`Ctrl+Z` 撤销。
+支持深色模式与窄屏布局。`Ctrl+K` 搜索物品，`Ctrl+Z` 撤销上一步修改。
 
-## 快速体验
+## 下载安装
 
-演示模式只需要 **Python 3.11+**，使用程序生成的合成存档和少量示例配置。
+**需要：Windows、Python 3.11+，以及已安装的 The Piper of Dawn。**
+
+当前支持游戏资源版本 **`2026-09-25-1016`**。准备程序会自动检查版本，详细信息见 [兼容性说明](docs/compatibility.md)。
+
+从 [最新版本](https://github.com/X-Zero-L/dawn-atelier/releases/latest) 下载并解压源码，或使用 Git：
 
 ```powershell
 git clone https://github.com/X-Zero-L/dawn-atelier.git
 cd dawn-atelier
-python launch.py --demo
 ```
 
-浏览器会打开 `http://127.0.0.1:8766`。演示模式可查看预设、修改预览并导出演示副本，直接写入游戏存档的入口保持禁用。
-
-如果端口已被占用：
-
-```powershell
-python launch.py --demo --port 8767
-```
-
-新克隆的演示界面使用内置矢量插画。README 和视频中的物品图来自本机游戏资源准备，存档数值均为合成数据。
-
-## 连接游戏
-
-真实存档编辑针对 **Windows 上的受支持游戏版本**。版本号及文件哈希见 [兼容性说明](docs/compatibility.md)。
+在项目目录中运行：
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-
 .\.venv\Scripts\python.exe prepare.py --game-dir "D:\Steam\steamapps\common\The Piper Of Dawn"
 .\.venv\Scripts\python.exe launch.py
 ```
 
-`prepare.py` 从本机安装读取资源，核对受支持版本、解码配置表，并准备界面需要的图标。游戏目录会写入被 Git 忽略的 `config.local.json`。找到 Steam 安装时可以省略 `--game-dir`。
+把 `--game-dir` 后的路径换成你的游戏目录，该目录应包含 `ThePiper.exe`。能自动找到 Steam 安装时，可以省略这一参数。
 
-只需要存档编辑和资料库时，可以跳过美术提取：
-
-```powershell
-python prepare.py --game-dir "D:\Steam\steamapps\common\The Piper Of Dawn" --skip-art
-```
-
-### 使用流程
-
-1. 在游戏中保存进度，进入工坊选择对应存档。
-2. 选择一键方案，或在各系统卡片中调整数值。
-3. 打开修改清单，核对原值、目标值和来源。
-4. 导出副本；或者退出游戏后点击“备份并直接应用”。
-5. 进入游戏，读取修改后的存档。
-
-金币直接输入界面数量，工坊会换算成游戏内部的千倍整数。工具等级显示为 1–4 级，内部存档值为 0–3。
-
-炼金沉淀物直接填写数量，不需要倍率换算。入口位于“存档编辑 → 炼金与天赋”，也可从“一键方案 → 炼金准备”或单项“炼金沉淀物”操作进入。结构依据与同步方式见 [炼金沉淀物说明](docs/alchemy-sediment.md)。
-
-![预设变更预览](docs/images/preview.png)
-
-### 数据放在哪里
-
-| 路径 | 内容 |
-| --- | --- |
-| `data/game/` | 从本机游戏生成的配置、索引和资料 |
-| `data/game/backups/` | 修改前的原档与操作记录 |
-| `data/game/modified-saves/` | 导出的修改副本 |
-| `data/demo/` | 合成演示数据、演示导出与备份 |
-| `web/assets/` | 本机提取的界面插画和物品图标 |
-| `config.local.json` | 本机路径设置 |
-
-这些目录都在 `.gitignore` 中。自定义方案、物品收藏和未保存草稿保存在浏览器本地存储；需要跨浏览器迁移的方案可以导出为 JSON。
-
-路径可通过 [config.example.json](config.example.json) 或环境变量覆盖：
-
-| 环境变量 | 用途 |
-| --- | --- |
-| `PIPER_GAME_DIR` | 游戏安装目录 |
-| `PIPER_SAVE_DIR` | 自定义存档目录 |
-| `DAWN_DATA_DIR` | 生成数据的目录 |
-| `DAWN_ASSET_DIR` | 界面图标与插画目录 |
-
-## 演示视频
-
-[![Dawn Atelier 动态演示](docs/images/demo.gif)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.0/dawn-atelier-demo.mp4)
-
-**[观看 / 下载 32 秒演示视频](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.0/dawn-atelier-demo.mp4)** · 1920 × 1080 · 30 fps · Remotion
-
-视频展示预设、背包、NPC 好感、农具升级与变更预览。没有应用到实际游戏存档。Remotion 工程、依赖锁文件、字体许可与复现命令位于 [video/](video/README.md)。
-
-## 运行方式与实现
-
-工作台采用 Python 标准库 HTTP 服务与原生 HTML/CSS/JavaScript。网页只连接本机服务，不需要前端构建工具。资源准备使用 `cryptography` 和 Pillow；Node.js 仅用于演示视频和截图脚本。
-
-```text
-app_config.py        本机路径、演示模式与 Steam 目录发现
-web_server.py        本地 API、预览、备份与应用
-save_codec.py        具名字段解析与局部字节替换
-presets.py           允许的预设操作和目标计算
-prepare.py           本机配置与界面资源准备
-demo_data.py         合成演示数据生成
-schemas/             受支持版本的字段结构与枚举
-web/                 网页界面和内置品牌矢量图
-research/            可复现的资源读取与结构分析脚本
-video/               Remotion 演示工程
-docs/images/         发布截图与视频封面
-```
-
-更详细的数据流程见 [架构说明](docs/architecture.md)。
-
-### 复现截图和视频
-
-截图脚本需要 Node.js 22+ 和已安装的 Chrome / Edge：
+浏览器会打开 **`http://127.0.0.1:8766`**。首次准备完成后，下次只需要运行：
 
 ```powershell
-python launch.py --demo --port 8767 --no-browser
-node scripts/capture-demo.mjs
-
-cd video
-npm ci
-npm run assets
-npm run render
+.\.venv\Scripts\python.exe launch.py
 ```
 
-截图脚本会检查服务确实处于合成演示模式，再启动独立的无头浏览器。视频文件生成在 `video/out/`，通过 GitHub Release 分发。
+### 先试用界面
 
-## 已确认的范围
+尚未准备游戏数据，也可以用示例存档体验操作：
 
-- 受支持版本的配置提取：81 张表、97,078 行、655 种物品。
-- 存档结构：137 个消息、774 个字段；配置结构与枚举随版本固定。
-- 资源读取：清单、配置表行数和对应 CRC 核对。
-- 界面展示：桌面、窄屏、方案编辑器、专用操作卡片和变更预览。
-- 写入保护：源文件 SHA-256 核对、修改反向还原比对、备份、临时文件替换。
+```powershell
+python launch.py --demo
+```
 
-预设只编辑已有记录，不创建缺失实体，不代替游戏执行剧情或奖励流程。各项预设尚未逐一完成游戏内效果验证。游戏更新后应先核对兼容性，版本不匹配时数据准备会停止。
+演示模式不会访问你的游戏存档。可以查看图鉴、组合预设和导出演示副本。
 
-## 项目与素材
+## 使用方法
 
-这是独立的本地工具，与游戏开发者没有隶属关系。游戏名称、美术和其他游戏资源属于各自权利人；原始游戏资源由使用者从本机安装生成，仓库提供工具源码、结构定义与展示截图。第三方字体的许可证见 [素材说明](NOTICE.md)。
+1. **在游戏里保存进度。** 回到工坊，选择刚保存的存档。
+2. **选择方案或调整单项。** 改动会先加入清单。
+3. **查看修改清单。** 确认原值、目标值，取消不需要的项目。
+4. **保存修改。** 可以导出副本；也可以退出游戏后，点击“备份并直接应用”。
+5. **重新进入游戏读档。** 读取刚修改的那一份存档。
+
+导出的副本保存在 `data/game/modified-saves/`。选择导出方式时，需要先退出游戏，再用副本替换对应的游戏存档文件。
+
+### 修改炼金沉淀物
+
+进入 **存档编辑 → 炼金与天赋**，点击“炼金沉淀物”的数量即可修改；也可以快捷补足到 **100、1000、10000**。
+
+“炼金准备”方案默认补足到 1000。自定义方案中可单独选择“炼金沉淀物”，输入自己的目标。
+
+### 保存自己的方案
+
+在“一键方案”中点击“自定义方案”，勾选操作并调整目标，保存到“我的方案”。方案支持 JSON 导入和导出，方便换浏览器或分享给其他玩家。
+
+尚未保存的修改会自动保留为草稿。如果游戏保存了新的进度，需要重新读取存档，再生成对应的修改清单。
+
+### 恢复修改前的进度
+
+进入 **导出与备份 → 最近操作与原档**，下载对应操作前的原档。退出游戏后，将它放回游戏存档目录，再进入游戏读取。
+
+原档和操作记录也保存在 `data/game/backups/`。建议保留这些文件，直到确认修改后的进度符合预期。
+
+## 观看演示
+
+[![黎明工坊操作演示](docs/images/demo.gif)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)
+
+**[观看完整演示](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)**，了解方案选择、背包调整、好感提升、农具升级和修改预览。
+
+## 常见问题
+
+**找不到游戏目录？** 运行 `prepare.py --game-dir "你的游戏目录"`。游戏装在其他盘也可以手动指定。
+
+**端口被占用？** 使用 `python launch.py --port 8767`，换一个本地端口。演示模式也支持这个参数。
+
+**为什么有些操作被跳过？** 补足目标已经满足、存档里没有对应物品、物品不能堆叠，或角色使用特殊设定时，预设会保留原状并说明原因。
+
+**为什么不能直接应用？** 请先退出游戏。演示模式下只能导出演示副本。
+
+**金币和沉淀物要乘倍率吗？** 都直接填写想要的数量，工坊会处理存储单位。
+
+**能一键获得所有物品、完成所有剧情吗？** 当前预设只修改已有记录。剧情、奖励和实体创建仍由游戏处理。
+
+**更新游戏后还能使用吗？** 先查看兼容性说明。版本不匹配时，准备程序会停止，避免按旧结构读取新版本数据。
+
+## 使用范围
+
+本工具在本机运行。修改前可预览，保存前会备份，并检查游戏是否已保存了更新的进度。
+
+各项预设尚未逐一完成游戏内效果验证；首次使用某项功能时，建议导出副本并保留原档。关于游戏版本和已知限制，参阅 [兼容性说明](docs/compatibility.md)。
+
+这是独立工具，与游戏开发者没有隶属关系。游戏名称与美术属于各自权利人，详见 [素材与第三方说明](NOTICE.md)。
+
+[报告问题](https://github.com/X-Zero-L/dawn-atelier/issues) · [开发文档](docs/development.md)
