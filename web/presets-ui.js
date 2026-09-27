@@ -80,14 +80,22 @@ function focusedRecords(){
   if(state.group==='staff')for(const field of all){if(!/^AllStaffSaveData\.StaffList\[\d+\]\.CurrentSan$/.test(field.path))continue;const parent=field.path.slice(0,-11);const max=Number(lookup.get(parent+'.MaxSan')?.value||0);data.push({field,parent,max,name:lookup.get(parent+'.Name')?.value||'员工',kind:'staff'});}
   return data;
 }
-function focusedActions(){const map={inventory:[['inventory','补足背包'],['seeds','补足种子'],['materials','补足材料']],favor:[['favor','批量好感'],['gifts','恢复送礼次数']],tools:[['tools','全部升至满级']],staff:[['staff','全员恢复 SAN']],alchemy:[['talent','补足天赋点']]};return (map[state.group]||[]).map(([id,label])=>`<button class="button secondary" data-action="single-preset" data-rule="${id}">${I(actionById(id)?.icon||'star')}${label}</button>`).join('');}
+function focusedActions(){const map={inventory:[['inventory','补足背包'],['seeds','补足种子'],['materials','补足材料']],favor:[['favor','批量好感'],['gifts','恢复送礼次数']],tools:[['tools','全部升至满级']],staff:[['staff','全员恢复 SAN']],alchemy:[['sediment','补足炼金沉淀物'],['talent','补足天赋点']]};return (map[state.group]||[]).map(([id,label])=>`<button class="button secondary" data-action="single-preset" data-rule="${id}">${I(actionById(id)?.icon||'star')}${label}</button>`).join('');}
+
+function renderSedimentCard(){
+  const field=state.save.fields.find(f=>f.path===state.save.sediment_path);
+  if(!field)return `<section class="sediment-card sediment-unavailable"><span class="sediment-emblem">${I('flask')}</span><div><h3>炼金沉淀物</h3><p>这份存档尚未找到沉淀物记录。先在游戏中获得沉淀物并保存，再重新读取。</p></div></section>`;
+  const value=effective(field);const index=state.save.fields.indexOf(field);const changed=state.pending.has(field.path);
+  return `<section class="sediment-card ${changed?'has-change':''}"><div class="sediment-info"><span class="sediment-emblem">${I('flask')}</span><div><span class="eyebrow">ALCHEMICAL SEDIMENT</span><h3>炼金沉淀物</h3><p>种子炼金等项目使用的沉淀物总量</p></div></div><div class="sediment-amount"><span>当前数量${changed?' · 待保存':''}</span><button class="sediment-value" data-action="edit-field" data-index="${index}" aria-label="修改炼金沉淀物数量"><strong>${num(value)}</strong><small>份</small>${I('edit')}</button></div><div class="sediment-quick"><span>一键补足</span><div class="amount-chips">${[100,1000,10000].map(n=>`<button data-action="sediment-target" data-value="${n}" ${Number(value)>=n?'disabled':''}>${num(n)} 份</button>`).join('')}</div><small>直接输入数量 · 自动同步摘要</small></div></section>`;
+}
+
 function renderFocusedFields(){
   if(!presetUI.catalog||!['inventory','favor','tools','staff','alchemy'].includes(state.group))return false;
   const controls=`<div class="focused-actions">${focusedActions()}<button class="text-button raw-toggle" data-action="toggle-raw">${presetUI.raw?'返回简洁视图':'查看全部字段'} ${I('code')}</button></div>`;
   if(presetUI.raw)return false;
   if(state.group==='alchemy'){
     const fields=state.save.fields;const talent=fields.find(f=>f.path==='AlchemySaveData.TalentPoint');const level=fields.find(f=>f.path==='AlchemySaveData.Level');const exp=fields.find(f=>f.path==='AlchemySaveData.Exp');
-    $('#field-count').textContent='炼金成长';$('#field-results').innerHTML=controls+`<div class="alchemy-dashboard"><div class="alchemy-highlight"><span class="alchemy-symbol">${I('flask')}</span><span class="eyebrow">YOUR NEXT DISCOVERY</span><h3>为灵感留一点余裕</h3><p>准备可用天赋点，在游戏里选择你真正想要的成长方向。</p><strong>${E(talent?effective(talent):'0')}<small>可用天赋点</small></strong><div class="amount-chips">${[10,30,100].map(n=>`<button data-action="talent-target" data-value="${n}">补足到 ${n} 点</button>`).join('')}</div></div><div class="alchemy-stats"><div><span>炼金等级</span><strong>Lv.${E(level?effective(level):'—')}</strong></div><div><span>当前经验</span><strong>${E(exp?effective(exp):'—')}</strong></div><button class="button secondary" data-action="toggle-raw">高级数值调整 ${I('arrowRight')}</button><p>等级、天赋解锁与经验有联动，预设优先准备可自由分配的点数。</p></div></div>`;return true;
+    $('#field-count').textContent='炼金资源与成长';$('#field-results').innerHTML=controls+renderSedimentCard()+`<div class="alchemy-dashboard"><div class="alchemy-highlight"><span class="alchemy-symbol">${I('flask')}</span><span class="eyebrow">YOUR NEXT DISCOVERY</span><h3>为灵感留一点余裕</h3><p>准备可用天赋点，在游戏里选择你真正想要的成长方向。</p><strong>${E(talent?effective(talent):'0')}<small>可用天赋点</small></strong><div class="amount-chips">${[10,30,100].map(n=>`<button data-action="talent-target" data-value="${n}">补足到 ${n} 点</button>`).join('')}</div></div><div class="alchemy-stats"><div><span>炼金等级</span><strong>Lv.${E(level?effective(level):'—')}</strong></div><div><span>当前经验</span><strong>${E(exp?effective(exp):'—')}</strong></div><button class="button secondary" data-action="toggle-raw">高级数值调整 ${I('arrowRight')}</button><p>等级、天赋解锁与经验有联动，预设优先准备可自由分配的点数。</p></div></div>`;return true;
   }
   const query=state.fieldQuery.trim().toLowerCase();const records=focusedRecords().filter(r=>!query||`${r.id||''} ${r.name} ${r.field.path}`.toLowerCase().includes(query));const size=9;const pages=Math.max(1,Math.ceil(records.length/size));state.fieldPage=Math.min(state.fieldPage,pages-1);
   $('#field-count').innerHTML=`<b>${records.length}</b> ${state.group==='inventory'?'组物品':state.group==='favor'?'位角色':state.group==='tools'?'类工具':'位员工'}`;
@@ -126,6 +134,7 @@ document.addEventListener('click',async event=>{
   else if(action==='stock-one'){const f=state.save.fields[Number(button.dataset.index)];queueChanges([{field:f,value:Math.max(Number(effective(f)),Math.min(99,Number(button.dataset.cap)))}],'物品补给');}
   else if(action==='favor-one'||action==='staff-one'){const f=state.save.fields[Number(button.dataset.index)];queueChanges([{field:f,value:Math.max(Number(effective(f)),Number(button.dataset.value))}],action==='favor-one'?'好感进阶':'员工恢复');}
   else if(action==='tool-one'){const f=state.save.fields[Number(button.dataset.index)];const selected=state.save.fields.find(x=>x.path===f.path.replace(/\.Level$/,'.SelectedIndex'));queueChanges([{field:f,value:button.dataset.value},{field:selected,value:button.dataset.value}],'工具升级');}
+  else if(action==='sediment-target')await requestPreset([{id:'sediment',value:Number(button.dataset.value)}],'炼金沉淀物',true,button);
   else if(action==='talent-target')await requestPreset([{id:'talent',value:Number(button.dataset.value)}],'炼金天赋点',true,button);
   else if(action==='apply-save')await applyChanges(button);
 });

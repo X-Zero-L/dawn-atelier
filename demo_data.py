@@ -5,7 +5,7 @@ from pathlib import Path
 import struct
 
 APP = Path(__file__).resolve().parent
-VERSION = 1
+VERSION = 2
 
 
 def varint(value):
@@ -101,10 +101,11 @@ def prepare_demo(destination):
     schema={row['name']:row for row in raw_schema['types']}
     save={
         'SlotIdx':0,'TimeStamp':1790503200,'GameTimeStamp':36000,'LoopTime':0,'HasContent':True,'MapId':303,
-        'AllAttributeSaveData':{'AttributeParams':[{'AttributeId':901,'Value':128500000},{'AttributeId':902,'Value':0}]},
+        'AllAttributeSaveData':{'AttributeParams':[{'AttributeId':901,'Value':128500000},{'AttributeId':902,'Value':240}]},
         'BagSaveData':{'ItemDataList':[{'ConfigId':ident,'Count':count,'Timestamp':0,'SeedLogicID':0,
                     'OriginalSeedItemID':-1,'ItemLogicID':i+1} for i,(ident,_,_,_,count) in enumerate(entries)]},
-        'AlchemySaveData':{'Level':3,'TalentPoint':8,'Exp':18,'LastGetExp':0,'LastLevel':3},
+        'AlchemySaveData':{'Level':3,'TalentPoint':8,'Exp':18,'LastGetExp':0,'LastLevel':3,
+                           'AlchemyPrecipitatesValueList':[240],'AlchemyPrecipitatesNumList':[1]},
         'AllFavorData':{'allNPCData':[{'npcID':ident,'favorValue':levels[level],'receiveGiftsToday':1,
                          'currentReturnGiftIndex':-1,'receivedGiftFlag':False,'timeSkipFlag':False} for ident,_,level in npcs]},
         'AllOprToolSaveData':{'OprToolDataList':[{'ID':ident,'Level':0,'SelectedIndex':0} for ident in range(5)]},
@@ -118,4 +119,12 @@ def prepare_demo(destination):
     target=destination/'saves/SAVE_PIPER_0.bytes'
     if not target.exists():
         target.write_bytes(encode_message('SaveLoadSystem.GameSaveData',save,schema))
+    elif marker.is_file() and marker.read_text() == '1':
+        # Add a fresh fixture alongside an existing demo; keep the user's edited copy.
+        for slot in range(1,100):
+            fixture=destination/'saves'/f'SAVE_PIPER_{slot}.bytes'
+            if not fixture.exists():
+                save['SlotIdx']=slot
+                fixture.write_bytes(encode_message('SaveLoadSystem.GameSaveData',save,schema))
+                break
     marker.write_text(str(VERSION))

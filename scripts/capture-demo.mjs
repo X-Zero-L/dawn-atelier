@@ -38,6 +38,18 @@ try{
   for(const host of ['127.0.0.1','[::1]']){try{const test=`http://${host}:${port}`;await fetch(test+'/json/version');endpoint=test;break;}catch{}}
   if(!endpoint)throw new Error('Cannot reach the isolated renderer.');
   browser=await connect(endpoint.replace('http:','ws:')+browserPath);
+  if(process.argv.includes('--alchemy-only')){
+    const alchemy=await openPage('saves',1600,1200);
+    await evaluate(alchemy,`document.querySelector('[data-action="field-group"][data-group="alchemy"]').click()`);
+    await capture(alchemy,'alchemy');
+    await evaluate(alchemy,`document.querySelector('[data-action="sediment-target"][data-value="1000"]').click()`);
+    await waitFor(alchemy,'#pending-bar:not([hidden])');
+    await evaluate(alchemy,`document.querySelector('[data-action="review"]').click()`);
+    await waitFor(alchemy,'#apply-runtime-note');
+    await capture(alchemy,'alchemy-preview');
+    await evaluate(alchemy,`document.querySelector('#review-dialog').close();document.querySelector('[data-action="clear-pending"]').click();presetUI.history=[];renderPending()`);
+    await close(alchemy);
+  }else{
   const overview=await openPage('home',1600,1200);await capture(overview,'overview');await close(overview);
   const presets=await openPage('presets',1600,1470);await capture(presets,'presets');
   await evaluate(presets,`document.querySelector('[data-action="configure-preset"][data-id="farmer"]').click()`);await capture(presets,'builder');
@@ -47,4 +59,5 @@ try{
   await close(saves);
   const items=await openPage('items',1600,1200);await capture(items,'items');await close(items);
   const mobile=await openPage('presets',430,1000,true);await capture(mobile,'mobile');await close(mobile);
+  }
 }finally{if(browser){try{await browser.send('Browser.close');}catch{}}sockets.forEach(socket=>socket.close());browserProcess.kill();}

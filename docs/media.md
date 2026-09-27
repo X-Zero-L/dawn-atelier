@@ -28,12 +28,15 @@ MP4 作为 `v2.0.0` Release 附件分发；仓库保留源工程、封面和 16 
 | `preview.png` | 方案适用项与具体改动入口 |
 | `items.png` | 物品图鉴 |
 | `mobile.png` | 430px 窄屏布局 |
+| `alchemy.png` | 炼金沉淀物数量与快捷补足 |
+| `alchemy-preview.png` | 沉淀物总量及摘要联动预览 |
 
 ## 复现
 
 ```powershell
 python launch.py --demo --port 8767 --no-browser
 node scripts/capture-demo.mjs
+node scripts/capture-demo.mjs --alchemy-only
 cd video
 npm ci
 npm run assets

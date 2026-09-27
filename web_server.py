@@ -102,6 +102,8 @@ def describe_save(name, include_fields=False, snapshot=None):
     gold = next((p['Value'] for p in decoded.get('AllAttributeSaveData', {}).get('AttributeParams', []) if p.get('AttributeId') == 901), 0)
     rows = list(SCHEMA.leaves(data)) if include_fields else []
     values = {r['path']: r['value'] for r in rows}
+    sediment_path = presets.sediment_field(values)
+    sediment = next((p['Value'] for p in decoded.get('AllAttributeSaveData', {}).get('AttributeParams', []) if p.get('AttributeId') == 902), None)
     fields = []
     for row in rows:
         route = row['path']
@@ -112,6 +114,7 @@ def describe_save(name, include_fields=False, snapshot=None):
         offset = 0
         icon = None
         common = False
+        readonly = False
         group = next((g[0] for g in GROUPS if g[2] and route.startswith(g[2])), 'all')
         if route.startswith('BagSaveData.ItemDataList['):
             ident = values.get(parent + '.ConfigId')
@@ -127,13 +130,19 @@ def describe_save(name, include_fields=False, snapshot=None):
             common = short in ('CurrentSan', 'MaxSan')
         elif route.startswith('AllAttributeSaveData.AttributeParams[') and short == 'Value':
             ident = values.get(parent + '.AttributeId')
-            title = '金币' if ident == 901 else '沉淀原始值'
+            title = '金币' if ident == 901 else '炼金沉淀物' if ident == 902 else f'属性 {ident}'
             scale = 1000 if ident == 901 else 1
-            detail = '当前持有' if ident == 901 else '属性 902'
+            detail = '当前持有' if ident == 901 else '炼金可用数量' if ident == 902 else f'属性 {ident}'
+            if ident == 902:
+                group = 'alchemy'
             common = True
         elif route.startswith('AlchemySaveData.'):
             detail = '炼金成长'
             common = short in ('TalentPoint', 'Exp', 'Level')
+            if route.startswith(presets.SEDIMENT_VALUE_PREFIX):
+                title, detail, readonly = '沉淀总量摘要', '随炼金沉淀物总量同步', True
+            elif route.startswith(presets.SEDIMENT_COUNT_PREFIX):
+                title, detail, readonly = '沉淀摘要条目数', '当前游戏版本固定写入 1', True
         elif route.startswith('AllOprToolSaveData.OprToolDataList['):
             tool_id = values.get(parent+'.ID')
             detail = presets.TOOL_NAMES.get(tool_id,'工具占位记录')
@@ -147,12 +156,16 @@ def describe_save(name, include_fields=False, snapshot=None):
             display = str(row['value']+offset)
         fields.append({'path': route, 'label': title, 'detail': detail, 'value': display,
                        'raw_value': value_text(row['value']), 'type': row['type'], 'kind': row['kind'],
-                       'group': group, 'common': common, 'icon': icon, 'scale': scale,'offset':offset})
+                       'group': group, 'common': common, 'icon': icon, 'scale': scale,'offset':offset,
+                       'readonly':readonly,'min':0 if route==sediment_path else None,
+                       'max':presets.SEDIMENT_MAX if route==sediment_path else None})
     return {'name': name, 'title': save_title(name), 'kind': 'auto' if name.startswith('AUTO_') else 'manual',
             'modified': datetime.fromtimestamp(path.stat().st_mtime).isoformat(timespec='seconds'),
             'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
             'gold': format(Decimal(gold) / 1000, 'f'), 'talent': decoded.get('AlchemySaveData', {}).get('TalentPoint', 0),
             'level': decoded.get('AlchemySaveData', {}).get('Level', 0),
+            'sediment': str(sediment) if sediment is not None else None,
+            'sediment_path': sediment_path,
             'inventory': len(decoded.get('BagSaveData', {}).get('ItemDataList', [])),
             'field_count': len(fields), 'fields': fields}
 
@@ -189,6 +202,8 @@ def edit_save(body, export=False, apply=False):
     if not isinstance(requested, list) or not 1 <= len(requested) <= 1000:
         raise ValueError('请选择 1 至 1000 项修改。')
     original_fields = {f['path']: f for f in SCHEMA.leaves(original)}
+    original_values = {route: field['value'] for route, field in original_fields.items()}
+    sediment_path = presets.sediment_field(original_values)
     descriptions = {f['path']: f for f in describe_save(name, True, original)['fields']}
     modified = original
     changes = []
@@ -200,6 +215,8 @@ def edit_save(body, export=False, apply=False):
         seen.add(route)
         field = original_fields[route]
         info = descriptions[route]
+        if info.get('readonly'):
+            raise ValueError('沉淀摘要由总量自动同步，请修改“炼金沉淀物”数量。')
         text = requested_edit.get('value')
         if field['type'] == 'bool':
             if not (isinstance(text, bool) or isinstance(text, str) and text in ('true', 'false')):
@@ -222,9 +239,23 @@ def edit_save(body, export=False, apply=False):
             value = int(number)
             if info['scale'] == 1000 and not 0 <= value <= 999999999000:
                 raise ValueError('金币必须介于 0 和 999999999 之间。')
+            if route == sediment_path and not 0 <= value <= presets.SEDIMENT_MAX:
+                raise ValueError(f'炼金沉淀物必须为 0 至 {presets.SEDIMENT_MAX} 的整数。')
         modified = SCHEMA.edit(modified, route, value)
         changes.append({'path': route, 'label': info['label'], 'detail': info['detail'],
                         'before': info['value'], 'after': value_text(text), 'raw_before': field['value'], 'raw_after': value})
+    sediment_change = next((change for change in changes if change['path'] == sediment_path), None)
+    synchronized = []
+    if sediment_change:
+        for route, value in presets.sediment_summaries(original_values, sediment_change['raw_after']).items():
+            if original_values[route] == value:
+                continue
+            info = descriptions[route]
+            modified = SCHEMA.edit(modified, route, value)
+            synchronized.append(route)
+            changes.append({'path':route,'label':info['label'],'detail':'随炼金沉淀物自动同步',
+                            'before':info['value'],'after':str(value),'raw_before':original_values[route],
+                            'raw_after':value,'automatic':True})
     parsed = {f['path']: f['value'] for f in SCHEMA.leaves(modified)}
     reverted = modified
     for change in reversed(changes):
@@ -234,7 +265,8 @@ def edit_save(body, export=False, apply=False):
     if reverted != original:
         raise ValueError('未修改字段的字节核对未通过，未写入任何存档。')
     response = {'changes': [{k: v for k, v in change.items() if not k.startswith('raw_')} for change in changes],
-                'count': len(changes), 'bytes': len(modified), 'original_preserved': True}
+                'count': len(changes), 'bytes': len(modified), 'original_preserved': True,
+                'synchronized_fields':synchronized}
     if export or apply:
         stamp = datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         destination = path if apply else MODIFIED_ROOT / f'{path.stem}-{stamp}.bytes'

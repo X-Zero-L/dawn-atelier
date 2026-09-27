@@ -23,6 +23,29 @@ for row in rows('ToolUpgradeConfig'):
         TOOL_CONFIG.setdefault(row['bodn'], []).append(row)
 TOOL_NAMES = {1: '播种工具', 2: '浇水工具', 3: '收获工具', 4: '铲除工具'}
 SUPPLY_TYPES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 15}
+SEDIMENT_MAX = 2147483647
+SEDIMENT_VALUE_PREFIX = 'AlchemySaveData.AlchemyPrecipitatesValueList['
+SEDIMENT_COUNT_PREFIX = 'AlchemySaveData.AlchemyPrecipitatesNumList['
+
+
+def sediment_field(values):
+    """Find the authoritative amount by attribute ID, independent of list order."""
+    matches = []
+    for route, ident in values.items():
+        if re.fullmatch(r'AllAttributeSaveData\.AttributeParams\[\d+\]\.AttributeId', route) and ident == 902:
+            amount = route.rsplit('.', 1)[0] + '.Value'
+            if amount in values:
+                matches.append(amount)
+    return matches[0] if len(matches) == 1 else None
+
+
+def sediment_summaries(values, amount):
+    """The supported build writes one total-value entry and one count of 1."""
+    value_paths = [route for route in values if route.startswith(SEDIMENT_VALUE_PREFIX)]
+    count_paths = [route for route in values if route.startswith(SEDIMENT_COUNT_PREFIX)]
+    if len(value_paths) == len(count_paths) == 1:
+        return {value_paths[0]: amount, count_paths[0]: 1}
+    return {}
 
 
 def number(label, default, minimum, maximum, choices=None, unit=''):
@@ -38,6 +61,7 @@ ACTIONS = [
     {'id':'products','name':'商品备货','category':'经营','icon':'archive','description':'补足已有商品、产物与珍品，省去逐格修改。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
     {'id':'fertilizer','name':'肥料储备','category':'种植','icon':'sprout','description':'补足背包里已经拥有的肥料。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
     {'id':'talent','name':'炼金天赋点','category':'成长','icon':'flask','description':'补足可用天赋点，供你在游戏里自由选择天赋。','parameter':number('可用点数',30,0,999,[10,30,100],'点')},
+    {'id':'sediment','name':'炼金沉淀物','category':'成长','icon':'flask','description':'将炼金沉淀物补足到目标数量，现有数量更多时保留。','note':'直接输入数量，自动同步沉淀摘要，无需倍率换算。','parameter':number('目标数量',1000,0,SEDIMENT_MAX,[100,1000,10000],'份')},
     {'id':'favor','name':'好感进阶','category':'社交','icon':'heart','description':'按每位 NPC 自己的档位配置提升好感，较高好感会保留。','note':'调整好感数值；后续剧情与奖励沿用游戏规则。','parameter':number('目标档位',5,1,12,[3,5,8,12],'级')},
     {'id':'gifts','name':'重置今日送礼','category':'社交','icon':'heart','description':'把已有 NPC 记录的今日收礼次数归零。'},
     {'id':'staff','name':'员工恢复精神','category':'经营','icon':'users','description':'将员工当前 SAN 恢复到各自上限；零上限员工保持原设定。'},
@@ -50,7 +74,7 @@ BUNDLES = [
     {'id':'starter','name':'轻松开荒','subtitle':'从容出发，慢慢探索','description':'准备启动资金、基础种子和天赋点，给新一天留一点余裕。','category':'推荐','icon':'sun','tone':'sage','art':10000,'badge':'推荐入门','actions':[{'id':'gold','value':100000},{'id':'seeds','value':30},{'id':'talent','value':10}]},
     {'id':'farmer','name':'田园日常','subtitle':'少些重复，多些收获','description':'种子与肥料补给，农具满级，顺手减轻清理杂物的负担。','category':'种植','icon':'sprout','tone':'olive','art':10003,'actions':[{'id':'seeds','value':99},{'id':'fertilizer','value':99},{'id':'tools','value':4},{'id':'clutter'}]},
     {'id':'merchant','name':'富足经营','subtitle':'让店铺和行囊都充实','description':'补足一百万金币和日常货品，让员工以充足精神继续工作。','category':'经营','icon':'bag','tone':'gold','art':10201,'actions':[{'id':'gold','value':1000000},{'id':'inventory','value':99},{'id':'staff'}]},
-    {'id':'alchemist','name':'炼金准备','subtitle':'为下一次灵感备好材料','description':'材料、炼金种子与天赋点一次准备，配方依然由你选择。','category':'成长','icon':'flask','tone':'lilac','art':10509,'actions':[{'id':'materials','value':99},{'id':'seeds','value':99},{'id':'talent','value':30}]},
+    {'id':'alchemist','name':'炼金准备','subtitle':'为下一次灵感备好材料','description':'材料、炼金种子、沉淀物与天赋点一次准备，配方依然由你选择。','category':'成长','icon':'flask','tone':'lilac','art':10509,'actions':[{'id':'materials','value':99},{'id':'seeds','value':99},{'id':'talent','value':30},{'id':'sediment','value':1000}]},
     {'id':'social','name':'街坊好友','subtitle':'给每一次相遇一点温度','description':'将现有 NPC 的好感提升到第 5 档，并恢复今日送礼次数。','category':'社交','icon':'heart','tone':'rose','art':10401,'actions':[{'id':'favor','value':5},{'id':'gifts'}]},
     {'id':'collector','name':'充实储备','subtitle':'把准备工作一次做好','description':'补足千万金币、999 份日常补给与 1000 枚牌桌筹码。','category':'进阶','icon':'archive','tone':'sand','art':10106,'actions':[{'id':'gold','value':10000000},{'id':'inventory','value':999},{'id':'chips','value':1000}]},
 ]
@@ -129,6 +153,12 @@ def plan(data, actions):
         elif ident=='talent':
             route='AlchemySaveData.TalentPoint'
             if route in values:update(route,max(old(route),target),ident,report,'天赋点','炼金成长')
+        elif ident=='sediment':
+            route=sediment_field(values)
+            if route and 0 <= old(route) <= SEDIMENT_MAX:
+                update(route,max(old(route),target),ident,report,'炼金沉淀物','炼金可用数量')
+            elif route:
+                report['excluded']+=1
         elif ident in ('favor','gifts'):
             for route,npc_id in values.items():
                 if not re.fullmatch(r'AllFavorData\.allNPCData\[\d+\]\.npcID',route):continue
@@ -169,6 +199,7 @@ def plan(data, actions):
             if route in values:update(route,max(old(route),target),ident,report,'筹码','二十一点')
         if report['changed']==0:
             reason='当前数值已满足目标' if report['matched'] else '当前存档没有适用记录'
+            if ident=='sediment' and report['excluded']:reason='当前沉淀数量超出支持的整数范围，未改动该字段'
             if ident=='staff' and report['excluded']:reason='已有员工的 SAN 上限为 0，保留其特殊设定'
             report['message']=reason
             skipped.append({'action':definition['name'],'reason':reason})
