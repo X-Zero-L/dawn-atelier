@@ -161,7 +161,7 @@ try {
   await capture(overview, 'overview');
   await closePage(overview);
 
-  const presets = await openPage('presets', 1600, 1470);
+  const presets = await openPage('presets', 1600, 1930);
   await capture(presets, 'presets');
   await click(presets, '[data-action="configure-preset"][data-id="farmer"]');
   await capture(presets, 'builder');
@@ -182,6 +182,18 @@ try {
   await waitFor(saves, `document.querySelector('#review-content').textContent.includes('沉淀总量摘要')`);
   await capture(saves, 'alchemy-preview');
   await closePage(saves);
+
+  const growth = await openPage('saves', 1600, 1450);
+  await click(growth, '[data-action="field-group"][data-group="workshop"]');
+  await capture(growth, 'workshop');
+  await click(growth, '[data-action="prepare-workshop"]');
+  await waitFor(growth, `document.querySelector('#preset-preview')?.open && !!document.querySelector('.native-plan-note')`);
+  await capture(growth, 'progression-preview');
+  await evaluate(growth, `document.querySelector('#preset-preview').close()`);
+  await click(growth, '[data-action="field-group"][data-group="alchemy"]');
+  await click(growth, '[data-action="progression-tab"][data-tab="unlocks"]');
+  await capture(growth, 'alchemy-unlocks');
+  await closePage(growth);
 
   const items = await openPage('items');
   await capture(items, 'items');

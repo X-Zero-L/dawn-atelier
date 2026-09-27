@@ -13,9 +13,9 @@ node scripts/refresh-media.mjs
 流程会自动完成：
 
 1. 使用空的临时目录生成合成存档，在空闲端口启动演示服务。
-2. 使用独立无头浏览器拍摄全部 16 张截图，包含桌面启动与准备进度。
+2. 使用独立无头浏览器拍摄全部 19 张截图，包含桌面启动、工坊成长与炼金解锁准备。
 3. 将本次截图复制到视频工程，检查图片 SHA-256。
-4. 渲染 48 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
+4. 渲染 54 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
 5. 生成两倍速 GIF、关键帧和拼图。
 6. 更新 README 预览、来源清单与校验值，清理临时服务和浏览器。
 
@@ -66,6 +66,9 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | `mobile.png` | 430px 窄屏方案列表 |
 | `alchemy.png` | 沉淀物数量与快捷补足 |
 | `alchemy-preview.png` | 沉淀物总量及摘要联动 |
+| `alchemy-unlocks.png` | 天赋条件与成本准备 |
+| `workshop.png` | 工坊目标等级与四项条件 |
+| `progression-preview.png` | 条件补齐的变更与游戏内下一步 |
 | `super-supply.png` | 超级补给入口 |
 | `super-supply-preview.png` | 铜锭补足与铁金锭新增 |
 | `super-supply-mobile.png` | 超级补给窄屏入口 |

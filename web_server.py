@@ -25,6 +25,7 @@ from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_RO
 import presets
 import inventory
 import game_runtime
+import progression
 
 WEB = ROOT / 'web'
 SCHEMA = Schema()
@@ -33,6 +34,7 @@ WRITE_LOCK = threading.Lock()
 GROUPS = [
     ('common', '常用数值', '', 'star'), ('inventory', '背包物品', 'BagSaveData', 'bag'),
     ('alchemy', '炼金与天赋', 'AlchemySaveData', 'flask'), ('favor', 'NPC 与好感', 'AllFavorData', 'heart'),
+    ('workshop', '工坊成长', progression.SHOP_PATH, 'layers'),
     ('staff', '员工与工作站', 'AllStaffSaveData', 'users'), ('tools', '工具与钓鱼', 'AllOprToolSaveData', 'tool'),
     ('farm', '作物与建筑', 'AllMapSaveData', 'sprout'), ('genes', '种子与基因', 'AllHybridData', 'dna'),
     ('all', '全部字段', '', 'code'),
@@ -117,6 +119,7 @@ def describe_save(name, include_fields=False, snapshot=None):
         icon = None
         common = False
         readonly = False
+        readonly_reason = ''
         group = next((g[0] for g in GROUPS if g[2] and route.startswith(g[2])), 'all')
         if route.startswith('BagSaveData.ItemDataList['):
             ident = values.get(parent + '.ConfigId')
@@ -145,6 +148,19 @@ def describe_save(name, include_fields=False, snapshot=None):
                 title, detail, readonly = '沉淀总量摘要', '随炼金沉淀物总量同步', True
             elif route.startswith(presets.SEDIMENT_COUNT_PREFIX):
                 title, detail, readonly = '沉淀摘要条目数', '当前游戏版本固定写入 1', True
+            elif short == 'Level' or any(route.startswith('AlchemySaveData.' + member) for member in
+                                         ('UnlockTalentList[', 'UnlockBuilding', 'ActiveStoryTalentList[', 'TalentAbilityEffectList[')):
+                readonly = True
+                readonly_reason = '炼金等级与解锁状态由游戏原生解锁流程维护，请使用“炼金解锁准备”补齐条件。'
+        elif route.startswith(progression.SHOP_PATH + '.'):
+            title = {'CurrentRank': '工坊等级', 'IncomeMetrics': '累计营业额', 'BuildingMetrics': '建筑价值',
+                     'AsetheticMetrics': '美观度', 'FavorabilityMetrics': '总好感快照', 'CurrentIncome': '今日营业额'}.get(short, title)
+            detail = '工坊成长'
+            if short in ('IncomeMetrics', 'CurrentIncome', 'BuildingMetrics', 'AsetheticMetrics'):
+                scale = 1000
+            if short in ('CurrentRank', 'BuildingMetrics', 'AsetheticMetrics', 'FavorabilityMetrics') or '.Unlock' in route:
+                readonly = True
+                readonly_reason = '等级和建筑、配方解锁由游戏升级流程维护；建筑与美观按实际布置重新计算。请使用“工坊升级准备”。'
         elif route.startswith('AllOprToolSaveData.OprToolDataList['):
             tool_id = values.get(parent+'.ID')
             detail = presets.TOOL_NAMES.get(tool_id,'工具占位记录')
@@ -159,7 +175,7 @@ def describe_save(name, include_fields=False, snapshot=None):
         fields.append({'path': route, 'label': title, 'detail': detail, 'value': display,
                        'raw_value': value_text(row['value']), 'type': row['type'], 'kind': row['kind'],
                        'group': group, 'common': common, 'icon': icon, 'scale': scale,'offset':offset,
-                       'readonly':readonly,'min':0 if route==sediment_path else None,
+                       'readonly':readonly,'readonly_reason':readonly_reason,'min':0 if route==sediment_path else None,
                        'max':presets.SEDIMENT_MAX if route==sediment_path else None})
     return {'name': name, 'title': save_title(name), 'kind': 'auto' if name.startswith('AUTO_') else 'manual',
             'modified': datetime.fromtimestamp(path.stat().st_mtime).isoformat(timespec='seconds'),
@@ -169,7 +185,8 @@ def describe_save(name, include_fields=False, snapshot=None):
             'sediment': str(sediment) if sediment is not None else None,
             'sediment_path': sediment_path,
             'inventory': len(decoded.get('BagSaveData', {}).get('ItemDataList', [])),
-            'field_count': len(fields), 'fields': fields}
+            'field_count': len(fields), 'fields': fields,
+            'progression': progression.overview(data) if include_fields else None}
 
 
 def saved_games():
@@ -227,7 +244,7 @@ def edit_save(body, export=False, apply=False):
         field = original_fields[route]
         info = descriptions[route]
         if info.get('readonly'):
-            raise ValueError('沉淀摘要由总量自动同步，请修改“炼金沉淀物”数量。')
+            raise ValueError(info.get('readonly_reason') or '沉淀摘要由总量自动同步，请修改“炼金沉淀物”数量。')
         text = requested_edit.get('value')
         if field['type'] == 'bool':
             if not (isinstance(text, bool) or isinstance(text, str) and text in ('true', 'false')):
@@ -304,8 +321,23 @@ def plan_preset(body):
     if hashlib.sha256(data).hexdigest()!=body.get('sha256'):
         raise ValueError('存档已更新，请重新读取后生成方案。')
     result=presets.plan(data,body.get('actions'))
+    return enrich_plan(result, body, data)
+
+
+def plan_progression(body):
+    name=body.get('save','')
+    data=save_path(name).read_bytes()
+    if hashlib.sha256(data).hexdigest()!=body.get('sha256'):
+        raise ValueError('存档已更新，请重新读取后生成方案。')
+    result=progression.plan(data,body.get('kind'),body.get('target'),body.get('talent_ids'))
+    return enrich_plan(result,body,data)
+
+
+def enrich_plan(result, body, data):
+    name=body['save']
     fields={f['path']:f for f in describe_save(name,True,data)['fields']}
     for change in result['changes']:
+        change.pop('raw_value',None)
         if change.get('operation')=='add_item':
             info=inventory.virtual_field(change['item_id'])
             info['icon']=item_icon(change['item_id'])
@@ -336,7 +368,7 @@ def export_history():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'DawnAtelier/2.2'
+    server_version = 'DawnAtelier/2.3'
 
     def log_message(self, format, *args):
         pass
@@ -422,7 +454,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_bytes(path.read_bytes(), 'application/octet-stream', extra={'Content-Disposition': f'attachment; filename="{name}"'})
             else:
                 relative = 'index.html' if route == '/' else route.lstrip('/')
-                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css',
+                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css','progression-ui.js','progression.css',
                                     'desktop/index.html','desktop/launcher.js','desktop/launcher.css') and not relative.startswith(('assets/','brand/')):
                     self.json({'error': '页面不存在。'}, 404)
                     return
@@ -467,6 +499,9 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if self.path=='/api/preset-plan':
                 self.json(plan_preset(body))
+                return
+            if self.path=='/api/progression-plan':
+                self.json(plan_progression(body))
                 return
             if self.path not in ('/api/preview', '/api/export','/api/apply'):
                 self.json({'error': '操作不存在。'}, 404)

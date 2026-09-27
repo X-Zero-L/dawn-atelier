@@ -29,7 +29,7 @@ RUNTIME_PACKAGES = ("pywebview", "pythonnet", "cryptography", "Pillow")
 PRIVATE_NAMES = {"config.local.json", "gameassembly.dll", "global-metadata.dat", "thepiper.exe"}
 PRIVATE_EXTENSIONS = {".bundle", ".bytes", ".ress", ".save", ".bak"}
 WEB_FILES = {
-    "index.html", "app.js", "presets-ui.js", "style.css", "presets.css",
+    "index.html", "app.js", "presets-ui.js", "style.css", "presets.css", "progression-ui.js", "progression.css",
     "brand/emblem.svg", "brand/botanical.svg",
 }
 DESKTOP_FILES = {"index.html", "launcher.css", "launcher.js"}

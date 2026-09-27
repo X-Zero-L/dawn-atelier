@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import re
 import inventory
+import progression
 
 from save_codec import ROOT, Schema
 from app_config import DATA_ROOT, SCHEMA_ROOT
@@ -66,6 +67,8 @@ ACTIONS = [
     {'id':'fertilizer','name':'肥料储备','category':'种植','icon':'sprout','description':'补足背包里已经拥有的肥料。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
     {'id':'talent','name':'炼金天赋点','category':'成长','icon':'flask','description':'补足可用天赋点，供你在游戏里自由选择天赋。','parameter':number('可用点数',30,0,999,[10,30,100],'点')},
     {'id':'sediment','name':'炼金沉淀物','category':'成长','icon':'flask','description':'将炼金沉淀物补足到目标数量，现有数量更多时保留。','note':'直接输入数量，自动同步沉淀摘要，无需倍率换算。','parameter':number('目标数量',1000,0,SEDIMENT_MAX,[100,1000,10000],'份')},
+    {'id':'alchemy_ready','name':'炼金解锁准备','category':'成长','icon':'flask','description':'为当前可准备的普通天赋与前置备齐金币、点数和材料，回游戏按顺序解锁。'},
+    {'id':'workshop_ready','name':'工坊升级准备','category':'经营','icon':'layers','description':'补足目标工坊等级所需的累计营业额与总好感，查看实际建筑和美观缺口。','note':'保存后回游戏逐级点击升级，领取解锁与奖励。建筑和美观需由实际布置满足。','parameter':number('目标工坊等级',50,1,50,[10,20,30,50],'级')},
     {'id':'favor','name':'好感进阶','category':'社交','icon':'heart','description':'按每位 NPC 自己的档位配置提升好感，较高好感会保留。','note':'调整好感数值；后续剧情与奖励沿用游戏规则。','parameter':number('目标档位',5,1,12,[3,5,8,12],'级')},
     {'id':'gifts','name':'重置今日送礼','category':'社交','icon':'heart','description':'把已有 NPC 记录的今日收礼次数归零。'},
     {'id':'staff','name':'员工恢复精神','category':'经营','icon':'users','description':'将员工当前 SAN 恢复到各自上限；零上限员工保持原设定。'},
@@ -82,6 +85,8 @@ BUNDLES = [
     {'id':'alchemist','name':'炼金准备','subtitle':'为下一次灵感备好材料','description':'材料、炼金种子、沉淀物与天赋点一次准备，配方依然由你选择。','category':'成长','icon':'flask','tone':'lilac','art':10509,'actions':[{'id':'materials','value':99},{'id':'seeds','value':99},{'id':'talent','value':30},{'id':'sediment','value':1000}]},
     {'id':'social','name':'街坊好友','subtitle':'给每一次相遇一点温度','description':'将现有 NPC 的好感提升到第 5 档，并恢复今日送礼次数。','category':'社交','icon':'heart','tone':'rose','art':10401,'actions':[{'id':'favor','value':5},{'id':'gifts'}]},
     {'id':'collector','name':'充实储备','subtitle':'把准备工作一次做好','description':'补足千万金币、999 份日常补给与 1000 枚牌桌筹码。','category':'进阶','icon':'archive','tone':'sand','art':10106,'actions':[{'id':'gold','value':10000000},{'id':'inventory','value':999},{'id':'chips','value':1000}]},
+    {'id':'talent-prep','name':'炼金解锁准备','subtitle':'材料备好，再点亮新能力','description':'按当前工坊等级与剧情前置，为普通天赋补齐成本；回游戏点击解锁，让配方、建筑与能力正常生效。','category':'成长','icon':'flask','tone':'lilac','art':10522,'actions':[{'id':'alchemy_ready'}]},
+    {'id':'workshop-prep','name':'工坊升级准备','subtitle':'看清缺口，逐级成长','description':'补足累计营业额与总好感。建筑、美观按实际布置满足后，在游戏里逐级升级并领取奖励。','category':'经营','icon':'layers','tone':'sage','art':10510,'actions':[{'id':'workshop_ready','value':50}]},
 ]
 
 
@@ -123,6 +128,9 @@ def plan(data, actions):
     skipped=[]
     additions={}
     missing_exclusions=[]
+    notes=[]
+    blockers=[]
+    unlock_order=[]
 
     def old(route):
         return changes[route]['raw_value'] if route in changes else values[route]
@@ -180,6 +188,19 @@ def plan(data, actions):
                 update(route,max(old(route),target),ident,report,'炼金沉淀物','炼金可用数量')
             elif route:
                 report['excluded']+=1
+        elif ident in ('alchemy_ready','workshop_ready'):
+            result=progression.plan(data,'alchemy' if ident=='alchemy_ready' else 'workshop',target)
+            notes.extend(result['notes']);blockers.extend(result['blockers']);unlock_order.extend(result['unlock_order'])
+            for change in result['changes']:
+                if change.get('operation')=='add_item':
+                    previous=additions.get(change['path'])
+                    if previous is None or int(change['value'])>int(previous['value']):
+                        additions[change['path']]={**change,'action':ident}
+                        report['changed']+=1;report['matched']+=1
+                    continue
+                route=change['path']
+                update(route,max(old(route),change['raw_value']),ident,report,
+                       change['label'],change['detail'],change['scale'])
         elif ident in ('favor','gifts'):
             for route,npc_id in values.items():
                 if not re.fullmatch(r'AllFavorData\.allNPCData\[\d+\]\.npcID',route):continue
@@ -236,4 +257,6 @@ def plan(data, actions):
     planned=[{key:value for key,value in change.items() if key!='raw_value'} for change in changes.values()]+list(additions.values())
     return {'actions':requested,'edits':[{'path':change['path'],'value':change['value']} for change in planned],
             'changes':planned,'new_items':len(additions),'missing_exclusions':missing_exclusions,
-            'count':len(planned),'reports':reports,'skipped':skipped}
+            'count':len(planned),'reports':reports,'skipped':skipped,
+            'notes':list(dict.fromkeys(notes)),'blockers':list(dict.fromkeys(blockers)),
+            'unlock_order':list({entry['id']:entry for entry in unlock_order}.values())}

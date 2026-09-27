@@ -15,6 +15,7 @@ web_server.py        本地 API、预览、备份与应用
 save_codec.py        具名字段解析与局部字节替换
 presets.py           预设操作和目标计算
 inventory.py         物品补全、种子关联与可逆新增
+progression.py       炼金与工坊的原生条件读取、资源准备
 prepare.py           本机配置与界面资源准备
 demo_data.py         合成演示数据生成
 schemas/             受支持版本的字段结构与枚举
@@ -28,6 +29,8 @@ docs/images/         文档截图与封面
 ```
 
 数据流、写入顺序和请求限制见 [架构说明](architecture.md)。字段编码、炼金沉淀物属性映射与联动摘要见 [存档结构说明](save-format.md)。
+
+炼金解锁与工坊升级的条件、游戏原生调用链和保留不变量见 [成长准备实现依据](progression-implementation.md)。专项检查可运行 `python -m unittest discover -s tests -v`，只操作临时合成存档。
 
 ## 本地目录
 

@@ -17,6 +17,8 @@ RESOURCE_FILES = [
     "web/presets-ui.js",
     "web/style.css",
     "web/presets.css",
+    "web/progression-ui.js",
+    "web/progression.css",
     "web/brand/emblem.svg",
     "web/brand/botanical.svg",
     "desktop/index.html",

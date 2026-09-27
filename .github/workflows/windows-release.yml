@@ -62,6 +62,9 @@ jobs:
           DAWN_RELEASE_TAG: ${{ steps.release.outputs.tag }}
         shell: pwsh
         run: python scripts/build-windows.py --expected-version $env:DAWN_RELEASE_TAG
+      - name: Check progression preparation on synthetic saves
+        shell: pwsh
+        run: python -X utf8 -m unittest discover -s tests -v
       - name: Keep package and build records
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

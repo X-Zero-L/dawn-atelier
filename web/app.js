@@ -122,7 +122,11 @@ function renderSaveContent() {
   $('#field-search').addEventListener('input',e=>{state.fieldQuery=e.target.value;state.fieldPage=0;renderFields();});renderFields();
 }
 function renderFields() {
-  if(renderFocusedFields())return;
+  if(renderProgressionFields())return;
+  if(renderFocusedFields()){
+    if(state.group==='alchemy')$('#field-results').insertAdjacentHTML('afterbegin',renderAlchemyTabs());
+    return;
+  }
   const q=state.fieldQuery.trim().toLowerCase();const rows=state.save.fields.filter(f=>groupMatches(f)&&(!q||`${f.label} ${f.detail} ${f.path} ${f.value}`.toLowerCase().includes(q)));
   const size=12,totalPages=Math.max(1,Math.ceil(rows.length/size));state.fieldPage=Math.min(state.fieldPage,totalPages-1);
   $('#field-count').innerHTML=`<b>${num(rows.length)}</b> 个字段`;

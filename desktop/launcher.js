@@ -6,7 +6,7 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.2.0', game_dir: '', detected: false, prepared: false,
+    version: '2.3.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
     error: '', mode: null, active_url: null, last_prepared: null,
@@ -112,7 +112,7 @@
     document.body.classList.toggle('preparing', state.busy);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.2.0'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.3.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -337,7 +337,7 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.2.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            version: '2.3.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
             prepared: false, data_dir: '', busy: scene === 'preparing',
             progress: scene === 'preparing'
               ? {percent: 68, stage: 'catalogue', message: '正在整理物品、炼金与角色资料', detail: '完成后将自动打开工坊。'}

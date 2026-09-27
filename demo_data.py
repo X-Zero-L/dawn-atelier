@@ -5,7 +5,7 @@ from pathlib import Path
 import struct
 
 APP = Path(__file__).resolve().parent
-VERSION = 3
+VERSION = 4
 
 
 def varint(value):
@@ -80,12 +80,29 @@ def prepare_demo(destination):
     npc_rows = [{'bnin':ident,'bnio':list(range(len(levels))),'bnip':levels} for ident,_,_ in npcs]
     tools = [{'bodm':tool*100+level,'bodn':tool,'bodt':area}
              for tool in range(1,5) for level,area in enumerate(([1,1],[1,3],[3,3],[5,5]),1)]
+    talents = [
+        {'bmzw':4050,'bmzz':'故事的转折点','bnac':2},
+        {'bmzw':4000,'bmzz':'自由炼金阵','bnaa':6,'bnae':[4050],'bnaf':1,'bnag':500000},
+        {'bmzw':4001,'bmzz':'进阶炼金阵','bnaa':16,'bnae':[4000],'bnaf':2,'bnag':2000000,'bnah':11200},
+        {'bmzw':4011,'bmzz':'火之炼金阵','bnaa':5,'bnae':[4050],'bnaf':2,'bnag':400000,'bnah':11201},
+        {'bmzw':4017,'bmzz':'引火药剂','bnac':1,'bnad':5109,'bnaa':8,'bnae':[4011],'bnaf':2,'bnag':150000,'bnah':11202},
+        {'bmzw':4080,'bmzz':'炼金种子研习','bnac':3,'bnaa':10,'bnae':[4050],'bnaf':4,'bnag':1000000},
+        {'bmzw':4082,'bmzz':'精神力扩充','bnac':4,'bnaa':12,'bnae':[4080],'bnaf':4,'bnag':2000000,'bnah':11203},
+        {'bmzw':4083,'bmzz':'进阶精神力扩充','bnac':4,'bnaa':30,'bnae':[4082],'bnaf':5,'bnag':5000000},
+        {'bmzw':4052,'bmzz':'等待下一段故事','bnac':2,'bnae':[4001]},
+    ]
+    groups = [{'bnpb':ident,'bnpc':1,'bnpd':[1]*len(items),'bnpe':items,'bnpf':counts,'bnpg':1}
+              for ident,items,counts in [(11200,[10511],[3]),(11201,[10510],[6]),(11202,[10511],[2]),(11203,[10510,10511],[4,2])]]
     tables = {
         'ItemConfig':[item['raw'] for item in items],
         'FavorNPCConfig':npc_rows,
         'ToolUpgradeConfig':tools,
         'AlchemyLevelConfig':[{'bmyp':i,'bmyq':(i-1)*12} for i in range(1,11)],
-        'RecipeConfig':[{'bnwq':5000,'bnwt':'演示配方 · 面粉','bnwu':[10100],'bnwv':[2],'bnww':10202}],
+        'RecipeConfig':[{'bnwq':5000,'bnwt':'演示配方 · 面粉','bnwu':[10100],'bnwv':[2],'bnww':10202},
+                        {'bnwq':5109,'bnwt':'演示配方 · 引火药剂','bnwu':[10510,10100],'bnwv':[1,1],'bnww':10510}],
+        'AlchemyTalentConfig':talents,
+        'ItemGroupConfig':groups,
+        'ShopRankConfig':[{'bnzo':i,'bnzp':i*i*1000000,'bnzq':i*200000,'bnzr':i*100000,'bnzs':max(0,i-5)*200000,'boaq':2} for i in range(1,51)],
     }
     index=[]
     for name, rows in tables.items():
@@ -93,7 +110,8 @@ def prepare_demo(destination):
         document={'table':name,'count':len(rows),'schema_type':'Example.'+name,'ids':ids,'rows':rows,'demo':True}
         (configs/(name+'.json')).write_text(json.dumps(document,ensure_ascii=False,indent=2),encoding='utf-8')
         index.append({'table':name,'count':len(rows),'schema_type':document['schema_type'],'unknown_top_level_fields':0})
-    friendly={'UnitConfig':[{'id':ident,'name':name,'raw':{}} for ident,name,_ in npcs]}
+    friendly={'UnitConfig':[{'id':ident,'name':name,'raw':{}} for ident,name,_ in npcs],
+              'AlchemyTalentConfig':[{'id':row['bmzw'],'name':row['bmzz'],'raw':row} for row in talents]}
     for filename, data in [('物品目录.json',items),('分类目录.json',friendly),('index.json',{
         'table_count':len(index),'row_count':sum(x['count'] for x in index),'item_count':len(items),
         'language_entries':0,'tables':index,'demo':True})]:
@@ -107,7 +125,10 @@ def prepare_demo(destination):
         'BagSaveData':{'ItemDataList':[{'ConfigId':ident,'Count':count,'Timestamp':0,'SeedLogicID':0,
                     'OriginalSeedItemID':-1,'ItemLogicID':i+1} for i,(ident,_,_,_,count) in enumerate(entries)]},
         'AlchemySaveData':{'Level':3,'TalentPoint':8,'Exp':18,'LastGetExp':0,'LastLevel':3,
-                           'AlchemyPrecipitatesValueList':[240],'AlchemyPrecipitatesNumList':[1]},
+                           'AlchemyPrecipitatesValueList':[240],'AlchemyPrecipitatesNumList':[1],
+                           'UnlockTalentList':[4050], 'ActiveStoryTalentList':[4050]},
+        'AllMissionSaveData':{'FinishedMissionList':[200200,200207]},
+        'StatisticSaveData':{'ItemGetItemList':[10100,10510],'ItemGetCountList':[35,2]},
         'AllFavorData':{'allNPCData':[{'npcID':ident,'favorValue':levels[level],'receiveGiftsToday':1,
                          'currentReturnGiftIndex':-1,'receivedGiftFlag':False,'timeSkipFlag':False} for ident,_,level in npcs]},
         'AllOprToolSaveData':{'OprToolDataList':[{'ID':ident,'Level':0,'SelectedIndex':0} for ident in range(5)]},
@@ -115,13 +136,15 @@ def prepare_demo(destination):
                          'Name':name,'CurrentSan':value,'MaxSan':100,'SanCostPerTick':1,'LastSanUpdateTime':36000,
                          'CurrentWorkID':-1,'State':1} for i,(ident,name,value) in enumerate([(1003,'演示店员',32),(1004,'演示园丁',65),(1005,'演示助手',80)])]},
         'AllBlackJackData':{'BlackJackChips':80},
-        'AllMapSaveData':{'FarmMapList':[{'FarmMapIsInitial':True,'MapAreaList':[{'MapAreaID':101,'LogicID':1,
+        'AllMapSaveData':{'WorkShopMap':{'ShopSaveData':{'StatsData':{'CurrentIncome':1200000,'CurrentRank':12,
+                         'IncomeMetrics':75000000,'BuildingMetrics':3000000,'AsetheticMetrics':900000,'FavorabilityMetrics':1100}}},
+                         'FarmMapList':[{'FarmMapIsInitial':True,'MapAreaList':[{'MapAreaID':101,'LogicID':1,
           'ClutterBuildingDataList':[{'Building':{'ConfigID':701,'LogicID':i+1,'Row':i,'Col':2},'CurrentDurability':15000} for i in range(4)]}]}]},
     }
     target=destination/'saves/SAVE_PIPER_0.bytes'
     if not target.exists():
         target.write_bytes(encode_message('SaveLoadSystem.GameSaveData',save,schema))
-    elif marker.is_file() and marker.read_text() in ('1','2'):
+    elif marker.is_file() and marker.read_text() in ('1','2','3'):
         # Add a fresh fixture alongside an existing demo; keep the user's edited copy.
         for slot in range(1,100):
             fixture=destination/'saves'/f'SAVE_PIPER_{slot}.bytes'

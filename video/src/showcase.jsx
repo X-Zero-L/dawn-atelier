@@ -80,12 +80,13 @@ function Tag({children, index = 0}) {
 const COPY = {
   intro: {name: '你的冒险，你的节奏', type: 'intro'},
   desktop: {name: 'Windows 一键包', type: 'desktop'},
-  presets: {name: '一键方案', title: ['从一个方案', '开始。'], description: ['超级补给与 6 组日常方案，', '按自己的节奏自由组合。'], asset: 'presets', tags: ['7 套内置方案', '16 项可选操作'], marker: 'START WITH A PLAN'},
+  presets: {name: '一键方案', title: ['从一个方案', '开始。'], description: ['物资补给与成长条件准备，', '按自己的节奏自由组合。'], asset: 'presets', tags: ['9 套内置方案', '18 项可选操作'], marker: 'START WITH A PLAN'},
   supply: {name: '超级补给', title: ['常用物资，', '一次备齐。'], description: ['已有铜锭补足数量，', '缺少的铁锭、金锭直接补入。'], asset: 'super-supply', view: 'supply', detailAsset: 'super-supply-preview', detailFrom: 112, tags: ['补足已有物品', '添加缺少物品'], marker: 'SUPER SUPPLY', emphasis: '铜锭 · 铁锭 · 金锭'},
   sediment: {name: '炼金沉淀物', title: ['为下一次炼金，', '留足准备。'], description: ['直接输入沉淀物数量，', '也能选择常用补足目标。'], asset: 'alchemy', view: 'alchemy', detailAsset: 'alchemy-preview', detailFrom: 88, tags: ['100 份', '1,000 份', '10,000 份'], marker: 'ALCHEMICAL SEDIMENT'},
   inventory: {name: '背包与物品', title: ['行囊，', '按心意整理。'], description: ['查找需要的物品，', '逐项调整背包数量。'], asset: 'inventory', tags: ['搜索物品', '调整数量'], marker: 'A LITTLE MORE PREPARED'},
   relationships: {name: 'NPC 与好感', title: ['想见的人，', '再近一点。'], description: ['按角色查看好感度，', '设定想要的好感目标。'], asset: 'relationships', tags: ['角色列表', '好感目标'], marker: 'ROOM FOR EVERY STORY'},
   tools: {name: '工具升级', title: ['熟悉的工具，', '更顺手。'], description: ['看清当前等级，', '选择下一档工具范围。'], asset: 'tools', tags: ['当前等级', '目标等级'], marker: 'READY FOR TOMORROW'},
+  progression: {name: '成长条件准备', title: ['条件备好，', '回游戏解锁。'], description: ['准备炼金成本与工坊条件，', '让游戏处理解锁和升级奖励。'], asset: 'workshop', view: 'content', detailAsset: 'alchemy-unlocks', detailFrom: 95, detailView: 'content', tags: ['金币 · 点数 · 材料', '前置条件清单'], marker: 'GROW THROUGH THE GAME'},
   review: {name: '预览与备份', title: ['每次调整，', '都先看清楚。'], description: ['逐项核对修改前后的差异，', '导出副本，自动备份原档。'], asset: 'preview', view: 'modal', tags: ['变更预览', '原档备份'], marker: 'MAKE EVERY CHANGE CLEAR'},
   outro: {name: '黎明工坊', type: 'outro'},
 };
@@ -133,7 +134,7 @@ function Feature({chapter}) {
     <div style={{opacity: interpolate(f,[6,27],[0,1],clamp), transform: `translateY(${interpolate(f,[6,42],[24,0],clamp)}px)`}}>
       <Window asset={chapter.asset} left={702} top={193} width={1132} height={794} view={chapter.view ?? 'content'} scale={interpolate(f,[0,chapter.duration],[1,1.008],clamp)}/>
       {chapter.detailAsset && <div style={{opacity: interpolate(f,[chapter.detailFrom,chapter.detailFrom + 14],[0,1],clamp)}}>
-        <Window asset={chapter.detailAsset} left={702} top={193} width={1132} height={794} view="modal" scale={interpolate(f,[0,chapter.duration],[1,1.008],clamp)}/>
+        <Window asset={chapter.detailAsset} left={702} top={193} width={1132} height={794} view={chapter.detailView ?? 'modal'} scale={interpolate(f,[0,chapter.duration],[1,1.008],clamp)}/>
       </div>}
     </div>
   </>;

@@ -3,7 +3,7 @@
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "durationInFrames": 1440,
+  "durationInFrames": 1620,
   "posterFrame": 225,
   "sampleFrames": {
     "intro": 84,
@@ -17,8 +17,10 @@
     "inventory": 900,
     "relationships": 1000,
     "tools": 1090,
-    "review": 1230,
-    "outro": 1380
+    "workshop": 1200,
+    "alchemyUnlocks": 1270,
+    "review": 1410,
+    "outro": 1560
   },
   "chapters": [
     {"key": "intro", "from": 0, "duration": 150},
@@ -29,7 +31,8 @@
     {"key": "inventory", "from": 840, "duration": 120},
     {"key": "relationships", "from": 945, "duration": 105},
     {"key": "tools", "from": 1035, "duration": 105},
-    {"key": "review", "from": 1125, "duration": 195},
-    {"key": "outro", "from": 1305, "duration": 135}
+    {"key": "progression", "from": 1125, "duration": 195},
+    {"key": "review", "from": 1305, "duration": 195},
+    {"key": "outro", "from": 1485, "duration": 135}
   ]
 }
