@@ -5,7 +5,7 @@ from pathlib import Path
 import struct
 
 APP = Path(__file__).resolve().parent
-VERSION = 2
+VERSION = 3
 
 
 def varint(value):
@@ -65,13 +65,15 @@ def prepare_demo(destination):
         (10201,'油','Oil',7,7),(10509,'石头','Stone',6,60),
         (10202,'面粉','Flour',7,13),(10401,'鸢尾','Iris',6,15),
         (10403,'铁矿草','Ironwort',6,20),(12000,'配方手册','Recipe Book',12,1),
+        (10510,'铜锭','Copper Ingot',10,2),(11000,'铜矿石','Copper Ore',10,7),
     ]
+    catalogue_only=[(10511,'铁锭','Iron Ingot',10,0),(10512,'金锭','Gold Ingot',10,0)]
     items = []
-    for ident, name, english, category, count in entries:
+    for ident, name, english, category, count in entries+catalogue_only:
         items.append({'id':ident,'name':name,'name_en':english,
                       'description':f'{name}。这是一条合成演示记录，用于体验物品搜索、收藏和存档调整。',
                       'raw':{'bnog':ident,'bnoh':ident*10+1,'bnoi':ident*10+2,'bnoj':category,
-                             'bnok':1 if category==12 else 9999,'bnov':f'Assets/Demo/Icon_{ident}'}})
+                             'bnok':1 if category==12 else 9999,'bnol':1,'bnov':f'Assets/Demo/Icon_{ident}'}})
     npcs = [(1001,'丽卡妲',1),(1003,'茜茜',2),(1004,'奈奈',0),(1005,'老金',3),
             (1006,'莫娜',1),(1007,'韩赛尔',2),(1008,'费恩',0),(1009,'卢卡',1),(1010,'乌鹊',0)]
     levels = [0,100,240,420,640,900,1200,1560,1960,2400,2900,3500,4400]
@@ -119,7 +121,7 @@ def prepare_demo(destination):
     target=destination/'saves/SAVE_PIPER_0.bytes'
     if not target.exists():
         target.write_bytes(encode_message('SaveLoadSystem.GameSaveData',save,schema))
-    elif marker.is_file() and marker.read_text() == '1':
+    elif marker.is_file() and marker.read_text() in ('1','2'):
         # Add a fresh fixture alongside an existing demo; keep the user's edited copy.
         for slot in range(1,100):
             fixture=destination/'saves'/f'SAVE_PIPER_{slot}.bytes'

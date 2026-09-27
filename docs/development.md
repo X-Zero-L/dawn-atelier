@@ -11,6 +11,7 @@ app_config.py        本机路径、演示模式与 Steam 目录发现
 web_server.py        本地 API、预览、备份与应用
 save_codec.py        具名字段解析与局部字节替换
 presets.py           预设操作和目标计算
+inventory.py         物品补全、种子关联与可逆新增
 prepare.py           本机配置与界面资源准备
 demo_data.py         合成演示数据生成
 schemas/             受支持版本的字段结构与枚举

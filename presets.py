@@ -1,8 +1,9 @@
-"""Allowlisted preset recipes that plan byte-preserving edits to existing save fields."""
+"""Allowlisted preset recipes for reversible save edits and inventory supply."""
 
 import json
 from pathlib import Path
 import re
+import inventory
 
 from save_codec import ROOT, Schema
 from app_config import DATA_ROOT, SCHEMA_ROOT
@@ -22,7 +23,8 @@ for row in rows('ToolUpgradeConfig'):
     if row.get('bodn') in (1, 2, 3, 4) and row.get('bodm', 0) > 0:
         TOOL_CONFIG.setdefault(row['bodn'], []).append(row)
 TOOL_NAMES = {1: '播种工具', 2: '浇水工具', 3: '收获工具', 4: '铲除工具'}
-SUPPLY_TYPES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 15}
+SUPPLY_TYPES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 16}
+METAL_IDS = {10509, 10510, 10511, 10512, 10513, 11000, 11001, 11002, 11003}
 SEDIMENT_MAX = 2147483647
 SEDIMENT_VALUE_PREFIX = 'AlchemySaveData.AlchemyPrecipitatesValueList['
 SEDIMENT_COUNT_PREFIX = 'AlchemySaveData.AlchemyPrecipitatesNumList['
@@ -54,10 +56,12 @@ def number(label, default, minimum, maximum, choices=None, unit=''):
 
 
 ACTIONS = [
+    {'id':'super_inventory','name':'全物品超级补给','category':'背包','icon':'layers','description':'一次补满可堆叠背包物品，并补齐尚未拥有的常规材料、矿石、金属锭和商品。','note':'数量按每种物品上限计算。需要独立数据的特殊物品会列出跳过原因。','parameter':number('每种目标数量',10000,1,10000,[99,999,10000],'个')},
+    {'id':'metals','name':'矿石与金属锭','category':'背包','icon':'layers','description':'补齐石头、铜铁金矿石及金属锭，尚未拥有的也会加入背包。','parameter':number('每种目标数量',999,1,10000,[99,999,10000],'个')},
     {'id':'gold','name':'备足金币','category':'财富','icon':'coin','description':'将持有金币补足到目标，余额更高时保留。','parameter':number('目标金币',1000000,0,999999999,[100000,1000000,10000000],'金币')},
-    {'id':'inventory','name':'背包补给','category':'背包','icon':'bag','description':'补足已有的可堆叠日常物品，保留任务物品和独特道具。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
+    {'id':'inventory','name':'背包补给','category':'背包','icon':'bag','description':'补足已有可堆叠物品，包含铜锭和矿石，保留独特道具。','parameter':number('每组至少',99,1,10000,[99,999,10000],'个')},
     {'id':'seeds','name':'种子储备','category':'背包','icon':'sprout','description':'补足已有作物、炼金、杂交与员工种子。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
-    {'id':'materials','name':'材料储备','category':'背包','icon':'layers','description':'补足已有材料，方便制作和建造。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
+    {'id':'materials','name':'材料储备','category':'背包','icon':'layers','description':'补足已有材料、矿石和金属锭，方便制作和建造。','parameter':number('每组至少',99,1,10000,[99,999,10000],'个')},
     {'id':'products','name':'商品备货','category':'经营','icon':'archive','description':'补足已有商品、产物与珍品，省去逐格修改。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
     {'id':'fertilizer','name':'肥料储备','category':'种植','icon':'sprout','description':'补足背包里已经拥有的肥料。','parameter':number('每组至少',99,1,9999,[30,99,999],'个')},
     {'id':'talent','name':'炼金天赋点','category':'成长','icon':'flask','description':'补足可用天赋点，供你在游戏里自由选择天赋。','parameter':number('可用点数',30,0,999,[10,30,100],'点')},
@@ -71,6 +75,7 @@ ACTIONS = [
 ]
 ACTION_BY_ID = {x['id']: x for x in ACTIONS}
 BUNDLES = [
+    {'id':'super','name':'超级补给','subtitle':'铜锭、材料、商品，一次备齐','description':'已有物品补满，缺少的常规物品自动加入。按各自堆叠上限处理，可在保存前逐项查看。','category':'推荐','icon':'layers','tone':'gold','art':10510,'badge':'全物品补给','actions':[{'id':'super_inventory','value':10000}]},
     {'id':'starter','name':'轻松开荒','subtitle':'从容出发，慢慢探索','description':'准备启动资金、基础种子和天赋点，给新一天留一点余裕。','category':'推荐','icon':'sun','tone':'sage','art':10000,'badge':'推荐入门','actions':[{'id':'gold','value':100000},{'id':'seeds','value':30},{'id':'talent','value':10}]},
     {'id':'farmer','name':'田园日常','subtitle':'少些重复，多些收获','description':'种子与肥料补给，农具满级，顺手减轻清理杂物的负担。','category':'种植','icon':'sprout','tone':'olive','art':10003,'actions':[{'id':'seeds','value':99},{'id':'fertilizer','value':99},{'id':'tools','value':4},{'id':'clutter'}]},
     {'id':'merchant','name':'富足经营','subtitle':'让店铺和行囊都充实','description':'补足一百万金币和日常货品，让员工以充足精神继续工作。','category':'经营','icon':'bag','tone':'gold','art':10201,'actions':[{'id':'gold','value':1000000},{'id':'inventory','value':99},{'id':'staff'}]},
@@ -84,7 +89,8 @@ def catalog():
     return {'version':1,'actions':ACTIONS,'bundles':BUNDLES,
             'npc_levels':{str(ident):[{'level':level,'value':value} for level,value in zip(config.get('bnio',[]),config.get('bnip',[]))] for ident,config in NPC_CONFIG.items()},
             'tool_ranges':{str(ident):[row.get('bodt',[1,1]) for row in sorted(config,key=lambda row:row['bodm'])] for ident,config in TOOL_CONFIG.items()},
-            'rules':['只调整存档中已有记录','补足操作保留更高现值','物品数量受配置上限约束','方案可预览、撤销和保存']}
+            'inventory_coverage':{'stackable':sum(inventory.stackable(item['raw']) for item in inventory.ITEMS),'creatable':sum(inventory.addition_supported(item['raw']) for item in inventory.ITEMS)},
+            'rules':['超级补给可新增常规物品','补足操作保留更高现值','物品数量受配置上限约束','方案可预览、撤销和保存']}
 
 
 def normalize_actions(actions):
@@ -115,6 +121,8 @@ def plan(data, actions):
     changes={}
     reports=[]
     skipped=[]
+    additions={}
+    missing_exclusions=[]
 
     def old(route):
         return changes[route]['raw_value'] if route in changes else values[route]
@@ -139,17 +147,30 @@ def plan(data, actions):
                 if re.fullmatch(r'AllAttributeSaveData\.AttributeParams\[\d+\]\.AttributeId',route) and value==901:
                     amount=route.rsplit('.',1)[0]+'.Value'
                     if amount in values:update(amount,max(old(amount),target*1000),ident,report,'金币','持有金币',1000)
-        elif ident in ('inventory','seeds','materials','products','fertilizer'):
-            allowed={'inventory':SUPPLY_TYPES,'seeds':{1,2,3,15},'materials':{6},'products':{5,7,8},'fertilizer':{9}}[ident]
+        elif ident in ('inventory','super_inventory','metals','seeds','materials','products','fertilizer'):
+            allowed={'inventory':SUPPLY_TYPES,'super_inventory':SUPPLY_TYPES,'metals':{10},'seeds':{1,2,3,15},'materials':{6,10},'products':{5,7,8},'fertilizer':{9}}[ident]
             for route, config_id in values.items():
                 if not re.fullmatch(r'BagSaveData\.ItemDataList\[\d+\]\.ConfigId',route):continue
                 config=ITEM_CONFIG.get(config_id,{})
+                if ident=='metals' and config_id not in METAL_IDS:continue
                 if config.get('bnoj') not in allowed:continue
                 count=route.rsplit('.',1)[0]+'.Count';cap=config.get('bnok',0)
-                if count not in values or cap<=1:
+                if count not in values or not inventory.stackable(config):
                     report['excluded']+=1;continue
                 amount=max(old(count),min(target,cap))
                 update(count,amount,ident,report,'数量',ITEM_NAMES.get(config_id,f'物品 {config_id}'))
+            if ident in ('super_inventory','metals'):
+                new_items,excluded=inventory.missing_items(data,target,METAL_IDS if ident=='metals' else None)
+                report['new']=len(new_items)
+                report['missing_skipped']=len(excluded)
+                report['changed']+=len(new_items)
+                report['matched']+=len(new_items)
+                missing_exclusions.extend(excluded)
+                for addition in new_items:
+                    addition['action']=ident
+                    previous=additions.get(addition['path'])
+                    if previous is None or int(addition['value'])>int(previous['value']):
+                        additions[addition['path']]=addition
         elif ident=='talent':
             route='AlchemySaveData.TalentPoint'
             if route in values:update(route,max(old(route),target),ident,report,'天赋点','炼金成长')
@@ -205,9 +226,14 @@ def plan(data, actions):
             skipped.append({'action':definition['name'],'reason':reason})
         else:
             report['message']=f"{report['changed']} 项调整"+(f"，{report['unchanged']} 项已满足" if report['unchanged'] else '')
+            if report.get('new'):
+                report['message']+=f"；新增 {report['new']} 种物品"
+            if report.get('missing_skipped'):
+                report['message']+=f"；{report['missing_skipped']} 种特殊种子未新增"
         reports.append(report)
     # Omit net no-ops when two requested actions converge on the original value.
     changes={route:change for route,change in changes.items() if change['raw_value']!=values[route]}
-    return {'actions':requested,'edits':[{'path':change['path'],'value':change['value']} for change in changes.values()],
-            'changes':[{key:value for key,value in change.items() if key!='raw_value'} for change in changes.values()],
-            'count':len(changes),'reports':reports,'skipped':skipped}
+    planned=[{key:value for key,value in change.items() if key!='raw_value'} for change in changes.values()]+list(additions.values())
+    return {'actions':requested,'edits':[{'path':change['path'],'value':change['value']} for change in planned],
+            'changes':planned,'new_items':len(additions),'missing_exclusions':missing_exclusions,
+            'count':len(planned),'reports':reports,'skipped':skipped}

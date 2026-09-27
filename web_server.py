@@ -22,6 +22,7 @@ from piper_save import write_modified
 from save_codec import ROOT, Schema
 from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_ROOT, SCHEMA_ROOT, DEMO
 import presets
+import inventory
 import game_runtime
 
 WEB = ROOT / 'web'
@@ -188,6 +189,7 @@ def items_response():
         result.append({'id': item['id'], 'name': item['name'], 'description': item['description'],
                        'name_en': item['name_en'], 'category': category, 'type_name': ITEM_TYPES.get(raw.get('bnoj'), ''),
                        'icon': item_icon(item['id']),
+                       'can_add':inventory.addition_supported(raw),
                        'raw': raw})
     return result
 
@@ -207,9 +209,17 @@ def edit_save(body, export=False, apply=False):
     descriptions = {f['path']: f for f in describe_save(name, True, original)['fields']}
     modified = original
     changes = []
+    additions = []
     seen = set()
     for requested_edit in requested:
         route = requested_edit.get('path')
+        new_item_id=inventory.parse_virtual_path(route)
+        if new_item_id is not None:
+            if route in seen:
+                raise ValueError('新增列表中包含重复物品。')
+            seen.add(route)
+            additions.append(requested_edit)
+            continue
         if route not in original_fields or route in seen:
             raise ValueError('修改清单包含重复或未识别的字段。')
         seen.add(route)
@@ -256,17 +266,23 @@ def edit_save(body, export=False, apply=False):
             changes.append({'path':route,'label':info['label'],'detail':'随炼金沉淀物自动同步',
                             'before':info['value'],'after':str(value),'raw_before':original_values[route],
                             'raw_after':value,'automatic':True})
+    modified,inventory_undo,added_records=inventory.append_items(modified,additions)
     parsed = {f['path']: f['value'] for f in SCHEMA.leaves(modified)}
-    reverted = modified
+    reverted = inventory.undo_additions(modified,inventory_undo)
     for change in reversed(changes):
         if parsed[change['path']] != change['raw_after']:
             raise ValueError('修改后的数值核对未通过。')
         reverted = SCHEMA.edit(reverted, change['path'], change['raw_before'])
     if reverted != original:
         raise ValueError('未修改字段的字节核对未通过，未写入任何存档。')
+    for record in added_records:
+        ident=record['ConfigId']
+        changes.append({'path':inventory.virtual_path(ident),'label':'新增物品',
+                        'detail':ITEM_NAMES.get(ident,str(ident)),
+                        'before':'未拥有','after':str(record['Count']),'operation':'add_item'})
     response = {'changes': [{k: v for k, v in change.items() if not k.startswith('raw_')} for change in changes],
                 'count': len(changes), 'bytes': len(modified), 'original_preserved': True,
-                'synchronized_fields':synchronized}
+                'synchronized_fields':synchronized,'new_items':len(added_records)}
     if export or apply:
         stamp = datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         destination = path if apply else MODIFIED_ROOT / f'{path.stem}-{stamp}.bytes'
@@ -289,10 +305,16 @@ def plan_preset(body):
     result=presets.plan(data,body.get('actions'))
     fields={f['path']:f for f in describe_save(name,True,data)['fields']}
     for change in result['changes']:
+        if change.get('operation')=='add_item':
+            info=inventory.virtual_field(change['item_id'])
+            info['icon']=item_icon(change['item_id'])
+            change['field']=info
+            change['icon']=info['icon']
+            continue
         info=fields[change['path']]
         change.update(label=info['label'],detail=info['detail'],before=info['value'],icon=info['icon'])
         if info.get('offset'):change['value']=str(int(change['value'])+info['offset'])
-    result['edits']=[{'path':change['path'],'value':change['value']} for change in result['changes']]
+    result['edits']=[{'path':change['path'],'value':change['value'],**({'field':change['field']} if change.get('operation')=='add_item' else {})} for change in result['changes']]
     result.update(save=name,sha256=body['sha256'])
     return result
 
@@ -313,7 +335,7 @@ def export_history():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'DawnAtelier/1.0'
+    server_version = 'DawnAtelier/2.1'
 
     def log_message(self, format, *args):
         pass
@@ -348,7 +370,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.json({'app': 'dawn-atelier', 'ready': True,'demo':DEMO})
             elif route == '/api/bootstrap':
                 self.json({'app': 'dawn-atelier', 'token': TOKEN, 'saves': saved_games(),
-                           'version':'2.0','runtime':game_runtime.status(),'demo':DEMO,
+                           'version':'2.1','runtime':game_runtime.status(),'demo':DEMO,
                            'stats': read_json('unpacked/configs/index.json'),
                            'resources': read_json('unpacked/resources/summary.json'),
                            'groups': [{'id': g[0], 'label': g[1], 'icon': g[3]} for g in GROUPS]})

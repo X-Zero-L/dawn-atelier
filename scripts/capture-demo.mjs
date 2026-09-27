@@ -38,7 +38,21 @@ try{
   for(const host of ['127.0.0.1','[::1]']){try{const test=`http://${host}:${port}`;await fetch(test+'/json/version');endpoint=test;break;}catch{}}
   if(!endpoint)throw new Error('Cannot reach the isolated renderer.');
   browser=await connect(endpoint.replace('http:','ws:')+browserPath);
-  if(process.argv.includes('--alchemy-only')){
+  if(process.argv.includes('--super-only')){
+    const superPage=await openPage('presets',1600,1300);
+    await capture(superPage,'super-supply');
+    await evaluate(superPage,`document.querySelector('[data-action="apply-preset"][data-id="super"]').click()`);
+    await waitFor(superPage,'#pending-bar:not([hidden])');
+    await evaluate(superPage,`document.querySelector('[data-action="review"]').click()`);
+    await waitFor(superPage,'#apply-runtime-note');
+    await evaluate(superPage,`document.querySelector('.review-dialog .change-list').scrollTop=100000`);
+    await capture(superPage,'super-supply-preview');
+    await evaluate(superPage,`document.querySelector('#review-dialog').close();document.querySelector('[data-action="clear-pending"]').click();presetUI.history=[];renderPending()`);
+    await close(superPage);
+    const mobile=await openPage('presets',430,1060,true);
+    await capture(mobile,'super-supply-mobile');
+    await close(mobile);
+  }else if(process.argv.includes('--alchemy-only')){
     const alchemy=await openPage('saves',1600,1200);
     await evaluate(alchemy,`document.querySelector('[data-action="field-group"][data-group="alchemy"]').click()`);
     await capture(alchemy,'alchemy');
