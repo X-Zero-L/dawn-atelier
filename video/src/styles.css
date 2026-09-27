@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Dawn Sans';
+  src: url('./fonts/DawnSans.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }

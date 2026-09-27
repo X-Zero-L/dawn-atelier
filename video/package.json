@@ -1,0 +1,18 @@
+{
+  "name": "dawn-atelier-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A reproducible Remotion showcase for Dawn Atelier",
+  "scripts": {
+    "assets": "node scripts/prepare-assets.mjs",
+    "studio": "remotion studio src/index.jsx",
+    "render": "remotion render src/index.jsx DawnAtelier out/dawn-atelier-demo.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
+    "poster": "remotion still src/index.jsx DawnAtelier out/dawn-atelier-poster.png --frame=84"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "remotion": "4.0.529",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
+}
