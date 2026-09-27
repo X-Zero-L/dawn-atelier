@@ -1,0 +1,32 @@
+{
+  "id": "DawnAtelier",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "durationInFrames": 1260,
+  "posterFrame": 84,
+  "sampleFrames": {
+    "intro": 84,
+    "presets": 225,
+    "supply": 360,
+    "supplyPreview": 460,
+    "sediment": 555,
+    "sedimentPreview": 630,
+    "inventory": 720,
+    "relationships": 820,
+    "tools": 910,
+    "review": 1050,
+    "outro": 1200
+  },
+  "chapters": [
+    {"key": "intro", "from": 0, "duration": 150},
+    {"key": "presets", "from": 135, "duration": 165},
+    {"key": "supply", "from": 285, "duration": 225},
+    {"key": "sediment", "from": 495, "duration": 180},
+    {"key": "inventory", "from": 660, "duration": 120},
+    {"key": "relationships", "from": 765, "duration": 105},
+    {"key": "tools", "from": 855, "duration": 105},
+    {"key": "review", "from": 945, "duration": 195},
+    {"key": "outro", "from": 1125, "duration": 135}
+  ]
+}

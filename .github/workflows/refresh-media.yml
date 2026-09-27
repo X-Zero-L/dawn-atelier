@@ -1,0 +1,73 @@
+name: Refresh screenshots and video
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Replace media attached to the selected release
+        type: boolean
+        default: false
+      release:
+        description: Existing release tag, or latest
+        type: string
+        default: latest
+      commit_media:
+        description: Commit and push the refreshed README gallery
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-media
+  cancel-in-progress: false
+
+jobs:
+  media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: video/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Prepare renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+          python -m pip install -r requirements.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - name: Refresh all media
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MEDIA_PUBLISH: ${{ inputs.publish }}
+          MEDIA_RELEASE: ${{ inputs.release }}
+          MEDIA_COMMIT: ${{ inputs.commit_media }}
+          DAWN_RENDER_CONCURRENCY: '2'
+        shell: bash
+        run: |
+          args=(--release "$MEDIA_RELEASE")
+          if [[ "$MEDIA_PUBLISH" == 'true' ]]; then args+=(--publish); fi
+          if [[ "$MEDIA_COMMIT" == 'true' ]]; then args+=(--commit); fi
+          node scripts/refresh-media.mjs "${args[@]}"
+      - name: Downloadable media and inspection frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dawn-atelier-media
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            video/out/
+            docs/images/

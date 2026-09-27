@@ -12,7 +12,7 @@
 
 </div>
 
-[![黎明工坊](docs/images/video-poster.png)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)
+[![黎明工坊](docs/images/video-poster.png)](https://github.com/X-Zero-L/dawn-atelier/releases/latest/download/dawn-atelier-demo.mp4)
 
 ## 功能介绍
 
@@ -143,9 +143,9 @@ python launch.py --demo
 
 ## 观看演示
 
-[![黎明工坊操作演示](docs/images/demo.gif)](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)
+[![黎明工坊操作演示](docs/images/demo.gif)](https://github.com/X-Zero-L/dawn-atelier/releases/latest/download/dawn-atelier-demo.mp4)
 
-**[观看完整演示](https://github.com/X-Zero-L/dawn-atelier/releases/download/v2.0.1/dawn-atelier-demo.mp4)**，了解方案选择、背包调整、好感提升、农具升级和修改预览。
+**[观看完整演示](https://github.com/X-Zero-L/dawn-atelier/releases/latest/download/dawn-atelier-demo.mp4)**，了解超级补给、铜铁金锭补齐、炼金沉淀物调整，以及保存前的修改预览。
 
 ## 常见问题
 

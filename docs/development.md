@@ -17,7 +17,7 @@ demo_data.py         合成演示数据生成
 schemas/             受支持版本的字段结构与枚举
 web/                 网页界面
 research/            资源读取与结构分析脚本
-scripts/             开发用截图脚本
+scripts/             截图、视频与发布自动化
 video/               演示视频工程
 docs/images/         文档截图与封面
 ```
@@ -50,17 +50,15 @@ docs/images/         文档截图与封面
 
 ## 截图与视频
 
-文档截图使用合成存档，拍摄前先启动演示服务：
+一条命令启动独立演示服务，刷新全部截图、视频、GIF 和封面：
 
 ```powershell
-python launch.py --demo --port 8767 --no-browser
-node scripts/capture-demo.mjs
-node scripts/capture-demo.mjs --alchemy-only
+node scripts/refresh-media.mjs
 ```
 
-脚本需要 Node.js 22+ 和 Chrome / Edge。它检查 localhost 服务处于演示模式，再使用独立的无头浏览器配置拍摄。
+需要 Node.js 22+、Python 3.11+、Chrome / Edge 和 FFmpeg。视频依赖缺失时自动按 lockfile 安装。流程使用临时合成存档与独立浏览器配置，完成后自动清理。
 
-视频工程的依赖、字体许可与构建命令见 [video/README.md](../video/README.md)。素材清单与输出规格见 [媒体开发说明](media.md)。这些工具不是运行存档工作台的依赖。
+自动提交、Release 上传和 GitHub Actions 用法见 [媒体开发说明](media.md)。视频字幕、时间线与字体许可见 [video/README.md](../video/README.md)。这些工具不是运行存档工作台的依赖。
 
 ## 发布检查记录
 

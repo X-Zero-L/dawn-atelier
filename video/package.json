@@ -5,8 +5,11 @@
   "description": "A reproducible Remotion showcase for Dawn Atelier",
   "scripts": {
     "assets": "node scripts/prepare-assets.mjs",
+    "prestudio": "npm run assets",
     "studio": "remotion studio src/index.jsx",
+    "prerender": "npm run assets",
     "render": "remotion render src/index.jsx DawnAtelier out/dawn-atelier-demo.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
+    "preposter": "npm run assets",
     "poster": "remotion still src/index.jsx DawnAtelier out/dawn-atelier-poster.png --frame=84"
   },
   "dependencies": {

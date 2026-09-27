@@ -8,7 +8,7 @@
 
 ## 字体
 
-演示视频包含 Noto Sans SC 的子集，按 SIL Open Font License 1.1 分发。完整许可文本和来源信息位于 `video/src/fonts/`。
+演示视频使用随工程附带的 Noto Sans SC 字体，按 SIL Open Font License 1.1 分发。完整许可文本、上游来源与校验值位于 `video/src/fonts/`。
 
 ## 依赖
 

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "repository": "X-Zero-L/dawn-atelier",
+  "gameTitle": "黎明门前的吹笛人",
+  "screenshots": [
+    "overview",
+    "presets",
+    "builder",
+    "preview",
+    "inventory",
+    "relationships",
+    "tools",
+    "items",
+    "mobile",
+    "alchemy",
+    "alchemy-preview",
+    "super-supply",
+    "super-supply-preview",
+    "super-supply-mobile"
+  ],
+  "snapshotVersion": 1,
+  "mediaFiles": [
+    "dawn-atelier-demo.mp4",
+    "dawn-atelier-demo.gif",
+    "dawn-atelier-poster.png"
+  ]
+}

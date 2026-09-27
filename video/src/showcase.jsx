@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AbsoluteFill, Img, Sequence, cancelRender, continueRender, delayRender, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import timeline from './timeline.json';
+import assets from '../public/assets.json';
 import './styles.css';
 
 const C = {paper: '#f6f3e9', ink: '#203e34', muted: '#7d8979', gold: '#b39751', green: '#2f5947', line: '#d9decb', sage: '#e7ecdc', paleGold: '#e9dfbb'};
@@ -36,11 +38,20 @@ function Backdrop({dark = false}) {
   </AbsoluteFill>;
 }
 
-function Window({asset, left, top, width, height, crop = false, scale = 1, origin = 'top left', border = true}) {
-  const imageStyle = asset === 'preview'
-    ? {position: 'absolute', width: '134%', maxWidth: 'none', left: '-17%', top: -316}
-    : crop ? {position: 'absolute', width: '121.5%', maxWidth: 'none', left: '-19.1%', top: -96}
-    : {width: '100%', display: 'block'};
+function Window({asset, left, top, width, height, view = 'full', scale = 1, origin = 'top left', border = true}) {
+  const dimensions = assets.screenshots[asset];
+  const normalizer = dimensions.width / 1600;
+  const crops = {
+    full: {x: 0, y: 0, width: 1600},
+    content: {x: 258, y: 116, width: 1320},
+    supply: {x: 256, y: 230, width: 1324},
+    alchemy: {x: 448, y: 350, width: 1100},
+  };
+  const crop = view === 'modal'
+    ? {x: 250, y: Math.max(0, dimensions.height / normalizer / 2 - 356), width: 1100}
+    : crops[view];
+  const imageScale = width / crop.width;
+  const imageStyle = {position: 'absolute', width: 1600 * imageScale, maxWidth: 'none', left: -crop.x * imageScale, top: -crop.y * imageScale};
   return <div style={{position: 'absolute', left, top, width, height, borderRadius: 18, overflow: 'hidden', background: C.paper, border: border ? '1px solid #d8ddc7' : 0, boxShadow: '0 30px 75px #15372b20', transform: `scale(${scale})`, transformOrigin: origin}}>
     <div style={{height: 34, background: '#eeefe5', borderBottom: `1px solid ${C.line}`, display: 'flex', alignItems: 'center', gap: 6, padding: '0 15px'}}>
       {[C.gold,'#9cac88','#bec5b4'].map((color) => <span key={color} style={{width: 7, height: 7, borderRadius: '50%', background: color}}/>)}
@@ -61,20 +72,24 @@ function Tag({children, index = 0}) {
   return <div style={{padding: '12px 19px', border: `1px solid ${C.line}`, background: '#ffffff60', borderRadius: 30, fontSize: 18, color: C.green, opacity: interpolate(f,[24+index*5,38+index*5],[0,1],clamp), transform: `translateY(${interpolate(f,[24+index*5,38+index*5],[9,0],clamp)}px)`}}>{children}</div>;
 }
 
-const CHAPTERS = [
-  {from: 0, duration: 150, id: '01', name: '你的冒险，你的节奏', type: 'intro'},
-  {from: 135, duration: 180, id: '02', name: '一键方案', title: ['从一个方案', '开始。'], description: ['选择喜欢的游玩节奏，', '把常用调整一次准备好。'], asset: 'presets', tags: ['轻松开荒','田园日常','富足经营'], marker: 'START WITH A PLAN'},
-  {from: 300, duration: 150, id: '03', name: '背包与物品', title: ['行囊，', '按心意整理。'], description: ['查找需要的物品，', '清楚设置每一项数量。'], asset: 'inventory', tags: ['搜索物品','调整数量','预览变更'], marker: 'A LITTLE MORE PREPARED'},
-  {from: 435, duration: 135, id: '04', name: 'NPC 与好感', title: ['让每段相遇，', '都有回响。'], description: ['按角色查看好感度，', '为想要的关系设定目标。'], asset: 'relationships', tags: ['角色列表','好感目标'], marker: 'ROOM FOR EVERY STORY'},
-  {from: 555, duration: 150, id: '05', name: '工具升级', title: ['熟悉的工具，', '更顺手。'], description: ['工具等级一目了然，', '逐项准备升级方案。'], asset: 'tools', tags: ['当前等级','目标等级'], marker: 'READY FOR TOMORROW'},
-  {from: 690, duration: 180, id: '06', name: '预览与备份', title: ['每次调整，', '都先看清楚。'], description: ['核对方案与调整项目，', '带着备份，再开启新一天。'], asset: 'preview', tags: ['方案预览','导出备份'], marker: 'MAKE EVERY CHANGE CLEAR'},
-  {from: 855, duration: 105, id: '07', name: '黎明工坊', type: 'outro'},
-];
+const COPY = {
+  intro: {name: '你的冒险，你的节奏', type: 'intro'},
+  presets: {name: '一键方案', title: ['从一个方案', '开始。'], description: ['超级补给与 6 组日常方案，', '按自己的节奏自由组合。'], asset: 'presets', tags: ['7 套内置方案', '16 项可选操作'], marker: 'START WITH A PLAN'},
+  supply: {name: '超级补给', title: ['常用物资，', '一次备齐。'], description: ['已有铜锭补足数量，', '缺少的铁锭、金锭直接补入。'], asset: 'super-supply', view: 'supply', detailAsset: 'super-supply-preview', detailFrom: 112, tags: ['补足已有物品', '添加缺少物品'], marker: 'SUPER SUPPLY', emphasis: '铜锭 · 铁锭 · 金锭'},
+  sediment: {name: '炼金沉淀物', title: ['为下一次炼金，', '留足准备。'], description: ['直接输入沉淀物数量，', '也能选择常用补足目标。'], asset: 'alchemy', view: 'alchemy', detailAsset: 'alchemy-preview', detailFrom: 88, tags: ['100 份', '1,000 份', '10,000 份'], marker: 'ALCHEMICAL SEDIMENT'},
+  inventory: {name: '背包与物品', title: ['行囊，', '按心意整理。'], description: ['查找需要的物品，', '逐项调整背包数量。'], asset: 'inventory', tags: ['搜索物品', '调整数量'], marker: 'A LITTLE MORE PREPARED'},
+  relationships: {name: 'NPC 与好感', title: ['想见的人，', '再近一点。'], description: ['按角色查看好感度，', '设定想要的好感目标。'], asset: 'relationships', tags: ['角色列表', '好感目标'], marker: 'ROOM FOR EVERY STORY'},
+  tools: {name: '工具升级', title: ['熟悉的工具，', '更顺手。'], description: ['看清当前等级，', '选择下一档工具范围。'], asset: 'tools', tags: ['当前等级', '目标等级'], marker: 'READY FOR TOMORROW'},
+  review: {name: '预览与备份', title: ['每次调整，', '都先看清楚。'], description: ['逐项核对修改前后的差异，', '导出副本，自动备份原档。'], asset: 'preview', view: 'modal', tags: ['变更预览', '原档备份'], marker: 'MAKE EVERY CHANGE CLEAR'},
+  outro: {name: '黎明工坊', type: 'outro'},
+};
+
+const CHAPTERS = timeline.chapters.map((chapter, index) => ({...chapter, ...COPY[chapter.key], id: String(index + 1).padStart(2, '0')}));
 
 function Footer({chapter, dark = false}) {
   return <div style={{position: 'absolute', left: 100, right: 100, bottom: 40, display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: dark ? '#b2c0a8' : C.muted}}>
     <span style={{fontSize: 12, letterSpacing: 1.5}}>演示数据 · 编辑器与变更预览</span>
-    <div style={{display: 'flex', alignItems: 'center', gap: 18}}><span style={{fontSize: 13, letterSpacing: 2}}>{chapter.name}</span><span style={{color: C.gold, fontSize: 13}}>{chapter.id} / 07</span></div>
+    <div style={{display: 'flex', alignItems: 'center', gap: 18}}><span style={{fontSize: 13, letterSpacing: 2}}>{chapter.name}</span><span style={{color: C.gold, fontSize: 13}}>{chapter.id} / {String(CHAPTERS.length).padStart(2, '0')}</span></div>
   </div>;
 }
 
@@ -83,10 +98,11 @@ function Intro() {
   const {fps} = useVideoConfig();
   const appear = spring({frame: f - 8, fps, config: {damping: 25, mass: 1.05, stiffness: 105}});
   return <>
-    <div style={{position: 'absolute', left: 100, top: 270, opacity: interpolate(f,[8,28],[0,1],clamp), transform: `translateY(${(1-appear)*24}px)`}}>
+    <div style={{position: 'absolute', left: 100, top: 246, opacity: interpolate(f,[8,28],[0,1],clamp), transform: `translateY(${(1-appear)*24}px)`}}>
       <SmallLabel>A NEW DAY, YOUR WAY</SmallLabel>
-      <div style={{fontSize: 72, fontWeight: 450, letterSpacing: -2, lineHeight: 1.5, marginTop: 37}}>把冒险，<br/>调成喜欢的样子。</div>
-      <div style={{fontSize: 24, color: C.muted, lineHeight: 1.9, marginTop: 30}}>你的本地存档工作台。<br/>从整理行囊，到规划下一段旅程。</div>
+      <div style={{marginTop: 25, fontSize: 21, color: C.green, letterSpacing: 1}}>《黎明门前的吹笛人》存档工具</div>
+      <div style={{fontSize: 70, fontWeight: 450, letterSpacing: -2, lineHeight: 1.5, marginTop: 27}}>把冒险，<br/>调成喜欢的样子。</div>
+      <div style={{fontSize: 23, color: C.muted, lineHeight: 1.9, marginTop: 23}}>补足物资，准备炼金。<br/>为下一段旅程，留一点余裕。</div>
       <div style={{marginTop: 43, display: 'flex', alignItems: 'center', gap: 16, fontSize: 17, color: C.green}}><span style={{width: 7, height: 7, background: '#819b6b', borderRadius: '50%'}}/>本地运行 <span style={{opacity: .4}}>／</span> 先预览，再导出</div>
     </div>
     <div style={{opacity: interpolate(f,[12,38],[0,1],clamp), transform: `translateX(${interpolate(f,[12,60],[55,0],clamp)}px)`}}>
@@ -102,13 +118,17 @@ function Feature({chapter}) {
   return <>
     <div style={{position: 'absolute', left: 100, top: 273, width: 535, opacity: progress, transform: `translateY(${(1-progress)*18}px)`}}>
       <SmallLabel>{chapter.marker}</SmallLabel>
-      <div style={{fontSize: 68, fontWeight: 460, letterSpacing: -1.8, lineHeight: 1.48, marginTop: 31}}>{chapter.title.map(t => <div key={t}>{t}</div>)}</div>
+      <div style={{fontSize: 66, fontWeight: 460, letterSpacing: -1.8, lineHeight: 1.48, marginTop: 31}}>{chapter.title.map(t => <div key={t}>{t}</div>)}</div>
       <div style={{fontSize: 23, color: C.muted, lineHeight: 1.95, marginTop: 31}}>{chapter.description.map(t => <div key={t}>{t}</div>)}</div>
       <div style={{display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 38}}>{chapter.tags.map((tag,index) => <Tag key={tag} index={index}>{tag}</Tag>)}</div>
-      <div style={{marginTop: 64, display: 'flex', gap: 9, alignItems: 'center'}}>{Array.from({length: 5},(_,i) => <div key={i} style={{height: 3, width: i === Number(chapter.id)-2 ? 40 : 15, borderRadius: 2, background: i === Number(chapter.id)-2 ? C.gold : C.line}}/>)}</div>
+      {chapter.emphasis && <div style={{marginTop: 35, color: C.gold, fontSize: 19, letterSpacing: 3}}>{chapter.emphasis}</div>}
+      <div style={{marginTop: chapter.emphasis ? 34 : 64, display: 'flex', gap: 9, alignItems: 'center'}}>{Array.from({length: CHAPTERS.length - 2},(_,i) => <div key={i} style={{height: 3, width: i === Number(chapter.id)-2 ? 40 : 15, borderRadius: 2, background: i === Number(chapter.id)-2 ? C.gold : C.line}}/>)}</div>
     </div>
     <div style={{opacity: interpolate(f,[6,27],[0,1],clamp), transform: `translateY(${interpolate(f,[6,42],[24,0],clamp)}px)`}}>
-      <Window asset={chapter.asset} left={702} top={193} width={1132} height={794} crop scale={interpolate(f,[0,chapter.duration],[1,1.012],clamp)}/>
+      <Window asset={chapter.asset} left={702} top={193} width={1132} height={794} view={chapter.view ?? 'content'} scale={interpolate(f,[0,chapter.duration],[1,1.008],clamp)}/>
+      {chapter.detailAsset && <div style={{opacity: interpolate(f,[chapter.detailFrom,chapter.detailFrom + 14],[0,1],clamp)}}>
+        <Window asset={chapter.detailAsset} left={702} top={193} width={1132} height={794} view="modal" scale={interpolate(f,[0,chapter.duration],[1,1.008],clamp)}/>
+      </div>}
     </div>
   </>;
 }
@@ -116,10 +136,11 @@ function Feature({chapter}) {
 function Outro() {
   const f = useCurrentFrame();
   return <>
-    <div style={{position: 'absolute', left: 350, top: 215, width: 1220, textAlign: 'center', color: C.paper, opacity: interpolate(f,[8,30],[0,1],clamp), transform: `translateY(${interpolate(f,[8,40],[16,0],clamp)}px)`}}>
+    <div style={{position: 'absolute', left: 350, top: 197, width: 1220, textAlign: 'center', color: C.paper, opacity: interpolate(f,[8,30],[0,1],clamp), transform: `translateY(${interpolate(f,[8,40],[16,0],clamp)}px)`}}>
       <Mark size={108}/>
       <div style={{fontSize: 66, fontWeight: 450, lineHeight: 1.45, marginTop: 24, letterSpacing: 2}}>留一份备份。<br/>开启新的冒险。</div>
       <div style={{marginTop: 39, fontSize: 22, letterSpacing: 8, color: '#d3ddc2'}}>黎明工坊 <span style={{fontSize: 18, letterSpacing: 3, color: C.gold, marginLeft: 10}}>DAWN ATELIER</span></div>
+      <div style={{marginTop: 24, fontSize: 22, letterSpacing: 2, color: '#c7d3be'}}>《黎明门前的吹笛人》存档工具</div>
       <div style={{margin: '36px auto 0', padding: '13px 27px', display: 'inline-flex', border: '1px solid #69816a', borderRadius: 40, fontSize: 18, letterSpacing: 3, color: '#c7d3be'}}>开源 · 本地运行 · 随心调整</div>
     </div>
   </>;

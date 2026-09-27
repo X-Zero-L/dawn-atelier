@@ -1,6 +1,7 @@
 import React from 'react';
 import {Composition, registerRoot} from 'remotion';
 import {DawnAtelier} from './showcase';
+import timeline from './timeline.json';
 
-const Root = () => <Composition id="DawnAtelier" component={DawnAtelier} width={1920} height={1080} fps={30} durationInFrames={960}/>;
+const Root = () => <Composition id={timeline.id} component={DawnAtelier} width={timeline.width} height={timeline.height} fps={timeline.fps} durationInFrames={timeline.durationInFrames}/>;
 registerRoot(Root);

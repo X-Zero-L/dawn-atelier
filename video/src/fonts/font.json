@@ -1,0 +1,8 @@
+{
+  "family": "Noto Sans SC",
+  "file": "DawnSans.ttf",
+  "coverage": "Full upstream Simplified Chinese variable font, not a caption subset",
+  "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+  "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+  "license": "SIL Open Font License 1.1; see OFL.txt"
+}
