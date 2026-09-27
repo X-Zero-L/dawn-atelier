@@ -78,5 +78,6 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | `DAWN_PYTHON` | 指定 Python 可执行文件 |
 | `DAWN_ASSET_DIR` | 指定本机可选美术目录 |
 | `DAWN_RENDER_CONCURRENCY` | 视频并行帧数，默认 2，范围 1–16 |
+| `DAWN_CAPTURE_NO_SANDBOX` | 托管 Linux 环境无法创建 Chrome 用户命名空间时设为 `1`，仅作用于临时演示浏览器；本地默认关闭 |
 
 单独维护截图时，可先启动合成演示服务，再运行 `node scripts/capture-demo.mjs`。它支持 `DAWN_DEMO_URL` 与 `DAWN_CAPTURE_DIR`，每次始终生成完整集合；发布仍需重新运行完整流程。

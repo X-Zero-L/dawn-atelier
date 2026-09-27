@@ -55,6 +55,7 @@ jobs:
           MEDIA_RELEASE: ${{ inputs.release }}
           MEDIA_COMMIT: ${{ inputs.commit_media }}
           DAWN_RENDER_CONCURRENCY: '2'
+          DAWN_CAPTURE_NO_SANDBOX: '1'
         shell: bash
         run: |
           args=(--release "$MEDIA_RELEASE")

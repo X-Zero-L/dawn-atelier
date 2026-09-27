@@ -22,11 +22,16 @@ let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch {} }
 if (!executable) throw new Error('Set CHROME_PATH to an installed Chromium browser.');
 const profile = await fs.mkdtemp(path.join(os.tmpdir(), 'dawn-atelier-capture-'));
+let browserLog = '', browserError;
 const browserProcess = spawn(executable, [
   '--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
+  // Ubuntu hosted runners restrict Chrome user namespaces. This opt-in is
+  // limited to the disposable browser rendering our localhost synthetic demo.
+  ...(process.env.DAWN_CAPTURE_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-dev-shm-usage'] : []),
   '--remote-debugging-port=0', `--user-data-dir=${profile}`, 'about:blank',
-], {windowsHide: true, stdio: 'ignore'});
-browserProcess.on('error', error => console.error(error.message));
+], {windowsHide: true, stdio: ['ignore', 'ignore', 'pipe']});
+browserProcess.stderr.on('data', data => { browserLog = (browserLog + data).slice(-12000); });
+browserProcess.on('error', error => { browserError = error; });
 const sockets = [];
 const screenshots = {};
 let endpoint, browser;
@@ -128,10 +133,11 @@ try {
   await fs.mkdir(output, {recursive: true});
   await fs.rm(path.join(output, 'screenshots.json'), {force: true});
   let portFile;
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 200; i++) {
+    if (browserError || browserProcess.exitCode !== null) throw new Error('Headless Chrome failed: ' + (browserError?.message || browserLog));
     try { portFile = await fs.readFile(path.join(profile, 'DevToolsActivePort'), 'utf8'); break; } catch { await delay(100); }
   }
-  if (!portFile) throw new Error('Headless Chrome did not start.');
+  if (!portFile) throw new Error('Headless Chrome did not start. ' + browserLog);
   const [port, browserPath] = portFile.trim().split(/\r?\n/);
   for (const host of ['127.0.0.1', '[::1]']) {
     try { const candidate = `http://${host}:${port}`; await fetch(candidate + '/json/version'); endpoint = candidate; break; } catch {}
