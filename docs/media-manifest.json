@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T16:56:16.370Z",
+  "generatedAt": "2026-09-27T18:35:05.082Z",
   "gameTitle": "黎明门前的吹笛人",
   "source": {
-    "commit": "7ffacceb2a3a1702f8bd93cafa51b7ef683314c9",
+    "commit": "c26c3c5df922b093c3e0032dcaa31c969701d5ef",
     "dirty": false,
-    "fingerprint": "61fa629903294b84751ad43388e9eeaa295a0a3a926f9a9b6b197d1955df8c80",
+    "fingerprint": "ecbab5e21fe6e408fd2b1ecc31f5b2a01df966e581fb870ca7421a5d8628447b",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -13,11 +13,35 @@
       ],
       [
         "app_config.py",
-        "0b57e1a2a0b98db826b49f8f12e592a7813d4d7047618e7cfe7abaff63c3f0f5"
+        "d93c16eb88e5e4ef3a083e8d33b609c0a3a3dde5ea682549502a2f496faac73f"
+      ],
+      [
+        "app_paths.py",
+        "e58fcf8481430b8847a6ee31ea45a4cf7f2d4d5da1a3155fbb3eecfa810aabd3"
       ],
       [
         "demo_data.py",
         "8be0b2458bc7d536efe31a1adad53a657d88ffffb88b047383f3789164032104"
+      ],
+      [
+        "desktop.py",
+        "a844a84a297dd9b0e19a3846a426300c11e4a28d7755fe98bec61a47841d4653"
+      ],
+      [
+        "desktop/index.html",
+        "daa0c828403ec3a7323b63618956e24fc3acd5bb331a6cbbdd6f7b4012d377fa"
+      ],
+      [
+        "desktop/launcher.css",
+        "a9b52a69e3b74ed965eda2e872166d2874907c138f13ace6cdd907528d576c23"
+      ],
+      [
+        "desktop/launcher.js",
+        "f95044286d364693845be8cc095159fc8f29da5e32f6f301ca6d61c24f36859c"
+      ],
+      [
+        "desktop_service.py",
+        "b617d8b4a437ad43fefc51cac26893145ebbeef2bd06de90e68d459f71eadee5"
       ],
       [
         "export_catalogue.py",
@@ -53,7 +77,7 @@
       ],
       [
         "prepare.py",
-        "0a7a1b51ce1ea55052fdd63597de34ae8ac9878cf4ac98664bfa2c3043e97b73"
+        "9f25e78c7db29d31804fe02ca8d5a418ab5daa6016ea20f46eca40c94670e4e6"
       ],
       [
         "presets.py",
@@ -80,20 +104,24 @@
         "16c30b431da180970c13691cab10d20def2d2715852516e044461355528bf5b8"
       ],
       [
+        "scripts/build-windows.py",
+        "c07c1c028f77a80b75a6acd2b63eca2d2734a3ca93ba2e14ba3d132dfaa5dd7c"
+      ],
+      [
         "scripts/capture-demo.mjs",
-        "a07134c4adec8eff58b08aa1c6a100b5a2808ba31b0b6407a571c1ae981ff089"
+        "645d51240c330850998f6b406525d200a3fbaf2eba31c580c5b6d263863e9084"
       ],
       [
         "scripts/media-config.json",
-        "5cf4bb5527046365f77d4424f98c31d28a660524571e08a75f075145c7b6c12c"
+        "ef7cb39a0f46148c6164c7e782e94728136ea83130729d94a7a1e9a13e0804b4"
       ],
       [
         "scripts/media-lib.mjs",
-        "08a6dd911824754adda4b124dcf7c6153e6be06360bcaab1dcfa3b1ebc728124"
+        "fcf3a74ebb8e8451a740031f532178749a645ce75e3c1332109aa0299e2fbcc6"
       ],
       [
         "scripts/refresh-media.mjs",
-        "5689f3df86bf8964cf706a304844d53374655d31d0257efc8a864264df7eb883"
+        "38b42698a8612fc28cc322a86f0fbc68d8e6956789c6e1ba784252b9f3d691c9"
       ],
       [
         "unpack_all.py",
@@ -104,16 +132,20 @@
         "7d96257c791254761412267fd775eef17cc75046be4f50cf8cc32d5373798751"
       ],
       [
+        "version.json",
+        "3247855f8ad7f60a7434abd6b23ccb8b1f08e5ac2acddac3e4f4a545851db8c4"
+      ],
+      [
         "video/package-lock.json",
         "7d92de4fe6576f471a744bf4da712b0dc3feb8411c3c403c7b55cae89bd142a2"
       ],
       [
         "video/package.json",
-        "64607e5eaca96f8c66146fd85e6b0dce8cd112438d9897f60637ab421af0542e"
+        "9cd8ce700d0deb19526f7510d9bcec3b89d662a2ebc19bc1af00527978cb4e95"
       ],
       [
         "video/scripts/prepare-assets.mjs",
-        "9df0d34de6773c33e36e36b4226b137e28dbc60b3063060f521470f23c4247ef"
+        "c1749851dcfbf7905661d63391effbf3988bd4240779709e88657397d1ba21b0"
       ],
       [
         "video/src/fonts/DawnSans.ttf",
@@ -133,7 +165,7 @@
       ],
       [
         "video/src/showcase.jsx",
-        "68c631ea00ee030d69f3aa7c1982479c3dba6f65f4c903a73aaeb6aa66767894"
+        "e9dba6887795477695b5a232291a3d2cc5dfaf2f01885239e724e789c6e51948"
       ],
       [
         "video/src/styles.css",
@@ -141,7 +173,7 @@
       ],
       [
         "video/src/timeline.json",
-        "76f6a7f6feb72e99f6ce423ed776fb8afe9bf41fdd3aaae2f09ef392f6df31af"
+        "7332b521603409659550312c0b30046e86c1bb25c3c32f43b6acb086327fc7cb"
       ],
       [
         "web/app.js",
@@ -157,7 +189,7 @@
       ],
       [
         "web/index.html",
-        "c1ec4a8ce6331f859534bfeae3fa25c081a61aff4ccbbf198772cb25e740016a"
+        "23efb4681db08a25a622c99a739f26b1271f7f2f136b06b32f1606ae44ae507a"
       ],
       [
         "web/presets-ui.js",
@@ -173,7 +205,7 @@
       ],
       [
         "web_server.py",
-        "51e0c8d959aaa591f6ce71c5d408e820d54de127fe2b8cef1d8d9dc99ebc82b3"
+        "0ff6b795108783182712906b8308fca85d36603a56fd02def9c23daf27a427f9"
       ]
     ],
     "artwork": {
@@ -1911,76 +1943,92 @@
     }
   },
   "screenshots": {
+    "desktop": {
+      "file": "desktop.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "7033cf35860a0f210d9541e30a84a976c184c2ea49e7981eac54e18a975d3f2c",
+      "bytes": 94582,
+      "route": "desktop"
+    },
+    "desktop-preparing": {
+      "file": "desktop-preparing.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "9c68be85ab27dc4c4dc98d0ddccb5abb637c562d228375b624b68fcf6bc49643",
+      "bytes": 91496,
+      "route": "desktop-preparing"
+    },
     "overview": {
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "041d1103c6cf4ac7b6a6e6f423ae910aa595623ca773f5dab209b5dff678b8eb",
-      "bytes": 161325,
+      "sha256": "c8ba311f390cd443fefb3e9e7fa94c3cee1e0e66a7259462d14afe12e8435a11",
+      "bytes": 161316,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "80fbe68478f8b6d66dc522d196ddfd52970d9cd34e632a5b429feef3a6079b50",
-      "bytes": 349693,
+      "sha256": "048b9cc346528b80fc422e6763406a315faed0b977f0ffccff1abbdb51e0de16",
+      "bytes": 349591,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "2c9fc4e86ebc3bc9bfb3357085fe13392ba12d38c7d7786fe2a764360b786cf9",
-      "bytes": 366801,
+      "sha256": "d5525087c4142ddc082a95de02879b9f1806add6f0bc3fe961c21382a87a6efe",
+      "bytes": 366821,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "59e7b1552905b1951b02583ae80939fc10c4856db3ec74aeff4321043dd3a7a2",
-      "bytes": 384321,
+      "sha256": "33213e43c6ae11d6f1c9bc0cee190baf91924138995e6240ab7f081d442b2e7d",
+      "bytes": 384328,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "382c7fd9a5ed094abffa704ed1b86e8e2861d50a767dfdbc0bdccaf27ce0df2a",
-      "bytes": 142257,
+      "sha256": "0587410f9bb37fc843dc94210325be6f6179fe0334a4a41ab12d169fb171b796",
+      "bytes": 142262,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "a37efdbea1997f033d14e1693ce7ffd9720172d30b2e465e6f2e279866d9712e",
-      "bytes": 128811,
+      "sha256": "3f1a3323956b24c90360f385f1192b4c90112709cbc168fa6618d7c138291f8d",
+      "bytes": 128821,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "ca11b6d9e661b8f5083b54958c8dfef4d7f40497e9adefbc60407d22dcdaa015",
-      "bytes": 114882,
+      "sha256": "1558805b1b512ddc7b04509f515ef7c5eee7acef26370414e75d7020924cfbbd",
+      "bytes": 114886,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "3f8cdce4a673a0ac4ee89e10517ba545d19db5c5d6d2e197f4a3f43297158416",
-      "bytes": 176512,
+      "sha256": "2150a19f3fb42e77220a3afab8ba65ad4c7347745f32e7776d6f96b6a5b11305",
+      "bytes": 176501,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "966e59257c657b40fcc6e48f49595fadc9ded5d9765711dfc5a066c2c416fd02",
-      "bytes": 264306,
+      "sha256": "c929756ac23608057c414fe5fe0a76deec3a5cd96fc23aca014f2d73ba5d25d6",
+      "bytes": 264328,
       "route": "saves"
     },
     "items": {
@@ -1995,24 +2043,24 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "f2efc3ea2ce4c2384f380d83d362c41835fcc089d08c1ed97b2e569957cce910",
-      "bytes": 335988,
+      "sha256": "15871f4385b797a5f3dcfd323d5bdaac35b67df1697ed1aad9747d15578c3028",
+      "bytes": 335887,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "25e4d3483a436af750a42cff64e382f69d947c6438bc8c19abdd8dd0328a7a1f",
-      "bytes": 346908,
+      "sha256": "0f94cbdd06fa1d99aa2ebd74e8572948944b5af5eaf516111b20598865a92467",
+      "bytes": 346912,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "0cc77d0aa7e3de9e4fe48d99b3612b435a917b00b53034ca4d0837797cb6adc8",
-      "bytes": 126433,
+      "sha256": "e42f15d64704007242116ec63ac2d97e3cf7197428bb76d93d27c36bc2fec4ec",
+      "bytes": 126354,
       "route": "presets"
     },
     "mobile": {
@@ -2028,23 +2076,23 @@
     "width": 1920,
     "height": 1080,
     "fps": 30,
-    "frames": 1260,
-    "duration": 42,
+    "frames": 1440,
+    "duration": 48,
     "codec": "h264",
     "audio": false
   },
   "files": {
     "dawn-atelier-demo.mp4": {
-      "bytes": 13037854,
-      "sha256": "ea292f768e4284aa749b8093756ac4068c680ef98c804e60f7884e90807fcbfa"
+      "bytes": 14061096,
+      "sha256": "8859035b007999f45a1728448fac297eecb68a227de1fde1b34099fd2bd7de67"
     },
     "dawn-atelier-demo.gif": {
-      "bytes": 5301028,
-      "sha256": "eae37f60ca8879c9ff50b07a3ad0305da436d15b9cfa450258a1de167404334c"
+      "bytes": 5729559,
+      "sha256": "26ea41b4e55207dba2078133cc80e29d959e6ef6b28272967f66b503ad5bd7c2"
     },
     "dawn-atelier-poster.png": {
-      "bytes": 266698,
-      "sha256": "996868e505839c10d8fc53ceae0035671081aa344d371eb22b41dd186eb0209d"
+      "bytes": 252315,
+      "sha256": "2c95266777ee9d5e5b6f1f8b0d9d555513b36631fb1c5a354d4dd6bf3fc634c3"
     }
   }
 }
