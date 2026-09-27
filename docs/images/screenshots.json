@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T18:32:04.177Z",
+  "generatedAt": "2026-09-27T19:33:44.556Z",
   "syntheticDemo": true,
   "source": {
-    "commit": "c26c3c5df922b093c3e0032dcaa31c969701d5ef",
+    "commit": "a68620a97dd98bc78d93c7e98ed403724e7ba721",
     "dirty": false,
-    "fingerprint": "ecbab5e21fe6e408fd2b1ecc31f5b2a01df966e581fb870ca7421a5d8628447b",
+    "fingerprint": "8d854d2b8e2adbfb13e0da44c1fe1d5287c22e77e0f3cd1d0c51d688b8ae2df3",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -21,7 +21,7 @@
       ],
       [
         "demo_data.py",
-        "8be0b2458bc7d536efe31a1adad53a657d88ffffb88b047383f3789164032104"
+        "152dba78617fbe55959ee79f31d8bcdc4cbe3fa650efefcb41ea304871c477f6"
       ],
       [
         "desktop.py",
@@ -29,7 +29,7 @@
       ],
       [
         "desktop/index.html",
-        "daa0c828403ec3a7323b63618956e24fc3acd5bb331a6cbbdd6f7b4012d377fa"
+        "8763a51b209e42f03914646826f17f92f705e18034503722c5aa742969d50a13"
       ],
       [
         "desktop/launcher.css",
@@ -37,7 +37,7 @@
       ],
       [
         "desktop/launcher.js",
-        "f95044286d364693845be8cc095159fc8f29da5e32f6f301ca6d61c24f36859c"
+        "53885cb056c67a9a8c64a7afb4488951ad1e09e812df9c8837a1cf1f35638802"
       ],
       [
         "desktop_service.py",
@@ -81,7 +81,11 @@
       ],
       [
         "presets.py",
-        "509bdf0f19167720e7edb1f573519d2434001b24d34f84e9b84e1d343215cb0c"
+        "c19d6afb44357fbb5cbe5cc36d18ffc6f8cc790c46a6514adc0d857cb1a7ceb4"
+      ],
+      [
+        "progression.py",
+        "bfb6d9f9819f12d1670ae4dce62e8c758a9b17ad811b3aa6695ac6760eb5fca8"
       ],
       [
         "requirements.txt",
@@ -105,15 +109,15 @@
       ],
       [
         "scripts/build-windows.py",
-        "c07c1c028f77a80b75a6acd2b63eca2d2734a3ca93ba2e14ba3d132dfaa5dd7c"
+        "9534eb4ecb35add200a1eea2c2f1bf29226751921f033fe22107248cfee1f808"
       ],
       [
         "scripts/capture-demo.mjs",
-        "645d51240c330850998f6b406525d200a3fbaf2eba31c580c5b6d263863e9084"
+        "d9633ba5af95202cb305608f0dcd74468661eb259ad119ec40f2f84592028fee"
       ],
       [
         "scripts/media-config.json",
-        "ef7cb39a0f46148c6164c7e782e94728136ea83130729d94a7a1e9a13e0804b4"
+        "365e9e0f8558951855dd44c5c41d7434a979f4b9708008a499747ade8bd67c42"
       ],
       [
         "scripts/media-lib.mjs",
@@ -133,7 +137,7 @@
       ],
       [
         "version.json",
-        "3247855f8ad7f60a7434abd6b23ccb8b1f08e5ac2acddac3e4f4a545851db8c4"
+        "da707bc6c99651bbb25a776df498b586fa9e0c668f9d8cd091da6a19add69f16"
       ],
       [
         "video/package-lock.json",
@@ -165,7 +169,7 @@
       ],
       [
         "video/src/showcase.jsx",
-        "e9dba6887795477695b5a232291a3d2cc5dfaf2f01885239e724e789c6e51948"
+        "d11c4dffc1942376c4f5102858ad9b110003381b220c14d21a90c3a0b52d0a5f"
       ],
       [
         "video/src/styles.css",
@@ -173,11 +177,11 @@
       ],
       [
         "video/src/timeline.json",
-        "7332b521603409659550312c0b30046e86c1bb25c3c32f43b6acb086327fc7cb"
+        "6a60d69de2f7d6d7588d708d034015f0d785efea02bb1f41f33150c2bfc08e09"
       ],
       [
         "web/app.js",
-        "cf9da8ee6978e8876a8b499aa9f58ea7db231c7f5b0db4259a144299120a1abb"
+        "aef68960ab87dc191e99f0086d20b1b81819a67973a945cc0553d6623cb80916"
       ],
       [
         "web/brand/botanical.svg",
@@ -189,15 +193,23 @@
       ],
       [
         "web/index.html",
-        "23efb4681db08a25a622c99a739f26b1271f7f2f136b06b32f1606ae44ae507a"
+        "fd88e62947444f8b8caefd8b8930f046ea2f6609d578b156effff6fb5578771b"
       ],
       [
         "web/presets-ui.js",
-        "d29a0eabdd06dc722a4703e3c2fd617e1da72f915e5eb906f7c8446bcbbfa8ce"
+        "217d739b3d521a3776de8adae69f5628b75667592e5db22489c295d37c80a72d"
       ],
       [
         "web/presets.css",
         "1886ac2bb7e37454bba0bfb68ed75fd2c1db36a7d26a38a81743586e03d94b0e"
+      ],
+      [
+        "web/progression-ui.js",
+        "4453f340d664068bdf49fd2e9fb9ab37348ac0904982f0626d3ebb450b9d67a1"
+      ],
+      [
+        "web/progression.css",
+        "a052cb49c4ed1af23bac3fd9e7b7d448de515279c025c14062eca4af5935bee0"
       ],
       [
         "web/style.css",
@@ -205,7 +217,7 @@
       ],
       [
         "web_server.py",
-        "0ff6b795108783182712906b8308fca85d36603a56fd02def9c23daf27a427f9"
+        "6b4fc05e0cdfeef0da8abd89c7260a54be9c11264001d8b9f53a4b3b2f27fbd9"
       ]
     ],
     "artwork": {
@@ -1947,7 +1959,7 @@
       "file": "desktop.png",
       "width": 1280,
       "height": 900,
-      "sha256": "7033cf35860a0f210d9541e30a84a976c184c2ea49e7981eac54e18a975d3f2c",
+      "sha256": "5ccacf9429869c7a13121b064a2078fcdbef4590e0107a2dd13679d6d4ff4585",
       "bytes": 94582,
       "route": "desktop"
     },
@@ -1955,7 +1967,7 @@
       "file": "desktop-preparing.png",
       "width": 1280,
       "height": 900,
-      "sha256": "9c68be85ab27dc4c4dc98d0ddccb5abb637c562d228375b624b68fcf6bc49643",
+      "sha256": "6ccbc317de63a017c5f5e427bc78d2355a70473d366250aead27ed1704dfeade",
       "bytes": 91496,
       "route": "desktop-preparing"
     },
@@ -1963,112 +1975,136 @@
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "c8ba311f390cd443fefb3e9e7fa94c3cee1e0e66a7259462d14afe12e8435a11",
-      "bytes": 161316,
+      "sha256": "e244949c32728e155ca21c2a58ce15284acb0e34e76da3a4bebfcee2dc783476",
+      "bytes": 161568,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
-      "height": 1470,
-      "sha256": "048b9cc346528b80fc422e6763406a315faed0b977f0ffccff1abbdb51e0de16",
-      "bytes": 349591,
+      "height": 1930,
+      "sha256": "e7f701d7d70a5d28423b38984562359955e61da80fcf7c974dc2a05fa0b22a59",
+      "bytes": 397967,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
-      "height": 1470,
-      "sha256": "d5525087c4142ddc082a95de02879b9f1806add6f0bc3fe961c21382a87a6efe",
-      "bytes": 366821,
+      "height": 1930,
+      "sha256": "533e21aebd7dccf16d91a1fd421f1388a3667fabf7b2131fe3c19df4dd8daf32",
+      "bytes": 425314,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
-      "height": 1470,
-      "sha256": "33213e43c6ae11d6f1c9bc0cee190baf91924138995e6240ab7f081d442b2e7d",
-      "bytes": 384328,
+      "height": 1930,
+      "sha256": "be273a7eed9625d649ae2ebe462d276e8f9d9ab7fd2936d27501fb7ab7a5421d",
+      "bytes": 452521,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "0587410f9bb37fc843dc94210325be6f6179fe0334a4a41ab12d169fb171b796",
-      "bytes": 142262,
+      "sha256": "0d4505e4b13f75bac0091accb58fb3840be741d38d242ebe2b403a3b31dfa803",
+      "bytes": 143686,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "3f1a3323956b24c90360f385f1192b4c90112709cbc168fa6618d7c138291f8d",
-      "bytes": 128821,
+      "sha256": "1e379874514d379fd822d397df8754cb36ad5834a13b6751fb8d0305e81bc82d",
+      "bytes": 130146,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "1558805b1b512ddc7b04509f515ef7c5eee7acef26370414e75d7020924cfbbd",
-      "bytes": 114886,
+      "sha256": "691007ce73a539cfb622104b6e6b9da5e804e30819c4084faf2eeb48f8ec66ba",
+      "bytes": 116315,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "2150a19f3fb42e77220a3afab8ba65ad4c7347745f32e7776d6f96b6a5b11305",
-      "bytes": 176501,
+      "sha256": "5ec8928d889be6989a6fa8e37b160adbe39315f734efc3130e2e761ceedbfb73",
+      "bytes": 181230,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "c929756ac23608057c414fe5fe0a76deec3a5cd96fc23aca014f2d73ba5d25d6",
-      "bytes": 264328,
+      "sha256": "66a89b68533c1d4246a8dffc0ccd24f21256c3d95086d31805e5fe399fa514c8",
+      "bytes": 272208,
+      "route": "saves"
+    },
+    "workshop": {
+      "file": "workshop.png",
+      "width": 1600,
+      "height": 1450,
+      "sha256": "a0bafde635493697489bd1736d85a90a41968a3adfd59a0e861ed58cdefc30e1",
+      "bytes": 145476,
+      "route": "saves"
+    },
+    "progression-preview": {
+      "file": "progression-preview.png",
+      "width": 1600,
+      "height": 1450,
+      "sha256": "329bc6965ee81f2b8b7630b3c4ba1f3b49bb54ac85cfde052952799bc0d465a4",
+      "bytes": 261574,
+      "route": "saves"
+    },
+    "alchemy-unlocks": {
+      "file": "alchemy-unlocks.png",
+      "width": 1600,
+      "height": 1450,
+      "sha256": "ea04b983415662cffbbd868c38d229827dddee06b3a90331758743833b74e0ab",
+      "bytes": 226919,
       "route": "saves"
     },
     "items": {
       "file": "items.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "79e8dfb4485972c26d6a8736a72c1488304129d3fdc2a62a16c90b40e9a31acb",
-      "bytes": 337536,
+      "sha256": "6c6b81f328aac419857511c5402f906996513006c75474a89b56f48040b53dc4",
+      "bytes": 337560,
       "route": "items"
     },
     "super-supply": {
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "15871f4385b797a5f3dcfd323d5bdaac35b67df1697ed1aad9747d15578c3028",
-      "bytes": 335887,
+      "sha256": "e4f152aa7343edbd337096222dff748adeb215d517404a4bab625921f2c2a7e6",
+      "bytes": 335916,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "0f94cbdd06fa1d99aa2ebd74e8572948944b5af5eaf516111b20598865a92467",
-      "bytes": 346912,
+      "sha256": "1d71fc4d3e99b2ead499d4edb8b86ac1981568a9567bcac676b996aa2a95310d",
+      "bytes": 346968,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "e42f15d64704007242116ec63ac2d97e3cf7197428bb76d93d27c36bc2fec4ec",
-      "bytes": 126354,
+      "sha256": "ed7344bb0903506dd5f6a51f2d985176954de6dcad1eb5cdab674d0961ab391d",
+      "bytes": 126460,
       "route": "presets"
     },
     "mobile": {
       "file": "mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "0596d89cd3aff71e026a1c11466f76c02b2c7b2a0d13c885241398bc93ccf148",
-      "bytes": 68080,
+      "sha256": "caa7b792142448f3cc4a3ce2b9d2c3a706dbbb92c149c93664e41ae5d065ec46",
+      "bytes": 68167,
       "route": "presets"
     }
   }
