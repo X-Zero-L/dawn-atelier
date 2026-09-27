@@ -41,3 +41,7 @@ node_modules/
 *.mp4
 *.webm
 *.log
+
+# Disposable desktop build environment and release archives
+/.build/
+/dist/

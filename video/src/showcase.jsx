@@ -38,24 +38,29 @@ function Backdrop({dark = false}) {
   </AbsoluteFill>;
 }
 
-function Window({asset, left, top, width, height, view = 'full', scale = 1, origin = 'top left', border = true}) {
+function Window({asset, left, top, width, height, view = 'full', scale = 1, origin = 'top left', border = true, desktop = false}) {
   const dimensions = assets.screenshots[asset];
   const normalizer = dimensions.width / 1600;
   const crops = {
-    full: {x: 0, y: 0, width: 1600},
-    content: {x: 258, y: 116, width: 1320},
-    supply: {x: 256, y: 230, width: 1324},
-    alchemy: {x: 448, y: 350, width: 1100},
+    full: {x: 0, y: 0, width: dimensions.width},
+    content: {x: 258 * normalizer, y: 116 * normalizer, width: 1320 * normalizer},
+    supply: {x: 256 * normalizer, y: 230 * normalizer, width: 1324 * normalizer},
+    alchemy: {x: 448 * normalizer, y: 350 * normalizer, width: 1100 * normalizer},
   };
   const crop = view === 'modal'
-    ? {x: 250, y: Math.max(0, dimensions.height / normalizer / 2 - 356), width: 1100}
+    ? {x: 250 * normalizer, y: Math.max(0, dimensions.height / 2 - 356 * normalizer), width: 1100 * normalizer}
     : crops[view];
   const imageScale = width / crop.width;
-  const imageStyle = {position: 'absolute', width: 1600 * imageScale, maxWidth: 'none', left: -crop.x * imageScale, top: -crop.y * imageScale};
+  const imageStyle = {position: 'absolute', width: dimensions.width * imageScale, maxWidth: 'none', left: -crop.x * imageScale, top: -crop.y * imageScale};
   return <div style={{position: 'absolute', left, top, width, height, borderRadius: 18, overflow: 'hidden', background: C.paper, border: border ? '1px solid #d8ddc7' : 0, boxShadow: '0 30px 75px #15372b20', transform: `scale(${scale})`, transformOrigin: origin}}>
     <div style={{height: 34, background: '#eeefe5', borderBottom: `1px solid ${C.line}`, display: 'flex', alignItems: 'center', gap: 6, padding: '0 15px'}}>
-      {[C.gold,'#9cac88','#bec5b4'].map((color) => <span key={color} style={{width: 7, height: 7, borderRadius: '50%', background: color}}/>)}
-      <span style={{fontSize: 10, letterSpacing: 2.5, color: '#8b9581', marginLeft: 12}}>DAWN ATELIER</span>
+      {desktop ? <>
+        <Mark size={19}/><span style={{fontSize: 11, color: '#78856e', marginLeft: 4}}>黎明工坊 · 黎明门前的吹笛人</span>
+        <svg width="97" height="22" viewBox="0 0 97 22" fill="none" style={{marginLeft: 'auto', color: '#8c9883'}}><path d="M4 11h10M39 6h9v9h-9V6Zm36 0 9 9m-9 0 9-9" stroke="currentColor" strokeWidth="1"/></svg>
+      </> : <>
+        {[C.gold,'#9cac88','#bec5b4'].map((color) => <span key={color} style={{width: 7, height: 7, borderRadius: '50%', background: color}}/>)}
+        <span style={{fontSize: 10, letterSpacing: 2.5, color: '#8b9581', marginLeft: 12}}>DAWN ATELIER</span>
+      </>}
     </div>
     <div style={{position: 'relative', height: height - 34, overflow: 'hidden'}}>
       <Img src={staticFile(`${asset}.png`)} style={imageStyle}/>
@@ -74,6 +79,7 @@ function Tag({children, index = 0}) {
 
 const COPY = {
   intro: {name: '你的冒险，你的节奏', type: 'intro'},
+  desktop: {name: 'Windows 一键包', type: 'desktop'},
   presets: {name: '一键方案', title: ['从一个方案', '开始。'], description: ['超级补给与 6 组日常方案，', '按自己的节奏自由组合。'], asset: 'presets', tags: ['7 套内置方案', '16 项可选操作'], marker: 'START WITH A PLAN'},
   supply: {name: '超级补给', title: ['常用物资，', '一次备齐。'], description: ['已有铜锭补足数量，', '缺少的铁锭、金锭直接补入。'], asset: 'super-supply', view: 'supply', detailAsset: 'super-supply-preview', detailFrom: 112, tags: ['补足已有物品', '添加缺少物品'], marker: 'SUPER SUPPLY', emphasis: '铜锭 · 铁锭 · 金锭'},
   sediment: {name: '炼金沉淀物', title: ['为下一次炼金，', '留足准备。'], description: ['直接输入沉淀物数量，', '也能选择常用补足目标。'], asset: 'alchemy', view: 'alchemy', detailAsset: 'alchemy-preview', detailFrom: 88, tags: ['100 份', '1,000 份', '10,000 份'], marker: 'ALCHEMICAL SEDIMENT'},
@@ -133,6 +139,34 @@ function Feature({chapter}) {
   </>;
 }
 
+function Desktop() {
+  const f = useCurrentFrame();
+  const appear = interpolate(f, [8, 30], [0, 1], clamp);
+  const preparing = interpolate(f, [98, 115], [0, 1], clamp);
+  const activeStep = f < 98 ? 0 : 1;
+  const steps = [
+    {title: '解压双击', detail: '打开 DawnAtelier.exe'},
+    {title: '自动准备', detail: '选好游戏，自动整理资料'},
+    {title: '独立窗口', detail: '准备完成，即可进入工坊'},
+  ];
+  return <>
+    <div style={{position: 'absolute', left: 100, top: 233, width: 505, opacity: appear, transform: `translateY(${(1-appear)*18}px)`}}>
+      <SmallLabel>WINDOWS 一键包</SmallLabel>
+      <div style={{fontSize: 65, fontWeight: 460, letterSpacing: -1.8, lineHeight: 1.5, marginTop: 30}}>双击打开，<br/>自在出发。</div>
+      <div style={{fontSize: 22, color: C.muted, lineHeight: 1.9, marginTop: 27}}>《黎明门前的吹笛人》<br/>现在，有了自己的桌面工坊。</div>
+      <div style={{display: 'grid', gap: 19, marginTop: 36}}>{steps.map((step, index) => <div key={step.title} style={{display: 'flex', alignItems: 'center', gap: 17}}>
+        <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 39, height: 39, borderRadius: 12, background: index <= activeStep ? C.green : '#e8eadd', color: index <= activeStep ? C.paper : '#95a082', fontSize: 15, fontWeight: 500}}>{String(index + 1).padStart(2, '0')}</span>
+        <div><div style={{fontSize: 22, color: C.green}}>{step.title}</div><div style={{fontSize: 15, marginTop: 4, color: C.muted}}>{step.detail}</div></div>
+      </div>)}</div>
+      <div style={{marginTop: 30, display: 'flex', gap: 10, color: '#849473', fontSize: 16, alignItems: 'center'}}><span style={{width: 5, height: 5, borderRadius: '50%', background: '#99a781'}}/>也可以先体验示例存档</div>
+    </div>
+    <div style={{opacity: interpolate(f,[5,26],[0,1],clamp), transform: `translateY(${interpolate(f,[5,38],[22,0],clamp)}px)`}}>
+      <Window asset="desktop" left={698} top={175} width={1136} height={833} desktop/>
+      <div style={{opacity: preparing}}><Window asset="desktop-preparing" left={698} top={175} width={1136} height={833} desktop/></div>
+    </div>
+  </>;
+}
+
 function Outro() {
   const f = useCurrentFrame();
   return <>
@@ -141,7 +175,7 @@ function Outro() {
       <div style={{fontSize: 66, fontWeight: 450, lineHeight: 1.45, marginTop: 24, letterSpacing: 2}}>留一份备份。<br/>开启新的冒险。</div>
       <div style={{marginTop: 39, fontSize: 22, letterSpacing: 8, color: '#d3ddc2'}}>黎明工坊 <span style={{fontSize: 18, letterSpacing: 3, color: C.gold, marginLeft: 10}}>DAWN ATELIER</span></div>
       <div style={{marginTop: 24, fontSize: 22, letterSpacing: 2, color: '#c7d3be'}}>《黎明门前的吹笛人》存档工具</div>
-      <div style={{margin: '36px auto 0', padding: '13px 27px', display: 'inline-flex', border: '1px solid #69816a', borderRadius: 40, fontSize: 18, letterSpacing: 3, color: '#c7d3be'}}>开源 · 本地运行 · 随心调整</div>
+      <div style={{margin: '36px auto 0', padding: '13px 27px', display: 'inline-flex', border: '1px solid #69816a', borderRadius: 40, fontSize: 18, letterSpacing: 3, color: '#c7d3be'}}>Windows 一键包 · 解压双击 · 本地运行</div>
     </div>
   </>;
 }
@@ -154,7 +188,7 @@ function Chapter({chapter}) {
     <Backdrop dark={dark}/>
     <div style={{position: 'absolute', left: 100, top: 62}}><Brand dark={dark}/></div>
     <div style={{position: 'absolute', right: 102, top: 83, fontSize: 13, letterSpacing: 3, color: dark ? '#b2c0a8' : C.muted}}>A LITTLE CORNER OF DAWN</div>
-    {chapter.type === 'intro' ? <Intro/> : chapter.type === 'outro' ? <Outro/> : <Feature chapter={chapter}/>}
+    {chapter.type === 'intro' ? <Intro/> : chapter.type === 'desktop' ? <Desktop/> : chapter.type === 'outro' ? <Outro/> : <Feature chapter={chapter}/>}
     <Footer chapter={chapter} dark={dark}/>
   </AbsoluteFill>;
 }

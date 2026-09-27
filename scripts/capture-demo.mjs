@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {CONFIG, ROOT, delay, sha256, sourceSnapshot, removeOwnedTemporaryDirectory} from './media-lib.mjs';
 
-if (process.argv.length > 2) throw new Error('Capture always refreshes all 14 views. Set DAWN_DEMO_URL and DAWN_CAPTURE_DIR as needed.');
+if (process.argv.length > 2) throw new Error('Capture always refreshes the complete gallery. Set DAWN_DEMO_URL and DAWN_CAPTURE_DIR as needed.');
 const base = process.env.DAWN_DEMO_URL || 'http://127.0.0.1:8767';
 if (!['127.0.0.1', 'localhost'].includes(new URL(base).hostname)) throw new Error('Capture is limited to a localhost demo.');
 const health = await (await fetch(base + '/api/health')).json();
@@ -94,6 +94,12 @@ async function openPage(route, width = 1600, height = 1200, mobile = false) {
   await client.send('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: 1, mobile});
   await client.send('Emulation.setTimezoneOverride', {timezoneId: 'Asia/Shanghai'});
   await client.send('Emulation.setLocaleOverride', {locale: 'zh-CN'});
+  if (route.startsWith('desktop')) {
+    const scene = route === 'desktop' ? 'welcome' : 'preparing';
+    await client.send('Page.navigate', {url: base + '/desktop/index.html?showcase=' + scene});
+    await waitFor(page, `document.body?.dataset.ready === 'true'`);
+    return page;
+  }
   await client.send('Page.navigate', {url: base + '/#' + route});
   const selector = route === 'presets' ? '.preset-card' : route === 'saves' ? '.category-list' : route === 'items' ? '.item-card' : '.hero';
   await waitFor(page, `!!document.querySelector('${selector}') && !!document.querySelector('.demo-banner')`);
@@ -107,7 +113,7 @@ async function capture(page, name) {
     await document.fonts.ready;
     document.activeElement?.blur();
   })()`);
-  await waitFor(page, `!document.querySelector('.toast')`);
+  await waitFor(page, `![...document.querySelectorAll('.toast')].some(element => !element.hidden && element.getClientRects().length)`);
   await delay(200);
   const result = await page.client.send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});
   const bytes = Buffer.from(result.data, 'base64');
@@ -119,7 +125,7 @@ async function capture(page, name) {
 
 async function closePage(page) {
   // Only browser drafts are cleared. Export and apply are never clicked.
-  await evaluate(page, `document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); state.pending.clear(); persistDraft(); presetUI.history = []; renderPending();`);
+  if (!page.route.startsWith('desktop')) await evaluate(page, `document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); state.pending.clear(); persistDraft(); presetUI.history = []; renderPending();`);
   await browser.send('Target.closeTarget', {targetId: page.targetId});
 }
 
@@ -144,6 +150,12 @@ try {
   }
   if (!endpoint) throw new Error('Cannot reach the isolated renderer.');
   browser = await connect(endpoint.replace('http:', 'ws:') + browserPath);
+
+  for (const name of ['desktop', 'desktop-preparing']) {
+    const launcher = await openPage(name, 1280, 900);
+    await capture(launcher, name);
+    await closePage(launcher);
+  }
 
   const overview = await openPage('home');
   await capture(overview, 'overview');

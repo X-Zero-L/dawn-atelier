@@ -13,3 +13,5 @@
 ## 依赖
 
 Python 资源准备依赖 `cryptography` 和 Pillow。视频项目依赖 Remotion、React 和 React DOM；版本固定在对应清单与锁文件中，各自适用其分发许可证。Remotion 的使用条款见其官方项目。
+
+Windows 桌面包使用 pywebview、pythonnet 与 Microsoft WebView2 SDK 组件。下载包中的 `licenses/` 目录与依赖清单提供对应许可和版本；系统 WebView2 Runtime 由 Microsoft 提供。构建工具 PyInstaller 的许可及其分发例外以该项目发布文本为准。

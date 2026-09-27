@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import math
 import mimetypes
+import os
 from pathlib import Path
 import re
 import secrets
@@ -335,7 +336,7 @@ def export_history():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'DawnAtelier/2.1'
+    server_version = 'DawnAtelier/2.2'
 
     def log_message(self, format, *args):
         pass
@@ -349,7 +350,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Content-Length', str(len(content)))
         self.send_header('X-Content-Type-Options', 'nosniff')
         self.send_header('Cache-Control', 'no-store' if mime.startswith('application/json') else 'no-cache')
-        self.send_header('Content-Security-Policy', "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'")
+        ancestor = getattr(self.server, 'desktop_origin', None) or "'none'"
+        self.send_header('Content-Security-Policy', f"default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors {ancestor}; base-uri 'none'")
         for key, value in (extra or {}).items():
             self.send_header(key, value)
         self.end_headers()
@@ -420,10 +422,11 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_bytes(path.read_bytes(), 'application/octet-stream', extra={'Content-Disposition': f'attachment; filename="{name}"'})
             else:
                 relative = 'index.html' if route == '/' else route.lstrip('/')
-                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css') and not relative.startswith(('assets/','brand/')):
+                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css',
+                                    'desktop/index.html','desktop/launcher.js','desktop/launcher.css') and not relative.startswith(('assets/','brand/')):
                     self.json({'error': '页面不存在。'}, 404)
                     return
-                base = ASSET_ROOT if relative.startswith('assets/') else WEB
+                base = ASSET_ROOT if relative.startswith('assets/') else ROOT if relative.startswith('desktop/') else WEB
                 path = (base / relative.removeprefix('assets/')).resolve()
                 if not path.exists() and relative in ('assets/gameicon.webp','assets/piper.webp'):
                     path=WEB/'brand'/('emblem.svg' if 'gameicon' in relative else 'botanical.svg')
@@ -442,6 +445,17 @@ class Handler(BaseHTTPRequestHandler):
             self.json({'error': str(exc)}, 400)
 
     def do_POST(self):
+        if self.path == '/api/desktop-stop' and getattr(self.server, 'desktop_token', None):
+            if not self.valid_host() or not secrets.compare_digest(self.headers.get('X-Dawn-Control', ''), self.server.desktop_token):
+                self.json({'error': '无效的桌面会话。'}, 403)
+                return
+            self.server.stopping = True
+            self.json({'ok': True})
+            threading.Thread(target=self.server.shutdown, daemon=True).start()
+            return
+        if getattr(self.server, 'stopping', False):
+            self.json({'error': '工坊正在关闭，请稍候。'}, 503)
+            return
         allowed_origin = (f'http://127.0.0.1:{self.server.server_port}', f'http://localhost:{self.server.server_port}')
         if not self.valid_host() or self.headers.get('Origin') not in allowed_origin or self.headers.get('X-Dawn-Token') != TOKEN:
             self.json({'error': '请在本地工作台中执行此操作。'}, 403)
@@ -467,10 +481,26 @@ def main():
     parser.add_argument('--port', type=int, default=8766)
     parser.add_argument('--open', action='store_true')
     parser.add_argument('--demo', action='store_true', help='Use synthetic example saves')
+    parser.add_argument('--ready-file', type=Path, help=argparse.SUPPRESS)
+    parser.add_argument('--fallback-port', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
-    server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
+    try:
+        server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
+    except OSError:
+        if not args.fallback_port:
+            raise
+        server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+    server.daemon_threads = False
+    server.desktop_token = secrets.token_urlsafe(32) if args.ready_file else None
+    origin = os.environ.get('DAWN_DESKTOP_ORIGIN', '')
+    server.desktop_origin = origin if args.ready_file and re.fullmatch(r'http://127\.0\.0\.1:\d{1,5}', origin) else None
+    if args.ready_file:
+        args.ready_file.parent.mkdir(parents=True, exist_ok=True)
+        args.ready_file.write_text(json.dumps({'port': server.server_port, 'pid': os.getpid(),
+                                              'token': server.desktop_token,
+                                              'session': os.environ.get('DAWN_DESKTOP_SESSION')}), encoding='utf-8')
     if args.open:
-        webbrowser.open(f'http://127.0.0.1:{args.port}')
+        webbrowser.open(f'http://127.0.0.1:{server.server_port}')
     try:
         server.serve_forever()
     finally:

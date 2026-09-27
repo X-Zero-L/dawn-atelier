@@ -8,6 +8,9 @@
 
 ```text
 app_config.py        本机路径、演示模式与 Steam 目录发现
+app_paths.py         程序资源与用户数据目录
+desktop.py           独立桌面窗口与冻结任务入口
+desktop_service.py   资源准备、启动状态与服务生命周期
 web_server.py        本地 API、预览、备份与应用
 save_codec.py        具名字段解析与局部字节替换
 presets.py           预设操作和目标计算
@@ -16,6 +19,8 @@ prepare.py           本机配置与界面资源准备
 demo_data.py         合成演示数据生成
 schemas/             受支持版本的字段结构与枚举
 web/                 网页界面
+desktop/             图形启动页
+build/               Windows 包定义、图标与许可
 research/            资源读取与结构分析脚本
 scripts/             截图、视频与发布自动化
 video/               演示视频工程
@@ -34,6 +39,8 @@ docs/images/         文档截图与封面
 | `config.local.json` | 本机路径设置 |
 
 这些文件均由 `.gitignore` 排除。浏览器 localStorage 保存收藏、自定义方案与待保存草稿。草稿键包含存档名称和 SHA-256，避免套用到已更新的存档。
+
+桌面发布包将这些数据放在 `%LOCALAPPDATA%\DawnAtelier`，源码运行仍使用项目目录。Windows 打包、独立窗口与生命周期见 [桌面版开发说明](desktop.md)。
 
 ## 路径配置
 

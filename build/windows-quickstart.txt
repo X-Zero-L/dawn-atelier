@@ -1,0 +1,29 @@
+黎明工坊 · Dawn Atelier {{VERSION}}
+《黎明门前的吹笛人》本地存档工具
+
+开始使用
+1. 将 ZIP 解压到一个普通文件夹。请保留 DawnAtelier.exe 旁边的 _internal 文件夹。
+2. 双击 DawnAtelier.exe，打开独立的桌面窗口；无需安装 Python。
+3. 首次使用时选择游戏安装目录，按窗口中的提示准备资料。
+4. 选择存档，使用一键方案或调整具体数值，查看修改清单后保存。
+
+使用前，请先在游戏内保存进度。直接应用修改时需要退出游戏。
+准备资料只读取本机游戏安装。保存修改前会自动备份原档。
+尚未选择游戏目录时，也可以打开演示模式熟悉界面。
+
+运行环境
+- Windows 10 / 11，64 位。
+- Microsoft Edge WebView2 Runtime（多数 Windows 电脑已安装）。
+  缺少时请按启动窗口提示安装，或访问：
+  https://developer.microsoft.com/microsoft-edge/webview2/
+- 当前支持游戏资源版本：2026-09-25-1016。
+
+资料、设置、日志与备份保存在：
+%LOCALAPPDATA%\DawnAtelier
+升级时解压新版并运行即可。保留上述用户资料文件夹即可保留本地设置与备份。
+
+下载、说明与反馈：
+https://github.com/X-Zero-L/dawn-atelier
+
+这是独立的玩家工具，与游戏开发者无隶属关系。
+游戏名称与资源属于相应权利人。更多说明见 NOTICE.md；第三方许可位于 licenses 文件夹。

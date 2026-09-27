@@ -1,0 +1,7 @@
+{
+  "name": "Microsoft.Web.WebView2",
+  "version": "1.0.3856.49",
+  "url": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.3856.49/microsoft.web.webview2.1.0.3856.49.nupkg",
+  "sha256": "bc0f76eb911b569838dc4aa8f8d325269b966bedb592863d26211aef3a099f1a",
+  "usage": "License texts for the WebView2 SDK DLLs shipped by pywebview 6.2.1. The WebView2 browser runtime is installed separately."
+}

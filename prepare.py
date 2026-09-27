@@ -8,8 +8,8 @@ from pathlib import Path
 import subprocess
 import sys
 import zlib
+from app_paths import APP_ROOT as ROOT, CONFIG_PATH, task_command, read_config, write_config
 
-ROOT=Path(__file__).resolve().parent
 ART_BUNDLES={'assets_gameres_arts_logo.bundle','assets_gameres_arts_ui_common_startwindow.bundle','assets_gameres_arts_atlas.bundle'}
 
 
@@ -28,15 +28,15 @@ def main():
             raise SystemExit('Game installation not found. Pass --game-dir or set PIPER_GAME_DIR.')
         if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:
             raise SystemExit('Unsupported game build. This release supports the 2026-09-25-1016 data build; see docs/compatibility.md.')
-    configuration=ROOT/'config.local.json'
-    local=json.loads(configuration.read_text(encoding='utf-8-sig')) if configuration.exists() else {}
+    local=read_config()
     local['game_dir']=str(GAME_DIR)
-    configuration.write_text(json.dumps(local,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    write_config(local)
     print('[1/3] Reading manifest and preparing gameplay tables…',flush=True)
-    subprocess.run([sys.executable,'-X','utf8',str(ROOT/'research/bundles/unpack.py')],cwd=ROOT,check=True)
+    options={'creationflags':subprocess.CREATE_NO_WINDOW} if os.name=='nt' else {}
+    subprocess.run(task_command('unpack'),cwd=ROOT,check=True,**options)
     print('[2/3] Building readable catalogues…',flush=True)
     with (DATA_ROOT/'catalogue-build.log').open('w',encoding='utf-8') as output:
-        subprocess.run([sys.executable,'-X','utf8',str(ROOT/'export_catalogue.py')],cwd=ROOT,stdout=output,check=True)
+        subprocess.run(task_command('catalogue'),cwd=ROOT,stdout=output,check=True,**options)
     manifest=json.loads((DATA_ROOT/'bundles/manifest.json').read_text(encoding='utf-8'))
     resources=DATA_ROOT/'resources'
     resources.mkdir(exist_ok=True)
@@ -65,7 +65,7 @@ def main():
                 record['files'].append(descriptor)
             records.append(record)
         (resources/'index.json').write_text(json.dumps(records,ensure_ascii=False,indent=2),encoding='utf-8')
-        subprocess.run([sys.executable,'-X','utf8',str(ROOT/'extract_web_art.py')],cwd=ROOT,check=True)
+        subprocess.run(task_command('art'),cwd=ROOT,check=True,**options)
     else:print('[3/3] Artwork skipped; the interface will use its built-in illustrations.',flush=True)
     summary={'bundles':len(manifest['bundles']),'fully_extracted_art_bundles':len(records),
              'serialized_objects':sum(len(f.get('objects',[])) for r in records for f in r['files']),

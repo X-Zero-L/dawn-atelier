@@ -47,3 +47,7 @@ flowchart LR
 ## 媒体
 
 `scripts/capture-demo.mjs` 只连接本机演示服务，通过独立 Chromium 配置拍摄截图。`video/` 使用固定版本 Remotion 合成演示视频，成片作为 Release 附件分发。
+
+## 桌面窗口
+
+`desktop.py` 使用 WebView2 承载图形启动页与原有工作台。`desktop_service.py` 负责版本检查、资源准备与自有服务进程，`app_paths.py` 区分随包资源和用户可写目录。桌面服务只允许该窗口的精确本机来源嵌入；关闭时等待正在进行的请求完成。打包和升级说明见 [桌面版开发说明](desktop.md)。

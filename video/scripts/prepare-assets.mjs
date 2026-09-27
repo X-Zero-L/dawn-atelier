@@ -4,11 +4,14 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 
 const project = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
+const config = JSON.parse(await readFile(path.join(project, '../scripts/media-config.json'), 'utf8'));
 const args = process.argv.slice(2);
 if (args.includes('--draft')) throw new Error('Draft asset fallbacks have been removed. Provide current named screenshots using --source <directory>.');
 const sourceArg = args.indexOf('--source');
 const source = sourceArg >= 0 ? path.resolve(args[sourceArg + 1]) : path.resolve(project, '../docs/images');
-const names = ['overview', 'presets', 'builder', 'preview', 'inventory', 'relationships', 'tools', 'items', 'mobile', 'alchemy', 'alchemy-preview', 'super-supply', 'super-supply-preview', 'super-supply-mobile'];
+const names = config.screenshots;
+if (!Array.isArray(names) || new Set(names).size !== names.length || names.some(name => !/^[a-z][a-z0-9-]*$/.test(name))) throw new Error('Invalid screenshot names in scripts/media-config.json.');
+if (!names.includes('desktop') || !names.includes('desktop-preparing')) throw new Error('Desktop showcase screenshots are required.');
 const target = path.join(project, 'public');
 const inputs = await Promise.all(names.map(async (name) => {
   const filename = `${name}.png`;

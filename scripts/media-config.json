@@ -3,6 +3,8 @@
   "repository": "X-Zero-L/dawn-atelier",
   "gameTitle": "黎明门前的吹笛人",
   "screenshots": [
+    "desktop",
+    "desktop-preparing",
     "overview",
     "presets",
     "builder",

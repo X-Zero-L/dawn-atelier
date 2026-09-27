@@ -13,10 +13,10 @@ node scripts/refresh-media.mjs
 流程会自动完成：
 
 1. 使用空的临时目录生成合成存档，在空闲端口启动演示服务。
-2. 使用独立无头浏览器拍摄全部 14 张截图。
+2. 使用独立无头浏览器拍摄全部 16 张截图，包含桌面启动与准备进度。
 3. 将本次截图复制到视频工程，检查图片 SHA-256。
-4. 渲染 42 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
-5. 生成两倍速 GIF、11 张关键帧和拼图。
+4. 渲染 48 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
+5. 生成两倍速 GIF、关键帧和拼图。
 6. 更新 README 预览、来源清单与校验值，清理临时服务和浏览器。
 
 `video/out/` 保存 MP4、GIF、封面、`contact-sheet.png`、`frame-*.png`、日志、`media-manifest.json` 与 `SHA256SUMS`。文档使用的截图和预览位于 `docs/images/`。
@@ -53,6 +53,8 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 
 | 文件 | 内容 |
 | --- | --- |
+| `desktop.png` | Windows 桌面启动页 |
+| `desktop-preparing.png` | 首次资料准备进度 |
 | `overview.png` | 工作台首页 |
 | `presets.png` | 超级补给与六组日常方案 |
 | `builder.png` | 参数组合编辑器 |

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e3c33">
+  <title>黎明工坊 · 黎明门前的吹笛人</title>
+  <link rel="stylesheet" href="launcher.css">
+  <script src="launcher.js" defer></script>
+</head>
+<body data-ready="false">
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h5l3 3h6a2 2 0 0 1 2 2v1M3 7h16a2 2 0 0 1 2 2l-2 10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 3C8 2 3 7 5 14s14 9 14-11ZM4 21l11-11M9 16v-5m0 5h5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8.5 11.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m3 7 9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7M12 11v10M7.5 5l9 4v4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 3 8M3 4v7h7M12 7v5l3 2"/></symbol>
+    <symbol id="i-document" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 0v6h6M8 13h8m-8 4h6"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 1-1 2.2M12 17h.01"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6m0-6L9 15M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2L12 3Zm0 6v5m0 3h.01"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8V4Z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 48 48"><path d="M9 31a15 15 0 1 1 30 0M5 37h38M10 42h28M24 3v5M6 12l4 4M42 12l-4 4M17 31c1-9 13-8 14-16M21 31c0-5 7-5 9-8"/></symbol>
+  </svg>
+
+  <div id="home-view" class="home-view">
+    <aside class="welcome-panel" aria-label="黎明工坊介绍">
+      <div class="brand">
+        <svg class="brand-symbol" aria-hidden="true"><use href="#i-sun"/></svg>
+        <div><strong>黎明工坊</strong><span>DAWN ATELIER</span></div>
+      </div>
+      <div class="welcome-copy">
+        <span class="small-kicker"><i></i> 属于你的冒险节奏</span>
+        <h1>一点调整，<br>自在冒险。</h1>
+        <p>《黎明门前的吹笛人》<br>本地存档工作台</p>
+      </div>
+      <div class="landscape" aria-hidden="true">
+        <svg viewBox="0 0 360 315" fill="none">
+          <circle cx="205" cy="119" r="69" fill="#cab577" opacity=".13"/>
+          <circle cx="205" cy="119" r="83" stroke="#cab577" opacity=".23"/>
+          <circle cx="205" cy="119" r="100" stroke="#9bb18e" opacity=".12"/>
+          <path d="M205 34v-9m60 28 7-7m-127 7-7-7M284 115h9M117 115h9" stroke="#c6b47a" stroke-linecap="round" opacity=".6"/>
+          <path d="M-18 234c63-78 115-23 154-66 48-52 107-19 237-51v200H-18V234Z" fill="#315647"/>
+          <path d="M-18 247c74-6 103-63 171-26 88 46 134-76 220-43v139H-18v-70Z" fill="#294c3e"/>
+          <path d="M-18 281c97-81 170-3 246-41 67-34 108 5 145 23v54H-18v-36Z" fill="#213f34"/>
+          <path d="M155 315c15-32 90-54 85-74-4-19-58-8-55-26 3-10 25-18 40-21" stroke="#d3c28c" opacity=".36" stroke-width="1.3"/>
+          <path d="M55 247c5-24 13-40 27-62m-16 30c-22-2-31-18-31-28 19 4 30 17 31 28Zm7-14c2-21 20-30 30-33-2 15-12 28-30 33Z" stroke="#8ba67a" stroke-width="1.2"/>
+          <path d="M303 260c-5-15-5-34-5-47m0 24c-14-1-22-11-22-20 14 2 21 11 22 20Zm0-13c0-17 14-23 22-24-2 13-11 21-22 24Z" stroke="#8ba67a" stroke-width="1.2" opacity=".65"/>
+          <path d="m97 105 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Zm202-50 1.5 4.5L305 61l-4.5 1.5L299 67l-1.5-4.5L293 61l4.5-1.5L299 55Z" fill="#d2bd7d" opacity=".7"/>
+        </svg>
+      </div>
+      <div class="welcome-features">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>一键补给与自由预设</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>物品、炼金与好感调整</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>修改预览与自动备份</span>
+      </div>
+      <div class="welcome-bottom"><span>为单人冒险留一点余地</span><span class="edition">WINDOWS EDITION</span></div>
+    </aside>
+
+    <div class="setup-workspace">
+      <header class="setup-topbar">
+        <span class="local-status"><i id="connection-dot" class="status-dot connecting"></i><span id="connection-label">正在连接桌面服务</span></span>
+        <div class="topbar-actions"><span class="version-label" data-version>v2.2.0</span><button class="icon-button" data-action="help" title="使用帮助" aria-label="使用帮助"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button></div>
+      </header>
+      <main class="setup-main" id="setup-main">
+        <div class="page-heading">
+          <span class="eyebrow">YOUR ADVENTURE, YOUR PACE</span>
+          <h2 id="welcome-title">欢迎来到黎明工坊</h2>
+          <p id="welcome-description">选择游戏目录，剩下的交给工坊。</p>
+        </div>
+
+        <section class="resume-card" id="resume-card" hidden aria-label="正在运行的工坊">
+          <span class="resume-symbol"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></span>
+          <div><strong id="resume-title">你的工坊正在运行</strong><p>返回后可继续编辑，未完成的修改仍会保留。</p></div>
+          <button class="button primary compact" data-action="resume">返回工坊<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </section>
+
+        <section class="game-card" aria-labelledby="game-card-title">
+          <div class="card-heading"><div class="step-number">01</div><div><h3 id="game-card-title">找到你的游戏</h3><p>黎明门前的吹笛人 <span>THE PIPER OF DAWN</span></p></div><span class="selection-badge" id="selection-badge">等待选择</span></div>
+          <label class="path-label" for="game-path">游戏安装目录</label>
+          <div class="path-row">
+            <div class="path-input-wrap"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><input id="game-path" type="text" spellcheck="false" autocomplete="off" placeholder="选择包含 ThePiper.exe 的文件夹" aria-describedby="path-hint"></div>
+            <button class="button secondary" data-action="choose"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>选择目录</button>
+          </div>
+          <div class="path-hint-row"><p id="path-hint">可选择文件夹，也可以直接粘贴安装路径。</p><button class="text-button" id="save-path-button" data-action="save-path" hidden>使用此目录<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button></div>
+
+          <div class="preparation-note"><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span><div><strong id="prepare-note-title">首次使用，自动准备本地资料</strong><p id="prepare-note-detail">工坊会读取游戏资料并整理物品图鉴，完成后自动打开工作台。</p></div></div>
+          <div class="start-actions"><button class="button primary start-button" id="start-button" data-action="start"><span id="start-label">准备并打开工坊</span><svg class="icon" id="start-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="button-spinner" id="start-spinner" hidden></span></button><button class="button demo-button" id="demo-button" data-action="demo"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span id="demo-label">先体验演示</span></button></div>
+          <p class="demo-hint">演示使用示例存档，随时可以体验。</p>
+        </section>
+
+        <section class="progress-card" id="progress-card" hidden aria-labelledby="progress-heading" aria-live="polite">
+          <div class="progress-heading"><div><span class="eyebrow">GETTING THINGS READY</span><h3 id="progress-heading">正在准备你的工坊</h3></div><span class="progress-percent" id="progress-percent">0<small>%</small></span></div>
+          <div class="progress-track" id="progress-track" role="progressbar" aria-label="准备进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill"></div></div>
+          <div class="progress-message"><span class="small-spinner"></span><p id="progress-message">正在读取游戏资料…</p></div>
+          <p class="progress-detail" id="progress-detail" hidden></p>
+          <ol class="progress-steps"><li id="step-read"><span>1</span>读取资料</li><li id="step-prepare"><span>2</span>整理图鉴</li><li id="step-launch"><span>3</span>打开工坊</li></ol>
+        </section>
+
+        <div class="error-card" id="error-card" hidden role="alert"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><div><strong id="error-heading">暂时没能完成</strong><p id="error-message"></p><button class="text-button" data-action="logs">查看运行日志<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></button></div><button class="icon-button" data-action="dismiss-error" title="关闭提示" aria-label="关闭提示"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+
+        <section class="quick-access" aria-labelledby="quick-title"><div class="section-heading"><h3 id="quick-title">常用入口</h3><button class="text-button" id="reprepare-button" data-action="prepare" hidden><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>重新准备资料</button></div><div class="quick-grid"><button class="quick-button" data-action="backups"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>存档备份<small>找到修改前的存档</small></span><svg class="quick-arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="quick-button" data-action="data"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>本地数据<small>资料、草稿与配置</small></span><svg class="quick-arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="quick-button" data-action="exports"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg><span>导出文件<small>查看已生成的副本</small></span><svg class="quick-arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg></button><button class="quick-button" data-action="logs"><svg class="icon" aria-hidden="true"><use href="#i-document"/></svg><span>运行日志<small>查看准备与启动记录</small></span><svg class="quick-arrow icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div></section>
+      </main>
+      <footer class="setup-footer"><span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>准备资料时，游戏与存档保持原样。</span><button class="text-button" data-action="help">使用指南<svg class="icon" aria-hidden="true"><use href="#i-external"/></svg></button></footer>
+    </div>
+  </div>
+
+  <section id="workbench-view" class="workbench-view" hidden aria-label="存档工作台">
+    <header class="shell-bar"><button class="shell-brand" data-action="settings" title="打开启动设置"><svg class="brand-symbol" aria-hidden="true"><use href="#i-sun"/></svg><strong>黎明工坊</strong><span class="shell-divider"></span><span id="shell-mode">本地存档</span></button><div class="shell-actions"><span class="shell-status"><i class="status-dot"></i>本地运行中</span><button class="shell-button" data-action="backups" title="打开存档备份"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>备份</span></button><button class="shell-button" data-action="browser" title="在默认浏览器中打开"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span>浏览器打开</span></button><button class="shell-button" data-action="settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg><span>启动设置</span></button></div></header>
+    <div class="frame-wrap"><iframe id="workbench-frame" title="黎明门前的吹笛人存档工作台" allow="clipboard-write" referrerpolicy="no-referrer"></iframe><div class="frame-loading" id="frame-loading"><span class="loading-orbit"></span><h2>正在打开你的工坊</h2><p>载入本地存档与物品资料…</p><button class="text-button" data-action="settings">返回启动设置</button></div></div>
+  </section>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

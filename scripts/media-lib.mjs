@@ -59,8 +59,8 @@ async function artworkSnapshot() {
 export async function sourceSnapshot() {
   const listed = await run('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], {capture: true});
   const files = [...new Set(listed.split('\0').filter(Boolean))].filter(file =>
-    /^(?:web\/(?:[^/]+\.(?:js|css|html)|brand\/)|schemas\/|scripts\/|video\/(?:src\/|scripts\/|package(?:-lock)?\.json))/.test(file)
-      || /^[^/]+\.pyw?$/.test(file) || file === 'requirements.txt' || file === '.github/workflows/refresh-media.yml',
+    /^(?:web\/(?:[^/]+\.(?:js|css|html)|brand\/)|desktop\/|schemas\/|scripts\/|video\/(?:src\/|scripts\/|package(?:-lock)?\.json))/.test(file)
+      || /^[^/]+\.pyw?$/.test(file) || file === 'version.json' || file === 'requirements.txt' || file === '.github/workflows/refresh-media.yml',
   ).sort();
   const hashes = [];
   for (const file of files) {

@@ -63,7 +63,7 @@ async function captureScreenshots() {
   const python = await pythonCommand();
   let server, serverError, serverText = '', serverLog = '';
   try {
-    console.log('1/5 Starting a fresh synthetic demo and capturing all 14 views…');
+    console.log(`1/5 Starting a fresh synthetic demo and capturing all ${CONFIG.screenshots.length} views…`);
     const bootstrap = 'import web_server; s=web_server.ThreadingHTTPServer(("127.0.0.1",0),web_server.Handler); print("DAWN_MEDIA_PORT="+str(s.server_port),flush=True); s.serve_forever()';
     server = spawn(python, ['-X', 'utf8', '-u', '-c', bootstrap], {
       cwd: ROOT, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
