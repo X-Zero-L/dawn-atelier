@@ -374,6 +374,9 @@ class Handler(BaseHTTPRequestHandler):
                 if not path.exists() and relative in ('assets/gameicon.webp','assets/piper.webp'):
                     path=WEB/'brand'/('emblem.svg' if 'gameicon' in relative else 'botanical.svg')
                     base=WEB
+                elif not path.exists() and re.fullmatch(r'assets/items/\d+\.webp',relative):
+                    path=WEB/'brand/botanical.svg'
+                    base=WEB
                 if not path.is_relative_to(base.resolve()) or not path.is_file():
                     self.json({'error': '页面不存在。'}, 404)
                     return
