@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"金币原始值（金币 × 1000；999999 金币填写 999999000）"</Description>
+      <ShowAsSigned>1</ShowAsSigned>
+      <VariableType>8 Bytes</VariableType>
+      <Address>"GameAssembly.dll"+2F51768</Address>
+      <Offsets>
+        <Offset>20</Offset>
+        <Offset>30</Offset>
+        <Offset>18</Offset>
+        <Offset>110</Offset>
+        <Offset>20</Offset>
+        <Offset>0</Offset>
+        <Offset>B8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"属性编号校验（必须为 901；不要修改这一行）"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"GameAssembly.dll"+2F51768</Address>
+      <Offsets>
+        <Offset>28</Offset>
+        <Offset>18</Offset>
+        <Offset>110</Offset>
+        <Offset>20</Offset>
+        <Offset>0</Offset>
+        <Offset>B8</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

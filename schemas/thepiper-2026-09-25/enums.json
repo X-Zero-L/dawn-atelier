@@ -1,0 +1,9119 @@
+{
+  "source": {
+    "metadata_version": 31,
+    "GameAssembly_sha256": "289c78f1c2f0556e5325607102ac07a54cdb69e11a429a42014069c75367782b",
+    "global_metadata_sha256": "e8cfe3b37ed3b02247e1ab930db7b5e780d37ad6c5b27b3608becb24bdf8e44a"
+  },
+  "types": [
+    {
+      "name": "h",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "START_PLOT",
+          "value": 0
+        },
+        {
+          "name": "FINISH_PLOT",
+          "value": 1
+        },
+        {
+          "name": "PLOT_CLICK",
+          "value": 2
+        },
+        {
+          "name": "PLOT_SAY_END",
+          "value": 3
+        },
+        {
+          "name": "PLOT_STORY_MENU_CLICK",
+          "value": 4
+        },
+        {
+          "name": "SETACTIVE_EVENT_UI",
+          "value": 5
+        },
+        {
+          "name": "FORBID_UI_INPUT",
+          "value": 6
+        },
+        {
+          "name": "SWITCH_STATE",
+          "value": 7
+        },
+        {
+          "name": "UPDATE_ATTRIBUTE",
+          "value": 8
+        },
+        {
+          "name": "UPDATE_ITEM",
+          "value": 9
+        },
+        {
+          "name": "MISSION_ACCEPT",
+          "value": 10
+        },
+        {
+          "name": "MISSION_COMPLETE",
+          "value": 11
+        },
+        {
+          "name": "TILE_OPS_CHANGE",
+          "value": 12
+        },
+        {
+          "name": "CROP_STATE_CHANGE",
+          "value": 13
+        },
+        {
+          "name": "SELECT_ITEM_IN_BAG",
+          "value": 14
+        },
+        {
+          "name": "CROP_HARVEST_ITEM",
+          "value": 15
+        },
+        {
+          "name": "REFRESH_SHELF_INFO",
+          "value": 16
+        },
+        {
+          "name": "MAP_SWITCH",
+          "value": 17
+        },
+        {
+          "name": "SHOP_CURRENT_TURNOVER_UPDATE",
+          "value": 18
+        },
+        {
+          "name": "ADD_TIP_MESSAGE",
+          "value": 19
+        },
+        {
+          "name": "ADD_WARNING",
+          "value": 20
+        },
+        {
+          "name": "QTE_CLICK_RESULT",
+          "value": 21
+        },
+        {
+          "name": "DIG_MINE",
+          "value": 22
+        },
+        {
+          "name": "DIG_MINE_COMPLETE",
+          "value": 23
+        },
+        {
+          "name": "SHOW_BUBBLE",
+          "value": 24
+        },
+        {
+          "name": "CLUTTER_CLEAN_COMPLETE",
+          "value": 25
+        },
+        {
+          "name": "BUILDING_COMPLETE",
+          "value": 26
+        },
+        {
+          "name": "BUILDING_MOVE_PRE",
+          "value": 27
+        },
+        {
+          "name": "BUILDING_DESTROY_PRE",
+          "value": 28
+        },
+        {
+          "name": "BUILDING_PLACED_MODIFY",
+          "value": 29
+        },
+        {
+          "name": "ENTER_OR_EXIT_BUILDINGMODE",
+          "value": 30
+        },
+        {
+          "name": "CHANGE_LANGUAGE",
+          "value": 31
+        },
+        {
+          "name": "CLICK_SHELF_DETAIL_ITEM_NODE",
+          "value": 32
+        },
+        {
+          "name": "PRODUCT_REFRESH",
+          "value": 33
+        },
+        {
+          "name": "PRODUCT_SLOT_UNLOCK",
+          "value": 34
+        },
+        {
+          "name": "PRODUCT_TIP",
+          "value": 35
+        },
+        {
+          "name": "UPDATE_SHELF_DATA",
+          "value": 36
+        },
+        {
+          "name": "PICK_UP_BUILDING",
+          "value": 37
+        },
+        {
+          "name": "ARTIFACT_EXP_CHANGE",
+          "value": 38
+        },
+        {
+          "name": "PRODUCT_ARTIFACT_EXP",
+          "value": 39
+        },
+        {
+          "name": "EVENT_FINISH",
+          "value": 40
+        },
+        {
+          "name": "SCHEDULE_PHASE_UPDATE",
+          "value": 41
+        },
+        {
+          "name": "MAP_LOAD_COMPLETE",
+          "value": 42
+        },
+        {
+          "name": "FINISH_ILLUSTRATION",
+          "value": 43
+        },
+        {
+          "name": "ARRIVE_MAP",
+          "value": 44
+        },
+        {
+          "name": "INTERACTIVE_NPC",
+          "value": 45
+        },
+        {
+          "name": "GET_ITEM",
+          "value": 46
+        },
+        {
+          "name": "USE_ITEM",
+          "value": 47
+        },
+        {
+          "name": "SHELVES_GOODS",
+          "value": 48
+        },
+        {
+          "name": "ARTIFACT_EQUIPPED",
+          "value": 49
+        },
+        {
+          "name": "CLEAR_CLUTTER",
+          "value": 50
+        },
+        {
+          "name": "OPEN_OR_CLOSE_BAG",
+          "value": 51
+        },
+        {
+          "name": "MAP_AREA_UNLOCK",
+          "value": 52
+        },
+        {
+          "name": "SHOP_RANK_UP",
+          "value": 53
+        },
+        {
+          "name": "SET_FIELD_OPT_NONE",
+          "value": 54
+        },
+        {
+          "name": "VIDEO_END",
+          "value": 55
+        },
+        {
+          "name": "SPAWN_BUILDING_IN_MAP",
+          "value": 56
+        },
+        {
+          "name": "RECORD_GAME_STATS",
+          "value": 57
+        },
+        {
+          "name": "FIELD_OPS_BUILDING_CHANGE",
+          "value": 58
+        },
+        {
+          "name": "BUILDING_BUBBLE_NODE_MODIFY",
+          "value": 59
+        },
+        {
+          "name": "REFRESH_ORDER",
+          "value": 60
+        },
+        {
+          "name": "REFRESH_ALCHEMY_TALENT",
+          "value": 61
+        },
+        {
+          "name": "SHOW_OR_HIDE_UNIT_TITTLE",
+          "value": 62
+        },
+        {
+          "name": "UPDATE_UNIT_TITTLE_ICON",
+          "value": 63
+        },
+        {
+          "name": "FOCUS_ON_MAP",
+          "value": 64
+        },
+        {
+          "name": "FINISH_FORCE_ILLUSTRATION",
+          "value": 65
+        },
+        {
+          "name": "SHOP_CAN_LEVEL_UP",
+          "value": 66
+        },
+        {
+          "name": "MISSION_PROGRESS_UPDATE",
+          "value": 67
+        },
+        {
+          "name": "START_OR_END_FISHING",
+          "value": 68
+        },
+        {
+          "name": "FISHING_STATE",
+          "value": 69
+        },
+        {
+          "name": "ALCHEMY_ITEM_REFRESH",
+          "value": 70
+        },
+        {
+          "name": "SHOW_ALCHEMY_RESULT",
+          "value": 71
+        },
+        {
+          "name": "FISHING_CASTING_ROD",
+          "value": 72
+        },
+        {
+          "name": "FISHING_LINE_COLOR",
+          "value": 73
+        },
+        {
+          "name": "FERTILIZER_COMPLETE",
+          "value": 74
+        },
+        {
+          "name": "ADD_MISSION_COMPLETE",
+          "value": 75
+        },
+        {
+          "name": "COMPLETE_ORDER",
+          "value": 76
+        },
+        {
+          "name": "SELECT_TOOL_INDEX",
+          "value": 77
+        },
+        {
+          "name": "NEW_BUILDING_UNLOCK",
+          "value": 78
+        },
+        {
+          "name": "INJECT_MISSION",
+          "value": 79
+        },
+        {
+          "name": "ADD_MISSION_UNIT",
+          "value": 80
+        },
+        {
+          "name": "REMOVE_NPC_IN_MAP",
+          "value": 81
+        },
+        {
+          "name": "ILLUSTRATION_FORCE",
+          "value": 82
+        },
+        {
+          "name": "ORDER_CAN_COMMIT",
+          "value": 83
+        },
+        {
+          "name": "UNLOCK_TALENT",
+          "value": 84
+        },
+        {
+          "name": "SELECT_CARD",
+          "value": 85
+        },
+        {
+          "name": "DRAW_CARD",
+          "value": 86
+        },
+        {
+          "name": "BLACKJACK_UPDATE_POINT",
+          "value": 87
+        },
+        {
+          "name": "BLACKJACK_UPDAT_CHIPS",
+          "value": 88
+        },
+        {
+          "name": "BLACKJACK_SETTLEMENT",
+          "value": 89
+        },
+        {
+          "name": "BLACKJACK_GAME_START",
+          "value": 90
+        },
+        {
+          "name": "ENTER_OR_EXIT_COPY_BLUEPRINT",
+          "value": 91
+        },
+        {
+          "name": "BLACKJACK_DECK_COUNT_CHANGE",
+          "value": 92
+        },
+        {
+          "name": "BLACKJACK_GRAVEYARD_COUNT_CHANGE",
+          "value": 93
+        },
+        {
+          "name": "BLACKJACK_GAME",
+          "value": 94
+        },
+        {
+          "name": "HYBRID_RESULT_REFRESH",
+          "value": 95
+        },
+        {
+          "name": "HYBRID_COMPLETE",
+          "value": 96
+        },
+        {
+          "name": "BLACKJACK_DEALER_TURN_START_OR_END",
+          "value": 97
+        },
+        {
+          "name": "BLACKJACK_DEALER_BUBBLE",
+          "value": 98
+        },
+        {
+          "name": "TOOL_UPGRADE",
+          "value": 99
+        },
+        {
+          "name": "SHOW_FISH_RESULT",
+          "value": 100
+        },
+        {
+          "name": "WORK_REQUIREMENT",
+          "value": 101
+        },
+        {
+          "name": "STAFF_REFRESH",
+          "value": 102
+        },
+        {
+          "name": "CLICK_HEXAGRAM",
+          "value": 103
+        },
+        {
+          "name": "FINISH_HEXAGRAM",
+          "value": 104
+        },
+        {
+          "name": "HARVEST_STAFF",
+          "value": 105
+        },
+        {
+          "name": "REFRESH_REPLENISH_PAGE",
+          "value": 106
+        },
+        {
+          "name": "ON_HOUR_CHANGE",
+          "value": 107
+        },
+        {
+          "name": "ON_SHELF_GOOD_CREATE_OR_REMOVE",
+          "value": 108
+        },
+        {
+          "name": "VORTEX_GENERATED",
+          "value": 109
+        },
+        {
+          "name": "VORTEX_DESTROYED",
+          "value": 110
+        },
+        {
+          "name": "RELIC_FACTION_ACTIVATED",
+          "value": 111
+        },
+        {
+          "name": "ARTIFACT_UNEQUIPPED",
+          "value": 112
+        },
+        {
+          "name": "BLACK_JACK_PLAYER_BUTTON",
+          "value": 113
+        },
+        {
+          "name": "FISH_ANIMATION_STATE",
+          "value": 114
+        },
+        {
+          "name": "UPDATE_MAX_POINTE",
+          "value": 115
+        },
+        {
+          "name": "FISHING_FINISH",
+          "value": 116
+        },
+        {
+          "name": "OPEN_NPC_SHOP_BUTTON",
+          "value": 117
+        },
+        {
+          "name": "REFRESH_FACTION",
+          "value": 118
+        },
+        {
+          "name": "ON_MIN_CHANGE",
+          "value": 119
+        },
+        {
+          "name": "HYBRID_TIP",
+          "value": 120
+        },
+        {
+          "name": "GENE_POOL_WINDOW_REFRESH",
+          "value": 121
+        },
+        {
+          "name": "NO_GUEST_IN_SHOP",
+          "value": 122
+        },
+        {
+          "name": "UPDATE_TIME_STATE",
+          "value": 123
+        },
+        {
+          "name": "RESUME_HIGH_SPEED",
+          "value": 124
+        },
+        {
+          "name": "VERTEX_STATE_CHANGE",
+          "value": 125
+        },
+        {
+          "name": "ADD_FAVOR_MESSAGE",
+          "value": 126
+        },
+        {
+          "name": "TRY_LEVELUP_ESCROW",
+          "value": 127
+        },
+        {
+          "name": "ENTER_OR_EXIT_PLANTING_MODE",
+          "value": 128
+        },
+        {
+          "name": "SHOP_WINDOW_OPEN",
+          "value": 129
+        },
+        {
+          "name": "FAVOR_GIFT_UPDATE",
+          "value": 130
+        },
+        {
+          "name": "GUEST_REFRESH_DATA_CHANGE",
+          "value": 131
+        }
+      ]
+    },
+    {
+      "name": "bb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "Fight",
+          "value": 1
+        },
+        {
+          "name": "Plot",
+          "value": 2
+        },
+        {
+          "name": "Unit",
+          "value": 3
+        },
+        {
+          "name": "Effect",
+          "value": 4
+        },
+        {
+          "name": "BGM",
+          "value": 5
+        },
+        {
+          "name": "Vocal",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "bc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Dubbing",
+          "value": 8001
+        },
+        {
+          "name": "TitoFightSound",
+          "value": 8002
+        },
+        {
+          "name": "LuckDrawThroCoin",
+          "value": 8003
+        },
+        {
+          "name": "LuckDrawQuality",
+          "value": 8004
+        },
+        {
+          "name": "LuckDrawBomb",
+          "value": 8005
+        },
+        {
+          "name": "LuckDrawInWater",
+          "value": 8005
+        },
+        {
+          "name": "WorldBossRadar",
+          "value": 8006
+        }
+      ]
+    },
+    {
+      "name": "bn.be",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Stop",
+          "value": 1
+        },
+        {
+          "name": "Pause",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "cd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FightTip",
+          "value": 1000
+        },
+        {
+          "name": "FightMainPage",
+          "value": 1000
+        },
+        {
+          "name": "TeamMemberAoYi",
+          "value": 1001
+        },
+        {
+          "name": "PlayerBar",
+          "value": 1980
+        },
+        {
+          "name": "Bag",
+          "value": 1990
+        },
+        {
+          "name": "Plot",
+          "value": 2001
+        },
+        {
+          "name": "Story",
+          "value": 2900
+        },
+        {
+          "name": "ContinueFight",
+          "value": 2900
+        },
+        {
+          "name": "NetMsgBox",
+          "value": 2950
+        },
+        {
+          "name": "SevenActivity",
+          "value": 2950
+        },
+        {
+          "name": "SampleRecharge",
+          "value": 2951
+        },
+        {
+          "name": "ScrollNotice",
+          "value": 2980
+        },
+        {
+          "name": "Prompt",
+          "value": 2980
+        },
+        {
+          "name": "MailMsgBox",
+          "value": 2980
+        },
+        {
+          "name": "ItemTips",
+          "value": 2986
+        },
+        {
+          "name": "GetSkinPage",
+          "value": 2983
+        },
+        {
+          "name": "GetHero",
+          "value": 2983
+        },
+        {
+          "name": "GetItem",
+          "value": 2985
+        },
+        {
+          "name": "LoadGameSaveBox",
+          "value": 2990
+        },
+        {
+          "name": "ExitMsgBox",
+          "value": 3980
+        }
+      ]
+    },
+    {
+      "name": "cf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "SHOW",
+          "value": 0
+        },
+        {
+          "name": "HIDE",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "cg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "AND",
+          "value": 0
+        },
+        {
+          "name": "OR",
+          "value": 1
+        },
+        {
+          "name": "LATEST",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "ea",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "ModifyAddValue",
+          "value": 1
+        },
+        {
+          "name": "AttributeChange",
+          "value": 2
+        },
+        {
+          "name": "MaxValue",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "ed",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "ADDITIVE",
+          "value": 0
+        },
+        {
+          "name": "REPLACE",
+          "value": 1
+        },
+        {
+          "name": "MAXIMUM",
+          "value": 2
+        },
+        {
+          "name": "MINIMUM",
+          "value": 3
+        },
+        {
+          "name": "MULTIPLY",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "ev.eu",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "SIMPLECHINESE",
+          "value": 0
+        },
+        {
+          "name": "JANPANESE",
+          "value": 1
+        },
+        {
+          "name": "TRADITIONALCHINESE",
+          "value": 2
+        },
+        {
+          "name": "ENGILISH",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SoftMasking.SoftMask.ij",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Graphic",
+          "value": 0
+        },
+        {
+          "name": "Sprite",
+          "value": 1
+        },
+        {
+          "name": "Texture",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SoftMasking.SoftMask.ik",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Simple",
+          "value": 0
+        },
+        {
+          "name": "Sliced",
+          "value": 1
+        },
+        {
+          "name": "Tiled",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SoftMasking.SoftMask.il",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NoError",
+          "value": 0
+        },
+        {
+          "name": "UnsupportedShaders",
+          "value": 1
+        },
+        {
+          "name": "NestedMasks",
+          "value": 2
+        },
+        {
+          "name": "TightPackedSprite",
+          "value": 4
+        },
+        {
+          "name": "AlphaSplitSprite",
+          "value": 8
+        },
+        {
+          "name": "UnsupportedImageType",
+          "value": 16
+        },
+        {
+          "name": "UnreadableTexture",
+          "value": 32
+        }
+      ]
+    },
+    {
+      "name": "Example.ix",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_SwitchScene",
+          "value": 1
+        },
+        {
+          "name": "E_PlayStory",
+          "value": 2
+        },
+        {
+          "name": "E_PlayVideo",
+          "value": 3
+        },
+        {
+          "name": "E_AutoArchive",
+          "value": 4
+        },
+        {
+          "name": "E_BGMController",
+          "value": 5
+        },
+        {
+          "name": "E_GiveItemGroup",
+          "value": 6
+        },
+        {
+          "name": "E_UseItemGroup",
+          "value": 7
+        },
+        {
+          "name": "E_GrowthSpeed",
+          "value": 8
+        },
+        {
+          "name": "E_EnvLabelChg",
+          "value": 9
+        },
+        {
+          "name": "E_WaterTimeChg",
+          "value": 10
+        },
+        {
+          "name": "E_MoreProduction",
+          "value": 11
+        },
+        {
+          "name": "E_EquipSpeed",
+          "value": 12
+        },
+        {
+          "name": "E_ClutterHP",
+          "value": 13
+        },
+        {
+          "name": "E_ClutterCD",
+          "value": 14
+        },
+        {
+          "name": "E_GuestCD",
+          "value": 15
+        },
+        {
+          "name": "E_GuestGold",
+          "value": 16
+        },
+        {
+          "name": "E_PlayerItemPrice",
+          "value": 17
+        },
+        {
+          "name": "E_ShelfCap",
+          "value": 18
+        },
+        {
+          "name": "E_ExtraBuy",
+          "value": 19
+        },
+        {
+          "name": "E_BulkBuy",
+          "value": 20
+        },
+        {
+          "name": "E_OracleRefresh",
+          "value": 21
+        },
+        {
+          "name": "E_OracleOption",
+          "value": 22
+        },
+        {
+          "name": "E_OracleSlot",
+          "value": 23
+        },
+        {
+          "name": "E_OracleExtractEff",
+          "value": 24
+        },
+        {
+          "name": "E_StartMissionTree",
+          "value": 25
+        },
+        {
+          "name": "E_AddBuilding",
+          "value": 26
+        },
+        {
+          "name": "E_AddRelic",
+          "value": 27
+        },
+        {
+          "name": "E_AddGuest",
+          "value": 28
+        },
+        {
+          "name": "E_ChangeAttribute",
+          "value": 29
+        },
+        {
+          "name": "E_DeleteUnit",
+          "value": 30
+        },
+        {
+          "name": "E_HarvestTimes",
+          "value": 31
+        },
+        {
+          "name": "E_FastGrowth",
+          "value": 32
+        },
+        {
+          "name": "E_ImmediateMutation",
+          "value": 33
+        },
+        {
+          "name": "E_MutationProbability",
+          "value": 34
+        },
+        {
+          "name": "E_ChangeSingleFiledGrowthTime",
+          "value": 35
+        },
+        {
+          "name": "E_CastBuff",
+          "value": 36
+        },
+        {
+          "name": "E_GetOrderGroup",
+          "value": 37
+        },
+        {
+          "name": "E_AbsoluteMutation",
+          "value": 38
+        },
+        {
+          "name": "E_AutoWatering",
+          "value": 39
+        },
+        {
+          "name": "E_ChangeMutationProbility",
+          "value": 40
+        },
+        {
+          "name": "E_CropDropSeed",
+          "value": 41
+        },
+        {
+          "name": "E_CropGrowthTime",
+          "value": 42
+        },
+        {
+          "name": "E_CropNoNeedWater",
+          "value": 43
+        },
+        {
+          "name": "E_RemoveButHarvest",
+          "value": 44
+        },
+        {
+          "name": "E_CropJumpToGrowthStage",
+          "value": 45
+        },
+        {
+          "name": "E_CropJumpToHarvestStage",
+          "value": 46
+        },
+        {
+          "name": "E_CropAddHarvestNumPercent",
+          "value": 47
+        },
+        {
+          "name": "E_CanNotRemoveCrop",
+          "value": 48
+        },
+        {
+          "name": "E_InfectOtherCrop",
+          "value": 49
+        },
+        {
+          "name": "E_FieldNoWaterOnDayBegin",
+          "value": 50
+        },
+        {
+          "name": "E_CropStopGrowUp",
+          "value": 51
+        },
+        {
+          "name": "E_ChangeEnvAdpLevel",
+          "value": 52
+        },
+        {
+          "name": "E_ForceOverrideGene",
+          "value": 53
+        },
+        {
+          "name": "E_CopySurroudCrop",
+          "value": 54
+        },
+        {
+          "name": "E_FertilizerAffinity",
+          "value": 55
+        },
+        {
+          "name": "E_PerStoreMoneyRevenue",
+          "value": 56
+        },
+        {
+          "name": "E_PerOrderMoneyRevenue",
+          "value": 57
+        },
+        {
+          "name": "E_StaffSanLimit",
+          "value": 58
+        },
+        {
+          "name": "E_StaffSanLimitByPercent",
+          "value": 59
+        },
+        {
+          "name": "E_StaffSanCost",
+          "value": 60
+        },
+        {
+          "name": "E_StaffSansRecoverRate",
+          "value": 61
+        },
+        {
+          "name": "E_EquipmentReturnMaterials",
+          "value": 62
+        },
+        {
+          "name": "E_EquipmentDirectlyCompleteProbability",
+          "value": 63
+        },
+        {
+          "name": "E_SpendAllMoneyProbability",
+          "value": 64
+        },
+        {
+          "name": "E_FarmlandOutputMultiplier",
+          "value": 65
+        },
+        {
+          "name": "E_EquipmentOutputMultiplier",
+          "value": 66
+        },
+        {
+          "name": "E_EquipmentAccelerationRateByPercent",
+          "value": 67
+        },
+        {
+          "name": "E_StaffMovementSpeedByPercent",
+          "value": 68
+        },
+        {
+          "name": "E_FertilizationDuration",
+          "value": 69
+        },
+        {
+          "name": "E_InsufficientReplenishmentProbability",
+          "value": 70
+        },
+        {
+          "name": "E_ReducedQuantityRreceivedProbability",
+          "value": 71
+        },
+        {
+          "name": "E_StaffWorkDayOrNight",
+          "value": 72
+        },
+        {
+          "name": "E_StaffEquipSpeed",
+          "value": 73
+        },
+        {
+          "name": "E_RelicSelect",
+          "value": 74
+        },
+        {
+          "name": "E_StaffSanChange",
+          "value": 75
+        },
+        {
+          "name": "E_AdjustGuestGroupWeight",
+          "value": 76
+        },
+        {
+          "name": "E_CropYieldRangePercent",
+          "value": 77
+        },
+        {
+          "name": "E_ChangeCropEnvAdapLevel",
+          "value": 78
+        },
+        {
+          "name": "E_ChangeGeneAppearanceRatio",
+          "value": 79
+        },
+        {
+          "name": "E_PrioritizeNegativeGene",
+          "value": 80
+        },
+        {
+          "name": "E_AddEtherElementFree",
+          "value": 81
+        },
+        {
+          "name": "E_ChangeUltimateAlchemySuccessRate",
+          "value": 82
+        },
+        {
+          "name": "E_PercentModifyAlchemyExp",
+          "value": 83
+        },
+        {
+          "name": "E_FreeAlchemyGetPrecipitate",
+          "value": 84
+        },
+        {
+          "name": "E_PercentModifyAlchemyConsume",
+          "value": 85
+        },
+        {
+          "name": "E_ShopSingleTypePriceBonus",
+          "value": 86
+        },
+        {
+          "name": "E_CustomerTipAfterFullPurchase",
+          "value": 87
+        },
+        {
+          "name": "E_OrderInstantRefresh",
+          "value": 88
+        },
+        {
+          "name": "E_OrderQuantityDouble",
+          "value": 89
+        },
+        {
+          "name": "E_CompleteOrderExtraFavorability",
+          "value": 90
+        },
+        {
+          "name": "E_FireStaffRarityGoldBonus",
+          "value": 91
+        },
+        {
+          "name": "E_FireStaffRarityItemGroup",
+          "value": 92
+        },
+        {
+          "name": "E_StaffRandomSkillWeight",
+          "value": 93
+        },
+        {
+          "name": "E_FireStaffRaritySeedBonus",
+          "value": 94
+        },
+        {
+          "name": "E_PercentModifyShopItemPrice",
+          "value": 95
+        },
+        {
+          "name": "E_PercentModifyShopSellPrice",
+          "value": 96
+        },
+        {
+          "name": "E_ShopLimitedItemFree",
+          "value": 97
+        },
+        {
+          "name": "E_FishingTreasureBarNoDecrease",
+          "value": 98
+        },
+        {
+          "name": "E_PercentModifyFishStamina",
+          "value": 99
+        },
+        {
+          "name": "E_FishDizzinessTimeModify",
+          "value": 100
+        },
+        {
+          "name": "E_PercentModifyWhirlpoolRange",
+          "value": 101
+        },
+        {
+          "name": "E_WhirlpoolRestoreFishingRodDurability",
+          "value": 102
+        },
+        {
+          "name": "E_GreenGodRelicAllCropsEffective",
+          "value": 103
+        },
+        {
+          "name": "E_MatureContinuousMutation",
+          "value": 104
+        },
+        {
+          "name": "E_EquipmentWorkCompleteReturnMaterials",
+          "value": 105
+        },
+        {
+          "name": "E_AlchemyGetHighestValueMaterial",
+          "value": 106
+        },
+        {
+          "name": "E_TreatAllGoodsAsOneCategory",
+          "value": 107
+        },
+        {
+          "name": "E_SellItemMultiPriceProbability",
+          "value": 108
+        },
+        {
+          "name": "E_CustomerBuyVirtualGoodsExtra",
+          "value": 109
+        },
+        {
+          "name": "E_RandomOrderItemNotSubmitted",
+          "value": 110
+        },
+        {
+          "name": "E_OpenShopAnyTime",
+          "value": 111
+        },
+        {
+          "name": "E_UnlockShopHighRarityItemLibrary",
+          "value": 112
+        },
+        {
+          "name": "E_FishKingAppears",
+          "value": 113
+        },
+        {
+          "name": "E_AllFactionCountIncrease",
+          "value": 114
+        },
+        {
+          "name": "E_NPCEscrowApportionExPercent",
+          "value": 115
+        },
+        {
+          "name": "E_NPCEscrowExItemNum",
+          "value": 116
+        },
+        {
+          "name": "E_ChangeRelicUpperLimit",
+          "value": 117
+        },
+        {
+          "name": "E_PredictRelic",
+          "value": 118
+        },
+        {
+          "name": "E_RelicTreeGrowthSpeed",
+          "value": 119
+        },
+        {
+          "name": "E_EquipmentOutputIncrease",
+          "value": 120
+        },
+        {
+          "name": "E_ChangeCropAnyEnvLevel",
+          "value": 121
+        },
+        {
+          "name": "E_CropHarvestRangeChangePercent",
+          "value": 122
+        }
+      ]
+    },
+    {
+      "name": "Example.jb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_CropSeed",
+          "value": 1
+        },
+        {
+          "name": "E_AlchemySeed",
+          "value": 2
+        },
+        {
+          "name": "E_HybridSeed",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.jd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Building",
+          "value": 0
+        },
+        {
+          "name": "E_Recipe",
+          "value": 1
+        },
+        {
+          "name": "E_Story",
+          "value": 2
+        },
+        {
+          "name": "E_Seed",
+          "value": 3
+        },
+        {
+          "name": "E_Ability",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.jf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Money",
+          "value": 1
+        },
+        {
+          "name": "E_Sediment",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.jg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Window",
+          "value": 1
+        },
+        {
+          "name": "E_Tips",
+          "value": 2
+        },
+        {
+          "name": "E_No",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.jj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Heart",
+          "value": 1
+        },
+        {
+          "name": "E_Diamond",
+          "value": 2
+        },
+        {
+          "name": "E_Spade",
+          "value": 3
+        },
+        {
+          "name": "E_Club",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.jk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Ace",
+          "value": 0
+        },
+        {
+          "name": "E_Two",
+          "value": 1
+        },
+        {
+          "name": "E_Three",
+          "value": 2
+        },
+        {
+          "name": "E_Four",
+          "value": 3
+        },
+        {
+          "name": "E_Five",
+          "value": 4
+        },
+        {
+          "name": "E_Six",
+          "value": 5
+        },
+        {
+          "name": "E_Seven",
+          "value": 6
+        },
+        {
+          "name": "E_Eight",
+          "value": 7
+        },
+        {
+          "name": "E_Nine",
+          "value": 8
+        },
+        {
+          "name": "E_Ten",
+          "value": 9
+        },
+        {
+          "name": "E_Jack",
+          "value": 10
+        },
+        {
+          "name": "E_Queue",
+          "value": 11
+        },
+        {
+          "name": "E_King",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "Example.jm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_PlayCard",
+          "value": 1
+        },
+        {
+          "name": "E_ExceedsTwentyOne",
+          "value": 2
+        },
+        {
+          "name": "E_WinTheGame",
+          "value": 3
+        },
+        {
+          "name": "E_GetBlackJack",
+          "value": 4
+        },
+        {
+          "name": "E_DrawGame",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Example.jn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_CheckDeck",
+          "value": 1
+        },
+        {
+          "name": "E_CheckAndSetDeck",
+          "value": 2
+        },
+        {
+          "name": "E_GetChip",
+          "value": 3
+        },
+        {
+          "name": "E_WinTheGame",
+          "value": 4
+        },
+        {
+          "name": "E_MoveCard",
+          "value": 5
+        },
+        {
+          "name": "E_PointEqual",
+          "value": 6
+        },
+        {
+          "name": "E_SetPoint",
+          "value": 7
+        },
+        {
+          "name": "E_ResetGraveyard",
+          "value": 8
+        },
+        {
+          "name": "E_ClearTable",
+          "value": 9
+        },
+        {
+          "name": "E_ExchangeTable",
+          "value": 10
+        },
+        {
+          "name": "E_DoNotGotoGraveyard",
+          "value": 11
+        },
+        {
+          "name": "E_ForceStop",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "Example.jp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_NeverRaise",
+          "value": 0
+        },
+        {
+          "name": "E_OnlyRaiseFristTurn",
+          "value": 1
+        },
+        {
+          "name": "E_RaiseEveryTurn",
+          "value": 2
+        },
+        {
+          "name": "E_RaiseWin",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.js",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_SingleSelf",
+          "value": 1
+        },
+        {
+          "name": "E_SurroundTwo",
+          "value": 2
+        },
+        {
+          "name": "E_SurroundFour",
+          "value": 3
+        },
+        {
+          "name": "E_SurroundEight",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.jt",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Moment",
+          "value": 1
+        },
+        {
+          "name": "E_GameTime",
+          "value": 2
+        },
+        {
+          "name": "E_MaxSplice",
+          "value": 3
+        },
+        {
+          "name": "E_ParentControl",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.ju",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_CropEnterHarvest",
+          "value": 1
+        },
+        {
+          "name": "E_CropOnHarvest",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.jv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_NoRefresh",
+          "value": 0
+        },
+        {
+          "name": "E_Refresh",
+          "value": 1
+        },
+        {
+          "name": "E_CreateNew",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.jw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Plus",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.jx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_CurSelectedFieldID",
+          "value": 1
+        },
+        {
+          "name": "E_ByBuffCaster",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.jz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_AlchemyWorkshop",
+          "value": 1
+        },
+        {
+          "name": "E_UndergroundFarm",
+          "value": 2
+        },
+        {
+          "name": "E_Common",
+          "value": 3
+        },
+        {
+          "name": "E_GroundFarm",
+          "value": 4
+        },
+        {
+          "name": "E_Farm",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Example.ka",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Farm",
+          "value": 1
+        },
+        {
+          "name": "E_Tools",
+          "value": 2
+        },
+        {
+          "name": "E_Equip",
+          "value": 3
+        },
+        {
+          "name": "E_Shelves",
+          "value": 4
+        },
+        {
+          "name": "E_Decoration",
+          "value": 5
+        },
+        {
+          "name": "E_Clutter",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Example.kb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Loam",
+          "value": 1
+        },
+        {
+          "name": "E_Clay",
+          "value": 2
+        },
+        {
+          "name": "E_Sandy",
+          "value": 3
+        },
+        {
+          "name": "E_Water",
+          "value": 4
+        },
+        {
+          "name": "E_FoodShelves",
+          "value": 5
+        },
+        {
+          "name": "E_MaterialShelves",
+          "value": 6
+        },
+        {
+          "name": "E_ProductShelves",
+          "value": 7
+        },
+        {
+          "name": "E_TreasuresShelves",
+          "value": 8
+        },
+        {
+          "name": "E_Crop",
+          "value": 9
+        },
+        {
+          "name": "E_Clean",
+          "value": 10
+        },
+        {
+          "name": "E_Dig",
+          "value": 11
+        },
+        {
+          "name": "E_LabelChange",
+          "value": 12
+        },
+        {
+          "name": "E_Watering",
+          "value": 13
+        },
+        {
+          "name": "E_ProcessingEquip",
+          "value": 14
+        },
+        {
+          "name": "E_RelicExtract",
+          "value": 15
+        },
+        {
+          "name": "E_Hybridization",
+          "value": 16
+        },
+        {
+          "name": "E_StaffHouse",
+          "value": 17
+        },
+        {
+          "name": "E_RelicTree",
+          "value": 18
+        },
+        {
+          "name": "E_FreeAlchemy",
+          "value": 19
+        },
+        {
+          "name": "E_PlantingSignage",
+          "value": 20
+        },
+        {
+          "name": "E_UpLoam",
+          "value": 21
+        }
+      ]
+    },
+    {
+      "name": "Example.kc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_Num",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.kf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Attribute",
+          "value": 1
+        },
+        {
+          "name": "E_AttributeLittle",
+          "value": 2
+        },
+        {
+          "name": "E_OrConditionGroup",
+          "value": 3
+        },
+        {
+          "name": "E_AndConditionGroup",
+          "value": 4
+        },
+        {
+          "name": "E_ArriveMap",
+          "value": 5
+        },
+        {
+          "name": "E_HaveItem",
+          "value": 6
+        },
+        {
+          "name": "E_OwnItemTypeOrRarity",
+          "value": 7
+        },
+        {
+          "name": "E_AccumulateGetItemTimes",
+          "value": 8
+        },
+        {
+          "name": "E_OwnRelic",
+          "value": 9
+        },
+        {
+          "name": "E_FinishMission",
+          "value": 10
+        },
+        {
+          "name": "E_PlayPlot",
+          "value": 11
+        },
+        {
+          "name": "E_ShopRank",
+          "value": 12
+        },
+        {
+          "name": "E_NpcFavor",
+          "value": 13
+        },
+        {
+          "name": "E_FactionFavor",
+          "value": 14
+        },
+        {
+          "name": "E_GameStats",
+          "value": 15
+        },
+        {
+          "name": "E_AlchemyTalent",
+          "value": 16
+        },
+        {
+          "name": "E_SetBuilding",
+          "value": 17
+        },
+        {
+          "name": "E_BlackJack",
+          "value": 18
+        },
+        {
+          "name": "E_UnlockAlchemyTalent",
+          "value": 19
+        },
+        {
+          "name": "E_DailyRevenue",
+          "value": 20
+        },
+        {
+          "name": "E_FinishEvent",
+          "value": 21
+        },
+        {
+          "name": "E_UnlockItemsByType",
+          "value": 22
+        },
+        {
+          "name": "E_CropGeneMatch",
+          "value": 23
+        },
+        {
+          "name": "E_EscrowMax",
+          "value": 24
+        },
+        {
+          "name": "E_VisitMaps",
+          "value": 25
+        },
+        {
+          "name": "E_CollectAllRelicsByFaction",
+          "value": 26
+        },
+        {
+          "name": "E_FactionFavorLess",
+          "value": 27
+        },
+        {
+          "name": "E_NANDConditionGroup",
+          "value": 28
+        },
+        {
+          "name": "E_NORConditionGroup",
+          "value": 29
+        },
+        {
+          "name": "E_XiaoLiClause",
+          "value": 30
+        },
+        {
+          "name": "E_AccumulateGetChipsNum",
+          "value": 31
+        }
+      ]
+    },
+    {
+      "name": "Example.kh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Custom",
+          "value": 0
+        },
+        {
+          "name": "E_AxisY40",
+          "value": 1
+        },
+        {
+          "name": "E_AxisY20",
+          "value": 2
+        },
+        {
+          "name": "E_AxisX40",
+          "value": 3
+        },
+        {
+          "name": "E_AxisX20",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.ki",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_none",
+          "value": 0
+        },
+        {
+          "name": "E_CharacterA",
+          "value": 1
+        },
+        {
+          "name": "E_CharacterB",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.kk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_CropWatering",
+          "value": 1
+        },
+        {
+          "name": "E_CropHarvest",
+          "value": 2
+        },
+        {
+          "name": "E_Restock",
+          "value": 3
+        },
+        {
+          "name": "E_ProcessingEquipMature",
+          "value": 4
+        },
+        {
+          "name": "E_LevelUp",
+          "value": 5
+        },
+        {
+          "name": "E_CompleteOrder",
+          "value": 6
+        },
+        {
+          "name": "E_Building",
+          "value": 7
+        },
+        {
+          "name": "E_NPC",
+          "value": 8
+        },
+        {
+          "name": "E_AlchemyTalent",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "name": "Example.kn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Auto",
+          "value": 1
+        },
+        {
+          "name": "E_Interaction",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.ko",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Action",
+          "value": 1
+        },
+        {
+          "name": "E_PlayMultipleStory",
+          "value": 2
+        },
+        {
+          "name": "E_SwitchTime",
+          "value": 3
+        },
+        {
+          "name": "E_Ending",
+          "value": 4
+        },
+        {
+          "name": "E_Illustration",
+          "value": 5
+        },
+        {
+          "name": "E_OpenNPCShop",
+          "value": 6
+        },
+        {
+          "name": "E_SubmitItemGroup",
+          "value": 7
+        },
+        {
+          "name": "E_BlackJackGame",
+          "value": 8
+        },
+        {
+          "name": "E_Puzzle",
+          "value": 9
+        },
+        {
+          "name": "E_RelicGet",
+          "value": 10
+        },
+        {
+          "name": "E_StartFishing",
+          "value": 11
+        },
+        {
+          "name": "E_Backtracking",
+          "value": 12
+        },
+        {
+          "name": "E_Vortex",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "name": "Example.kq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Item",
+          "value": 1
+        },
+        {
+          "name": "E_Unit",
+          "value": 2
+        },
+        {
+          "name": "E_Relic",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.ks",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Positive",
+          "value": 1
+        },
+        {
+          "name": "E_Negative",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.ku",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Soil",
+          "value": 1
+        },
+        {
+          "name": "E_Temperature",
+          "value": 2
+        },
+        {
+          "name": "E_Humidity",
+          "value": 3
+        },
+        {
+          "name": "E_Brightness",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.kv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Loam",
+          "value": 1
+        },
+        {
+          "name": "E_Clay",
+          "value": 2
+        },
+        {
+          "name": "E_Sandy",
+          "value": 3
+        },
+        {
+          "name": "E_Water",
+          "value": 4
+        },
+        {
+          "name": "E_Cold",
+          "value": 5
+        },
+        {
+          "name": "E_Ambient",
+          "value": 6
+        },
+        {
+          "name": "E_Hot",
+          "value": 7
+        },
+        {
+          "name": "E_Dry",
+          "value": 8
+        },
+        {
+          "name": "E_Wet",
+          "value": 9
+        },
+        {
+          "name": "E_Flooding",
+          "value": 10
+        },
+        {
+          "name": "E_Dark",
+          "value": 11
+        },
+        {
+          "name": "E_Twilight",
+          "value": 12
+        },
+        {
+          "name": "E_Light",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "name": "Example.kz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_EscapeWaterFlow",
+          "value": 1
+        },
+        {
+          "name": "E_Pendulum",
+          "value": 2
+        },
+        {
+          "name": "E_Dush",
+          "value": 3
+        },
+        {
+          "name": "E_Freestyle",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.la",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Near",
+          "value": 1
+        },
+        {
+          "name": "E_Far",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.ld",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Rod",
+          "value": 1
+        },
+        {
+          "name": "E_Bouy",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.lf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_GetAttrValue",
+          "value": 0
+        },
+        {
+          "name": "E_CouplingNum",
+          "value": 1
+        },
+        {
+          "name": "E_DefReduce",
+          "value": 2
+        },
+        {
+          "name": "E_GetDamageDone",
+          "value": 3
+        },
+        {
+          "name": "E_GetKillNum",
+          "value": 4
+        },
+        {
+          "name": "E_GetBuffLayer",
+          "value": 5
+        },
+        {
+          "name": "E_GetHPChange",
+          "value": 6
+        },
+        {
+          "name": "E_GetDamageTaken",
+          "value": 7
+        },
+        {
+          "name": "E_RelicNum",
+          "value": 8
+        },
+        {
+          "name": "E_Random",
+          "value": 9
+        },
+        {
+          "name": "E_AttrPreMax",
+          "value": 10
+        },
+        {
+          "name": "E_SliverNum",
+          "value": 11
+        },
+        {
+          "name": "E_GetCombo",
+          "value": 12
+        },
+        {
+          "name": "E_CurrAttr",
+          "value": 13
+        },
+        {
+          "name": "E_OverDamage",
+          "value": 14
+        },
+        {
+          "name": "E_DMGType",
+          "value": 15
+        },
+        {
+          "name": "E_SRType",
+          "value": 16
+        },
+        {
+          "name": "E_GetWeaponGrid",
+          "value": 17
+        },
+        {
+          "name": "E_GetAtk",
+          "value": 18
+        },
+        {
+          "name": "E_GetFeatureNum",
+          "value": 19
+        }
+      ]
+    },
+    {
+      "name": "Example.lh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Map",
+          "value": 1
+        },
+        {
+          "name": "E_Building",
+          "value": 2
+        },
+        {
+          "name": "E_Clean",
+          "value": 3
+        },
+        {
+          "name": "E_Relic",
+          "value": 4
+        },
+        {
+          "name": "E_Alchemy",
+          "value": 5
+        },
+        {
+          "name": "E_Confidence",
+          "value": 6
+        },
+        {
+          "name": "E_StaffEmployee",
+          "value": 7
+        },
+        {
+          "name": "E_StaffManage",
+          "value": 8
+        },
+        {
+          "name": "E_Gene",
+          "value": 9
+        },
+        {
+          "name": "E_TimeSkip",
+          "value": 10
+        },
+        {
+          "name": "E_MaterialShelvesTab",
+          "value": 11
+        },
+        {
+          "name": "E_ProductShelvesTab",
+          "value": 12
+        },
+        {
+          "name": "E_RarityShelvesTab",
+          "value": 13
+        },
+        {
+          "name": "E_AlchemySeedTab",
+          "value": 14
+        },
+        {
+          "name": "E_HybridSeedTab",
+          "value": 15
+        },
+        {
+          "name": "E_StaffSeedTab",
+          "value": 16
+        },
+        {
+          "name": "E_FarmBuildingEquipTab",
+          "value": 17
+        },
+        {
+          "name": "E_FarmBuildingToolTab",
+          "value": 18
+        },
+        {
+          "name": "E_DecorationTab",
+          "value": 19
+        },
+        {
+          "name": "E_BluePrintTab",
+          "value": 20
+        },
+        {
+          "name": "E_ShopThemeTab",
+          "value": 21
+        },
+        {
+          "name": "E_Shop",
+          "value": 22
+        },
+        {
+          "name": "E_Order",
+          "value": 23
+        }
+      ]
+    },
+    {
+      "name": "Example.lj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_HandHands",
+          "value": 1
+        },
+        {
+          "name": "E_LoudLouds",
+          "value": 2
+        },
+        {
+          "name": "E_WateringTime",
+          "value": 3
+        },
+        {
+          "name": "E_CashierTime",
+          "value": 4
+        },
+        {
+          "name": "E_HarvestCropSeed",
+          "value": 5
+        },
+        {
+          "name": "E_HarvestAlchemySeed",
+          "value": 6
+        },
+        {
+          "name": "E_HarvestStaffSeed",
+          "value": 7
+        },
+        {
+          "name": "E_HarvestHybridSeed",
+          "value": 8
+        },
+        {
+          "name": "E_HarvestSeed",
+          "value": 9
+        },
+        {
+          "name": "E_CompleteOrder",
+          "value": 10
+        },
+        {
+          "name": "E_FireEmployeeTimes",
+          "value": 11
+        },
+        {
+          "name": "E_FishingTimes",
+          "value": 12
+        },
+        {
+          "name": "E_GetOracleTimes",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "name": "Example.ln",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_Sequence",
+          "value": 1
+        },
+        {
+          "name": "E_Task",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.lr",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_ItemGoods",
+          "value": 1
+        },
+        {
+          "name": "E_ItemMaterial",
+          "value": 2
+        },
+        {
+          "name": "E_ItemProduct",
+          "value": 3
+        },
+        {
+          "name": "E_ItemTreasure",
+          "value": 4
+        },
+        {
+          "name": "E_ItemFish",
+          "value": 5
+        },
+        {
+          "name": "E_ItemImporttantProp",
+          "value": 6
+        },
+        {
+          "name": "E_SeedCrop",
+          "value": 7
+        },
+        {
+          "name": "E_SeedAlchemy",
+          "value": 8
+        },
+        {
+          "name": "E_SeedStaff",
+          "value": 9
+        },
+        {
+          "name": "E_SeedHybrid",
+          "value": 10
+        },
+        {
+          "name": "E_Relic",
+          "value": 11
+        },
+        {
+          "name": "E_BuildProcessingEquip",
+          "value": 12
+        },
+        {
+          "name": "E_BuildAlchemyEquip",
+          "value": 13
+        },
+        {
+          "name": "E_BuildDecoration",
+          "value": 14
+        },
+        {
+          "name": "E_BuildShelves",
+          "value": 15
+        },
+        {
+          "name": "E_StaffFarm",
+          "value": 16
+        },
+        {
+          "name": "E_StaffShop",
+          "value": 17
+        },
+        {
+          "name": "E_StaffWorker",
+          "value": 18
+        },
+        {
+          "name": "E_StaffWarlock",
+          "value": 19
+        },
+        {
+          "name": "E_BuildOther",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "name": "Example.lu",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_ClickUI",
+          "value": 1
+        },
+        {
+          "name": "E_PlayVideo",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.lw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Water",
+          "value": 1
+        },
+        {
+          "name": "E_Fire",
+          "value": 2
+        },
+        {
+          "name": "E_Air",
+          "value": 3
+        },
+        {
+          "name": "E_Earth",
+          "value": 4
+        },
+        {
+          "name": "E_All",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Example.lx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Seed",
+          "value": 1
+        },
+        {
+          "name": "E_RelicEffect",
+          "value": 2
+        },
+        {
+          "name": "E_UnlockRecipe",
+          "value": 3
+        },
+        {
+          "name": "E_Fertilization",
+          "value": 4
+        },
+        {
+          "name": "E_Staff",
+          "value": 5
+        },
+        {
+          "name": "E_StaffSkill",
+          "value": 6
+        },
+        {
+          "name": "E_UnlockTheme",
+          "value": 7
+        },
+        {
+          "name": "E_UnlockBuild",
+          "value": 8
+        },
+        {
+          "name": "E_RelicSeed",
+          "value": 9
+        },
+        {
+          "name": "E_GetItem",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "Example.ly",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Auto",
+          "value": 0
+        },
+        {
+          "name": "E_Package",
+          "value": 1
+        },
+        {
+          "name": "E_NotShow",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.lz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_CropSeed",
+          "value": 1
+        },
+        {
+          "name": "E_AlchemySeed",
+          "value": 2
+        },
+        {
+          "name": "E_HybridSeed",
+          "value": 3
+        },
+        {
+          "name": "E_Crop",
+          "value": 4
+        },
+        {
+          "name": "E_Goods",
+          "value": 5
+        },
+        {
+          "name": "E_Material",
+          "value": 6
+        },
+        {
+          "name": "E_Product",
+          "value": 7
+        },
+        {
+          "name": "E_Treasures",
+          "value": 8
+        },
+        {
+          "name": "E_Fertilizer",
+          "value": 9
+        },
+        {
+          "name": "E_ImportantProp",
+          "value": 10
+        },
+        {
+          "name": "E_Relic",
+          "value": 11
+        },
+        {
+          "name": "E_Recipe",
+          "value": 12
+        },
+        {
+          "name": "E_Poker",
+          "value": 13
+        },
+        {
+          "name": "E_FishingTool",
+          "value": 14
+        },
+        {
+          "name": "E_StaffSeed",
+          "value": 15
+        },
+        {
+          "name": "E_ReStaffSkill",
+          "value": 16
+        }
+      ]
+    },
+    {
+      "name": "Example.mb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_material",
+          "value": 1
+        },
+        {
+          "name": "E_Random",
+          "value": 2
+        },
+        {
+          "name": "E_NoRepeatingRandom",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.mh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_Shop",
+          "value": 1
+        },
+        {
+          "name": "E_Farm",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.mk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_ArriveMap",
+          "value": 1
+        },
+        {
+          "name": "E_InteractiveNpc",
+          "value": 2
+        },
+        {
+          "name": "E_GetItemCount",
+          "value": 3
+        },
+        {
+          "name": "E_HaveItemCount",
+          "value": 4
+        },
+        {
+          "name": "E_UseItemCount",
+          "value": 5
+        },
+        {
+          "name": "E_PlotFinish",
+          "value": 6
+        },
+        {
+          "name": "E_VideoFinish",
+          "value": 7
+        },
+        {
+          "name": "E_EventFinish",
+          "value": 8
+        },
+        {
+          "name": "E_MissionGroupFinish",
+          "value": 9
+        },
+        {
+          "name": "E_AfterTime",
+          "value": 10
+        },
+        {
+          "name": "E_AttrRange",
+          "value": 11
+        },
+        {
+          "name": "E_GetRelicCount",
+          "value": 12
+        },
+        {
+          "name": "E_ShelvesGoods",
+          "value": 13
+        },
+        {
+          "name": "E_BuildBuildingCount",
+          "value": 14
+        },
+        {
+          "name": "E_ClearClutterCount",
+          "value": 15
+        },
+        {
+          "name": "E_FinishToday",
+          "value": 16
+        },
+        {
+          "name": "E_MapAreaUnlock",
+          "value": 17
+        },
+        {
+          "name": "E_CheckGameStats",
+          "value": 18
+        },
+        {
+          "name": "E_CompleteOrder",
+          "value": 19
+        },
+        {
+          "name": "E_GetStaff",
+          "value": 20
+        },
+        {
+          "name": "E_AddNewBuilding",
+          "value": 21
+        },
+        {
+          "name": "E_InNRounds",
+          "value": 22
+        },
+        {
+          "name": "E_ShopRank",
+          "value": 23
+        },
+        {
+          "name": "E_CropRipening",
+          "value": 24
+        },
+        {
+          "name": "E_StaffToFight",
+          "value": 25
+        },
+        {
+          "name": "E_NPCEscrow",
+          "value": 26
+        },
+        {
+          "name": "E_HadItemCount",
+          "value": 27
+        }
+      ]
+    },
+    {
+      "name": "Example.ml",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Main",
+          "value": 1
+        },
+        {
+          "name": "E_Branch",
+          "value": 2
+        },
+        {
+          "name": "E_Subtask",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.mm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_InjectEvent",
+          "value": 1
+        },
+        {
+          "name": "E_RefreshNPC",
+          "value": 2
+        },
+        {
+          "name": "E_RefreshInject",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.mo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_ItemType",
+          "value": 1
+        },
+        {
+          "name": "E_ItemID",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.mq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_Main",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.ms",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Normal",
+          "value": 0
+        },
+        {
+          "name": "E_Queue",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.mu",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Normal",
+          "value": 1
+        },
+        {
+          "name": "E_Happy",
+          "value": 2
+        },
+        {
+          "name": "E_Serious",
+          "value": 3
+        },
+        {
+          "name": "E_Awkward",
+          "value": 4
+        },
+        {
+          "name": "E_Confused",
+          "value": 5
+        },
+        {
+          "name": "E_Angry",
+          "value": 6
+        },
+        {
+          "name": "E_Shy",
+          "value": 7
+        },
+        {
+          "name": "E_Sadness",
+          "value": 8
+        },
+        {
+          "name": "E_Speechless",
+          "value": 9
+        },
+        {
+          "name": "E_Blackface",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "Example.mw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_TurnOn",
+          "value": 1
+        },
+        {
+          "name": "E_Mirror",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.my",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_AfterPass",
+          "value": 1
+        },
+        {
+          "name": "E_AfterClick",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.mz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Random",
+          "value": 1
+        },
+        {
+          "name": "E_PairRandom",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.na",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_MonsterAttack",
+          "value": 1
+        },
+        {
+          "name": "E_SpeedUp",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.nb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_MonsterAttack",
+          "value": 1
+        },
+        {
+          "name": "E_SpeedUp",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Example.nc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_GenerateOnInit",
+          "value": 1
+        },
+        {
+          "name": "E_GenerateOnEndPoint",
+          "value": 2
+        },
+        {
+          "name": "E_GenerateByNodePos",
+          "value": 3
+        },
+        {
+          "name": "E_Make",
+          "value": 4
+        },
+        {
+          "name": "E_Cook",
+          "value": 5
+        },
+        {
+          "name": "E_Collect",
+          "value": 6
+        },
+        {
+          "name": "E_GenerateOnHeadAndEnd",
+          "value": 7
+        },
+        {
+          "name": "E_SplitTwo",
+          "value": 8
+        },
+        {
+          "name": "E_Invisible",
+          "value": 10
+        },
+        {
+          "name": "E_RightBox",
+          "value": 11
+        },
+        {
+          "name": "E_DoubleRightBox",
+          "value": 12
+        },
+        {
+          "name": "E_DodgeBlack",
+          "value": 13
+        },
+        {
+          "name": "E_GenerateDoubleByPos",
+          "value": 14
+        }
+      ]
+    },
+    {
+      "name": "Example.ne",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Once",
+          "value": 0
+        },
+        {
+          "name": "E_Mutil",
+          "value": 1
+        },
+        {
+          "name": "E_Press",
+          "value": 2
+        },
+        {
+          "name": "E_Refresh",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.nf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Head",
+          "value": 1
+        },
+        {
+          "name": "E_End",
+          "value": 2
+        },
+        {
+          "name": "E_Attack",
+          "value": 3
+        },
+        {
+          "name": "E_Defense",
+          "value": 4
+        },
+        {
+          "name": "E_Collect",
+          "value": 5
+        },
+        {
+          "name": "E_Cook",
+          "value": 6
+        },
+        {
+          "name": "E_Make",
+          "value": 7
+        },
+        {
+          "name": "E_Transform",
+          "value": 8
+        },
+        {
+          "name": "E_Merge",
+          "value": 9
+        },
+        {
+          "name": "E_Crit",
+          "value": 10
+        },
+        {
+          "name": "E_Pair",
+          "value": 11
+        },
+        {
+          "name": "E_Ban",
+          "value": 12
+        },
+        {
+          "name": "E_Reverse",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "name": "Example.nh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Line",
+          "value": 0
+        },
+        {
+          "name": "E_Circle",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.ni",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Make",
+          "value": 1
+        },
+        {
+          "name": "E_Cook",
+          "value": 2
+        },
+        {
+          "name": "E_Collect",
+          "value": 3
+        },
+        {
+          "name": "E_Fight",
+          "value": 8
+        },
+        {
+          "name": "E_FightSpider",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "name": "Example.nk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_LineReturn",
+          "value": 1
+        },
+        {
+          "name": "E_LineRestart",
+          "value": 2
+        },
+        {
+          "name": "E_Circling",
+          "value": 3
+        },
+        {
+          "name": "E_DoubleCircling",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.nn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_GetStaff",
+          "value": 1
+        },
+        {
+          "name": "E_BuildingDouble",
+          "value": 2
+        },
+        {
+          "name": "E_Rest",
+          "value": 3
+        },
+        {
+          "name": "E_FireStaff",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.no",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_AutoActive",
+          "value": 0
+        },
+        {
+          "name": "E_OnlyActiveOnce",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Example.nv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Fix",
+          "value": 1
+        },
+        {
+          "name": "E_Story",
+          "value": 2
+        },
+        {
+          "name": "E_RandomNonRefresh",
+          "value": 3
+        },
+        {
+          "name": "E_RandomRefresh",
+          "value": 4
+        },
+        {
+          "name": "E_RelicItem",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Example.nw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Grocery",
+          "value": 1
+        },
+        {
+          "name": "E_Tanuki",
+          "value": 2
+        },
+        {
+          "name": "E_Tavern",
+          "value": 3
+        },
+        {
+          "name": "E_SilverKey",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.oa",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_StaffSkill",
+          "value": 1
+        },
+        {
+          "name": "E_StaffPositiveSkill",
+          "value": 2
+        },
+        {
+          "name": "E_StaffNegativeSkill",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Example.oe",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Eye",
+          "value": 1
+        },
+        {
+          "name": "E_Brain",
+          "value": 2
+        },
+        {
+          "name": "E_Hand",
+          "value": 3
+        },
+        {
+          "name": "E_Tooth",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.of",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Shop",
+          "value": 1
+        },
+        {
+          "name": "E_Farm",
+          "value": 2
+        },
+        {
+          "name": "E_Worker",
+          "value": 3
+        },
+        {
+          "name": "E_Warlock",
+          "value": 4
+        },
+        {
+          "name": "E_HeroineShop",
+          "value": 5
+        },
+        {
+          "name": "E_HeroineFarm",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Example.oh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Shop",
+          "value": 1
+        },
+        {
+          "name": "E_Farm",
+          "value": 2
+        },
+        {
+          "name": "E_205Worker",
+          "value": 3
+        },
+        {
+          "name": "E_206Worker",
+          "value": 4
+        },
+        {
+          "name": "E_207Worker",
+          "value": 5
+        },
+        {
+          "name": "E_208Worker",
+          "value": 6
+        },
+        {
+          "name": "E_209Worker",
+          "value": 7
+        },
+        {
+          "name": "E_280Warlock",
+          "value": 8
+        },
+        {
+          "name": "E_281Warlock",
+          "value": 9
+        },
+        {
+          "name": "E_282Warlock",
+          "value": 10
+        },
+        {
+          "name": "E_283Warlock",
+          "value": 11
+        },
+        {
+          "name": "E_284Warlock",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "Example.oj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_ReplenishGoods",
+          "value": 1
+        },
+        {
+          "name": "E_CleanWeed",
+          "value": 2
+        },
+        {
+          "name": "E_WaterField",
+          "value": 3
+        },
+        {
+          "name": "E_HarvestCrop",
+          "value": 4
+        },
+        {
+          "name": "E_FertilizerField",
+          "value": 5
+        },
+        {
+          "name": "E_EquipProduct",
+          "value": 6
+        },
+        {
+          "name": "E_ObtainEquipProdcut",
+          "value": 7
+        },
+        {
+          "name": "E_AlchemyProdcut",
+          "value": 8
+        },
+        {
+          "name": "E_ObtainAlchemyProduct",
+          "value": 9
+        },
+        {
+          "name": "E_Plant",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "name": "Example.om",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_Null",
+          "value": 0
+        },
+        {
+          "name": "E_Seed",
+          "value": 1
+        },
+        {
+          "name": "E_Water",
+          "value": 2
+        },
+        {
+          "name": "E_Harvest",
+          "value": 3
+        },
+        {
+          "name": "E_Remove",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.oo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_SceneNPC",
+          "value": 1
+        },
+        {
+          "name": "E_NPC",
+          "value": 2
+        },
+        {
+          "name": "E_Guest",
+          "value": 3
+        },
+        {
+          "name": "E_Staff",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Example.oq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "E_None",
+          "value": 0
+        },
+        {
+          "name": "E_Item",
+          "value": 1
+        },
+        {
+          "name": "E_Element",
+          "value": 2
+        },
+        {
+          "name": "E_StaffNum",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SaveLoadSystem.AllArtifactPropertyData.FieldDictionaryType",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FieldFastGrowthDic",
+          "value": 0
+        },
+        {
+          "name": "FieldHarvestTimeDic",
+          "value": 1
+        },
+        {
+          "name": "FieldWaterTimeDic",
+          "value": 2
+        },
+        {
+          "name": "FieldMutationStateDic",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SaveLoadSystem.AllArtifactPropertyData.SimpleDictionaryType",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "EnvAdpRate",
+          "value": 0
+        },
+        {
+          "name": "EquipSeedDic",
+          "value": 1
+        },
+        {
+          "name": "ItemTypeSellPriceChangePercent",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Fishing.or",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NONE",
+          "value": 0
+        },
+        {
+          "name": "HOLDROD",
+          "value": 1
+        },
+        {
+          "name": "CASTINGROD",
+          "value": 2
+        },
+        {
+          "name": "WAITING",
+          "value": 3
+        },
+        {
+          "name": "FISHING",
+          "value": 4
+        },
+        {
+          "name": "SHOWRESULT",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Fishing.ow",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FadeIn",
+          "value": 0
+        },
+        {
+          "name": "Stable",
+          "value": 1
+        },
+        {
+          "name": "FadeOut",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Fishing.oy",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "WAITING",
+          "value": 0
+        },
+        {
+          "name": "CLOCKWISE",
+          "value": 1
+        },
+        {
+          "name": "COUNTERCLOCKWISE",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Fishing.pa",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Birth",
+          "value": 1
+        },
+        {
+          "name": "FreeMoveIdle",
+          "value": 2
+        },
+        {
+          "name": "FreeMoveAction",
+          "value": 3
+        },
+        {
+          "name": "RunAway",
+          "value": 4
+        },
+        {
+          "name": "TryBiteHook",
+          "value": 5
+        },
+        {
+          "name": "BiteHookIdle",
+          "value": 6
+        },
+        {
+          "name": "BiteHookAction",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "MissionGraph.pk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "CannotAccess",
+          "value": 0
+        },
+        {
+          "name": "CanAccept",
+          "value": 1
+        },
+        {
+          "name": "Progressing",
+          "value": 2
+        },
+        {
+          "name": "Finished",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "IsoTools.IsoObject.pr",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Mode2d",
+          "value": 0
+        },
+        {
+          "name": "Mode3d",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "IsoGrid.qv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "AllMap",
+          "value": 0
+        },
+        {
+          "name": "Area",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "IsoGrid.qz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Edit",
+          "value": 1
+        },
+        {
+          "name": "Weapon",
+          "value": 2
+        },
+        {
+          "name": "Forbid",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SilentOrbit.ProtocolBuffers.rg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Varint",
+          "value": 0
+        },
+        {
+          "name": "Fixed64",
+          "value": 1
+        },
+        {
+          "name": "LengthDelimited",
+          "value": 2
+        },
+        {
+          "name": "Fixed32",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.rp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Money",
+          "value": 901
+        },
+        {
+          "name": "Precipitate",
+          "value": 902
+        }
+      ]
+    },
+    {
+      "name": "Piper.rq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Add",
+          "value": 0
+        },
+        {
+          "name": "PercentAdd",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.rr",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "ShowWarning",
+          "value": 1
+        },
+        {
+          "name": "PlayerMapMarkTip",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.rv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NormalBubby",
+          "value": 0
+        },
+        {
+          "name": "OutOfStock",
+          "value": 1
+        },
+        {
+          "name": "TooExpensive",
+          "value": 2
+        },
+        {
+          "name": "LeaveShop",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.sa",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Base",
+          "value": 0
+        },
+        {
+          "name": "Main",
+          "value": 1
+        },
+        {
+          "name": "Plot",
+          "value": 2
+        },
+        {
+          "name": "Building",
+          "value": 3
+        },
+        {
+          "name": "Fishing",
+          "value": 4
+        },
+        {
+          "name": "Func",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.sb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Base",
+          "value": 1000
+        },
+        {
+          "name": "Func",
+          "value": 0
+        },
+        {
+          "name": "Main",
+          "value": 100
+        },
+        {
+          "name": "Building",
+          "value": 200
+        },
+        {
+          "name": "Plot",
+          "value": 300
+        },
+        {
+          "name": "Fishing",
+          "value": 400
+        }
+      ]
+    },
+    {
+      "name": "Piper.sc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "LeftMouse",
+          "value": 1
+        },
+        {
+          "name": "ExitBuildingMode",
+          "value": 2
+        },
+        {
+          "name": "RotateBuilding",
+          "value": 3
+        },
+        {
+          "name": "CancelPreviewBuilding",
+          "value": 4
+        },
+        {
+          "name": "OpenSetting",
+          "value": 5
+        },
+        {
+          "name": "Quit",
+          "value": 6
+        },
+        {
+          "name": "UISubmit",
+          "value": 7
+        },
+        {
+          "name": "HideBuildingInBuildingMode",
+          "value": 8
+        },
+        {
+          "name": "InteractiveBuilding",
+          "value": 9
+        },
+        {
+          "name": "SpeedUpPlot",
+          "value": 10
+        },
+        {
+          "name": "PlayNextDialogue",
+          "value": 11
+        },
+        {
+          "name": "Fishing_S",
+          "value": 12
+        },
+        {
+          "name": "Fishing_A",
+          "value": 13
+        },
+        {
+          "name": "Fishing_D",
+          "value": 14
+        },
+        {
+          "name": "Fishing_W",
+          "value": 15
+        },
+        {
+          "name": "Fishing_Space",
+          "value": 16
+        },
+        {
+          "name": "Fishing_QuitSecond",
+          "value": 17
+        },
+        {
+          "name": "Fishing_Quit",
+          "value": 18
+        },
+        {
+          "name": "QuitSecond",
+          "value": 19
+        },
+        {
+          "name": "Seed",
+          "value": 20
+        },
+        {
+          "name": "Water",
+          "value": 21
+        },
+        {
+          "name": "Harvest",
+          "value": 22
+        },
+        {
+          "name": "RemoveClutter",
+          "value": 23
+        },
+        {
+          "name": "Dig",
+          "value": 24
+        },
+        {
+          "name": "RemoveCrop",
+          "value": 25
+        },
+        {
+          "name": "Fertilizer",
+          "value": 26
+        },
+        {
+          "name": "Build",
+          "value": 27
+        },
+        {
+          "name": "Alchemy",
+          "value": 28
+        },
+        {
+          "name": "Relic",
+          "value": 29
+        },
+        {
+          "name": "StaffBag",
+          "value": 30
+        },
+        {
+          "name": "StaffManage",
+          "value": 31
+        },
+        {
+          "name": "Gene",
+          "value": 32
+        },
+        {
+          "name": "Social",
+          "value": 33
+        },
+        {
+          "name": "Store",
+          "value": 34
+        },
+        {
+          "name": "Order",
+          "value": 35
+        },
+        {
+          "name": "Map",
+          "value": 36
+        },
+        {
+          "name": "NPCShop",
+          "value": 37
+        },
+        {
+          "name": "TimePause",
+          "value": 38
+        },
+        {
+          "name": "SwitchTime",
+          "value": 39
+        },
+        {
+          "name": "AlchemyTalent",
+          "value": 40
+        },
+        {
+          "name": "TimeSkip",
+          "value": 41
+        }
+      ]
+    },
+    {
+      "name": "Piper.sd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Start",
+          "value": 1
+        },
+        {
+          "name": "Perform",
+          "value": 2
+        },
+        {
+          "name": "Cancel",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.sf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "GameInit",
+          "value": 0
+        },
+        {
+          "name": "StartPage",
+          "value": 1
+        },
+        {
+          "name": "Preloading",
+          "value": 2
+        },
+        {
+          "name": "Gaming",
+          "value": 3
+        },
+        {
+          "name": "ClearData",
+          "value": 4
+        },
+        {
+          "name": "LoadGameData",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.su",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "PAUSE",
+          "value": 0
+        },
+        {
+          "name": "NORMAL",
+          "value": 1
+        },
+        {
+          "name": "DOUBLESPEED",
+          "value": 2
+        },
+        {
+          "name": "HIGHSPEED",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.sw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "COMMONTIP",
+          "value": 0
+        },
+        {
+          "name": "GETITEM",
+          "value": 1
+        },
+        {
+          "name": "SELLING",
+          "value": 2
+        },
+        {
+          "name": "GETBUILDING",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.tg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Birth",
+          "value": 0
+        },
+        {
+          "name": "Idle",
+          "value": 1
+        },
+        {
+          "name": "Interactive",
+          "value": 2
+        },
+        {
+          "name": "Walk",
+          "value": 3
+        },
+        {
+          "name": "MoveToWork",
+          "value": 4
+        },
+        {
+          "name": "Working",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.th",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Brith",
+          "value": 0
+        },
+        {
+          "name": "Idle",
+          "value": 1
+        },
+        {
+          "name": "Walk",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.tj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Birth",
+          "value": 0
+        },
+        {
+          "name": "WanderOnStreet",
+          "value": 1
+        },
+        {
+          "name": "IdleOnStreet",
+          "value": 2
+        },
+        {
+          "name": "WanderInShop",
+          "value": 3
+        },
+        {
+          "name": "IdleInShop",
+          "value": 4
+        },
+        {
+          "name": "StreetToShop",
+          "value": 5
+        },
+        {
+          "name": "ShopToStreet",
+          "value": 6
+        },
+        {
+          "name": "Shopping",
+          "value": 7
+        },
+        {
+          "name": "LoadData",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.tk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "BuyNothing",
+          "value": 0
+        },
+        {
+          "name": "BuyPartNeed",
+          "value": 1
+        },
+        {
+          "name": "BuyAllNeed",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.tn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Spawn",
+          "value": 0
+        },
+        {
+          "name": "Idle",
+          "value": 1
+        },
+        {
+          "name": "Patrol",
+          "value": 2
+        },
+        {
+          "name": "MovingToWork",
+          "value": 3
+        },
+        {
+          "name": "Working",
+          "value": 4
+        },
+        {
+          "name": "LoadingData",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Unit.tq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "IDLE",
+          "value": 0
+        },
+        {
+          "name": "WALK",
+          "value": 1
+        },
+        {
+          "name": "SHOPPING",
+          "value": 2
+        },
+        {
+          "name": "WORK",
+          "value": 3
+        },
+        {
+          "name": "STAND1",
+          "value": 4
+        },
+        {
+          "name": "STAND2",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Trigger.yx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Artifact",
+          "value": 0
+        },
+        {
+          "name": "StaffSkill",
+          "value": 1
+        },
+        {
+          "name": "AlchemyTalent",
+          "value": 2
+        },
+        {
+          "name": "Buff",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Trigger.zj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Field",
+          "value": 1
+        },
+        {
+          "name": "Crop",
+          "value": 2
+        },
+        {
+          "name": "Staff",
+          "value": 3
+        },
+        {
+          "name": "Equipment",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.TimeSkip.zl",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Fishing",
+          "value": 0
+        },
+        {
+          "name": "Carding",
+          "value": 1
+        },
+        {
+          "name": "Outdoor",
+          "value": 2
+        },
+        {
+          "name": "Meditation",
+          "value": 3
+        },
+        {
+          "name": "DoNothing",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bai",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Priority",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.baj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Idle",
+          "value": 0
+        },
+        {
+          "name": "Enqueued",
+          "value": 1
+        },
+        {
+          "name": "Completed",
+          "value": 2
+        },
+        {
+          "name": "Skipped",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bak",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Idle",
+          "value": 0
+        },
+        {
+          "name": "Running",
+          "value": 1
+        },
+        {
+          "name": "Paused",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bbc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "UPLOAM",
+          "value": 200
+        },
+        {
+          "name": "LOAM",
+          "value": 201
+        },
+        {
+          "name": "WATER",
+          "value": 202
+        },
+        {
+          "name": "CLAY",
+          "value": 203
+        },
+        {
+          "name": "SANDY",
+          "value": 204
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bbm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Insane",
+          "value": 1
+        },
+        {
+          "name": "Resting",
+          "value": 2
+        },
+        {
+          "name": "Working",
+          "value": 3
+        },
+        {
+          "name": "Idle",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bbn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Natural",
+          "value": 0
+        },
+        {
+          "name": "Skill",
+          "value": 1
+        },
+        {
+          "name": "Item",
+          "value": 2
+        },
+        {
+          "name": "Other",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bbo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "OnWork",
+          "value": 0
+        },
+        {
+          "name": "OnShopSale",
+          "value": 1
+        },
+        {
+          "name": "OnFarmHarvest",
+          "value": 2
+        },
+        {
+          "name": "OnTimePass",
+          "value": 3
+        },
+        {
+          "name": "OnRest",
+          "value": 4
+        },
+        {
+          "name": "OnSkillUse",
+          "value": 5
+        },
+        {
+          "name": "OnSanityLow",
+          "value": 6
+        },
+        {
+          "name": "OnSanityFull",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.bbp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Shop",
+          "value": 1
+        },
+        {
+          "name": "Farm",
+          "value": 2
+        },
+        {
+          "name": "Product",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.UI.bcr.bcp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "WORKING",
+          "value": 0
+        },
+        {
+          "name": "REST",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.UI.bcv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Locked",
+          "value": 0
+        },
+        {
+          "name": "Vacancies",
+          "value": 1
+        },
+        {
+          "name": "Working",
+          "value": 2
+        },
+        {
+          "name": "SanLoss",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Staff.UI.bcz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "HasStaff",
+          "value": 0
+        },
+        {
+          "name": "Empty",
+          "value": 1
+        },
+        {
+          "name": "Locked",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Shop.bdt",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "AlchemyMaterial",
+          "value": 1
+        },
+        {
+          "name": "AlchemyItem",
+          "value": 2
+        },
+        {
+          "name": "Treasure",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Schedule.bel",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "BeginPhaseI",
+          "value": 0
+        },
+        {
+          "name": "BeginPhaseII",
+          "value": 1
+        },
+        {
+          "name": "PrimaryPhase",
+          "value": 2
+        },
+        {
+          "name": "ShopClosing",
+          "value": 3
+        },
+        {
+          "name": "FinishNightMission",
+          "value": 4
+        },
+        {
+          "name": "EndPhaseII",
+          "value": 5
+        },
+        {
+          "name": "SettlementPhase",
+          "value": 6
+        },
+        {
+          "name": "Backtracking",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Piper.Product.beq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Waiting",
+          "value": 1
+        },
+        {
+          "name": "Processing",
+          "value": 2
+        },
+        {
+          "name": "Completed",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.NPCShop.bfh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Item",
+          "value": 0
+        },
+        {
+          "name": "Food",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.NPCShop.bfo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Item",
+          "value": 0
+        },
+        {
+          "name": "Sell",
+          "value": 1
+        },
+        {
+          "name": "Escrow",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Mission.bfx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "WaitStart",
+          "value": 0
+        },
+        {
+          "name": "Running",
+          "value": 1
+        },
+        {
+          "name": "Paused",
+          "value": 2
+        },
+        {
+          "name": "Completed",
+          "value": 3
+        },
+        {
+          "name": "WaitSuccessEvent",
+          "value": 4
+        },
+        {
+          "name": "WaitFailEvent",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Map.bhm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Street",
+          "value": 300
+        },
+        {
+          "name": "Shop",
+          "value": 301
+        },
+        {
+          "name": "Farm",
+          "value": 302
+        },
+        {
+          "name": "FarmAbove",
+          "value": 303
+        },
+        {
+          "name": "SunTavern",
+          "value": 304
+        },
+        {
+          "name": "Square",
+          "value": 305
+        },
+        {
+          "name": "BearHome",
+          "value": 306
+        },
+        {
+          "name": "BoneForest",
+          "value": 307
+        },
+        {
+          "name": "FlowerForest",
+          "value": 308
+        },
+        {
+          "name": "Lake",
+          "value": 309
+        },
+        {
+          "name": "Grand",
+          "value": 310
+        },
+        {
+          "name": "Mine",
+          "value": 311
+        },
+        {
+          "name": "Residential",
+          "value": 312
+        }
+      ]
+    },
+    {
+      "name": "Piper.Map.bij",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "DespawnParticle",
+          "value": 0
+        },
+        {
+          "name": "Despawn",
+          "value": 1
+        },
+        {
+          "name": "Spawn",
+          "value": 2
+        },
+        {
+          "name": "SpawnParticle",
+          "value": 3
+        },
+        {
+          "name": "End",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Map.biq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "BuildingRegion",
+          "value": 1
+        },
+        {
+          "name": "CanBuild",
+          "value": 2
+        },
+        {
+          "name": "Forbidden",
+          "value": 3
+        },
+        {
+          "name": "EffectRange",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Map.Env.biz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "HandBookBlack",
+          "value": 1
+        },
+        {
+          "name": "HandBookWhite",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Hybrid.bkw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "HybridMachine",
+          "value": 0
+        },
+        {
+          "name": "Crop",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Hybrid.bli.blb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Seed",
+          "value": 1
+        },
+        {
+          "name": "AlchemyItems",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.GameStats.blk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Min",
+          "value": 0
+        },
+        {
+          "name": "HandHands",
+          "value": 1
+        },
+        {
+          "name": "LoudLouds",
+          "value": 2
+        },
+        {
+          "name": "Max",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.FieldOpt.bln",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Tool",
+          "value": 1
+        },
+        {
+          "name": "Seed",
+          "value": 2
+        },
+        {
+          "name": "Water",
+          "value": 3
+        },
+        {
+          "name": "Remove",
+          "value": 4
+        },
+        {
+          "name": "Harvest",
+          "value": 5
+        },
+        {
+          "name": "Dig",
+          "value": 6
+        },
+        {
+          "name": "RemoveClutter",
+          "value": 7
+        },
+        {
+          "name": "BuildGround",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "Piper.FieldOpt.blp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Watering",
+          "value": 1
+        },
+        {
+          "name": "Fertilizer",
+          "value": 2
+        },
+        {
+          "name": "Seed",
+          "value": 3
+        },
+        {
+          "name": "Harvest",
+          "value": 4
+        },
+        {
+          "name": "Remove",
+          "value": 5
+        },
+        {
+          "name": "CleanClutter",
+          "value": 6
+        },
+        {
+          "name": "DigMine",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Piper.Favor.bmg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NAINAI",
+          "value": 0
+        },
+        {
+          "name": "XIXI",
+          "value": 1
+        },
+        {
+          "name": "JIMOLI",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Favor.bmi",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "CannotTrigger",
+          "value": 0
+        },
+        {
+          "name": "WaitTrigger",
+          "value": 1
+        },
+        {
+          "name": "Skipped",
+          "value": 2
+        },
+        {
+          "name": "Finished",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Farm.bmw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "CropSeed",
+          "value": 1
+        },
+        {
+          "name": "AlchemySeed",
+          "value": 2
+        },
+        {
+          "name": "HybridSeed",
+          "value": 3
+        },
+        {
+          "name": "StaffSeed",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Farm.bmx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "OnDayBegin",
+          "value": 0
+        },
+        {
+          "name": "OnCropPlanted",
+          "value": 1
+        },
+        {
+          "name": "OnCropGrowth",
+          "value": 2
+        },
+        {
+          "name": "OnCropHarvest",
+          "value": 3
+        },
+        {
+          "name": "OnCropRemove",
+          "value": 4
+        },
+        {
+          "name": "OnWaterCheck",
+          "value": 5
+        },
+        {
+          "name": "OnMutationCheck",
+          "value": 6
+        },
+        {
+          "name": "OnInfectCheck",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Piper.BuildingBlueprint.bov",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Reversal",
+          "value": 1
+        },
+        {
+          "name": "Workshop",
+          "value": 2
+        },
+        {
+          "name": "Farm",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.BuildingBlueprint.bow",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Selecting",
+          "value": 1
+        },
+        {
+          "name": "Confirm",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.BuildingBlueprint.box",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Copying",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Buff.bpn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Crop",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Buff.bpo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "InActive",
+          "value": 1
+        },
+        {
+          "name": "Active",
+          "value": 2
+        },
+        {
+          "name": "Finish",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.bqt",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "ANTE",
+          "value": 0
+        },
+        {
+          "name": "DEALERPHASE",
+          "value": 1
+        },
+        {
+          "name": "DEALERSETTLEMENT",
+          "value": 2
+        },
+        {
+          "name": "PLAYERPHASE",
+          "value": 3
+        },
+        {
+          "name": "PLAYERSETTLEMENT",
+          "value": 4
+        },
+        {
+          "name": "GENERATERESULT",
+          "value": 5
+        },
+        {
+          "name": "GAMESETTLEMENT",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.bqv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Gaming",
+          "value": 0
+        },
+        {
+          "name": "BothExceedsTwentyOne",
+          "value": 1
+        },
+        {
+          "name": "Draw",
+          "value": 2
+        },
+        {
+          "name": "PlayerWin",
+          "value": 3
+        },
+        {
+          "name": "PlayerLose",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.bqx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "TwentyOne",
+          "value": 1
+        },
+        {
+          "name": "StopDraw",
+          "value": 2
+        },
+        {
+          "name": "ExceedsTwentyOne",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.bqz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Running",
+          "value": 1
+        },
+        {
+          "name": "Finished",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.brg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Draw",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "Piper.BlackJack.brp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "PlayerChip",
+          "value": 0
+        },
+        {
+          "name": "DealerChip",
+          "value": 1
+        },
+        {
+          "name": "PlayerPoint",
+          "value": 2
+        },
+        {
+          "name": "DealerPoint",
+          "value": 3
+        },
+        {
+          "name": "PrizePool",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.brs",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Hide",
+          "value": 1
+        },
+        {
+          "name": "SellOut",
+          "value": 2
+        },
+        {
+          "name": "OutOfReach",
+          "value": 3
+        },
+        {
+          "name": "Remove",
+          "value": 4
+        },
+        {
+          "name": "LackSeed",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.bry",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "BuildingMode",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.brz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "BuildNew",
+          "value": 1
+        },
+        {
+          "name": "Transition",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.bsl",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "IsBuilding",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.bsq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "MutationProbability",
+          "value": 1
+        },
+        {
+          "name": "PositiveMutationProbability",
+          "value": 2
+        },
+        {
+          "name": "NegativeMutationProbability",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Building.bta",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Processing",
+          "value": 1
+        },
+        {
+          "name": "Complete",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bun.bum",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Default",
+          "value": 0
+        },
+        {
+          "name": "MoneyDes",
+          "value": 1
+        },
+        {
+          "name": "MoneyAsc",
+          "value": 2
+        },
+        {
+          "name": "OwnNumDes",
+          "value": 3
+        },
+        {
+          "name": "OwnNumAsc",
+          "value": 4
+        },
+        {
+          "name": "AlchemyValueDesc",
+          "value": 5
+        },
+        {
+          "name": "AlchemyValueAsc",
+          "value": 6
+        },
+        {
+          "name": "RarityDesc",
+          "value": 7
+        },
+        {
+          "name": "RarityAsc",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.buw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Seed",
+          "value": 1
+        },
+        {
+          "name": "Farm",
+          "value": 2
+        },
+        {
+          "name": "Workshop",
+          "value": 3
+        },
+        {
+          "name": "Fertilizer",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bux",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "All",
+          "value": 100
+        },
+        {
+          "name": "SeedAll",
+          "value": 110
+        },
+        {
+          "name": "CropSeed",
+          "value": 120
+        },
+        {
+          "name": "AlchemySeed",
+          "value": 130
+        },
+        {
+          "name": "HybridSeed",
+          "value": 140
+        },
+        {
+          "name": "StaffSeed",
+          "value": 150
+        },
+        {
+          "name": "FarmAll",
+          "value": 210
+        },
+        {
+          "name": "Field",
+          "value": 220
+        },
+        {
+          "name": "Equip",
+          "value": 230
+        },
+        {
+          "name": "Tool",
+          "value": 240
+        },
+        {
+          "name": "DecorationFarm",
+          "value": 250
+        },
+        {
+          "name": "BlueprintFarm",
+          "value": 260
+        },
+        {
+          "name": "WorkshopAll",
+          "value": 310
+        },
+        {
+          "name": "Shelf",
+          "value": 320
+        },
+        {
+          "name": "MaterialShelf",
+          "value": 330
+        },
+        {
+          "name": "AlchemyShelf",
+          "value": 340
+        },
+        {
+          "name": "TreasureShelf",
+          "value": 350
+        },
+        {
+          "name": "DecorationShop",
+          "value": 360
+        },
+        {
+          "name": "BlueprintShop",
+          "value": 370
+        },
+        {
+          "name": "ShopTheme",
+          "value": 380
+        },
+        {
+          "name": "FertilizerAll",
+          "value": 410
+        },
+        {
+          "name": "Fertilizer",
+          "value": 420
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Goods",
+          "value": 0
+        },
+        {
+          "name": "Seed",
+          "value": 1
+        },
+        {
+          "name": "Fertilizer",
+          "value": 2
+        },
+        {
+          "name": "Important",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Field",
+          "value": 0
+        },
+        {
+          "name": "PlantTools",
+          "value": 1
+        },
+        {
+          "name": "AlchemyTools",
+          "value": 2
+        },
+        {
+          "name": "Decorations",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvi",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "GoodsShelf",
+          "value": 0
+        },
+        {
+          "name": "Decorations",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Crop",
+          "value": 0
+        },
+        {
+          "name": "ProcessGoods",
+          "value": 1
+        },
+        {
+          "name": "AlchemyMaterial",
+          "value": 2
+        },
+        {
+          "name": "AlchemyGoods",
+          "value": 3
+        },
+        {
+          "name": "Rare",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "CropSeed",
+          "value": 0
+        },
+        {
+          "name": "AlchemySeed",
+          "value": 1
+        },
+        {
+          "name": "HybridizationSeed",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvl",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Floor",
+          "value": 0
+        },
+        {
+          "name": "Building",
+          "value": 1
+        },
+        {
+          "name": "Decoration",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Food",
+          "value": 0
+        },
+        {
+          "name": "Material",
+          "value": 1
+        },
+        {
+          "name": "Rare",
+          "value": 2
+        },
+        {
+          "name": "Marvel",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Bag.bvn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Floor",
+          "value": 0
+        },
+        {
+          "name": "Building",
+          "value": 1
+        },
+        {
+          "name": "Decoration",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Artifact.bwm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NegativeGenePriority",
+          "value": 0
+        },
+        {
+          "name": "AlchemyPrecipitateGainPercent",
+          "value": 1
+        },
+        {
+          "name": "ShopSingleTypePriceBonus",
+          "value": 2
+        },
+        {
+          "name": "CustomerTipPercent",
+          "value": 3
+        },
+        {
+          "name": "OrderQuantityMultiplier",
+          "value": 4
+        },
+        {
+          "name": "OrderCompleteExtraFavorability",
+          "value": 5
+        },
+        {
+          "name": "FishDizzinessTimeChange",
+          "value": 6
+        },
+        {
+          "name": "MatureContinuousMutation",
+          "value": 7
+        },
+        {
+          "name": "WhirlpoolDurabilityRestoreEnabled",
+          "value": 8
+        },
+        {
+          "name": "UnlockShopHighRarityItemLibraryEnabled",
+          "value": 9
+        },
+        {
+          "name": "OpenShopAnytimeEnabled",
+          "value": 10
+        },
+        {
+          "name": "FishKingAppearsEnabled",
+          "value": 11
+        },
+        {
+          "name": "FreeAlchemyEtherElement",
+          "value": 12
+        },
+        {
+          "name": "AllFactionCountIncrease",
+          "value": 13
+        },
+        {
+          "name": "GreenGodEffectEnabled",
+          "value": 14
+        },
+        {
+          "name": "AllGoodsAsOneCategoryEnabled",
+          "value": 15
+        },
+        {
+          "name": "FishingTreasureBarNoDecreaseEnabled",
+          "value": 16
+        },
+        {
+          "name": "Max",
+          "value": 17
+        }
+      ]
+    },
+    {
+      "name": "Piper.Artifact.bxx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "CanRefreshNum",
+          "value": 1
+        },
+        {
+          "name": "ChangeRelicSelectNum",
+          "value": 2
+        },
+        {
+          "name": "WaterEffectExtraTime",
+          "value": 3
+        },
+        {
+          "name": "ChangeDigHpPercent",
+          "value": 4
+        },
+        {
+          "name": "ChangeGuestTakeMoneyPercent",
+          "value": 5
+        },
+        {
+          "name": "ClutterSpeedPercent",
+          "value": 6
+        },
+        {
+          "name": "RelicExpChangePercent",
+          "value": 7
+        },
+        {
+          "name": "ChangeGuestCDPercent",
+          "value": 8
+        },
+        {
+          "name": "ChangeGoodShelfCapPercent",
+          "value": 9
+        },
+        {
+          "name": "HarvestTimeExtraTime",
+          "value": 11
+        },
+        {
+          "name": "Max",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "name": "Piper.Artifact.byb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Self",
+          "value": 1
+        },
+        {
+          "name": "TogetherWorkers",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Artifact.byt",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "StaffMovementSpeed",
+          "value": 1000
+        },
+        {
+          "name": "StaffWorkTimeRestriction",
+          "value": 1001
+        },
+        {
+          "name": "StaffSanCostAbsoluteChange",
+          "value": 1002
+        },
+        {
+          "name": "EquipmentReturnProbability",
+          "value": 2000
+        },
+        {
+          "name": "EquipmentDirectCompleteProbability",
+          "value": 2002
+        },
+        {
+          "name": "EquipmentAccelerationRate",
+          "value": 2003
+        },
+        {
+          "name": "EquipmentSanRecoveryRate",
+          "value": 2004
+        },
+        {
+          "name": "EquipmentSpeedRate",
+          "value": 2005
+        },
+        {
+          "name": "FieldOutputMultiplier",
+          "value": 3000
+        },
+        {
+          "name": "MutationProbability",
+          "value": 3001
+        },
+        {
+          "name": "PositiveMutationProbability",
+          "value": 3002
+        },
+        {
+          "name": "NegativeMutationProbability",
+          "value": 3003
+        },
+        {
+          "name": "FieldAutoWatering",
+          "value": 3010
+        },
+        {
+          "name": "FieldNoNeedWater",
+          "value": 3011
+        },
+        {
+          "name": "FieldCanNotRemoveCrop",
+          "value": 3012
+        },
+        {
+          "name": "FieldPlantEnterGrowthStage",
+          "value": 3013
+        },
+        {
+          "name": "FieldGrowUpEnterHarvestStage",
+          "value": 3014
+        },
+        {
+          "name": "FieldForceOverrideGene",
+          "value": 3015
+        },
+        {
+          "name": "FieldInfectOtherCrop",
+          "value": 3016
+        },
+        {
+          "name": "FieldNoWaterOnDayBegin",
+          "value": 3017
+        },
+        {
+          "name": "FieldAbsoluteMutation",
+          "value": 3018
+        },
+        {
+          "name": "FieldStopGrowUp",
+          "value": 3019
+        },
+        {
+          "name": "FieldHarvestMinPercent",
+          "value": 3020
+        },
+        {
+          "name": "FieldHarvestMaxPercent",
+          "value": 3021
+        },
+        {
+          "name": "FieldHarvestMinPercentModify",
+          "value": 3022
+        },
+        {
+          "name": "FieldHarvestMaxPercentModify",
+          "value": 3023
+        },
+        {
+          "name": "FieldDropSeedProbability",
+          "value": 3024
+        },
+        {
+          "name": "StoreMoneyRevenue",
+          "value": 4000
+        },
+        {
+          "name": "OrderMoneyRevenue",
+          "value": 4001
+        },
+        {
+          "name": "ShopSingleTypePriceBonus",
+          "value": 6200
+        },
+        {
+          "name": "ItemTypeSellPricePercent",
+          "value": 6201
+        },
+        {
+          "name": "CustomerTipPercent",
+          "value": 6300
+        },
+        {
+          "name": "OrderInstantRefresh",
+          "value": 6400
+        },
+        {
+          "name": "OrderQuantityMultiplier",
+          "value": 6401
+        },
+        {
+          "name": "OrderCompleteExtraFavorability",
+          "value": 6402
+        },
+        {
+          "name": "FertilizerDuration",
+          "value": 5000
+        },
+        {
+          "name": "SpendAllMoneyProbability",
+          "value": 6000
+        },
+        {
+          "name": "ReducedQuantityReceivedProbability",
+          "value": 6002
+        },
+        {
+          "name": "FishStaminaPercent",
+          "value": 6003
+        },
+        {
+          "name": "WhirlpoolRangePercent",
+          "value": 6004
+        },
+        {
+          "name": "UltimateAlchemySuccessRate",
+          "value": 6100
+        },
+        {
+          "name": "AlchemyExpGainPercent",
+          "value": 6101
+        },
+        {
+          "name": "ShopItemPricePercent",
+          "value": 6102
+        },
+        {
+          "name": "ShopSellPricePercent",
+          "value": 6103
+        },
+        {
+          "name": "AlchemySedimentConsumePercent",
+          "value": 6104
+        },
+        {
+          "name": "InsufficientReplenishmentComplex",
+          "value": 7000
+        },
+        {
+          "name": "FarmlandOutputMultiplierComplex",
+          "value": 7001
+        },
+        {
+          "name": "EquipmentOutputMultiplierComplex",
+          "value": 7002
+        },
+        {
+          "name": "SellItemMultiPriceProbabilityComplex",
+          "value": 7003
+        },
+        {
+          "name": "NPCEscrowApportionExPercent",
+          "value": 8000
+        },
+        {
+          "name": "NPCEscrowExItemNum",
+          "value": 8001
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.caa",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "White",
+          "value": 0
+        },
+        {
+          "name": "Green",
+          "value": 1
+        },
+        {
+          "name": "Blue",
+          "value": 2
+        },
+        {
+          "name": "Purple",
+          "value": 3
+        },
+        {
+          "name": "Golden",
+          "value": 4
+        },
+        {
+          "name": "Particular",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cac",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Freedom",
+          "value": 0
+        },
+        {
+          "name": "Fertilizer",
+          "value": 1
+        },
+        {
+          "name": "Seed",
+          "value": 2
+        },
+        {
+          "name": "StaffSkill",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cad",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Perfect",
+          "value": 0
+        },
+        {
+          "name": "MultiTwo",
+          "value": 1
+        },
+        {
+          "name": "MultiThree",
+          "value": 2
+        },
+        {
+          "name": "SingleElement",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.caj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NoMoney",
+          "value": 0
+        },
+        {
+          "name": "NoTalentPoint",
+          "value": 1
+        },
+        {
+          "name": "NoMaterial",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cal",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Empty",
+          "value": 0
+        },
+        {
+          "name": "HasItem",
+          "value": 1
+        },
+        {
+          "name": "Locked",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cbg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "MoveToCenter",
+          "value": 1
+        },
+        {
+          "name": "LoopSlot",
+          "value": 2
+        },
+        {
+          "name": "RarityShow",
+          "value": 3
+        },
+        {
+          "name": "End",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cbr.cbq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FarmSeed",
+          "value": 0
+        },
+        {
+          "name": "AlchemySeed",
+          "value": 1
+        },
+        {
+          "name": "HybridSeed",
+          "value": 2
+        },
+        {
+          "name": "StaffSeed",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Piper.Alchemy.cca",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FreeAlchemy",
+          "value": 0
+        },
+        {
+          "name": "SeedAlchemy",
+          "value": 1
+        },
+        {
+          "name": "StaffSkillAlchemy",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.ccw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Clip",
+          "value": 0
+        },
+        {
+          "name": "Fade",
+          "value": 1
+        },
+        {
+          "name": "ClipFade",
+          "value": 2
+        },
+        {
+          "name": "SlideLeft",
+          "value": 3
+        },
+        {
+          "name": "SlideRight",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.ccx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Str",
+          "value": 0
+        },
+        {
+          "name": "Picture",
+          "value": 1
+        },
+        {
+          "name": "Count",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.cde",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Clip",
+          "value": 0
+        },
+        {
+          "name": "Fade",
+          "value": 1
+        },
+        {
+          "name": "ClipFade",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.cdv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "WaitContinureDrag",
+          "value": 1
+        },
+        {
+          "name": "WaitRelease",
+          "value": 2
+        },
+        {
+          "name": "WaitLoad",
+          "value": 3
+        },
+        {
+          "name": "Loaded",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.ceb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NoTargetSet",
+          "value": 0
+        },
+        {
+          "name": "TargetHasSet",
+          "value": 1
+        },
+        {
+          "name": "SnapMoving",
+          "value": 2
+        },
+        {
+          "name": "SnapMoveFinish",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.cec",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "LeftBottom",
+          "value": 0
+        },
+        {
+          "name": "LeftTop",
+          "value": 1
+        },
+        {
+          "name": "RightTop",
+          "value": 2
+        },
+        {
+          "name": "RightBottom",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.ced",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "TopToBottom",
+          "value": 0
+        },
+        {
+          "name": "BottomToTop",
+          "value": 1
+        },
+        {
+          "name": "LeftToRight",
+          "value": 2
+        },
+        {
+          "name": "RightToLeft",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.cee",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "TopLeftToBottomRight",
+          "value": 0
+        },
+        {
+          "name": "BottomLeftToTopRight",
+          "value": 1
+        },
+        {
+          "name": "TopRightToBottomLeft",
+          "value": 2
+        },
+        {
+          "name": "BottomRightToTopLeft",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "SuperScrollView.cef",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "ColumnCountFixed",
+          "value": 0
+        },
+        {
+          "name": "RowCountFixed",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.SwitchTransition.cfk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "fadein",
+          "value": 0
+        },
+        {
+          "name": "keepFade",
+          "value": 1
+        },
+        {
+          "name": "fadeout",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.TimeTransition.cfl",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FadeToBlack",
+          "value": 0
+        },
+        {
+          "name": "SetupScene",
+          "value": 1
+        },
+        {
+          "name": "FadeToClear",
+          "value": 2
+        },
+        {
+          "name": "ShowStartYear",
+          "value": 3
+        },
+        {
+          "name": "RollYear",
+          "value": 4
+        },
+        {
+          "name": "ShowLocation",
+          "value": 5
+        },
+        {
+          "name": "FadeToBlack2",
+          "value": 6
+        },
+        {
+          "name": "SwitchBG",
+          "value": 7
+        },
+        {
+          "name": "FadeToClear2",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Entry",
+          "value": 0
+        },
+        {
+          "name": "WaitSeconds",
+          "value": 1
+        },
+        {
+          "name": "LoadSfx",
+          "value": 2
+        },
+        {
+          "name": "Parallel",
+          "value": 3
+        },
+        {
+          "name": "ParallelComplete",
+          "value": 4
+        },
+        {
+          "name": "Selector",
+          "value": 5
+        },
+        {
+          "name": "Sequence",
+          "value": 6
+        },
+        {
+          "name": "OptionalTask",
+          "value": 7
+        },
+        {
+          "name": "CutScene",
+          "value": 8
+        },
+        {
+          "name": "Audio",
+          "value": 9
+        },
+        {
+          "name": "SequenceImmediately",
+          "value": 10
+        },
+        {
+          "name": "LogAction",
+          "value": 11
+        },
+        {
+          "name": "Live2d",
+          "value": 12
+        },
+        {
+          "name": "Say",
+          "value": 13
+        },
+        {
+          "name": "Menu",
+          "value": 14
+        },
+        {
+          "name": "PlayNext",
+          "value": 15
+        },
+        {
+          "name": "BackGround",
+          "value": 16
+        },
+        {
+          "name": "ScreenMask",
+          "value": 17
+        },
+        {
+          "name": "Barrage",
+          "value": 18
+        },
+        {
+          "name": "ImageEye",
+          "value": 19
+        },
+        {
+          "name": "ImageMouth",
+          "value": 20
+        },
+        {
+          "name": "SetImage",
+          "value": 21
+        },
+        {
+          "name": "FadeScreen",
+          "value": 22
+        },
+        {
+          "name": "ShakeCamera",
+          "value": 23
+        },
+        {
+          "name": "ImgEffect",
+          "value": 24
+        },
+        {
+          "name": "MovePath",
+          "value": 25
+        },
+        {
+          "name": "MoveTo",
+          "value": 26
+        },
+        {
+          "name": "PunchScale",
+          "value": 27
+        },
+        {
+          "name": "ScaleTo",
+          "value": 28
+        },
+        {
+          "name": "ShakePosition",
+          "value": 29
+        },
+        {
+          "name": "OpenWindow",
+          "value": 30
+        },
+        {
+          "name": "PlayAnim",
+          "value": 31
+        },
+        {
+          "name": "ActiveMapTrigger",
+          "value": 32
+        },
+        {
+          "name": "PrivateMessage",
+          "value": 33
+        },
+        {
+          "name": "SetPrivateMessage",
+          "value": 34
+        },
+        {
+          "name": "OptionalPrivateMessage",
+          "value": 35
+        },
+        {
+          "name": "CloseLoaingPage",
+          "value": 36
+        },
+        {
+          "name": "Vibrate",
+          "value": 37
+        },
+        {
+          "name": "PlaySound",
+          "value": 38
+        },
+        {
+          "name": "Answer",
+          "value": 39
+        },
+        {
+          "name": "OptionalAnswer",
+          "value": 40
+        },
+        {
+          "name": "PlayBGM",
+          "value": 41
+        },
+        {
+          "name": "StopTween",
+          "value": 42
+        },
+        {
+          "name": "RotateTo",
+          "value": 43
+        },
+        {
+          "name": "ExOptionalTask",
+          "value": 44
+        },
+        {
+          "name": "WidthHeightTo",
+          "value": 45
+        },
+        {
+          "name": "MoveScreen",
+          "value": 46
+        },
+        {
+          "name": "BranchPoint",
+          "value": 47
+        },
+        {
+          "name": "DisColor",
+          "value": 48
+        },
+        {
+          "name": "CreateUnit",
+          "value": 49
+        },
+        {
+          "name": "DeleteUnit",
+          "value": 50
+        },
+        {
+          "name": "UnitMove",
+          "value": 51
+        },
+        {
+          "name": "UnitAction",
+          "value": 52
+        },
+        {
+          "name": "MovieMode",
+          "value": 53
+        },
+        {
+          "name": "FadeAllUnit",
+          "value": 54
+        },
+        {
+          "name": "CameraSetting",
+          "value": 55
+        },
+        {
+          "name": "CameraMove",
+          "value": 56
+        },
+        {
+          "name": "PlayCutsceneEffect",
+          "value": 57
+        },
+        {
+          "name": "CartoonSet",
+          "value": 58
+        },
+        {
+          "name": "CartoonMoveTo",
+          "value": 59
+        },
+        {
+          "name": "CartoonShake",
+          "value": 60
+        },
+        {
+          "name": "CartoonScaleTo",
+          "value": 61
+        },
+        {
+          "name": "PlayPlot",
+          "value": 62
+        },
+        {
+          "name": "ExecuteEvent",
+          "value": 63
+        },
+        {
+          "name": "ModifyAttribute",
+          "value": 64
+        },
+        {
+          "name": "PlotBranch",
+          "value": 65
+        },
+        {
+          "name": "ShakeBackGround",
+          "value": 66
+        },
+        {
+          "name": "ConditionBranch",
+          "value": 67
+        },
+        {
+          "name": "SwitchTransition",
+          "value": 68
+        },
+        {
+          "name": "CountDown",
+          "value": 69
+        },
+        {
+          "name": "MissionCondition",
+          "value": 70
+        },
+        {
+          "name": "DoMission",
+          "value": 71
+        },
+        {
+          "name": "MissionParallelComplete",
+          "value": 72
+        },
+        {
+          "name": "MissionSequence",
+          "value": 73
+        },
+        {
+          "name": "PlayGIF",
+          "value": 74
+        },
+        {
+          "name": "PlaySpineAnim",
+          "value": 75
+        },
+        {
+          "name": "MissionChain",
+          "value": 76
+        },
+        {
+          "name": "MissionNode",
+          "value": 77
+        },
+        {
+          "name": "WaitForSchedule",
+          "value": 78
+        },
+        {
+          "name": "DoGameAction",
+          "value": 79
+        },
+        {
+          "name": "MoveIn",
+          "value": 80
+        },
+        {
+          "name": "Breath",
+          "value": 81
+        },
+        {
+          "name": "OpenReadingWindow",
+          "value": 82
+        },
+        {
+          "name": "PlayShaderEffect",
+          "value": 83
+        },
+        {
+          "name": "TimeTransition",
+          "value": 84
+        },
+        {
+          "name": "BlackJack",
+          "value": 85
+        },
+        {
+          "name": "SetPrivateImage",
+          "value": 86
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Yes",
+          "value": 0
+        },
+        {
+          "name": "No",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Plot",
+          "value": 0
+        },
+        {
+          "name": "Mission",
+          "value": 1
+        },
+        {
+          "name": "MissionGraph",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cje",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Yellow",
+          "value": 0
+        },
+        {
+          "name": "Blue",
+          "value": 1
+        },
+        {
+          "name": "Purple",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Major",
+          "value": 0
+        },
+        {
+          "name": "Branch",
+          "value": 1
+        },
+        {
+          "name": "NPCTale",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Immediate",
+          "value": 0
+        },
+        {
+          "name": "AfterPlot",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjh",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "open",
+          "value": 0
+        },
+        {
+          "name": "close",
+          "value": 1
+        },
+        {
+          "name": "fadeOut",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cji",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "CharacterA",
+          "value": 0
+        },
+        {
+          "name": "CharacterB",
+          "value": 1
+        },
+        {
+          "name": "CharacterC",
+          "value": 2
+        },
+        {
+          "name": "Background",
+          "value": 3
+        },
+        {
+          "name": "CGImage1",
+          "value": 4
+        },
+        {
+          "name": "CGImage2",
+          "value": 5
+        },
+        {
+          "name": "CGImage3",
+          "value": 6
+        },
+        {
+          "name": "CGImage4",
+          "value": 7
+        },
+        {
+          "name": "CGImage5",
+          "value": 8
+        },
+        {
+          "name": "CGBackground",
+          "value": 9
+        },
+        {
+          "name": "SystemDialog",
+          "value": 10
+        },
+        {
+          "name": "CartoonImage1",
+          "value": 11
+        },
+        {
+          "name": "CartoonImage2",
+          "value": 12
+        },
+        {
+          "name": "CartoonImage3",
+          "value": 13
+        },
+        {
+          "name": "CartoonImage4",
+          "value": 14
+        },
+        {
+          "name": "CartoonImage5",
+          "value": 15
+        },
+        {
+          "name": "CartoonImage6",
+          "value": 16
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Custom",
+          "value": 0
+        },
+        {
+          "name": "AxisY40",
+          "value": 1
+        },
+        {
+          "name": "AxisY20",
+          "value": 2
+        },
+        {
+          "name": "AxisX40",
+          "value": 3
+        },
+        {
+          "name": "AxisX20",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Linear",
+          "value": 0
+        },
+        {
+          "name": "InQuad",
+          "value": 1
+        },
+        {
+          "name": "OutQuad",
+          "value": 2
+        },
+        {
+          "name": "InOutQuad",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjl",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "CodingWindow",
+          "value": 1
+        },
+        {
+          "name": "NamePlayerWindow",
+          "value": 2
+        },
+        {
+          "name": "AikeSnatchWindow",
+          "value": 3
+        },
+        {
+          "name": "ReadingWindow",
+          "value": 4
+        },
+        {
+          "name": "ProgressBarWindow",
+          "value": 5
+        },
+        {
+          "name": "BirthdayWindow",
+          "value": 6
+        },
+        {
+          "name": "HandGameWindow",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjm",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Left",
+          "value": 0
+        },
+        {
+          "name": "Right",
+          "value": 1
+        },
+        {
+          "name": "Close",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NormalAlpha",
+          "value": 0
+        },
+        {
+          "name": "DeepAlpha",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NormalType",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NormalType",
+          "value": 0
+        },
+        {
+          "name": "FavorType",
+          "value": 1
+        },
+        {
+          "name": "TeamType",
+          "value": 2
+        },
+        {
+          "name": "DateType",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "Bomb",
+          "value": 1
+        },
+        {
+          "name": "Mental",
+          "value": 2
+        },
+        {
+          "name": "Date",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjr",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "Date",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjs",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "SystemTip",
+          "value": 1
+        },
+        {
+          "name": "Narration",
+          "value": 2
+        },
+        {
+          "name": "StarChart",
+          "value": 3
+        },
+        {
+          "name": "Signal",
+          "value": 4
+        },
+        {
+          "name": "Date",
+          "value": 5
+        },
+        {
+          "name": "All",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjt",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Normal",
+          "value": 0
+        },
+        {
+          "name": "Happy",
+          "value": 1
+        },
+        {
+          "name": "Serious",
+          "value": 2
+        },
+        {
+          "name": "Awkward",
+          "value": 3
+        },
+        {
+          "name": "Confused",
+          "value": 4
+        },
+        {
+          "name": "Angry",
+          "value": 5
+        },
+        {
+          "name": "Shy",
+          "value": 6
+        },
+        {
+          "name": "Sadness",
+          "value": 7
+        },
+        {
+          "name": "Speechless",
+          "value": 8
+        },
+        {
+          "name": "Blackface",
+          "value": 9
+        },
+        {
+          "name": "Special",
+          "value": 10
+        },
+        {
+          "name": "Special01",
+          "value": 11
+        },
+        {
+          "name": "Special02",
+          "value": 12
+        },
+        {
+          "name": "Special03",
+          "value": 13
+        },
+        {
+          "name": "Special04",
+          "value": 14
+        },
+        {
+          "name": "Special05",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cju",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Default",
+          "value": 0
+        },
+        {
+          "name": "Left",
+          "value": 1
+        },
+        {
+          "name": "Middle",
+          "value": 2
+        },
+        {
+          "name": "Right",
+          "value": 3
+        },
+        {
+          "name": "Custom",
+          "value": 4
+        },
+        {
+          "name": "MoveToLeft",
+          "value": 5
+        },
+        {
+          "name": "MoveToRight",
+          "value": 6
+        },
+        {
+          "name": "MoveToMiddle",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Disabled",
+          "value": 0
+        },
+        {
+          "name": "ClickAnywhere",
+          "value": 1
+        },
+        {
+          "name": "ClickOnDialog",
+          "value": 2
+        },
+        {
+          "name": "ClickOnButton",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Endless",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjy",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "EndByClick",
+          "value": 0
+        },
+        {
+          "name": "EndByTime",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cjz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Directly",
+          "value": 0
+        },
+        {
+          "name": "NavMesh",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cka",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "EndByTime",
+          "value": 0
+        },
+        {
+          "name": "ReachDestination",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.ckb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Mannual",
+          "value": 1
+        },
+        {
+          "name": "Animation",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.ckc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Actor",
+          "value": 0
+        },
+        {
+          "name": "SeaNPC",
+          "value": 1
+        },
+        {
+          "name": "Enemy",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cky",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Inactive",
+          "value": 0
+        },
+        {
+          "name": "Running",
+          "value": 1
+        },
+        {
+          "name": "Success",
+          "value": 2
+        },
+        {
+          "name": "Failure",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cla",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Invalid",
+          "value": 0
+        },
+        {
+          "name": "Words",
+          "value": 1
+        },
+        {
+          "name": "BoldStart",
+          "value": 2
+        },
+        {
+          "name": "BoldEnd",
+          "value": 3
+        },
+        {
+          "name": "ItalicStart",
+          "value": 4
+        },
+        {
+          "name": "ItalicEnd",
+          "value": 5
+        },
+        {
+          "name": "ColorStart",
+          "value": 6
+        },
+        {
+          "name": "ColorEnd",
+          "value": 7
+        },
+        {
+          "name": "SizeStart",
+          "value": 8
+        },
+        {
+          "name": "SizeEnd",
+          "value": 9
+        },
+        {
+          "name": "Wait",
+          "value": 10
+        },
+        {
+          "name": "WaitForInputNoClear",
+          "value": 11
+        },
+        {
+          "name": "WaitForInputAndClear",
+          "value": 12
+        },
+        {
+          "name": "WaitOnPunctuationStart",
+          "value": 13
+        },
+        {
+          "name": "WaitOnPunctuationEnd",
+          "value": 14
+        },
+        {
+          "name": "Clear",
+          "value": 15
+        },
+        {
+          "name": "SpeedStart",
+          "value": 16
+        },
+        {
+          "name": "SpeedEnd",
+          "value": 17
+        },
+        {
+          "name": "Exit",
+          "value": 18
+        },
+        {
+          "name": "Message",
+          "value": 19
+        },
+        {
+          "name": "VerticalPunch",
+          "value": 20
+        },
+        {
+          "name": "HorizontalPunch",
+          "value": 21
+        },
+        {
+          "name": "Punch",
+          "value": 22
+        },
+        {
+          "name": "Flash",
+          "value": 23
+        },
+        {
+          "name": "Audio",
+          "value": 24
+        },
+        {
+          "name": "AudioLoop",
+          "value": 25
+        },
+        {
+          "name": "AudioPause",
+          "value": 26
+        },
+        {
+          "name": "AudioStop",
+          "value": 27
+        },
+        {
+          "name": "WaitForVoiceOver",
+          "value": 28
+        },
+        {
+          "name": "SendSayEnd",
+          "value": 29
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.clc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Image",
+          "value": 1
+        },
+        {
+          "name": "RawImage",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.PlotWindow.cln",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NONE",
+          "value": 0
+        },
+        {
+          "name": "TODARK",
+          "value": 1
+        },
+        {
+          "name": "WAIT",
+          "value": 2
+        },
+        {
+          "name": "TOLIGHT",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cmi",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Invalid",
+          "value": 0
+        },
+        {
+          "name": "Start",
+          "value": 1
+        },
+        {
+          "name": "Pause",
+          "value": 2
+        },
+        {
+          "name": "Resume",
+          "value": 3
+        },
+        {
+          "name": "End",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "LevelDesigner.cms",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Beeps",
+          "value": 0
+        },
+        {
+          "name": "SoundEffect",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.cmu",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "PC",
+          "value": 0
+        },
+        {
+          "name": "Android",
+          "value": 1
+        },
+        {
+          "name": "IOS",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.cmv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Default",
+          "value": 1
+        },
+        {
+          "name": "GooglePlay",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.QTE.cnj",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "SUCCESS",
+          "value": 0
+        },
+        {
+          "name": "CLICK_OUT_OF_RANGE",
+          "value": 1
+        },
+        {
+          "name": "MISS_CLICK",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.QTE.cns.cnp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "FadeIn",
+          "value": 0
+        },
+        {
+          "name": "Wait",
+          "value": 1
+        },
+        {
+          "name": "FadeOut",
+          "value": 2
+        },
+        {
+          "name": "QTEing",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.QTE.cny.cnx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "InRange",
+          "value": 0
+        },
+        {
+          "name": "OutOfRange",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.QTE.cog.cod",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Pre",
+          "value": 0
+        },
+        {
+          "name": "Ing",
+          "value": 1
+        },
+        {
+          "name": "Finish",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.Render.OutlineRenderFeature.coo",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "INcolorON",
+          "value": 0
+        },
+        {
+          "name": "INcolorOFF",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.GameCommand.cou",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "SwitchBuildingMode",
+          "value": 0
+        },
+        {
+          "name": "EnterAlchemyTalent",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cqm.cqk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Left",
+          "value": 0
+        },
+        {
+          "name": "Right",
+          "value": 1
+        },
+        {
+          "name": "Top",
+          "value": 2
+        },
+        {
+          "name": "Bottom",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.UIManager.cqn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "MAIN",
+          "value": 0
+        },
+        {
+          "name": "PLOTBATTLE",
+          "value": 1
+        },
+        {
+          "name": "BATTLE",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cqr",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Low",
+          "value": 0
+        },
+        {
+          "name": "Normal",
+          "value": 1
+        },
+        {
+          "name": "Top",
+          "value": 2
+        },
+        {
+          "name": "Overlay",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cqs",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "ClearBackAll",
+          "value": 1
+        },
+        {
+          "name": "MainBack",
+          "value": 2
+        },
+        {
+          "name": "SubBack",
+          "value": 4
+        },
+        {
+          "name": "CloseAll",
+          "value": 8
+        },
+        {
+          "name": "DontResume",
+          "value": 16
+        },
+        {
+          "name": "DontDestroy",
+          "value": 32
+        },
+        {
+          "name": "ForbidESC",
+          "value": 64
+        },
+        {
+          "name": "DontClose",
+          "value": 128
+        },
+        {
+          "name": "TimePause",
+          "value": 256
+        },
+        {
+          "name": "NoCommonTop",
+          "value": 512
+        },
+        {
+          "name": "NoReturnMain",
+          "value": 1024
+        },
+        {
+          "name": "NotBack",
+          "value": 2048
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.crb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "DeadSeaPaper",
+          "value": 0
+        },
+        {
+          "name": "ApophisBook",
+          "value": 1
+        },
+        {
+          "name": "Communication",
+          "value": 2
+        },
+        {
+          "name": "SoulConnection",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.crf",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Seed",
+          "value": 0
+        },
+        {
+          "name": "NormalItem",
+          "value": 1
+        },
+        {
+          "name": "AlchemyMaterial",
+          "value": 2
+        },
+        {
+          "name": "AlchemyPotion",
+          "value": 3
+        },
+        {
+          "name": "Treasure",
+          "value": 4
+        },
+        {
+          "name": "Important",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cru",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "DuangDuang",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.crv",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Sprite",
+          "value": 0
+        },
+        {
+          "name": "Spine",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.csc.csb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Water",
+          "value": 1
+        },
+        {
+          "name": "Harvest",
+          "value": 2
+        },
+        {
+          "name": "NotGrowing",
+          "value": 4
+        },
+        {
+          "name": "Mine",
+          "value": 8
+        },
+        {
+          "name": "Grass",
+          "value": 16
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.css",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Create",
+          "value": 0
+        },
+        {
+          "name": "Remove",
+          "value": 1
+        },
+        {
+          "name": "Update",
+          "value": 2
+        },
+        {
+          "name": "ForceRemove",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.csw",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Save",
+          "value": 0
+        },
+        {
+          "name": "Load",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.ctd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Price_Increase",
+          "value": 0
+        },
+        {
+          "name": "Price_Decrease",
+          "value": 1
+        },
+        {
+          "name": "Stock_Increase",
+          "value": 2
+        },
+        {
+          "name": "Stock_Decrease",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.ctz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "PlayerDeck",
+          "value": 0
+        },
+        {
+          "name": "PlayerGraveyard",
+          "value": 1
+        },
+        {
+          "name": "PlayerHand",
+          "value": 2
+        },
+        {
+          "name": "PlayerCurrentCard",
+          "value": 3
+        },
+        {
+          "name": "DealerDeck",
+          "value": 4
+        },
+        {
+          "name": "DealerGraveyard",
+          "value": 5
+        },
+        {
+          "name": "DealerCurrentCard",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cua",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "DRAWCARD",
+          "value": 0
+        },
+        {
+          "name": "ADDCHIPS",
+          "value": 1
+        },
+        {
+          "name": "STOPDRAW",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cui",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "PLAYERDECK",
+          "value": 0
+        },
+        {
+          "name": "PLAYERGRAVEYARD",
+          "value": 1
+        },
+        {
+          "name": "NPCDECK",
+          "value": 2
+        },
+        {
+          "name": "NPCGRAVEYARD",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cvq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "AreaUnlock",
+          "value": 0
+        },
+        {
+          "name": "ProcessCostItem",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cwi",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Unavailable",
+          "value": 0
+        },
+        {
+          "name": "Available",
+          "value": 1
+        },
+        {
+          "name": "Awarded",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cwn",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NONE",
+          "value": 0
+        },
+        {
+          "name": "IDLE",
+          "value": 1
+        },
+        {
+          "name": "CASTINGROD",
+          "value": 2
+        },
+        {
+          "name": "LINEFLY",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cyc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Main",
+          "value": 0
+        },
+        {
+          "name": "Item",
+          "value": 1
+        },
+        {
+          "name": "Relic",
+          "value": 2
+        },
+        {
+          "name": "Building",
+          "value": 3
+        },
+        {
+          "name": "Crop",
+          "value": 4
+        },
+        {
+          "name": "BlackJack",
+          "value": 5
+        },
+        {
+          "name": "Staff",
+          "value": 6
+        },
+        {
+          "name": "Plot",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.cyq",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Fadein",
+          "value": 0
+        },
+        {
+          "name": "Keep",
+          "value": 1
+        },
+        {
+          "name": "FadeOut",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.czd.czc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Main",
+          "value": 0
+        },
+        {
+          "name": "Farm",
+          "value": 1
+        },
+        {
+          "name": "Manager",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.czm.czk",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Submit",
+          "value": 0
+        },
+        {
+          "name": "Enter",
+          "value": 1
+        },
+        {
+          "name": "Stable",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dal",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Farm",
+          "value": 1
+        },
+        {
+          "name": "Clutter",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dbb",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Circle",
+          "value": 0
+        },
+        {
+          "name": "Square",
+          "value": 1
+        },
+        {
+          "name": "Diamond",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dbd.dbc",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Cover",
+          "value": 1
+        },
+        {
+          "name": "Waiting",
+          "value": 2
+        },
+        {
+          "name": "Reveal",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dco.dcg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Attributes",
+          "value": 0
+        },
+        {
+          "name": "Product",
+          "value": 1
+        },
+        {
+          "name": "Staff",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dcp",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "IDAscending",
+          "value": 0
+        },
+        {
+          "name": "PriceAscending",
+          "value": 1
+        },
+        {
+          "name": "PriceDescending",
+          "value": 2
+        },
+        {
+          "name": "StockAscending",
+          "value": 3
+        },
+        {
+          "name": "StockDescending",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dcs",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "ShowShelfButton",
+          "value": 0
+        },
+        {
+          "name": "ShowNoneText",
+          "value": 1
+        },
+        {
+          "name": "ShowRemoveButton",
+          "value": 2
+        },
+        {
+          "name": "Shelfing",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dda.dcz",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Item",
+          "value": 0
+        },
+        {
+          "name": "Building",
+          "value": 1
+        },
+        {
+          "name": "Recipe",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.dde.ddd",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Money",
+          "value": 0
+        },
+        {
+          "name": "Building",
+          "value": 1
+        },
+        {
+          "name": "Aesthetic",
+          "value": 2
+        },
+        {
+          "name": "Favorability",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.ddz.ddx",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Doing",
+          "value": 0
+        },
+        {
+          "name": "Fishing",
+          "value": 1
+        },
+        {
+          "name": "Carding",
+          "value": 2
+        },
+        {
+          "name": "Favor",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Foundation.UI.deu",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "Idle",
+          "value": 0
+        },
+        {
+          "name": "FadeIn",
+          "value": 1
+        },
+        {
+          "name": "Waiting",
+          "value": 2
+        },
+        {
+          "name": "FadeOut",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "UGUIExtend.AdvancedText.dgg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "NONE",
+          "value": 0
+        },
+        {
+          "name": "SHADOW",
+          "value": 1
+        },
+        {
+          "name": "OUTLINE4",
+          "value": 2
+        },
+        {
+          "name": "OUTLINE8",
+          "value": 3
+        },
+        {
+          "name": "MATERIAL",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "DG.Tweening.djg",
+      "is_enum": true,
+      "values": [
+        {
+          "name": "None",
+          "value": 0
+        },
+        {
+          "name": "Play",
+          "value": 1
+        },
+        {
+          "name": "Restart",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

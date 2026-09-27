@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#193d33">
+  <title>黎明工坊 · Dawn Atelier</title>
+  <link rel="icon" href="/assets/gameicon.webp">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/presets.css">
+  <script src="/presets-ui.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#home" aria-label="黎明工坊首页">
+      <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M9 31a15 15 0 1 1 30 0M5 37h38M10 42h28M24 3v5M6 12l4 4M42 12l-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M17 31c1-9 13-8 14-16M21 31c0-5 7-5 9-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span><strong>黎明工坊</strong><small>DAWN ATELIER</small></span>
+    </a>
+    <div class="nav-heading">你的冒险手册</div>
+    <nav id="navigation" aria-label="主导航"></nav>
+    <div class="sidebar-note"><span class="note-spark">✦</span><span>一点小小的调整，<br>让冒险更自在。</span><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M15 75Q72 61 94 5M56 59Q32 39 28 18Q57 24 64 48M75 35Q91 27 109 28Q102 48 71 50" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
+    <div class="sidebar-bottom"><img src="/assets/gameicon.webp" alt="游戏头像"><div><strong>本地旅人</strong><span><i class="status-dot"></i> 只属于你的工作台</span></div><button class="icon-button light-icon" id="help-button" title="使用帮助" aria-label="使用帮助">?</button></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb"><span>工作台</span><span class="slash">/</span><strong id="breadcrumb-current">工坊总览</strong></div>
+      <div class="topbar-actions"><form class="global-search" id="global-search"><span data-icon="search"></span><input id="global-query" aria-label="全局物品搜索" placeholder="搜索物品或 ID…" autocomplete="off"><kbd>Ctrl K</kbd></form><span class="connection" id="connection"><i class="status-dot"></i> 本地已连接</span><button id="theme-button" class="icon-button theme-button" aria-label="切换深浅主题" title="切换主题" data-icon="moon"></button></div>
+    </header>
+    <main id="main" tabindex="-1"><div class="initial-loading"><span class="loading-orbit"></span><h2>正在打开你的工坊</h2><p>载入本地存档与物品资料…</p></div></main>
+    <footer class="page-footer"><span>THE PIPER OF DAWN <b>·</b> 独属于你的冒险节奏</span><span>本地工作台 <i></i> v2.0</span></footer>
+  </div>
+  <div id="pending-bar" class="pending-bar" hidden></div>
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="item-drawer" class="item-drawer" hidden role="dialog" aria-modal="true" aria-label="物品详情" tabindex="-1"></aside>
+  <dialog id="edit-dialog" class="dialog edit-dialog"><form id="edit-form"><div class="dialog-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2 id="edit-title">修改数值</h2></div><button class="icon-button" type="button" data-close="edit-dialog" aria-label="关闭" data-icon="close"></button></div><p class="muted" id="edit-detail"></p><div class="value-comparison"><div><span>当前数值</span><strong id="edit-before"></strong></div><span data-icon="arrowRight"></span><div><label for="edit-value">调整为</label><input id="edit-value" name="value" autocomplete="off" required></div></div><p id="edit-note" class="field-note"></p><details class="field-path"><summary>查看字段位置</summary><code id="edit-path"></code></details><div class="dialog-actions"><button type="button" class="button secondary" data-close="edit-dialog">取消</button><button type="submit" class="button primary">加入修改清单 <span data-icon="check"></span></button></div></form></dialog>
+  <dialog id="review-dialog" class="dialog review-dialog"><div class="dialog-heading"><div><span class="eyebrow">REVIEW YOUR CHANGES</span><h2>确认这一点改变</h2></div><button class="icon-button" data-close="review-dialog" aria-label="关闭" data-icon="close"></button></div><div id="review-content"></div></dialog>
+  <dialog id="help-dialog" class="dialog help-dialog"><div class="dialog-heading"><div><span class="eyebrow">A LITTLE GUIDE</span><h2>从这里开始</h2></div><button class="icon-button" data-close="help-dialog" aria-label="关闭" data-icon="close"></button></div><ol class="guide-list"><li><span>01</span><div><h3>选一份存档</h3><p>选择一份存档，在“一键方案”挑选整套预设，或进入“存档编辑”做单项调整。</p></div></li><li><span>02</span><div><h3>做一点调整</h3><p>方案可以调整目标、组合和保存。改动先加入清单，支持逐项删除、整组撤销与草稿恢复。</p></div></li><li><span>03</span><div><h3>导出，再继续冒险</h3><p>确认清单后可导出副本，或退出游戏后直接应用到所选存档。两种方式都会备份原档，操作记录中可下载修改前的存档。</p></div></li></ol><div class="info-note"><span data-icon="info"></span><p>物品图鉴和资料库随时可以查阅。任务、解锁与实体 ID 存在关联，优先调整已有物品的数量与常用数值。</p></div></dialog>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+  <dialog id="preset-builder" class="dialog preset-builder"></dialog>
+  <dialog id="preset-preview" class="dialog preset-preview"></dialog>
+  <input type="file" id="preset-file" accept="application/json,.json" hidden>
+</body>
+</html>

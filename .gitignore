@@ -1,0 +1,43 @@
+# Local game-derived data, user saves and backups
+/data/
+/unpacked/
+/backups/
+/modified-saves/
+/web/assets/
+/web/preview/
+/web/logs/
+/config.local.json
+*.bytes
+*.bak
+*.lnk
+*.bundle
+*.resS
+*.dll
+*.exe
+*.dat
+
+# Python and editors
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.omx/
+
+# Extractor output
+/research/schema/serializers/
+*.asm
+
+# Reproducible video sources are tracked; generated inputs/output stay local
+node_modules/
+/video/public/
+/video/out/
+*.mp4
+*.webm
+*.log
