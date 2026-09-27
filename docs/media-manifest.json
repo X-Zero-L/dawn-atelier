@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T16:49:58.740Z",
+  "generatedAt": "2026-09-27T16:56:16.370Z",
   "gameTitle": "黎明门前的吹笛人",
   "source": {
-    "commit": "17124128748bb88f52fdc7de37b5bd012bb148ce",
+    "commit": "7ffacceb2a3a1702f8bd93cafa51b7ef683314c9",
     "dirty": false,
-    "fingerprint": "5df81c1d829360c1237eae018f4fe9db91aee50f5a8d8a730c053cd96df498c7",
+    "fingerprint": "61fa629903294b84751ad43388e9eeaa295a0a3a926f9a9b6b197d1955df8c80",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
-        "0633804bbe5889428a7a8947b90f66ffdb50f10e40ab65db0a33a7b122028502"
+        "e0e601d20ce6e1c4f870affc140b2634f2817219c45e96658dd7494e1fbc4470"
       ],
       [
         "app_config.py",
@@ -81,7 +81,7 @@
       ],
       [
         "scripts/capture-demo.mjs",
-        "e75f4e1366b5b15d9e5002c9422fac1c5cd7a121c3a63ecbff0635347e22bdef"
+        "a07134c4adec8eff58b08aa1c6a100b5a2808ba31b0b6407a571c1ae981ff089"
       ],
       [
         "scripts/media-config.json",
@@ -1915,72 +1915,72 @@
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "912a2d20d7f8a03c0d4f796505380a2457600dcfa1834c1e64119c43f4828b16",
-      "bytes": 161361,
+      "sha256": "041d1103c6cf4ac7b6a6e6f423ae910aa595623ca773f5dab209b5dff678b8eb",
+      "bytes": 161325,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "905fd264ced96ef9bc9de65440ff84511a247a4c2fdd27a766a1c11fa1e6baa3",
-      "bytes": 349736,
+      "sha256": "80fbe68478f8b6d66dc522d196ddfd52970d9cd34e632a5b429feef3a6079b50",
+      "bytes": 349693,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "b0a5e625663702ea77cc3ae84c0650887c5699acb4af146f7faeb49da147ff2b",
-      "bytes": 366802,
+      "sha256": "2c9fc4e86ebc3bc9bfb3357085fe13392ba12d38c7d7786fe2a764360b786cf9",
+      "bytes": 366801,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "a062a52578b789b9f302c2a1a37d3230fdcff1af8983f2fc605d0dd05eb73820",
-      "bytes": 384313,
+      "sha256": "59e7b1552905b1951b02583ae80939fc10c4856db3ec74aeff4321043dd3a7a2",
+      "bytes": 384321,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "3449f52b1e317728edff6e5b43bef56eac9b5c3c7c478698b906492c569c2b33",
-      "bytes": 142291,
+      "sha256": "382c7fd9a5ed094abffa704ed1b86e8e2861d50a767dfdbc0bdccaf27ce0df2a",
+      "bytes": 142257,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "53d7a6df3ede1955a5d6eb8c1fd16510d848b6a99fe108e75b1ae148134c5497",
-      "bytes": 128840,
+      "sha256": "a37efdbea1997f033d14e1693ce7ffd9720172d30b2e465e6f2e279866d9712e",
+      "bytes": 128811,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "9910e557d01e56dbc7de495c2dc5d50cb64f09e29ff0fcbc4fcede65186378be",
-      "bytes": 114912,
+      "sha256": "ca11b6d9e661b8f5083b54958c8dfef4d7f40497e9adefbc60407d22dcdaa015",
+      "bytes": 114882,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "bc011194143bee97a5c42d1b3943599ae2ef28246815b9363d381708cbc33101",
-      "bytes": 176540,
+      "sha256": "3f8cdce4a673a0ac4ee89e10517ba545d19db5c5d6d2e197f4a3f43297158416",
+      "bytes": 176512,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "8c69d101b7b6540e78294e165adf9ce8b97f7066a2df4facff4bc34dfebc48c3",
-      "bytes": 264313,
+      "sha256": "966e59257c657b40fcc6e48f49595fadc9ded5d9765711dfc5a066c2c416fd02",
+      "bytes": 264306,
       "route": "saves"
     },
     "items": {
@@ -1995,24 +1995,24 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "5db5833290bb4e7f19a919365a60eea2e0da366bc06bc9d2b88b3284c8eb01b1",
-      "bytes": 336031,
+      "sha256": "f2efc3ea2ce4c2384f380d83d362c41835fcc089d08c1ed97b2e569957cce910",
+      "bytes": 335988,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "357c3ba4bc0d141393f3879def7be966ec9b32d3581d3f8614d76bc93d6f9f93",
-      "bytes": 346911,
+      "sha256": "25e4d3483a436af750a42cff64e382f69d947c6438bc8c19abdd8dd0328a7a1f",
+      "bytes": 346908,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "b0fa722dcdccc5519d1b37cd4c760a748206ff162615069bf9d9e7c21227a316",
-      "bytes": 126453,
+      "sha256": "0cc77d0aa7e3de9e4fe48d99b3612b435a917b00b53034ca4d0837797cb6adc8",
+      "bytes": 126433,
       "route": "presets"
     },
     "mobile": {
@@ -2035,16 +2035,16 @@
   },
   "files": {
     "dawn-atelier-demo.mp4": {
-      "bytes": 13039639,
-      "sha256": "7b40ad517e447855b8432901e57aeb3cbe9571784cbf99ba316e85d4e7ef7185"
+      "bytes": 13037854,
+      "sha256": "ea292f768e4284aa749b8093756ac4068c680ef98c804e60f7884e90807fcbfa"
     },
     "dawn-atelier-demo.gif": {
-      "bytes": 5302032,
-      "sha256": "43aa8d656e7ac9097b8e2fb46dc7073feb337e3b0af82b7e29241673b5d572d3"
+      "bytes": 5301028,
+      "sha256": "eae37f60ca8879c9ff50b07a3ad0305da436d15b9cfa450258a1de167404334c"
     },
     "dawn-atelier-poster.png": {
-      "bytes": 266713,
-      "sha256": "b187648e15556cb8dde85ec38f9e1afc2c139cfa4d5d963a7ec3fa3e999d05c8"
+      "bytes": 266698,
+      "sha256": "996868e505839c10d8fc53ceae0035671081aa344d371eb22b41dd186eb0209d"
     }
   }
 }
