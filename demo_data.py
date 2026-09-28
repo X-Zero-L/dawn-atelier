@@ -5,7 +5,7 @@ from pathlib import Path
 import struct
 
 APP = Path(__file__).resolve().parent
-VERSION = 4
+VERSION = 5
 
 
 def varint(value):
@@ -77,7 +77,8 @@ def prepare_demo(destination):
     npcs = [(1001,'丽卡妲',1),(1003,'茜茜',2),(1004,'奈奈',0),(1005,'老金',3),
             (1006,'莫娜',1),(1007,'韩赛尔',2),(1008,'费恩',0),(1009,'卢卡',1),(1010,'乌鹊',0)]
     levels = [0,100,240,420,640,900,1200,1560,1960,2400,2900,3500,4400]
-    npc_rows = [{'bnin':ident,'bnio':list(range(len(levels))),'bnip':levels} for ident,_,_ in npcs]
+    npc_rows = [{'bnin':ident,'bnio':list(range(len(levels) if ident in (1001,1003,1004) else 11)),
+                 'bnip':levels if ident in (1001,1003,1004) else levels[:11]} for ident,_,_ in npcs]
     tools = [{'bodm':tool*100+level,'bodn':tool,'bodt':area}
              for tool in range(1,5) for level,area in enumerate(([1,1],[1,3],[3,3],[5,5]),1)]
     talents = [
@@ -144,7 +145,7 @@ def prepare_demo(destination):
     target=destination/'saves/SAVE_PIPER_0.bytes'
     if not target.exists():
         target.write_bytes(encode_message('SaveLoadSystem.GameSaveData',save,schema))
-    elif marker.is_file() and marker.read_text() in ('1','2','3'):
+    elif marker.is_file() and marker.read_text() in ('1','2','3','4'):
         # Add a fresh fixture alongside an existing demo; keep the user's edited copy.
         for slot in range(1,100):
             fixture=destination/'saves'/f'SAVE_PIPER_{slot}.bytes'

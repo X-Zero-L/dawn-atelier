@@ -13,7 +13,7 @@ node scripts/refresh-media.mjs
 流程会自动完成：
 
 1. 使用空的临时目录生成合成存档，在空闲端口启动演示服务。
-2. 使用独立无头浏览器拍摄全部 19 张截图，包含桌面启动、工坊成长与炼金解锁准备。
+2. 使用独立无头浏览器拍摄全部 20 张截图，包含桌面启动、满好感预览、工坊成长与炼金解锁准备。
 3. 将本次截图复制到视频工程，检查图片 SHA-256。
 4. 渲染 54 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
 5. 生成两倍速 GIF、关键帧和拼图。
@@ -61,6 +61,7 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | `preview.png` | 最终修改清单、前后数值与导出入口 |
 | `inventory.png` | 背包数量与补给 |
 | `relationships.png` | 好感档位 |
+| `favor-preview.png` | 按每位角色上限计算的全员好感预览 |
 | `tools.png` | 工具等级与范围 |
 | `items.png` | 物品图鉴 |
 | `mobile.png` | 430px 窄屏方案列表 |

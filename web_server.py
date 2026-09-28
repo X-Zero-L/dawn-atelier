@@ -21,7 +21,15 @@ import webbrowser
 
 from piper_save import write_modified
 from save_codec import ROOT, Schema
-from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_ROOT, SCHEMA_ROOT, DEMO
+from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_ROOT, SCHEMA_ROOT, DEMO, GAME_DIR
+from compatibility import require_prepared, require_unchanged_install
+
+COMPATIBILITY = None if DEMO else require_prepared(GAME_DIR, DATA_ROOT)
+
+
+def check_installation():
+    if not DEMO:
+        require_unchanged_install(GAME_DIR, DATA_ROOT, COMPATIBILITY)
 import presets
 import inventory
 import game_runtime
@@ -199,6 +207,39 @@ def saved_games():
     return result
 
 
+@lru_cache(maxsize=64)
+def indexed_save_summary(name, data):
+    return describe_save(name, snapshot=data)
+
+
+def save_index():
+    """Read current filenames and identities without decoding every save."""
+    result = []
+    for path in SAVE_DIR.glob('*SAVE_PIPER_*.bytes'):
+        if not re.fullmatch(r'(?:AUTO_)?SAVE_PIPER_\d+\.bytes', path.name):
+            continue
+        try:
+            before = path.stat()
+            data = path.read_bytes()
+            after = path.stat()
+            if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+                continue
+            summary = {}
+            try:
+                summary = indexed_save_summary(path.name, data)
+            except (ValueError, KeyError, IndexError, struct.error) as error:
+                summary = {'error':'这份存档暂时无法读取，游戏可能正在保存。稍候刷新重试。'}
+            result.append({**summary, 'name':path.name,'title':save_title(path.name),
+                           'kind':'auto' if path.name.startswith('AUTO_') else 'manual',
+                           'modified':datetime.fromtimestamp(after.st_mtime).isoformat(timespec='seconds'),
+                           'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),
+                           '_mtime':after.st_mtime_ns})
+        except OSError:
+            continue
+    result.sort(key=lambda row:(row['name'].startswith('AUTO_'),-row['_mtime']))
+    return [{key:value for key,value in row.items() if key!='_mtime'} for row in result]
+
+
 def items_response():
     result = []
     for item in ITEMS:
@@ -213,6 +254,7 @@ def items_response():
 
 
 def edit_save(body, export=False, apply=False):
+    check_installation()
     name = body.get('save', '')
     path = save_path(name)
     original = path.read_bytes()
@@ -305,6 +347,7 @@ def edit_save(body, export=False, apply=False):
         stamp = datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         destination = path if apply else MODIFIED_ROOT / f'{path.stem}-{stamp}.bytes'
         with WRITE_LOCK:
+            check_installation()
             if apply and (DEMO or not game_runtime.status(fresh=True)['can_apply']):
                 raise ValueError('请先退出 ThePiper，再直接应用。游戏运行时可以导出副本。')
             backup = write_modified(path, original, modified, destination)
@@ -315,6 +358,7 @@ def edit_save(body, export=False, apply=False):
 
 
 def plan_preset(body):
+    check_installation()
     name=body.get('save','')
     path=save_path(name)
     data=path.read_bytes()
@@ -325,6 +369,7 @@ def plan_preset(body):
 
 
 def plan_progression(body):
+    check_installation()
     name=body.get('save','')
     data=save_path(name).read_bytes()
     if hashlib.sha256(data).hexdigest()!=body.get('sha256'):
@@ -368,7 +413,7 @@ def export_history():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'DawnAtelier/2.3'
+    server_version = 'DawnAtelier/2.4'
 
     def log_message(self, format, *args):
         pass
@@ -401,7 +446,7 @@ class Handler(BaseHTTPRequestHandler):
         query = parse_qs(parsed.query)
         try:
             if route == '/api/health':
-                self.json({'app': 'dawn-atelier', 'ready': True,'demo':DEMO})
+                self.json({'app': 'dawn-atelier', 'ready': True,'demo':DEMO,'compatibility':COMPATIBILITY})
             elif route == '/api/bootstrap':
                 self.json({'app': 'dawn-atelier', 'token': TOKEN, 'saves': saved_games(),
                            'version':'2.1','runtime':game_runtime.status(),'demo':DEMO,
@@ -410,11 +455,15 @@ class Handler(BaseHTTPRequestHandler):
                            'groups': [{'id': g[0], 'label': g[1], 'icon': g[3]} for g in GROUPS]})
             elif route == '/api/presets':
                 self.json(presets.catalog())
+            elif route == '/api/saves':
+                check_installation()
+                self.json({'saves':save_index()})
             elif route == '/api/runtime':
                 self.json(game_runtime.status())
             elif route == '/api/items':
                 self.json(items_response())
             elif route == '/api/save':
+                check_installation()
                 self.json(describe_save(query.get('name', [''])[0], True))
             elif route == '/api/table':
                 name = query.get('name', [''])[0]
@@ -454,7 +503,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_bytes(path.read_bytes(), 'application/octet-stream', extra={'Content-Disposition': f'attachment; filename="{name}"'})
             else:
                 relative = 'index.html' if route == '/' else route.lstrip('/')
-                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css','progression-ui.js','progression.css',
+                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css','progression-ui.js','progression.css','save-refresh.js',
                                     'desktop/index.html','desktop/launcher.js','desktop/launcher.css') and not relative.startswith(('assets/','brand/')):
                     self.json({'error': '页面不存在。'}, 404)
                     return

@@ -1,7 +1,6 @@
 """Desktop lifecycle: prepare local resources and own one workbench process."""
 
 from datetime import datetime, timezone
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -14,14 +13,7 @@ from urllib.parse import urlparse
 import webbrowser
 
 from app_paths import APP_ROOT, USER_ROOT, LOG_ROOT, app_version, read_config, write_config, task_command, find_game
-
-
-def fingerprint(path):
-    digest = hashlib.sha256()
-    with path.open('rb') as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
-            digest.update(chunk)
-    return digest.hexdigest()
+from compatibility import inspect_game, installation_stamp, profiles, require_prepared
 
 
 class DesktopService:
@@ -63,17 +55,15 @@ class DesktopService:
             return False
         root = self._data_root()
         try:
+            require_prepared(self._game_dir, root)
             receipt = json.loads((root / 'desktop-ready.json').read_text(encoding='utf-8'))
-            reference = json.loads((APP_ROOT / 'schemas/thepiper-2026-09-25/save_schema.json').read_text(encoding='utf-8'))['source']
             game = Path(self._game_dir)
-            assembly = game / 'GameAssembly.dll'
-            metadata = game / 'ThePiper_Data/il2cpp_data/Metadata/global-metadata.dat'
             return (receipt['game_dir'] == str(game.resolve()) and
-                    receipt['schema'] == reference['GameAssembly_sha256'] and
-                    receipt['files'] == [[assembly.stat().st_size, assembly.stat().st_mtime_ns],
-                                         [metadata.stat().st_size, metadata.stat().st_mtime_ns]] and
+                    receipt.get('compatibility', {}).get('profile') in {profile['id'] for profile in profiles()} and
+                    receipt['files'] == installation_stamp(game) and
                     all((root / relative).is_file() for relative in
-                        ('configs/index.json', 'configs/物品目录.json', 'configs/分类目录.json', 'resources/summary.json')))
+                        ('configs/index.json', 'configs/物品目录.json', 'configs/分类目录.json', 'resources/summary.json',
+                         'schema/save_schema.json', 'schema/config_schema.json', 'compatibility.json')))
         except (OSError, ValueError, KeyError):
             return False
 
@@ -82,10 +72,16 @@ class DesktopService:
             self._active_url = None
             self._mode = None
             self._error = '工作台已停止，可以重新打开；排查详情见日志文件夹。'
+        compatibility = None
+        try:
+            compatibility = json.loads((self._data_root() / 'compatibility.json').read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            pass
         return {'version': app_version(), 'game_dir': self._game_dir, 'detected': bool(self._game_dir),
                 'prepared': self._prepared, 'data_dir': str(USER_ROOT), 'busy': self._busy,
                 'progress': dict(self._progress), 'error': self._error, 'mode': self._mode,
-                'active_url': self._active_url, 'last_prepared': self._config.get('last_prepared')}
+                'active_url': self._active_url, 'last_prepared': self._config.get('last_prepared'),
+                'compatibility': compatibility}
 
     def status(self):
         with self._lock:
@@ -174,14 +170,8 @@ class DesktopService:
         self._prepared = False
         (self._data_root() / 'desktop-ready.json').unlink(missing_ok=True)
         game = Path(self._game_dir)
-        reference = json.loads((APP_ROOT / 'schemas/thepiper-2026-09-25/save_schema.json').read_text(encoding='utf-8'))['source']
-        expected_files = [(game / 'GameAssembly.dll', reference['GameAssembly_sha256']),
-                          (game / 'ThePiper_Data/il2cpp_data/Metadata/global-metadata.dat', reference['global_metadata_sha256'])]
-        for file, expected in expected_files:
-            if not file.is_file():
-                raise ValueError('游戏文件不完整，请重新选择安装目录。')
-            if fingerprint(file) != expected:
-                raise ValueError('这个游戏版本暂不支持。当前支持 2026-09-25-1016，请先查看兼容性说明。')
+        compatible = inspect_game(game)
+        initial_stamp = installation_stamp(game)
         self._progress_to(12, 'tables', '正在准备物品与游戏资料', '首次准备需要一点时间，请保持窗口开启。')
         with (LOG_ROOT / 'prepare.log').open('w', encoding='utf-8') as log:
             self._prepare_process = self._popen(task_command('prepare', '--game-dir', self._game_dir),
@@ -199,8 +189,10 @@ class DesktopService:
         if result != 0:
             raise ValueError('准备未完成，请打开日志文件夹查看 prepare.log，然后重试。')
         now = datetime.now(timezone.utc).isoformat(timespec='seconds')
-        receipt = {'game_dir': str(game.resolve()), 'schema': reference['GameAssembly_sha256'], 'created': now,
-                   'files': [[file.stat().st_size, file.stat().st_mtime_ns] for file, _ in expected_files]}
+        if installation_stamp(game) != initial_stamp:
+            raise ValueError('准备过程中游戏文件发生更新，请重新准备。')
+        receipt = {'game_dir': str(game.resolve()), 'compatibility': compatible, 'created': now,
+                   'files': initial_stamp}
         data = self._data_root()
         (data / 'desktop-ready.json').write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding='utf-8')
         with self._lock:

@@ -1,14 +1,13 @@
 """Build local catalogues and artwork from a supported installed copy of ThePiper."""
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
 import subprocess
 import sys
-import zlib
-from app_paths import APP_ROOT as ROOT, CONFIG_PATH, task_command, read_config, write_config
+from app_paths import APP_ROOT as ROOT, task_command, read_config, write_config
+from compatibility import inspect_game, install_schema, begin_preparation, complete_preparation
 
 ART_BUNDLES={'assets_gameres_arts_logo.bundle','assets_gameres_arts_ui_common_startwindow.bundle','assets_gameres_arts_atlas.bundle'}
 
@@ -20,14 +19,10 @@ def main():
     args=parser.parse_args()
     if args.game_dir:os.environ['PIPER_GAME_DIR']=str(args.game_dir.resolve())
     from app_config import GAME_DIR,DATA_ROOT,SCHEMA_ROOT
-    reference=json.loads((SCHEMA_ROOT/'save_schema.json').read_text(encoding='utf-8'))['source']
-    required=[(GAME_DIR/'GameAssembly.dll',reference['GameAssembly_sha256']),
-              (GAME_DIR/'ThePiper_Data/il2cpp_data/Metadata/global-metadata.dat',reference['global_metadata_sha256'])]
-    for path,expected in required:
-        if not path.is_file():
-            raise SystemExit('Game installation not found. Pass --game-dir or set PIPER_GAME_DIR.')
-        if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:
-            raise SystemExit('Unsupported game build. This release supports the 2026-09-25-1016 data build; see docs/compatibility.md.')
+    report=inspect_game(GAME_DIR)
+    begin_preparation(DATA_ROOT)
+    install_schema(report,DATA_ROOT)
+    print('Compatibility: '+report['package_version']+' / '+report['message'],flush=True)
     local=read_config()
     local['game_dir']=str(GAME_DIR)
     write_config(local)
@@ -69,8 +64,10 @@ def main():
     else:print('[3/3] Artwork skipped; the interface will use its built-in illustrations.',flush=True)
     summary={'bundles':len(manifest['bundles']),'fully_extracted_art_bundles':len(records),
              'serialized_objects':sum(len(f.get('objects',[])) for r in records for f in r['files']),
-             'package_version':manifest['package_version'],'mode':'selective','selected_crc_matched':True}
+             'package_version':manifest['package_version'],'mode':'selective','selected_crc_matched':True,
+             'compatibility':report}
     (resources/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+    complete_preparation(report,DATA_ROOT,GAME_DIR)
     print('Ready. Run: python launch.py',flush=True)
 
 

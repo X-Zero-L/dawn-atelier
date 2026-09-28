@@ -17,7 +17,7 @@ import os
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from inspect_meta import ROOT, meta, pe, H, td, fields, methods, name as raw_name, s, imagebase, readva, sections
-from dump_currency import typesptr, methodptr, fo, ma
+from dump_currency import typesptr, methodptr, method_count, fo, ma
 
 sys.path.insert(0, str(HERE.parent.parent))
 from app_config import DATA_ROOT
@@ -102,10 +102,10 @@ for sec,rva,vs,raw,rs in sections:
             if start and end>start:PDA.append((start,end))
 PDA.sort()
 PDSTART=[a for a,b in PDA]
-# The installed Assembly-CSharp module contains 0x5b00 method pointers.
+# Discover the method count from the installed Assembly-CSharp module.
 # A method may span multiple adjacent .pdata records (unwind regions), so a
 # single RUNTIME_FUNCTION end is insufficient for the complete serializer.
-METHOD_STARTS=sorted({p for p in readva(methodptr,'<'+str(0x5b00)+'Q') if imagebase<p<imagebase+0x4000000})
+METHOD_STARTS=sorted({p for p in readva(methodptr,'<'+str(method_count)+'Q') if imagebase<p<imagebase+0x4000000})
 
 def function_end(va):
     ni=bisect.bisect_right(METHOD_STARTS,va)
@@ -128,7 +128,9 @@ def disassemble(va, label):
     path=ASM/(label+'.asm')
     marker='# extracted_stop_address='+hex(end)
     if not path.exists() or marker not in path.read_text(encoding='utf-8'):
-        result=subprocess.run([os.environ.get('OBJDUMP') or shutil.which('objdump') or 'objdump','-d','-M','intel',f'--start-address={hex(va)}',f'--stop-address={hex(end)}',str(ROOT/'GameAssembly.dll')],capture_output=True,text=True,check=True)
+        executable=os.environ.get('OBJDUMP') or shutil.which('objdump')
+        command=[executable,'-d','-M','intel',f'--start-address={hex(va)}',f'--stop-address={hex(end)}',str(ROOT/'GameAssembly.dll')] if executable else ['wsl','-e','objdump','-d','-M','intel',f'--start-address={hex(va)}',f'--stop-address={hex(end)}','/mnt/'+ROOT.drive[0].lower()+ROOT.as_posix()[2:]+'/GameAssembly.dll']
+        result=subprocess.run(command,capture_output=True,text=True,check=True)
         path.write_text(result.stdout+'\n'+marker+'\n',encoding='utf-8')
     return instructions(path.read_text(encoding='utf-8')),path
 

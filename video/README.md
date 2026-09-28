@@ -14,7 +14,7 @@ npm run render
 npm run poster
 ```
 
-`npm run assets` reads the screenshot list from `../scripts/media-config.json`, requires all 19 current screenshots in `../docs/images/`, copies them into ignored `public/`, and records their dimensions and SHA-256 hashes. It also checks the bundled font against its recorded upstream hash. The render, poster and studio commands prepare the assets automatically. Missing inputs fail before any screenshots are copied.
+`npm run assets` reads the screenshot list from `../scripts/media-config.json`, requires all 20 current screenshots in `../docs/images/`, copies them into ignored `public/`, and records their dimensions and SHA-256 hashes. It also checks the bundled font against its recorded upstream hash. The render, poster and studio commands prepare the assets automatically. Missing inputs fail before any screenshots are copied.
 
 Required inputs are listed in `scripts/media-config.json`: desktop launch/preparation, the workbench gallery, alchemy resources and unlock conditions, workshop growth, and the corresponding change previews. The two desktop screenshots are 1280 × 900 and appear as complete viewports.
 
@@ -43,7 +43,7 @@ ffmpeg -i out/dawn-atelier-demo.mp4 -filter_complex "[0:v]setpts=0.5*PTS,fps=5,s
 | --- | --- |
 | 0:00 | Product overview |
 | 0:04.5 | Windows one-click package and automatic desktop preparation |
-| 0:10.5 | Nine presets and 18 configurable operations |
+| 0:10.5 | Ten presets and 19 configurable operations |
 | 0:15.5 | Super supply: copper, iron, and gold ingots |
 | 0:22.5 | Alchemical sediment and quick targets |
 | 0:28 | Inventory |
@@ -55,4 +55,4 @@ ffmpeg -i out/dawn-atelier-demo.mp4 -filter_complex "[0:v]setpts=0.5*PTS,fps=5,s
 
 Representative still frames: intro **84**, desktop **210**, preparing **285**, supply **540**, sediment **735**, workshop **1200**, alchemy preparation **1270**, final review **1410**, outro **1560**. The poster uses **225**. These are also available under `sampleFrames` in the timeline metadata.
 
-The asset helper accepts `--source <directory>` for a different local directory containing the same 19 filenames. Release generation should use the root media pipeline so every screenshot comes from the current fixed demo fixture before rendering. The current complete list, including `workshop.png`, `alchemy-unlocks.png` and `progression-preview.png`, is defined in `scripts/media-config.json`.
+The asset helper accepts `--source <directory>` for a different local directory containing the same 20 filenames. Release generation should use the root media pipeline so every screenshot comes from the current fixed demo fixture before rendering. The current complete list is defined in `scripts/media-config.json`.

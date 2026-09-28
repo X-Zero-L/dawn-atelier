@@ -19,6 +19,7 @@ RESOURCE_FILES = [
     "web/presets.css",
     "web/progression-ui.js",
     "web/progression.css",
+    "web/save-refresh.js",
     "web/brand/emblem.svg",
     "web/brand/botanical.svg",
     "desktop/index.html",
@@ -27,6 +28,11 @@ RESOURCE_FILES = [
     "schemas/thepiper-2026-09-25/save_schema.json",
     "schemas/thepiper-2026-09-25/config_schema.json",
     "schemas/thepiper-2026-09-25/enums.json",
+    "schemas/thepiper-2026-09-28/save_schema.json",
+    "schemas/thepiper-2026-09-28/config_schema.json",
+    "schemas/thepiper-2026-09-28/enums.json",
+    "schemas/compatibility/2026-09-25-1016.json",
+    "schemas/compatibility/2026-09-28-1042.json",
     "version.json",
     "NOTICE.md",
     "build/assets/dawn-atelier.ico",
@@ -45,7 +51,7 @@ datas += copy_metadata("clr-loader")
 
 hiddenimports = [
     "app_config", "app_paths", "desktop_service", "demo_data", "web_server", "game_runtime", "presets",
-    "inventory", "piper_save", "save_codec", "gold_save", "prepare",
+    "inventory", "favor", "compatibility", "native_layout", "piper_save", "save_codec", "gold_save", "prepare",
     "export_catalogue", "extract_web_art", "unpack_unity", "unpack",
     "read_manifest", "decode_bundles", "decode_tables", "extract_unity",
     "dump_currency", "inspect_meta", "webview.platforms.winforms",

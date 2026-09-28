@@ -2,12 +2,16 @@
 from pathlib import Path
 import base64
 from cryptography.hazmat.primitives.serialization import load_der_public_key
-from decode_bundles import literal_va
+from decode_bundles import unique_literal
 from app_config import DATA_ROOT
 
 
 def public_numbers():
-    return load_der_public_key(base64.b64decode(literal_va(0x182f5eb88))).public_numbers()
+    literal = unique_literal(lambda value: value.startswith(b'MIG') and 180 <= len(value) <= 240)
+    key = load_der_public_key(base64.b64decode(literal, validate=True)).public_numbers()
+    if key.n.bit_length() != 1024 or key.e not in (3, 65537):
+        raise ValueError('Unsupported resource table key format.')
+    return key
 
 
 def decode_table(raw, key):

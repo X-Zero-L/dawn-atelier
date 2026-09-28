@@ -31,7 +31,11 @@ def main():
     evidence = {'package_version': version, 'manifest_sha256': sha256(manifest_path.read_bytes()),
                 'asset_count': len(manifest['assets']), 'bundle_count': len(manifest['bundles']),
                 'crypto': crypto_evidence, 'bundle_headers': [], 'decoded_bundles': [], 'tables': []}
-    manifest_assets = {Path(a['path']).stem: a['path'] for a in manifest['assets'] if a['bundle_id'] == 177}
+    table_bundles = [bundle for bundle in manifest['bundles'] if bundle['name'] == 'assets_gameres_table.bundle']
+    if len(table_bundles) != 1:
+        raise ValueError('Gameplay table bundle could not be identified uniquely.')
+    table_bundle_id = table_bundles[0]['bundle_id']
+    manifest_assets = {Path(a['path']).stem: a['path'] for a in manifest['assets'] if a['bundle_id'] == table_bundle_id}
     for bundle in manifest['bundles']:
         path = source / (bundle['hash'] + '.bundle')
         if path.stat().st_size != bundle['size']:
@@ -49,7 +53,7 @@ def main():
         evidence['bundle_headers'].append(dict(bundle_id=bundle['bundle_id'], name=bundle['name'],
                                                file=path.name, bytes=bundle['size'], signature=signature,
                                                format_version=format_version, unity_revision=revision))
-        if bundle['bundle_id'] not in (0, 1, 177):
+        if bundle['bundle_id'] != table_bundle_id:
             continue
         encrypted = path.read_bytes()
         if struct.pack('<I', zlib.crc32(encrypted)).hex() != bundle['crc']:
@@ -59,8 +63,6 @@ def main():
         evidence['decoded_bundles'].append(dict(name=bundle['name'], encrypted_sha256=sha256(encrypted),
                                                 plain_sha256=sha256(plain), bytes=len(plain),
                                                 encrypted_crc32=bundle['crc']))
-        if bundle['bundle_id'] != 177:
-            continue
         key = public_numbers()
         for directory in ('tables', 'tables-decoded'):
             (destination / directory).mkdir(exist_ok=True)

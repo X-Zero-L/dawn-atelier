@@ -173,7 +173,7 @@ try {
   await closePage(presets);
 
   const saves = await openPage('saves');
-  for (const [group, name] of [['inventory', 'inventory'], ['favor', 'relationships'], ['tools', 'tools'], ['alchemy', 'alchemy']]) {
+  for (const [group, name] of [['inventory', 'inventory'], ['tools', 'tools'], ['alchemy', 'alchemy']]) {
     await click(saves, `[data-action="field-group"][data-group="${group}"]`);
     await capture(saves, name);
   }
@@ -182,6 +182,15 @@ try {
   await waitFor(saves, `document.querySelector('#review-content').textContent.includes('沉淀总量摘要')`);
   await capture(saves, 'alchemy-preview');
   await closePage(saves);
+
+  const social = await openPage('saves', 1600, 1470);
+  await click(social, '[data-action="field-group"][data-group="favor"]');
+  await capture(social, 'relationships');
+  await click(social, '[data-action="favor-all-max"]');
+  await waitFor(social, `document.querySelector('#preset-preview')?.open && !!document.querySelector('.native-plan-note')`);
+  await evaluate(social, `document.querySelector('#preset-preview .plan-details').open = true`);
+  await capture(social, 'favor-preview');
+  await closePage(social);
 
   const growth = await openPage('saves', 1600, 1450);
   await click(growth, '[data-action="field-group"][data-group="workshop"]');

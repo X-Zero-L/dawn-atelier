@@ -10,9 +10,9 @@
 
 ## 首次准备
 
-启动器发现 Steam 安装目录或读取已记住的目录。点击准备后，会核对两个受支持游戏文件的 SHA-256，再在用户数据目录提取必要配置与插画，生成中文图鉴。游戏和存档在准备阶段只读。
+启动器发现 Steam 安装目录或读取已记住的目录。点击准备后，按已核对版本或结构兼容规则匹配存档格式，再在用户数据目录提取必要配置与插画，生成中文图鉴。游戏和存档在准备阶段只读。
 
-准备成功记录游戏路径、结构版本与文件状态。游戏文件发生变化时需重新准备；没有成功记录时不会把半成品当作可用资料。
+准备成功记录游戏路径、结构版本及程序集、元数据、资源清单状态。游戏或资源文件发生变化时需重新准备；没有成功记录时不会把半成品当作可用资料。
 
 ## 窗口生命周期
 
@@ -22,22 +22,24 @@
 
 打开启动设置时保留同一个 iframe，避免丢失未导出的草稿。所有生成数据与程序目录分离，更新 ZIP 后可继续使用原资料和备份。
 
+存档页与方案页通过 `/api/saves` 获取当前列表。页面可见时定时刷新，下拉框聚焦、展开及窗口恢复焦点时立即刷新；已选文件内容变化只提示重新读取，不直接替换正在编辑的快照。手动重读先保留原 SHA 对应草稿，再读取新快照。
+
 ## 构建
 
 在 Windows x64、Python 3.11 下运行：
 
 ```powershell
-python scripts/build-windows.py --expected-version v2.3.0
+python scripts/build-windows.py --expected-version v2.4.0
 ```
 
 脚本自动创建隔离环境、安装固定依赖、构建窗口版 EXE、检查打包文件，并输出：
 
 ```text
 dist/windows/
-  DawnAtelier-2.3.0-windows-x64.zip
-  DawnAtelier-2.3.0-windows-x64.sha256
-  DawnAtelier-2.3.0-windows-x64.manifest.json
-  DawnAtelier-2.3.0-windows-x64.dependencies.json
+  DawnAtelier-2.4.0-windows-x64.zip
+  DawnAtelier-2.4.0-windows-x64.sha256
+  DawnAtelier-2.4.0-windows-x64.manifest.json
+  DawnAtelier-2.4.0-windows-x64.dependencies.json
   SHA256SUMS-windows.txt
 ```
 

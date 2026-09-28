@@ -16,6 +16,9 @@ save_codec.py        具名字段解析与局部字节替换
 presets.py           预设操作和目标计算
 inventory.py         物品补全、种子关联与可逆新增
 progression.py       炼金与工坊的原生条件读取、资源准备
+favor.py             按每位角色配置计算好感上限和缺口
+compatibility.py     已核对版本、结构匹配和规范字段名
+native_layout.py     动态定位 IL2CPP 类型与方法表
 prepare.py           本机配置与界面资源准备
 demo_data.py         合成演示数据生成
 schemas/             受支持版本的字段结构与枚举
@@ -31,6 +34,8 @@ docs/images/         文档截图与封面
 数据流、写入顺序和请求限制见 [架构说明](architecture.md)。字段编码、炼金沉淀物属性映射与联动摘要见 [存档结构说明](save-format.md)。
 
 炼金解锁与工坊升级的条件、游戏原生调用链和保留不变量见 [成长准备实现依据](progression-implementation.md)。专项检查可运行 `python -m unittest discover -s tests -v`，只操作临时合成存档。
+
+跨版本结构与配置字段转换见 [游戏兼容判断](build-compatibility.md)。好感目标采用各角色配置里的最高累计阈值，数值拉满仍保留剧情和领奖记录。
 
 ## 本地目录
 
@@ -72,6 +77,6 @@ node scripts/refresh-media.mjs
 
 ## 发布检查记录
 
-当前支持版本恢复了 81 张配置表、655 种物品，以及 137 个存档消息、774 个字段。版本哈希见 [兼容性说明](compatibility.md)。
+当前支持版本恢复了 81 张配置表、656 种物品；最新版包含 137 个可序列化存档消息、776 个确认字段。版本哈希见 [兼容性说明](compatibility.md)。
 
 已有检查包括：配置表行数与对应 CRC、Python/JavaScript 语法、演示和真实模式的只读启动、桌面与窄屏截图、变更预览，以及视频输出参数。未逐项验证将修改存档加载到游戏后的效果。

@@ -16,7 +16,8 @@
 - Microsoft Edge WebView2 Runtime（多数 Windows 电脑已安装）。
   缺少时请按启动窗口提示安装，或访问：
   https://developer.microsoft.com/microsoft-edge/webview2/
-- 当前支持游戏资源版本：2026-09-25-1016。
+- 已核对游戏资源版本：2026-09-28-1042、2026-09-25-1016。
+  兼容补丁按关键结构与序列化代码核对；游戏更新后请重新准备资料。
 
 资料、设置、日志与备份保存在：
 %LOCALAPPDATA%\DawnAtelier

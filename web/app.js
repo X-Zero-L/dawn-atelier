@@ -100,19 +100,18 @@ function showItem(id) {
 function closeDrawer() {$('.workspace').inert=false;$('.sidebar').inert=false;if(state.drawerTrigger?.isConnected)state.drawerTrigger.focus({preventScroll:true});state.drawerTrigger=null;$('#drawer-backdrop').hidden=true;$('#item-drawer').hidden=true;document.body.style.overflow='';state.selectedItem=null;}
 
 async function renderSaves() {
+  await refreshSaveList();
+  if(state.page!=='saves')return;
   const saves=state.boot.saves.filter(x=>!x.error);
-  if(!saves.length){$('#main').innerHTML=heading('MAKE IT YOURS','存档编辑','从一份存档开始，轻轻调整你的冒险。')+empty('还没有发现存档','在游戏中创建一份手动存档，然后刷新工作台。','file');return;}
+  if(!saves.length){$('#main').innerHTML=heading('MAKE IT YOURS','存档编辑','从一份存档开始，轻轻调整你的冒险。')+empty('还没有发现存档','在游戏中创建一份手动存档，然后点击刷新列表。','file');renderSaveFreshness();return;}
   if(!state.saveName)state.saveName=saves[0].name;
   $('#main').innerHTML=heading('MAKE IT YOURS','存档编辑','每个改变，都可以先想一想、再确认。',`<div class="save-selector"><select id="save-select" aria-label="选择存档">${saves.map(s=>`<option value="${E(s.name)}" ${state.saveName===s.name?'selected':''}>${E(s.title)}</option>`).join('')}</select><button class="icon-button" data-action="refresh-save" title="重新读取存档" aria-label="重新读取存档">${I('refresh')}</button></div>`)+`<div id="save-content">${loading()}</div>`;
-  $('#save-select').addEventListener('change',async e=>{
-    if(state.pending.size){e.target.value=state.saveName;toast('先导出或清空当前修改，再切换存档。');return;}
-    state.saveName=e.target.value;state.save=null;presetUI.history=[];state.fieldPage=0;await loadSave();
-  });
+  bindSaveSelector($('#save-select'));
   if(state.save&&state.save.name===state.saveName)renderSaveContent();else await loadSave();
 }
 async function loadSave() {
   const name=state.saveName;
-  try {const data=await api('/api/save?name='+encodeURIComponent(name));if(name!==state.saveName)return;state.save=data;restoreDraft();if(state.page==='saves')renderSaveContent();renderPending();}
+  try {const data=await api('/api/save?name='+encodeURIComponent(name));if(name!==state.saveName)return;state.save=data;restoreDraft();if(state.page==='saves')renderSaveContent();renderPending();renderSaveFreshness();}
   catch(e){if($('#save-content'))$('#save-content').innerHTML=empty('暂时无法读取',e.message,'file');toast(e.message,true);}
 }
 function groupMatches(field) {return state.group==='all'||(state.group==='common'?field.common:field.group===state.group);}
@@ -190,7 +189,7 @@ document.addEventListener('click',async event=>{
   else if(action==='field-page'){state.fieldPage+=Number(button.dataset.delta);renderFields();}
   else if(action==='edit-field')openEdit(Number(button.dataset.index));
   else if(action==='clear-pending'){checkpoint('清空修改清单');state.pending.clear();persistDraft();renderPending();if(state.page==='saves')renderFields();toast('所有待保存的修改已撤销。');}
-  else if(action==='refresh-save'){if(state.pending.size){toast('请先导出或清空修改，再重新读取。');return;}state.save=null;$('#save-content').innerHTML=loading();await loadSave();toast('已重新读取游戏存档。');}
+  else if(action==='refresh-save')await reloadLiveSave();
   else if(action==='review')await reviewChanges();
   else if(action==='remove-change'){const path=button.dataset.path;if(!state.pending.has(path))return;checkpoint('移除一项修改');state.pending.delete(path);persistDraft();renderPending();if(state.page==='saves')renderFields();if(!state.pending.size)$('#review-dialog').close();else await reviewChanges();}
   else if(action==='export-save')await exportChanges(button);

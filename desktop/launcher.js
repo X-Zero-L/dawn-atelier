@@ -6,7 +6,7 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.3.0', game_dir: '', detected: false, prepared: false,
+    version: '2.4.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
     error: '', mode: null, active_url: null, last_prepared: null,
@@ -112,7 +112,7 @@
     document.body.classList.toggle('preparing', state.busy);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.3.0'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.4.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -121,7 +121,7 @@
     setText('selection-badge', state.prepared ? '资料已就绪' : selected ? state.detected ? '已找到游戏' : '已选择目录' : '等待选择');
     setText('path-hint', pathDirty ? '路径已更改，点击“使用此目录”保存。' : state.detected ? '已找到 ThePiper.exe，安装目录已记住。' : selected ? '已保存安装目录，下次打开可继续使用。' : '可选择文件夹，也可以直接粘贴安装路径。');
     setText('prepare-note-title', state.prepared ? '本地资料已就绪' : '首次使用，自动准备本地资料');
-    setText('prepare-note-detail', state.prepared ? '直接打开工坊即可开始编辑。游戏更新后，可重新准备资料。' : '工坊会读取游戏资料并整理物品图鉴，完成后自动打开工作台。');
+    setText('prepare-note-detail', state.prepared && state.compatibility ? `${state.compatibility.package_version} · ${state.compatibility.message}。游戏更新后重新准备即可。` : state.prepared ? '直接打开工坊即可开始编辑。游戏更新后，可重新准备资料。' : '自动核对存档结构与资源配置。兼容补丁可直接准备，完成后进入工作台。');
     setText('start-label', state.busy ? state.mode === 'demo' ? '正在打开演示' : autoLaunchIntent ? '正在准备，完成后自动打开' : '正在处理，请稍候' : active && state.mode === 'game' && !pathDirty ? '返回我的工坊' : state.prepared && !pathDirty ? '打开我的工坊' : '准备并打开工坊');
     setText('demo-label', active && state.mode === 'demo' ? '返回演示' : '先体验演示');
     element('start-arrow').toggleAttribute('hidden', busy);
@@ -337,7 +337,7 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.3.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            version: '2.4.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
             prepared: false, data_dir: '', busy: scene === 'preparing',
             progress: scene === 'preparing'
               ? {percent: 68, stage: 'catalogue', message: '正在整理物品、炼金与角色资料', detail: '完成后将自动打开工坊。'}

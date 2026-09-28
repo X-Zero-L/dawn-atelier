@@ -62,7 +62,7 @@ jobs:
           DAWN_RELEASE_TAG: ${{ steps.release.outputs.tag }}
         shell: pwsh
         run: python scripts/build-windows.py --expected-version $env:DAWN_RELEASE_TAG
-      - name: Check progression preparation on synthetic saves
+      - name: Check compatibility and save operations on synthetic fixtures
         shell: pwsh
         run: python -X utf8 -m unittest discover -s tests -v
       - name: Keep package and build records
@@ -109,7 +109,7 @@ jobs:
           - 一键超级补给、炼金沉淀物调整、NPC 好感与农具升级。
           - 保存前查看修改清单，自动备份原档；也可先进入演示模式。
 
-          需要 Windows 10 / 11 64 位和 Microsoft Edge WebView2 Runtime。当前支持游戏资源版本 **2026-09-25-1016**。
+          需要 Windows 10 / 11 64 位和 Microsoft Edge WebView2 Runtime。已核对游戏资源版本 **2026-09-28-1042** 和 **2026-09-25-1016**；兼容补丁可在重新准备后继续使用。
 
           请完整解压文件夹，并保留 DawnAtelier.exe 旁边的 _internal 文件夹。
           "@

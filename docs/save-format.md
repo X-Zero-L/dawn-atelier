@@ -6,9 +6,9 @@
 
 存档使用游戏自定义的 protobuf 类结构。部分消息使用字段号 0，负整数为补码 varint，不能统一按 ZigZag 解释。字段编号存在空缺，不能用声明顺序代替。
 
-`schemas/thepiper-2026-09-25/` 保存字段名、类型、字段编号、枚举和版本依据。编辑器只对已确认的现有字段作局部替换，其他数据保留原始字节。
+`schemas/thepiper-2026-09-25/` 和 `schemas/thepiper-2026-09-28/` 保存对应结构的字段名、类型、字段编号、枚举和版本依据。准备后根据兼容规则选用已核对结构；编辑器对确认字段作局部替换，其他数据保留原始字节。
 
-游戏更新后，不应直接把新文件哈希加入允许列表。需要重新核对资源读取、字段结构、存档格式与预设依赖。`research/schema/extract_schema.py` 可恢复结构，需要 GNU `objdump`，可通过 `OBJDUMP` 指定路径。
+游戏更新后，不应直接把新文件哈希加入允许列表。兼容补丁可通过结构与序列化指纹检查；变化的结构仍需核对资源读取、存档格式与预设依赖。详见 [兼容判断实现](build-compatibility.md)。`research/schema/extract_schema.py` 可恢复结构，需要 GNU `objdump`，可通过 `OBJDUMP` 指定路径，Windows 也支持已安装的 WSL objdump。
 
 ## 炼金沉淀物
 

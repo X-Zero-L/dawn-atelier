@@ -1,7 +1,10 @@
 from inspect_meta import *
-typesptr=0x182b1c170
-fieldoffptr=0x182e62000
-methodptr=0x182eb2790
+from native_layout import NativeLayout
+layout=NativeLayout(pe,meta)
+typesptr=layout.types_pointer
+fieldoffptr=layout.field_offsets
+methodptr=layout.methods_pointer
+method_count=layout.method_count
 def ty(i):
  p=readva(typesptr+i*8,'<Q')[0]
  a,b=readva(p,'<QI')

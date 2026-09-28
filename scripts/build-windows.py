@@ -29,7 +29,7 @@ RUNTIME_PACKAGES = ("pywebview", "pythonnet", "cryptography", "Pillow")
 PRIVATE_NAMES = {"config.local.json", "gameassembly.dll", "global-metadata.dat", "thepiper.exe"}
 PRIVATE_EXTENSIONS = {".bundle", ".bytes", ".ress", ".save", ".bak"}
 WEB_FILES = {
-    "index.html", "app.js", "presets-ui.js", "style.css", "presets.css", "progression-ui.js", "progression.css",
+    "index.html", "app.js", "presets-ui.js", "style.css", "presets.css", "progression-ui.js", "progression.css", "save-refresh.js",
     "brand/emblem.svg", "brand/botanical.svg",
 }
 DESKTOP_FILES = {"index.html", "launcher.css", "launcher.js"}
@@ -70,9 +70,7 @@ def ensure_owned_paths():
 def source_files():
     files = list(ROOT.glob("*.py"))
     files.extend((ROOT / "research").rglob("*.py"))
-    files.extend(ROOT / "schemas/thepiper-2026-09-25" / name for name in (
-        "save_schema.json", "config_schema.json", "enums.json",
-    ))
+    files.extend((ROOT / "schemas").rglob("*.json"))
     for directory in ("build",):
         files.extend(path for path in (ROOT / directory).rglob("*") if path.is_file() and "__pycache__" not in path.parts)
     files.extend(ROOT / "web" / relative for relative in sorted(WEB_FILES))
@@ -224,6 +222,8 @@ def inspect_payload(directory):
     required = [
         "DawnAtelier.exe", "_internal/version.json", "_internal/web/index.html", "_internal/desktop/index.html",
         "_internal/schemas/thepiper-2026-09-25/save_schema.json",
+        "_internal/schemas/thepiper-2026-09-28/save_schema.json",
+        "_internal/schemas/compatibility/2026-09-28-1042.json",
         "_internal/build/assets/dawn-atelier.ico",
         "_internal/webview/lib/Microsoft.Web.WebView2.Core.dll",
         "_internal/webview/lib/Microsoft.Web.WebView2.WinForms.dll",

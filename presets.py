@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 import inventory
 import progression
+import favor
 
 from save_codec import ROOT, Schema
 from app_config import DATA_ROOT, SCHEMA_ROOT
@@ -18,7 +19,8 @@ def rows(name):
 
 ITEM_CONFIG = {x['bnog']: x for x in rows('ItemConfig')}
 ITEM_NAMES = {x['id']: x['name'] for x in json.loads((DATA_ROOT / 'configs/物品目录.json').read_text(encoding='utf-8'))}
-NPC_CONFIG = {x['bnin']: x for x in rows('FavorNPCConfig')}
+NPC_FAVOR = favor.catalog(rows('FavorNPCConfig'))
+NPC_NAMES = {x['id']: x['name'] for x in json.loads((DATA_ROOT / 'configs/分类目录.json').read_text(encoding='utf-8')).get('UnitConfig', [])}
 TOOL_CONFIG = {}
 for row in rows('ToolUpgradeConfig'):
     if row.get('bodn') in (1, 2, 3, 4) and row.get('bodm', 0) > 0:
@@ -69,7 +71,8 @@ ACTIONS = [
     {'id':'sediment','name':'炼金沉淀物','category':'成长','icon':'flask','description':'将炼金沉淀物补足到目标数量，现有数量更多时保留。','note':'直接输入数量，自动同步沉淀摘要，无需倍率换算。','parameter':number('目标数量',1000,0,SEDIMENT_MAX,[100,1000,10000],'份')},
     {'id':'alchemy_ready','name':'炼金解锁准备','category':'成长','icon':'flask','description':'为当前可准备的普通天赋与前置备齐金币、点数和材料，回游戏按顺序解锁。'},
     {'id':'workshop_ready','name':'工坊升级准备','category':'经营','icon':'layers','description':'补足目标工坊等级所需的累计营业额与总好感，查看实际建筑和美观缺口。','note':'保存后回游戏逐级点击升级，领取解锁与奖励。建筑和美观需由实际布置满足。','parameter':number('目标工坊等级',50,1,50,[10,20,30,50],'级')},
-    {'id':'favor','name':'好感进阶','category':'社交','icon':'heart','description':'按每位 NPC 自己的档位配置提升好感，较高好感会保留。','note':'调整好感数值；后续剧情与奖励沿用游戏规则。','parameter':number('目标档位',5,1,12,[3,5,8,12],'级')},
+    {'id':'favor_max','name':'一键好感拉满','category':'社交','icon':'heart','description':'按每位已有角色的配置，自动算出最高档位所需好感并补足，保留更高现值。','note':favor.NATIVE_NOTE},
+    {'id':'favor','name':'好感进阶','category':'社交','icon':'heart','description':'按每位 NPC 自己的档位配置提升好感，较高好感会保留。','note':favor.NATIVE_NOTE,'parameter':favor.level_parameter(NPC_FAVOR)},
     {'id':'gifts','name':'重置今日送礼','category':'社交','icon':'heart','description':'把已有 NPC 记录的今日收礼次数归零。'},
     {'id':'staff','name':'员工恢复精神','category':'经营','icon':'users','description':'将员工当前 SAN 恢复到各自上限；零上限员工保持原设定。'},
     {'id':'tools','name':'升级农用工具','category':'种植','icon':'tool','description':'升级播种、浇水、收获和铲除工具，并选中该级可用范围。','parameter':number('目标等级',4,1,4,[2,3,4],'级')},
@@ -84,6 +87,7 @@ BUNDLES = [
     {'id':'merchant','name':'富足经营','subtitle':'让店铺和行囊都充实','description':'补足一百万金币和日常货品，让员工以充足精神继续工作。','category':'经营','icon':'bag','tone':'gold','art':10201,'actions':[{'id':'gold','value':1000000},{'id':'inventory','value':99},{'id':'staff'}]},
     {'id':'alchemist','name':'炼金准备','subtitle':'为下一次灵感备好材料','description':'材料、炼金种子、沉淀物与天赋点一次准备，配方依然由你选择。','category':'成长','icon':'flask','tone':'lilac','art':10509,'actions':[{'id':'materials','value':99},{'id':'seeds','value':99},{'id':'talent','value':30},{'id':'sediment','value':1000}]},
     {'id':'social','name':'街坊好友','subtitle':'给每一次相遇一点温度','description':'将现有 NPC 的好感提升到第 5 档，并恢复今日送礼次数。','category':'社交','icon':'heart','tone':'rose','art':10401,'actions':[{'id':'favor','value':5},{'id':'gifts'}]},
+    {'id':'social-max','name':'好感拉满','subtitle':'每位角色，各自算到顶','description':'自动计算已有角色的最高数值档位，一次补足全部好感。剧情、对话和奖励继续在游戏中完成。','category':'社交','icon':'heart','tone':'rose','art':10401,'badge':'自动计算上限','actions':[{'id':'favor_max'}]},
     {'id':'collector','name':'充实储备','subtitle':'把准备工作一次做好','description':'补足千万金币、999 份日常补给与 1000 枚牌桌筹码。','category':'进阶','icon':'archive','tone':'sand','art':10106,'actions':[{'id':'gold','value':10000000},{'id':'inventory','value':999},{'id':'chips','value':1000}]},
     {'id':'talent-prep','name':'炼金解锁准备','subtitle':'材料备好，再点亮新能力','description':'按当前工坊等级与剧情前置，为普通天赋补齐成本；回游戏点击解锁，让配方、建筑与能力正常生效。','category':'成长','icon':'flask','tone':'lilac','art':10522,'actions':[{'id':'alchemy_ready'}]},
     {'id':'workshop-prep','name':'工坊升级准备','subtitle':'看清缺口，逐级成长','description':'补足累计营业额与总好感。建筑、美观按实际布置满足后，在游戏里逐级升级并领取奖励。','category':'经营','icon':'layers','tone':'sage','art':10510,'actions':[{'id':'workshop_ready','value':50}]},
@@ -92,7 +96,8 @@ BUNDLES = [
 
 def catalog():
     return {'version':1,'actions':ACTIONS,'bundles':BUNDLES,
-            'npc_levels':{str(ident):[{'level':level,'value':value} for level,value in zip(config.get('bnio',[]),config.get('bnip',[]))] for ident,config in NPC_CONFIG.items()},
+            'npc_levels':{ident:config['levels'] for ident,config in NPC_FAVOR.items()},
+            'npc_favor':NPC_FAVOR,
             'tool_ranges':{str(ident):[row.get('bodt',[1,1]) for row in sorted(config,key=lambda row:row['bodm'])] for ident,config in TOOL_CONFIG.items()},
             'inventory_coverage':{'stackable':sum(inventory.stackable(item['raw']) for item in inventory.ITEMS),'creatable':sum(inventory.addition_supported(item['raw']) for item in inventory.ITEMS)},
             'rules':['超级补给可新增常规物品','补足操作保留更高现值','物品数量受配置上限约束','方案可预览、撤销和保存']}
@@ -131,6 +136,7 @@ def plan(data, actions):
     notes=[]
     blockers=[]
     unlock_order=[]
+    favor_exclusions=[]
 
     def old(route):
         return changes[route]['raw_value'] if route in changes else values[route]
@@ -201,21 +207,25 @@ def plan(data, actions):
                 route=change['path']
                 update(route,max(old(route),change['raw_value']),ident,report,
                        change['label'],change['detail'],change['scale'])
-        elif ident in ('favor','gifts'):
+        elif ident in ('favor','favor_max'):
+            effective_values={**values,**{route:change['raw_value'] for route,change in changes.items()}}
+            result=favor.plan(effective_values,NPC_FAVOR,None if ident=='favor_max' else target)
+            notes.append(favor.NATIVE_NOTE)
+            for npc in result['targets']:
+                name=NPC_NAMES.get(npc['id'],f"角色 {npc['id']}")
+                detail=f"{name} · 数值目标 Lv.{npc['target_level']}"
+                update(npc['path'],npc['value'],ident,report,'好感值',detail)
+            report['excluded']=len(result['excluded'])
+            for npc in result['excluded']:
+                entry={**npc,'name':NPC_NAMES.get(npc['id'],f"角色 {npc['id']}")}
+                if entry not in favor_exclusions:favor_exclusions.append(entry)
+                skipped.append({'action':definition['name'],'reason':entry['name']+'：'+entry['reason']})
+        elif ident=='gifts':
             for route,npc_id in values.items():
                 if not re.fullmatch(r'AllFavorData\.allNPCData\[\d+\]\.npcID',route):continue
                 parent=route.rsplit('.',1)[0]
-                if ident=='gifts':
-                    field=parent+'.receiveGiftsToday'
-                    if field in values and old(field)>=0:update(field,0,ident,report,'今日收礼次数',f'NPC {npc_id}')
-                else:
-                    config=NPC_CONFIG.get(npc_id,{})
-                    thresholds=list(zip(config.get('bnio',[]),config.get('bnip',[])))
-                    field=parent+'.favorValue'
-                    if not thresholds or field not in values:report['excluded']+=1;continue
-                    eligible=[pair for pair in thresholds if pair[0]<=target]
-                    threshold=max(eligible,key=lambda pair:pair[0])[1] if eligible else thresholds[0][1]
-                    update(field,max(old(field),threshold),ident,report,'好感值',f'NPC {npc_id}')
+                field=parent+'.receiveGiftsToday'
+                if field in values and old(field)>=0:update(field,0,ident,report,'今日收礼次数',f'NPC {npc_id}')
         elif ident=='staff':
             for route,maximum in values.items():
                 if not re.fullmatch(r'AllStaffSaveData\.StaffList\[\d+\]\.MaxSan',route):continue
@@ -251,12 +261,14 @@ def plan(data, actions):
                 report['message']+=f"；新增 {report['new']} 种物品"
             if report.get('missing_skipped'):
                 report['message']+=f"；{report['missing_skipped']} 种特殊种子未新增"
+        if ident in ('favor','favor_max') and report['excluded']:
+            report['message']+=f"；{report['excluded']} 条角色记录已跳过，请查看原因"
         reports.append(report)
     # Omit net no-ops when two requested actions converge on the original value.
     changes={route:change for route,change in changes.items() if change['raw_value']!=values[route]}
     planned=[{key:value for key,value in change.items() if key!='raw_value'} for change in changes.values()]+list(additions.values())
     return {'actions':requested,'edits':[{'path':change['path'],'value':change['value']} for change in planned],
-            'changes':planned,'new_items':len(additions),'missing_exclusions':missing_exclusions,
+            'changes':planned,'new_items':len(additions),'missing_exclusions':missing_exclusions,'favor_exclusions':favor_exclusions,
             'count':len(planned),'reports':reports,'skipped':skipped,
             'notes':list(dict.fromkeys(notes)),'blockers':list(dict.fromkeys(blockers)),
             'unlock_order':list({entry['id']:entry for entry in unlock_order}.values())}
