@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T19:35:33.967Z",
+  "generatedAt": "2026-09-28T21:19:06.782Z",
   "gameTitle": "黎明门前的吹笛人",
   "source": {
-    "commit": "a68620a97dd98bc78d93c7e98ed403724e7ba721",
+    "commit": "111169273181a94ac55f64a077546b75e73f596e",
     "dirty": false,
-    "fingerprint": "8d854d2b8e2adbfb13e0da44c1fe1d5287c22e77e0f3cd1d0c51d688b8ae2df3",
+    "fingerprint": "0075e8b0559798efda5a829bea70f6e5c0e78f0a138b8c7f724060648891c306",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -20,8 +20,12 @@
         "e58fcf8481430b8847a6ee31ea45a4cf7f2d4d5da1a3155fbb3eecfa810aabd3"
       ],
       [
+        "compatibility.py",
+        "29ff5711f64f9edb01ff5696cf25dc2a00aa0395408b581d718064e27bab5743"
+      ],
+      [
         "demo_data.py",
-        "152dba78617fbe55959ee79f31d8bcdc4cbe3fa650efefcb41ea304871c477f6"
+        "67c2185fc3c5aab5a5cb4e0a648af7f32ece87960f118245ef92b7f95268c57f"
       ],
       [
         "desktop.py",
@@ -29,7 +33,7 @@
       ],
       [
         "desktop/index.html",
-        "8763a51b209e42f03914646826f17f92f705e18034503722c5aa742969d50a13"
+        "f2ac84f004927b7d35aa1e9dc4664114600b50270628ca9ac966e43a8f45ab11"
       ],
       [
         "desktop/launcher.css",
@@ -37,11 +41,11 @@
       ],
       [
         "desktop/launcher.js",
-        "53885cb056c67a9a8c64a7afb4488951ad1e09e812df9c8837a1cf1f35638802"
+        "d673eb411f4beb6724b30f1265445f3c4513990069bd772d71cdfd224f9c0444"
       ],
       [
         "desktop_service.py",
-        "b617d8b4a437ad43fefc51cac26893145ebbeef2bd06de90e68d459f71eadee5"
+        "d5346365ee2eae391b52926ac01d1e5fbce303195fbcd9a7b3d7cb3a973793f7"
       ],
       [
         "export_catalogue.py",
@@ -50,6 +54,10 @@
       [
         "extract_web_art.py",
         "8c3b7f9e1fb2782809d2025b0a3614808c3c2bb7bd1568b031ed4e0204e60f51"
+      ],
+      [
+        "favor.py",
+        "f1fba87deee5b800ddf41112aa99f06fc0c06128c356aea87ac6fb9e7f347d63"
       ],
       [
         "game_runtime.py",
@@ -72,16 +80,20 @@
         "d410e95910e4adccc4fb6a168478bbfff4b98bd6f2467c5e77967aa142588ee0"
       ],
       [
+        "native_layout.py",
+        "384ea1dc36f02d9ccf53bb2e598ef9eee1ba9370252b908417b872349ab8169d"
+      ],
+      [
         "piper_save.py",
         "2af7813a64c903697201764a336cd54521c22a1170bb54eba77ff5d120f71eb5"
       ],
       [
         "prepare.py",
-        "9f25e78c7db29d31804fe02ca8d5a418ab5daa6016ea20f46eca40c94670e4e6"
+        "f5f30829cfbec94b71797fbed549babc20c06bfd1bd4399c49512877c6523f36"
       ],
       [
         "presets.py",
-        "c19d6afb44357fbb5cbe5cc36d18ffc6f8cc790c46a6514adc0d857cb1a7ceb4"
+        "31d3fb9fcd8d6f00b4d71971d81c44527d250c8a53cf0a15148b86c560855965"
       ],
       [
         "progression.py",
@@ -96,6 +108,14 @@
         "e399ce2e51dc00753114d793cab03671aa599594c5a4a42fdd9e2dbf2db00373"
       ],
       [
+        "schemas/compatibility/2026-09-25-1016.json",
+        "99b333989a367af8dab3657838397c67081921e58f22c3c5962b2eeb0f642776"
+      ],
+      [
+        "schemas/compatibility/2026-09-28-1042.json",
+        "35f5f66cc812220f10a31641b7929ef66c7e2d7f840445300ba51e90d2454786"
+      ],
+      [
         "schemas/thepiper-2026-09-25/config_schema.json",
         "3cbc82c6653785e8d1783aafd102ace078db64f8d218c81dda750a0fc205d77d"
       ],
@@ -108,16 +128,28 @@
         "16c30b431da180970c13691cab10d20def2d2715852516e044461355528bf5b8"
       ],
       [
+        "schemas/thepiper-2026-09-28/config_schema.json",
+        "8e904ecc95eeed854b99f68c03dede9dddd0a7aae83f913166c5fc305764820f"
+      ],
+      [
+        "schemas/thepiper-2026-09-28/enums.json",
+        "1f92c05274b347f313dce40e82d5767e66f8b87b3fa5a4a48b7e92e7670cf906"
+      ],
+      [
+        "schemas/thepiper-2026-09-28/save_schema.json",
+        "81632ce7c4c68eba9b55aa2377ad928b369d23f222cc4d1f7e2ac14f703597cd"
+      ],
+      [
         "scripts/build-windows.py",
-        "9534eb4ecb35add200a1eea2c2f1bf29226751921f033fe22107248cfee1f808"
+        "80c28c7bb9cb29bad1fa409dd7f0e495cfcf07f49a21bf36dca41f4d64e73c5c"
       ],
       [
         "scripts/capture-demo.mjs",
-        "d9633ba5af95202cb305608f0dcd74468661eb259ad119ec40f2f84592028fee"
+        "9b3e5d8f23ceb4d526248796e02d760b9d5713edbb85c55c49b08cef2a8954e8"
       ],
       [
         "scripts/media-config.json",
-        "365e9e0f8558951855dd44c5c41d7434a979f4b9708008a499747ade8bd67c42"
+        "dba468253c38e5b053a5cae45956b78637446c282a7d4b7fcf0e320b1c10b77b"
       ],
       [
         "scripts/media-lib.mjs",
@@ -137,7 +169,7 @@
       ],
       [
         "version.json",
-        "da707bc6c99651bbb25a776df498b586fa9e0c668f9d8cd091da6a19add69f16"
+        "76e993f5cd819811db3fb97ef753aa05130148f63c51a8911101fdb2c25d7839"
       ],
       [
         "video/package-lock.json",
@@ -169,7 +201,7 @@
       ],
       [
         "video/src/showcase.jsx",
-        "d11c4dffc1942376c4f5102858ad9b110003381b220c14d21a90c3a0b52d0a5f"
+        "0e21c5866d619d72db2464782f42707228326bae3f835147168066f32e9542ed"
       ],
       [
         "video/src/styles.css",
@@ -181,7 +213,7 @@
       ],
       [
         "web/app.js",
-        "aef68960ab87dc191e99f0086d20b1b81819a67973a945cc0553d6623cb80916"
+        "d0c7d5078f84a1d7fb11037285a2a363491da91b7257ae09b75acc79a5236ca3"
       ],
       [
         "web/brand/botanical.svg",
@@ -193,15 +225,15 @@
       ],
       [
         "web/index.html",
-        "fd88e62947444f8b8caefd8b8930f046ea2f6609d578b156effff6fb5578771b"
+        "d886e958b91d135bbd85b58714bf26159e27d7244f7fc552a21687a7f5c766a4"
       ],
       [
         "web/presets-ui.js",
-        "217d739b3d521a3776de8adae69f5628b75667592e5db22489c295d37c80a72d"
+        "472670af1c529102bfd2eaa85cb87b7292e2d23de4702b76cbd92821d16a7cc7"
       ],
       [
         "web/presets.css",
-        "1886ac2bb7e37454bba0bfb68ed75fd2c1db36a7d26a38a81743586e03d94b0e"
+        "a99dceeee79e9fff4745ec3e145439e1a839389c360ff79c091916134be9fbf6"
       ],
       [
         "web/progression-ui.js",
@@ -212,12 +244,16 @@
         "a052cb49c4ed1af23bac3fd9e7b7d448de515279c025c14062eca4af5935bee0"
       ],
       [
+        "web/save-refresh.js",
+        "c36182ffe4fb5c2a7dd987a76ee12268b3862b571e00f4453fc2206afd76534d"
+      ],
+      [
         "web/style.css",
-        "1aad5b5e4980c4655a0082517643ffa44bedafa908cf00801cf68b0d09c9bf97"
+        "c99ff26a08fce557c665858af01468c0632d85e956254660650701aca434c9ff"
       ],
       [
         "web_server.py",
-        "6b4fc05e0cdfeef0da8abd89c7260a54be9c11264001d8b9f53a4b3b2f27fbd9"
+        "37554347c3be7e6ac979903b2a2ae199cac16d2a7f6aca35f8f12caf1a5b8e6d"
       ]
     ],
     "artwork": {
@@ -1959,112 +1995,120 @@
       "file": "desktop.png",
       "width": 1280,
       "height": 900,
-      "sha256": "5ccacf9429869c7a13121b064a2078fcdbef4590e0107a2dd13679d6d4ff4585",
-      "bytes": 94582,
+      "sha256": "78b09531509d7a7ee6c9df14b761c55a7a7eb30696bb95fd7be8dbb9e7474ff8",
+      "bytes": 94850,
       "route": "desktop"
     },
     "desktop-preparing": {
       "file": "desktop-preparing.png",
       "width": 1280,
       "height": 900,
-      "sha256": "6ccbc317de63a017c5f5e427bc78d2355a70473d366250aead27ed1704dfeade",
-      "bytes": 91496,
+      "sha256": "8aa24156690977893f7c006df00493030d39c51cb29bf5df4ffd0a45c94d279e",
+      "bytes": 91492,
       "route": "desktop-preparing"
     },
     "overview": {
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "e244949c32728e155ca21c2a58ce15284acb0e34e76da3a4bebfcee2dc783476",
-      "bytes": 161568,
+      "sha256": "6b12e63b0396873d797b883ba9906c05ba1e47c8593f94c4f9dcacf31af45fdd",
+      "bytes": 161429,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "e7f701d7d70a5d28423b38984562359955e61da80fcf7c974dc2a05fa0b22a59",
-      "bytes": 397967,
+      "sha256": "f42306112a93e013ea88ad047897143a9f58dcf0f84ad117b46eba8eddbbac44",
+      "bytes": 413201,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "533e21aebd7dccf16d91a1fd421f1388a3667fabf7b2131fe3c19df4dd8daf32",
-      "bytes": 425314,
+      "sha256": "a46e48ab482bb142af198168598ca2145ed1cc0af6e2d411d768aa32c280bd99",
+      "bytes": 457168,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "be273a7eed9625d649ae2ebe462d276e8f9d9ab7fd2936d27501fb7ab7a5421d",
-      "bytes": 452521,
+      "sha256": "94789d5fa3d4226070dde2339b408a2bb7296164ba4161180974f927a6f70f96",
+      "bytes": 473464,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "0d4505e4b13f75bac0091accb58fb3840be741d38d242ebe2b403a3b31dfa803",
-      "bytes": 143686,
-      "route": "saves"
-    },
-    "relationships": {
-      "file": "relationships.png",
-      "width": 1600,
-      "height": 1200,
-      "sha256": "1e379874514d379fd822d397df8754cb36ad5834a13b6751fb8d0305e81bc82d",
-      "bytes": 130146,
+      "sha256": "31f8a68bfcddbf2467bc6ba8c1eb144a36ba258d30b457abad7e6efa550970c1",
+      "bytes": 146162,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "691007ce73a539cfb622104b6e6b9da5e804e30819c4084faf2eeb48f8ec66ba",
-      "bytes": 116315,
+      "sha256": "0ea230085145fb404b9159ac3e2381a8bcc5115c143901e84a6f11a1881b19fe",
+      "bytes": 122094,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "5ec8928d889be6989a6fa8e37b160adbe39315f734efc3130e2e761ceedbfb73",
-      "bytes": 181230,
+      "sha256": "847eec7d2277605304f668a47531049c35c432d1b1fad7c0e9165e463aee86dd",
+      "bytes": 185726,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "66a89b68533c1d4246a8dffc0ccd24f21256c3d95086d31805e5fe399fa514c8",
-      "bytes": 272208,
+      "sha256": "4008303f758a99ad1414031649174fc60a0ef2c1883a1f01b095c18514006ed9",
+      "bytes": 281105,
+      "route": "saves"
+    },
+    "relationships": {
+      "file": "relationships.png",
+      "width": 1600,
+      "height": 1470,
+      "sha256": "b05d5aad4b34592dcbfe2eceaf78644821cf1c0f5ad6269b08dd8d571aa54a8f",
+      "bytes": 177499,
+      "route": "saves"
+    },
+    "favor-preview": {
+      "file": "favor-preview.png",
+      "width": 1600,
+      "height": 1470,
+      "sha256": "61ed7ab30733d3e1d10e45ad764c1c6696777ea7207a9d56af317e1d21cb50f7",
+      "bytes": 315463,
       "route": "saves"
     },
     "workshop": {
       "file": "workshop.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "a0bafde635493697489bd1736d85a90a41968a3adfd59a0e861ed58cdefc30e1",
-      "bytes": 145476,
+      "sha256": "e10fbf8eef761e47e6903f5d2113f85f12a5be24e43689a532a203b4558a8874",
+      "bytes": 151119,
       "route": "saves"
     },
     "progression-preview": {
       "file": "progression-preview.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "329bc6965ee81f2b8b7630b3c4ba1f3b49bb54ac85cfde052952799bc0d465a4",
-      "bytes": 261574,
+      "sha256": "5ecba5fd22d4a45cab22683b0519b3106b6aafd77c79e090763626f8f3e44d73",
+      "bytes": 276368,
       "route": "saves"
     },
     "alchemy-unlocks": {
       "file": "alchemy-unlocks.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "ea04b983415662cffbbd868c38d229827dddee06b3a90331758743833b74e0ab",
-      "bytes": 226919,
+      "sha256": "11786ecfdba1a42c5bb69da2d12a6286570dae524afd43a4eef809057feafb70",
+      "bytes": 231877,
       "route": "saves"
     },
     "items": {
@@ -2079,32 +2123,32 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "e4f152aa7343edbd337096222dff748adeb215d517404a4bab625921f2c2a7e6",
-      "bytes": 335916,
+      "sha256": "311201d498f7d4543fcf90a424d29c3a980d1aba2229227d8ce5cfe504366111",
+      "bytes": 327888,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "1d71fc4d3e99b2ead499d4edb8b86ac1981568a9567bcac676b996aa2a95310d",
-      "bytes": 346968,
+      "sha256": "bd86c24b284fefa43e323a82b129fa607310caa8cea62446235dab62b0cf6e0b",
+      "bytes": 355002,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "ed7344bb0903506dd5f6a51f2d985176954de6dcad1eb5cdab674d0961ab391d",
-      "bytes": 126460,
+      "sha256": "fc8ae53a5d20f4a0ff0aa8c64c2edbb997811a5ffbabb59878a63a4b60c25b66",
+      "bytes": 127582,
       "route": "presets"
     },
     "mobile": {
       "file": "mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "caa7b792142448f3cc4a3ce2b9d2c3a706dbbb92c149c93664e41ae5d065ec46",
-      "bytes": 68167,
+      "sha256": "59c95db6f55c0b030098e306bade1d7e196df4512a21e8793b7d89d96f30e126",
+      "bytes": 68062,
       "route": "presets"
     }
   },
@@ -2119,16 +2163,16 @@
   },
   "files": {
     "dawn-atelier-demo.mp4": {
-      "bytes": 15880030,
-      "sha256": "983dbe940f79f220f02a19d3a556686f89e507dac59bb329db38393c663ade43"
+      "bytes": 16208347,
+      "sha256": "48dde8de1bb182ad811bf939305993c9c7354ac160b913ea1c39ccccc7f2d81e"
     },
     "dawn-atelier-demo.gif": {
-      "bytes": 6694544,
-      "sha256": "b170171cfd73516a71c23371f6b4d20f3c5edfabc08c574b12bbee21a581b60b"
+      "bytes": 6542623,
+      "sha256": "ea63a6b4ed458dc578e482fe78fd9cf5ffb06e242d88796abe71ec9e9f349d2a"
     },
     "dawn-atelier-poster.png": {
-      "bytes": 252299,
-      "sha256": "1f7a5572c8b6b99ea019a27ce41a57b17248515d6153aeac836fddfe9777ee0b"
+      "bytes": 252881,
+      "sha256": "28a16158437b24611ecdce8cd2c97f1e995f6ef0a68c65772875b31ec3140cc1"
     }
   }
 }
