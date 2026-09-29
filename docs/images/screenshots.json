@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T15:01:01.953Z",
+  "generatedAt": "2026-09-29T15:47:06.108Z",
   "syntheticDemo": true,
   "source": {
-    "commit": "81a8a91e2456ad8e3750d20ccb70da5d4cd20e3a",
+    "commit": "302addb311fff672503d7cab7a538d43de070223",
     "dirty": false,
-    "fingerprint": "0b755a584efc40001b20c15845b94d55c5f107f534923c37db823788e34040ad",
+    "fingerprint": "871c8b3fd0d55338aae387b9f322126d094944b9e8da4cd3645bc0f1e7eb699e",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -20,6 +20,10 @@
         "e58fcf8481430b8847a6ee31ea45a4cf7f2d4d5da1a3155fbb3eecfa810aabd3"
       ],
       [
+        "app_update.py",
+        "c64d7b13720efc5e14f7264e6726f263b5de50e3ea7e49725780500d2550aad3"
+      ],
+      [
         "compatibility.py",
         "dc4b5c534f7561918419e673a5e05c30e65fb4e9cb75ccc523ddcdf8b95ff528"
       ],
@@ -29,23 +33,23 @@
       ],
       [
         "desktop.py",
-        "df2bdbd0c1b4d06a0bd93fcb459189296f30d019bfca5d94a667d042cc78190b"
+        "bf7c7ad6f1a998eb5284c43c8529bfbdb534ce72e54f20eeaaebbb081e38a791"
       ],
       [
         "desktop/index.html",
-        "0d2494d034f4f728e68cb5406b37d2c42f97108376d9f05ad6c87b74997a31d7"
+        "37962536625af607db71c110ef6436a2d2302539e41d1988c1197d4b9e2635a0"
       ],
       [
         "desktop/launcher.css",
-        "93474966d6b9f28b49ba4e56efdc8e8a9638a036eb17f4e7659ba3e77b698dee"
+        "d924743e7277e300ed5d2b3637b7667bff9db0e108caa279b08662399bd57b58"
       ],
       [
         "desktop/launcher.js",
-        "af7118ea9a19612cb300246880f09f73d8ef77f8adffd15c23c0cf349a6ad426"
+        "b087cd76bd7d59e377925309b6cab419f109f87e3d7e373f115550f4f71da598"
       ],
       [
         "desktop_service.py",
-        "c6ca52375ce3564feaceaa89c3206471536be51037a32e1f2c6012c5e650036b"
+        "b00aa0317871f93734588a28d2695480014a59e7fe9c966f785c87afd5dd5287"
       ],
       [
         "export_catalogue.py",
@@ -161,11 +165,11 @@
       ],
       [
         "scripts/capture-demo.mjs",
-        "ed5ab25cc01442a72ca14cc8e9835e5c0f095bbe6064fa29a72354239e2f9beb"
+        "9589af71dca6cbb7697c5e5b00df0c85c17313cebd0c9c09ab023c6a6f3811c8"
       ],
       [
         "scripts/media-config.json",
-        "08f225023369d02057e12e41ed096bf463f6a5f962eb96717ef4e536865004ee"
+        "1a429dfb54aac8ce47f77dc898829f4b894c58e9c97c4da51fa0f86354b7224e"
       ],
       [
         "scripts/media-lib.mjs",
@@ -184,8 +188,16 @@
         "7d96257c791254761412267fd775eef17cc75046be4f50cf8cc32d5373798751"
       ],
       [
+        "update_packages.py",
+        "1789ac4916c3e1c47aeee0a8939dd1ab0756adbd1c3edf857109538a69f3fd96"
+      ],
+      [
+        "updates_install.py",
+        "a370348bd5659ca40bfa95d3c58d29f6c48fcb6645116b7e1fbdbb3e84a9d4a8"
+      ],
+      [
         "version.json",
-        "c942c5cc11a39b4b269cd4ecc2b61b763e76bbf5085256bc9eecf98f383cef6e"
+        "d7aedb4550f6dcae53dfb266d43bf19a441e598b62b6417423e52cec15318b3b"
       ],
       [
         "video/package-lock.json",
@@ -217,7 +229,7 @@
       ],
       [
         "video/src/showcase.jsx",
-        "f23be08b87cd423949c2c9e41b43d2a59a974f99078b3b511db1a46d15710a07"
+        "089eeed7cfeb3e89bbb31f534d5ad5c35877eef9eefc93dbad51f5f68ad62338"
       ],
       [
         "video/src/styles.css",
@@ -2011,128 +2023,136 @@
       "file": "desktop.png",
       "width": 1280,
       "height": 900,
-      "sha256": "cfedf3aceab96c3fd5476f8fea6f226fa982757b61c7a5645338d5e4cbfb8cd3",
-      "bytes": 94846,
+      "sha256": "5d221641a78e17ee8d472bcbdcee21e53a60ccc576bc56d0f92af97240bb977d",
+      "bytes": 85562,
       "route": "desktop"
     },
     "desktop-preparing": {
       "file": "desktop-preparing.png",
       "width": 1280,
       "height": 900,
-      "sha256": "d7f71cf2ffa22e9c32f449152a25bf7137e2ea452b7f1459ce631e39a47072b9",
-      "bytes": 91489,
+      "sha256": "a629cda150a5b9545611868784d2cb4471314fc60197c65823d8a4b6c42e0181",
+      "bytes": 91460,
       "route": "desktop-preparing"
     },
     "desktop-updating": {
       "file": "desktop-updating.png",
       "width": 1280,
       "height": 900,
-      "sha256": "e8df5b4a9d85b688baede4962f776601475dc755a2b7262c737cc457a5d2f445",
-      "bytes": 93180,
+      "sha256": "33ea85e8b6a39b677ae04f8f2505d9a8718d87be8e8952772cfd8e9b184a55a2",
+      "bytes": 92235,
       "route": "desktop-updating"
+    },
+    "desktop-app-update": {
+      "file": "desktop-app-update.png",
+      "width": 1280,
+      "height": 900,
+      "sha256": "aff66fddcd883c13548ba3d4086053c724a7c78a808a25cb16c69662439ef2c6",
+      "bytes": 86183,
+      "route": "desktop-app-update"
     },
     "overview": {
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "ec284f1c9485b1587670c5c242fe0b1d5c78697c48701f37393d528ab4eb9036",
-      "bytes": 161433,
+      "sha256": "03bbc406b5ddf67dc76c844fc1217b92f5b5263e5c785a86284e92fe1b190319",
+      "bytes": 161468,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "89b7cc86bbd1ad9e5d08a197dbda8a1c362d032cddda474f31230bdb32929407",
-      "bytes": 413354,
+      "sha256": "7b25d2e13cfdef199f0e4795c473f02658294b68becc18fa0d98db659c6d60a9",
+      "bytes": 413498,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "dbfac257795f90047c3d427807465db85e5be092d4cdf541754b11967d584774",
-      "bytes": 457239,
+      "sha256": "216060a8a03c17a92ca9c63a4279f6fd29a52aa4308dd3d53ed170d34272ccc0",
+      "bytes": 457247,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "32dc6e70c2230f7fbcfa78e74b542683e051017c6c8743f15a5064e982dcdca5",
-      "bytes": 473532,
+      "sha256": "8023b2e984dbbf83b3a7693681147a7cab8cb8fac4f138a37ee3f21c764e3753",
+      "bytes": 473570,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "2296539ddffe9990510ec91678c9f2413ed82ab4f4e5f27528258e11f1a62840",
-      "bytes": 146280,
+      "sha256": "b62a361d2076a0e6f88cf4bf13060ed503b4ec05cfe6efb374ccb39d5af91443",
+      "bytes": 146408,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "423e8ec2e1a8f8156d41cf9abf14f5e96fd82c1866aab6e69e57903af2becc66",
-      "bytes": 122211,
+      "sha256": "539b58fe4a7079c5270c5b0b11138b7d04d41140d9c3e69d6554b0d7cdd6409a",
+      "bytes": 122334,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "51775e80fd44a4fe0d6a0061bf61a53a595d567e0848c00d5de7bce52ea4ad74",
-      "bytes": 185867,
+      "sha256": "618ec1dbfe3318d800ddb3efd533d042c92af3cc476ef7cabce35c6874a2c321",
+      "bytes": 186000,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "bb97802b91f0a37fef6760c2e26c3a579d509c2bf6c0bbe9a9e9ebbebf29b01f",
-      "bytes": 281145,
+      "sha256": "870ee423db831e987d9defb1e3c3617f03acfe4982796e450a80ee99f9c7fe0d",
+      "bytes": 281159,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "7c20572a39bc3e86ca8477b516a9b186b4cac4332a1a7b757a193bc9ef2ee48b",
-      "bytes": 177628,
+      "sha256": "8f8cd176081df910210b7542b762e2b1af68b8b653544c1d4be348069c64b0f1",
+      "bytes": 177754,
       "route": "saves"
     },
     "favor-preview": {
       "file": "favor-preview.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "010985a990370477b60a0e02111a06c9ff61073006d47d17c6348d36f11f5eaa",
-      "bytes": 315526,
+      "sha256": "02bf62d84851bb1b793ad24630aec61b21b5ac41e592f04489f86bfd462b747b",
+      "bytes": 315555,
       "route": "saves"
     },
     "workshop": {
       "file": "workshop.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "1df2b8064e05661dd31d9935db5d0d355297d630afc39a3c22ad056a51bb617f",
-      "bytes": 151247,
+      "sha256": "c0617159cd9c107b08c466a225e0584e98d534ba4e0eea14b5ef583998f065a6",
+      "bytes": 151380,
       "route": "saves"
     },
     "progression-preview": {
       "file": "progression-preview.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "c3620264c79ba792bb109695e6066c6b9b9f6bae6a3b06008e88199c10eebb81",
-      "bytes": 276439,
+      "sha256": "faf97c95a434144c147cb64ded9840bfb26bd6138d13f4ae4ffbe2e537ba7582",
+      "bytes": 276457,
       "route": "saves"
     },
     "alchemy-unlocks": {
       "file": "alchemy-unlocks.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "4d4fb0434b107b3dd4e79e8259f50c53fd876bac20dbdf763db9aebd89080d57",
-      "bytes": 232008,
+      "sha256": "1b9f2a049252d326ec5a2aa8259a561244c871735d395abcad5f91b8f2fff2d8",
+      "bytes": 232119,
       "route": "saves"
     },
     "items": {
@@ -2147,24 +2167,24 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "a2bd381923f0a4841005ebc24c0731a3e8dfde940caf80a7db0e5b8b893a6f87",
-      "bytes": 328063,
+      "sha256": "d4f56b463b117bf65a787517681230b4b162434e756b80646a14e4a374380358",
+      "bytes": 328208,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "24605b9ce654e22d9d744c6c7ebef6f6a1640568cd2b49a0894ab32b4eb4b203",
-      "bytes": 355085,
+      "sha256": "8509cff0c847771c1b27613b173ac08ece7eddf1d68adb36ad7c85e8544ca4b6",
+      "bytes": 355155,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "183695b25e602384c44617b306d913624eb327762ef84b915fbcc69887e494b1",
-      "bytes": 127761,
+      "sha256": "be2c52ff094d8ac648c41d9c568d44d334a2c9f459de1da422d5d554d8fb4ff3",
+      "bytes": 127752,
       "route": "presets"
     },
     "mobile": {
