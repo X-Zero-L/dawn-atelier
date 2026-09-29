@@ -26,13 +26,15 @@ def schema_contract_hash(layout):
     return digest(json.dumps(layout.schema_contract(), sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
 
 
-def match_structure(assembly, metadata, candidates):
+def match_structure(assembly, metadata, candidates, mismatches=None):
     layout = NativeLayout(assembly, metadata)
     contract = schema_contract_hash(layout)
     names = {layout.type_name(index): index for index in range(layout.type_count)}
+    matched_contract = False
     for profile in candidates:
         if profile.get('contract_sha256') != contract or not profile.get('serializers'):
             continue
+        matched_contract = True
         for probe in profile['serializers']:
             methods = layout.methods(names[probe['type']])
             if probe['ordinal'] >= len(methods):
@@ -45,6 +47,8 @@ def match_structure(assembly, metadata, candidates):
                 break
         else:
             return profile
+    if mismatches is not None:
+        mismatches.append('存档序列化代码与已核对版本不同' if matched_contract else '关键存档结构或配置定义与已核对版本不同')
     return None
 
 
@@ -53,20 +57,6 @@ def inspect_game(game):
     paths = [game / 'GameAssembly.dll', game / 'ThePiper_Data/il2cpp_data/Metadata/global-metadata.dat']
     if not all(file.is_file() for file in paths):
         raise ValueError('游戏文件不完整，请选择包含 ThePiper.exe 的游戏目录。')
-    assembly, metadata = (file.read_bytes() for file in paths)
-    hashes = [digest(assembly), digest(metadata)]
-    candidates = profiles()
-    selected = next((profile for profile in candidates if
-                    [profile['GameAssembly_sha256'], profile['global_metadata_sha256']] == hashes), None)
-    mode = 'reviewed'
-    if selected is None:
-        try:
-            selected = match_structure(assembly, metadata, candidates)
-        except (ValueError, struct.error, IndexError, UnicodeError, KeyError):
-            selected = None
-        mode = 'structural'
-    if selected is None:
-        raise ValueError('关键存档结构或序列化代码与已核对版本不同，暂不能准备。请更新工坊；版本日期本身不会阻止兼容补丁。')
     version_file = game / 'ThePiper_Data/StreamingAssets/yoo/Main/PackageManifest_Main.version'
     package_version = version_file.read_text(encoding='utf-8-sig').strip() if version_file.is_file() else ''
     if not package_version or '/' in package_version or '\\' in package_version or '..' in package_version:
@@ -74,6 +64,22 @@ def inspect_game(game):
     manifest = version_file.parent / f'PackageManifest_Main_{package_version}.bytes'
     if not manifest.is_file():
         raise ValueError('当前版本的游戏资源清单缺失。')
+    assembly, metadata = (file.read_bytes() for file in paths)
+    hashes = [digest(assembly), digest(metadata)]
+    candidates = profiles()
+    selected = next((profile for profile in candidates if
+                    [profile['GameAssembly_sha256'], profile['global_metadata_sha256']] == hashes), None)
+    mode = 'reviewed'
+    mismatches = []
+    if selected is None:
+        try:
+            selected = match_structure(assembly, metadata, candidates, mismatches)
+        except (ValueError, struct.error, IndexError, UnicodeError, KeyError):
+            mismatches.append('当前游戏文件的存档结构尚不能识别')
+            selected = None
+        mode = 'structural'
+    if selected is None:
+        raise ValueError(f'检测到游戏版本 {package_version}。{mismatches[-1]}，当前工坊尚未完成兼容核对。请下载新版黎明工坊后重新准备。')
     return {'format': REPORT_VERSION, 'mode': mode, 'profile': selected['id'], 'schema': selected['schema'],
             'package_version': package_version, 'GameAssembly_sha256': hashes[0], 'global_metadata_sha256': hashes[1],
             'manifest_sha256': digest(manifest.read_bytes()), 'installation_stamp': installation_stamp(game),

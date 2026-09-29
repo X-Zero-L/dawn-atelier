@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 import webbrowser
 
 from app_paths import APP_ROOT, USER_ROOT, LOG_ROOT, app_version, read_config, write_config, task_command, find_game
-from compatibility import inspect_game, installation_stamp, profiles, require_prepared
+from compatibility import inspect_game, installation_stamp, profiles, require_prepared, begin_preparation
 
 
 class DesktopService:
@@ -169,11 +169,19 @@ class DesktopService:
         self._stop_service()
         self._prepared = False
         (self._data_root() / 'desktop-ready.json').unlink(missing_ok=True)
+        begin_preparation(self._data_root())
         game = Path(self._game_dir)
-        compatible = inspect_game(game)
-        initial_stamp = installation_stamp(game)
-        self._progress_to(12, 'tables', '正在准备物品与游戏资料', '首次准备需要一点时间，请保持窗口开启。')
         with (LOG_ROOT / 'prepare.log').open('w', encoding='utf-8') as log:
+            log.write(f'Dawn Atelier {app_version()}\n')
+            try:
+                compatible = inspect_game(game)
+            except (OSError, ValueError) as exc:
+                log.write(f'Compatibility check failed: {exc}\n')
+                raise
+            initial_stamp = compatible['installation_stamp']
+            log.write(f"Compatibility: {compatible['package_version']} / {compatible['profile']}\n")
+            log.flush()
+            self._progress_to(12, 'tables', '正在准备物品与游戏资料', '首次准备需要一点时间，请保持窗口开启。')
             self._prepare_process = self._popen(task_command('prepare', '--game-dir', self._game_dir),
                 env=self._environment(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                 text=True, encoding='utf-8', errors='replace')

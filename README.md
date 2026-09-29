@@ -82,7 +82,7 @@
 
 **Windows 10 / 11 64 位，无需安装 Python。**
 
-1. 从 [最新版本](https://github.com/X-Zero-L/dawn-atelier/releases/latest) 下载 **`DawnAtelier-2.4.0-windows-x64.zip`**。
+1. 从 [最新版本](https://github.com/X-Zero-L/dawn-atelier/releases/latest) 下载 **`DawnAtelier-2.4.1-windows-x64.zip`**。
 2. 完整解压，双击 **`DawnAtelier.exe`**。
 3. 确认自动找到的游戏目录，或点击 **选择游戏**。
 4. 点击 **准备并打开工坊**。首次准备完成后，后续可直接进入。
@@ -93,7 +93,7 @@
 
 ![桌面启动器](docs/images/desktop.png)
 
-已核对游戏资源版本 **`2026-09-28-1042`** 和 `2026-09-25-1016`。游戏更新后重新准备即可；补丁日期变化不会直接阻止使用，程序会检查存档结构、序列化代码和资源配置。详细信息见 [兼容性说明](docs/compatibility.md)。
+已核对游戏资源版本 **`2026-09-29-717`**、`2026-09-28-1042` 和 `2026-09-25-1016`。**v2.4.1 修复了 9 月 29 日游戏更新后无法准备、进入工坊的问题**；旧版用户请更新后重新准备。补丁日期变化不会直接阻止使用，程序会检查存档结构、序列化代码和资源配置。详细信息见 [兼容性说明](docs/compatibility.md)。
 
 ### 从源码运行
 

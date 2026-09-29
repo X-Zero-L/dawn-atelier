@@ -29,17 +29,17 @@
 在 Windows x64、Python 3.11 下运行：
 
 ```powershell
-python scripts/build-windows.py --expected-version v2.4.0
+python scripts/build-windows.py --expected-version v2.4.1
 ```
 
 脚本自动创建隔离环境、安装固定依赖、构建窗口版 EXE、检查打包文件，并输出：
 
 ```text
 dist/windows/
-  DawnAtelier-2.4.0-windows-x64.zip
-  DawnAtelier-2.4.0-windows-x64.sha256
-  DawnAtelier-2.4.0-windows-x64.manifest.json
-  DawnAtelier-2.4.0-windows-x64.dependencies.json
+  DawnAtelier-2.4.1-windows-x64.zip
+  DawnAtelier-2.4.1-windows-x64.sha256
+  DawnAtelier-2.4.1-windows-x64.manifest.json
+  DawnAtelier-2.4.1-windows-x64.dependencies.json
   SHA256SUMS-windows.txt
 ```
 

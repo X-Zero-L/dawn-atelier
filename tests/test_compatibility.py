@@ -86,7 +86,21 @@ class CompatibilityChecks(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder, patch.object(compatibility,'profiles',return_value=[self.profile()]), patch.object(compatibility,'NativeLayout',FakeLayout):
             game=self.fixture(folder)
             (game/'GameAssembly.dll').write_bytes(b'NEXTB4D!TAIL')
-            with self.assertRaisesRegex(ValueError,'关键存档结构'):
+            with self.assertRaisesRegex(ValueError,'2099-01-01-hotfix.*序列化'):
+                compatibility.inspect_game(game)
+
+    def test_unknown_metadata_error_names_the_detected_game_version(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(compatibility,'profiles',return_value=[self.profile()]), patch.object(compatibility,'NativeLayout',FakeLayout):
+            game=self.fixture(folder,'2099-02-03-update')
+            (game/'ThePiper_Data/il2cpp_data/Metadata/global-metadata.dat').write_bytes(b'renamed fields')
+            with self.assertRaisesRegex(ValueError,'2099-02-03-update.*关键存档结构'):
+                compatibility.inspect_game(game)
+
+    def test_missing_manifest_is_reported_before_native_compatibility(self):
+        with tempfile.TemporaryDirectory() as folder:
+            game=self.fixture(folder)
+            (game/'ThePiper_Data/StreamingAssets/yoo/Main/PackageManifest_Main_2099-01-01-hotfix.bytes').unlink()
+            with self.assertRaisesRegex(ValueError,'资源清单缺失'):
                 compatibility.inspect_game(game)
 
     def test_path_like_resource_version_is_rejected(self):
@@ -120,6 +134,28 @@ class CompatibilityChecks(unittest.TestCase):
             crop=next(row for row in actual['types'] if row['name']=='SaveLoadSystem.FarmCropBuildingData')
             self.assertIn(('IsFirstHarvest',17),[(row['name'],row['protobuf_tag']) for row in crop['fields']])
             self.assertIn(('OriginalGeneList',18),[(row['name'],row['protobuf_tag']) for row in crop['fields']])
+
+    def test_september_29_config_renames_keep_every_canonical_alias(self):
+        baseline=json.loads((compatibility.BASELINE/'config_schema.json').read_text(encoding='utf-8'))
+        expected={(typ['name'],field['protobuf_tag']):field for typ in baseline['types'] for field in typ['fields']}
+        with tempfile.TemporaryDirectory() as folder:
+            compatibility.install_schema({'schema':'thepiper-2026-09-29'},folder)
+            actual=json.loads((Path(folder)/'schema/config_schema.json').read_text(encoding='utf-8'))
+            fields=[(typ['name'],field) for typ in actual['types'] for field in typ['fields']]
+            self.assertEqual(len(fields),857)
+            for name,field in fields:
+                old=expected[(name,field['protobuf_tag'])]
+                self.assertEqual((field['name'],field['type_text'],field['wire_type']),
+                                 (old['name'],old['type_text'],old['wire_type']))
+                self.assertNotEqual(field['source_name'],field['name'])
+
+    def test_september_29_profile_has_complete_current_evidence(self):
+        profile=next(row for row in compatibility.profiles() if row['id']=='2026-09-29-717')
+        self.assertEqual(len(profile['serializers']),291)
+        for name in ('save_schema.json','config_schema.json','enums.json'):
+            schema=json.loads((compatibility.SCHEMAS/profile['schema']/name).read_text(encoding='utf-8'))
+            for key in ('GameAssembly_sha256','global_metadata_sha256'):
+                self.assertEqual(schema['source'][key],profile[key])
 
     def test_schema_directory_cannot_escape_bundle(self):
         with tempfile.TemporaryDirectory() as folder, self.assertRaises(ValueError):

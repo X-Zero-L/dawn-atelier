@@ -38,7 +38,7 @@ def main():
     probes = []
     for row in evidence['types']:
         if row.get('status') != 'complete_native_mapping':
-            continue
+            raise ValueError('Incomplete native serializer evidence: ' + row['name'])
         start, stop = int(row['rva'], 0), int(row['end_rva'], 0)
         methods = layout.methods(names[row['name']])
         matching = [(ordinal, method) for ordinal, method in enumerate(methods) if method['address'] == layout.image_base + start]
