@@ -14,6 +14,14 @@
 
 准备成功记录游戏路径、结构版本及程序集、元数据、资源清单状态。游戏或资源文件发生变化时需重新准备；没有成功记录时不会把半成品当作可用资料。
 
+## 自动检测游戏更新
+
+启动器通过 `check_game_update()` 读取四个安装文件的大小与修改时间，至少间隔一秒检查一次；文件状态连续稳定六秒后才允许自动准备。切回窗口会立即请求检查，常规轮询约两秒一次。`status()` 保持只读，关闭窗口不会意外启动准备。
+
+自动准备前，嵌入工作台通过精确来源、窗口引用和单次令牌确认空闲。待保存修改、打开的对话框、近期输入和未完成请求都会阻止自动重启。演示模式不触发自动准备；原生浏览器备用模式只在没有活动工作台时自动继续。
+
+成功准备身份另存于本机配置，失败时清除准备完成标记仍能识别之后的新更新。一次运行中每组文件状态只自动尝试一次，手动重试始终可用。自动准备成功后重启工作台；新的会话标识保证同一端口也会重新载入 iframe。
+
 ## 窗口生命周期
 
 同一用户工作目录只启动一个桌面会话。真实模式和演示模式使用不同数据目录、浏览器来源和持久端口，端口被占用时自动选择空闲端口并记住。
@@ -29,17 +37,17 @@
 在 Windows x64、Python 3.11 下运行：
 
 ```powershell
-python scripts/build-windows.py --expected-version v2.4.1
+python scripts/build-windows.py --expected-version v2.5.0
 ```
 
 脚本自动创建隔离环境、安装固定依赖、构建窗口版 EXE、检查打包文件，并输出：
 
 ```text
 dist/windows/
-  DawnAtelier-2.4.1-windows-x64.zip
-  DawnAtelier-2.4.1-windows-x64.sha256
-  DawnAtelier-2.4.1-windows-x64.manifest.json
-  DawnAtelier-2.4.1-windows-x64.dependencies.json
+  DawnAtelier-2.5.0-windows-x64.zip
+  DawnAtelier-2.5.0-windows-x64.sha256
+  DawnAtelier-2.5.0-windows-x64.manifest.json
+  DawnAtelier-2.5.0-windows-x64.dependencies.json
   SHA256SUMS-windows.txt
 ```
 

@@ -139,8 +139,11 @@ def browser_fallback(service):
     ttk.Button(buttons, text='安装 WebView2', command=lambda: webbrowser.open('https://developer.microsoft.com/microsoft-edge/webview2/')).pack(side='right')
     ttk.Button(app, text='打开数据与备份文件夹', command=lambda: service.open_folder('data')).pack(anchor='w', padx=34)
     def refresh():
-        current = service.status()
-        status.set(current['error'] or current['progress']['message'])
+        current = service.check_game_update()
+        update = current.get('game_update', {})
+        if not current['busy'] and not current['active_url'] and update.get('phase') == 'ready':
+            current = service.refresh_game_update(update['token'])
+        status.set(current['error'] or (update.get('message') if update.get('phase') in ('waiting', 'ready') else '') or current['progress']['message'])
         progress['value'] = current['progress']['percent']
         start['state'] = demo['state'] = 'disabled' if current['busy'] else 'normal'
         if not current['busy'] and pending['start_after_prepare']:
@@ -197,6 +200,10 @@ def main():
     import webview
     webview.settings['ALLOW_DOWNLOADS'] = True
     webview.settings['OPEN_EXTERNAL_LINKS_IN_BROWSER'] = True
+    # Each independent --home session must serve its own launcher resources.
+    # pywebview otherwise shares port 42001 in persistent mode and may display
+    # an older running copy's UI with this process's newer Python bridge.
+    webview.settings['DEFAULT_HTTP_PORT'] = 0
     window = webview.create_window('黎明工坊 · 黎明门前的吹笛人', str(APP_ROOT / 'desktop/index.html'),
         js_api=service, width=1440, height=940, min_size=(1000, 700), background_color='#f6f3e9')
     service._window = window

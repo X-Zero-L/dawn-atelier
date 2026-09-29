@@ -95,7 +95,7 @@ async function openPage(route, width = 1600, height = 1200, mobile = false) {
   await client.send('Emulation.setTimezoneOverride', {timezoneId: 'Asia/Shanghai'});
   await client.send('Emulation.setLocaleOverride', {locale: 'zh-CN'});
   if (route.startsWith('desktop')) {
-    const scene = route === 'desktop' ? 'welcome' : 'preparing';
+    const scene = route === 'desktop' ? 'welcome' : route === 'desktop-updating' ? 'updating' : 'preparing';
     await client.send('Page.navigate', {url: base + '/desktop/index.html?showcase=' + scene});
     await waitFor(page, `document.body?.dataset.ready === 'true'`);
     return page;
@@ -151,7 +151,7 @@ try {
   if (!endpoint) throw new Error('Cannot reach the isolated renderer.');
   browser = await connect(endpoint.replace('http:', 'ws:') + browserPath);
 
-  for (const name of ['desktop', 'desktop-preparing']) {
+  for (const name of ['desktop', 'desktop-preparing', 'desktop-updating']) {
     const launcher = await openPage(name, 1280, 900);
     await capture(launcher, name);
     await closePage(launcher);

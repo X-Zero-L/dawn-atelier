@@ -6,10 +6,10 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.4.1', game_dir: '', detected: false, prepared: false,
+    version: '2.5.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
-    error: '', mode: null, active_url: null, last_prepared: null,
+    error: '', mode: null, active_url: null, last_prepared: null, auto_prepare: false, game_update: null,
   };
   let api = null;
   let pendingRequest = false;
@@ -24,6 +24,9 @@
   let showAfterLaunch = false;
   let assignedUrl = '';
   let assignedMode = null;
+  let assignedSession = null;
+  let updateChecking = false;
+  let updateWaitMessage = '';
   let currentView = 'home';
   let toastTimer = null;
   let frameTimer = null;
@@ -76,9 +79,10 @@
       if (!state.active_url) assignedUrl = '';
       return;
     }
-    if (assignedUrl !== url || assignedMode !== state.mode) {
+    if (assignedUrl !== url || assignedMode !== state.mode || assignedSession !== state.workbench_session) {
       assignedUrl = url;
       assignedMode = state.mode;
+      assignedSession = state.workbench_session;
       showAfterLaunch = true;
       element('frame-loading').hidden = false;
       element('frame-loading').querySelector('p').textContent = '载入本地存档与物品资料…';
@@ -109,10 +113,18 @@
     const selected = Boolean(state.game_dir);
     const active = Boolean(trustedWorkbenchUrl(state.active_url));
     const error = localError || state.error;
+    const update = state.game_update;
+    const updateMessage = update?.phase === 'ready'
+      ? state.mode === 'demo' ? '游戏已更新。演示可继续使用，返回游戏时重新准备。' : state.external_workbench ? '游戏已更新。请保留浏览器中的编辑，完成后点击重新准备。' : updateWaitMessage || update.message
+      : update?.message || '';
+    for (const id of ['game-update-notice', 'shell-update-notice']) {
+      element(id).hidden = !updateMessage || state.auto_prepare || update?.phase === 'failed';
+      element(id).querySelector('span').textContent = updateMessage;
+    }
     document.body.classList.toggle('preparing', state.busy);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.4.1'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.5.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -120,9 +132,9 @@
     element('selection-badge').classList.toggle('selected', selected);
     setText('selection-badge', state.prepared ? '资料已就绪' : selected ? state.detected ? '已找到游戏' : '已选择目录' : '等待选择');
     setText('path-hint', pathDirty ? '路径已更改，点击“使用此目录”保存。' : state.detected ? '已找到 ThePiper.exe，安装目录已记住。' : selected ? '已保存安装目录，下次打开可继续使用。' : '可选择文件夹，也可以直接粘贴安装路径。');
-    setText('prepare-note-title', state.prepared ? '本地资料已就绪' : '首次使用，自动准备本地资料');
-    setText('prepare-note-detail', state.prepared && state.compatibility ? `${state.compatibility.package_version} · ${state.compatibility.message}。游戏更新后重新准备即可。` : state.prepared ? '直接打开工坊即可开始编辑。游戏更新后，可重新准备资料。' : '自动核对存档结构与资源配置。兼容补丁可直接准备，完成后进入工作台。');
-    setText('start-label', state.busy ? state.mode === 'demo' ? '正在打开演示' : autoLaunchIntent ? '正在准备，完成后自动打开' : '正在处理，请稍候' : active && state.mode === 'game' && !pathDirty ? '返回我的工坊' : state.prepared && !pathDirty ? '打开我的工坊' : '准备并打开工坊');
+    setText('prepare-note-title', state.auto_prepare ? '检测到游戏更新，正在自动准备' : state.prepared ? '本地资料已就绪' : '首次使用，自动准备本地资料');
+    setText('prepare-note-detail', state.auto_prepare ? '正在重新读取游戏资料与本地图鉴，完成后会自动打开工坊。' : state.prepared && state.compatibility ? `${state.compatibility.package_version} · ${state.compatibility.message}。游戏更新后会自动重新准备。` : state.prepared ? '直接打开工坊即可开始编辑。游戏更新后会自动重新准备资料。' : '自动核对存档结构与资源配置。兼容补丁可直接准备，完成后进入工作台。');
+    setText('start-label', state.busy ? state.mode === 'demo' ? '正在打开演示' : state.auto_prepare ? '检测到更新，自动准备中' : autoLaunchIntent ? '正在准备，完成后自动打开' : '正在处理，请稍候' : active && state.mode === 'game' && !pathDirty ? '返回我的工坊' : state.prepared && !pathDirty ? '打开我的工坊' : '准备并打开工坊');
     setText('demo-label', active && state.mode === 'demo' ? '返回演示' : '先体验演示');
     element('start-arrow').toggleAttribute('hidden', busy);
     element('start-spinner').hidden = !busy;
@@ -139,7 +151,7 @@
     const unit = document.createElement('small');
     unit.textContent = '%';
     element('progress-percent').append(unit);
-    setText('progress-heading', autoLaunchIntent ? '正在准备你的工坊' : state.mode === 'demo' ? '正在打开演示工坊' : showAfterLaunch || /launch|serve/.test(state.progress?.stage || '') ? '正在打开你的工坊' : '正在准备本地资料');
+    setText('progress-heading', state.auto_prepare ? '正在更新游戏资料' : autoLaunchIntent ? '正在准备你的工坊' : state.mode === 'demo' ? '正在打开演示工坊' : showAfterLaunch || /launch|serve/.test(state.progress?.stage || '') ? '正在打开你的工坊' : '正在准备本地资料');
     setText('progress-message', state.progress?.message || '正在处理，请稍候…');
     setText('progress-detail', state.progress?.detail || '');
     element('progress-detail').hidden = !state.progress?.detail;
@@ -168,6 +180,8 @@
     if (!next || typeof next !== 'object' || !('busy' in next)) throw new Error('桌面服务返回了无效状态，请重试。');
     Object.assign(state, next);
     connected = true;
+    if (next.auto_prepare) { autoLaunchIntent = null; showAfterLaunch = true; showView('home'); }
+    if (next.game_update?.phase !== 'ready') updateWaitMessage = '';
     if (options.resetPath) {
       pathDirty = false;
       gamePath.value = state.game_dir || '';
@@ -192,7 +206,7 @@
     polling = true;
     const revision = stateRevision;
     try {
-      const next = await api.status();
+      const next = await api.check_game_update();
       if (revision === stateRevision) acceptState(next);
     } catch (error) {
       connected = false;
@@ -201,7 +215,48 @@
     } finally {
       polling = false;
       maybeAutoLaunch();
+      void maybeAutoRefresh();
       schedulePoll();
+    }
+  }
+
+  function editorIdleForUpdate(token) {
+    if (!state.active_url) return Promise.resolve({ready: true});
+    const origin = new URL(state.active_url).origin;
+    return new Promise(resolve => {
+      const finish = value => {
+        clearTimeout(timer);
+        window.removeEventListener('message', receive);
+        resolve(value);
+      };
+      const receive = event => {
+        if (event.source !== frame.contentWindow || event.origin !== origin ||
+            event.data?.type !== 'dawn-update-idle' || event.data.token !== token) return;
+        finish(event.data);
+      };
+      const timer = setTimeout(() => finish({ready: false, message: '游戏已更新，等待工作台空闲后自动准备。'}), 2500);
+      window.addEventListener('message', receive);
+      frame.contentWindow.postMessage({type: 'dawn-update-check', token}, origin);
+    });
+  }
+
+  async function maybeAutoRefresh() {
+    if (!api || showcase || updateChecking || isBusy() || pathDirty || polling || state.external_workbench || state.mode === 'demo' || state.game_update?.phase !== 'ready') return;
+    const token = state.game_update.token;
+    const origin = state.active_url ? new URL(state.active_url).origin : null;
+    updateChecking = true;
+    try {
+      const result = await editorIdleForUpdate(token);
+      if (!result.ready) { updateWaitMessage = result.message; render(); return; }
+      // A foreground action may have changed the session during the handshake.
+      if (isBusy() || state.game_update?.token !== token || state.mode === 'demo') return;
+      const next = await request('refresh_game_update', [token]);
+      if (next?.auto_prepare) showView('home');
+    } finally {
+      // If the files changed again or preparation failed to start, release the
+      // idle editor. A started refresh retains the mounted frame until reload.
+      if (origin && !state.auto_prepare) frame.contentWindow.postMessage({type: 'dawn-update-resume', token}, origin);
+      updateChecking = false;
     }
   }
 
@@ -316,6 +371,8 @@
     clearTimeout(frameTimer);
     element('frame-loading').hidden = true;
   });
+  window.addEventListener('focus', () => { if (!document.hidden) void poll(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) void poll(); });
 
   async function connectBridge() {
     if (api || showcase || !window.pywebview?.api) return;
@@ -327,7 +384,7 @@
 
   async function init() {
     const scene = new URLSearchParams(location.search).get('showcase');
-    if (['welcome', 'preparing'].includes(scene) && ['http:', 'https:'].includes(location.protocol)) {
+    if (['welcome', 'preparing', 'updating'].includes(scene) && ['http:', 'https:'].includes(location.protocol)) {
       try {
         const response = await fetch('/api/health', {cache: 'no-store'});
         const health = response.ok ? await response.json() : null;
@@ -337,9 +394,12 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.4.1', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
-            prepared: false, data_dir: '', busy: scene === 'preparing',
-            progress: scene === 'preparing'
+            version: '2.5.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            prepared: false, data_dir: '', busy: scene !== 'welcome', auto_prepare: scene === 'updating',
+            game_update: scene === 'updating' ? {phase: 'preparing', message: '检测到游戏更新，正在自动准备资料。', token: ''} : null,
+            progress: scene === 'updating'
+              ? {percent: 68, stage: 'catalogue', message: '正在更新物品、炼金与角色资料', detail: '游戏更新已检测，准备完成后会自动打开工坊。'}
+              : scene === 'preparing'
               ? {percent: 68, stage: 'catalogue', message: '正在整理物品、炼金与角色资料', detail: '完成后将自动打开工坊。'}
               : {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
             error: '', mode: null, active_url: null, last_prepared: null,

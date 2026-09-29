@@ -66,7 +66,7 @@
     <div class="setup-workspace">
       <header class="setup-topbar">
         <span class="local-status"><i id="connection-dot" class="status-dot connecting"></i><span id="connection-label">正在连接桌面服务</span></span>
-        <div class="topbar-actions"><span class="version-label" data-version>v2.4.1</span><button class="icon-button" data-action="help" title="使用帮助" aria-label="使用帮助"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button></div>
+        <div class="topbar-actions"><span class="version-label" data-version>v2.5.0</span><button class="icon-button" data-action="help" title="使用帮助" aria-label="使用帮助"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button></div>
       </header>
       <main class="setup-main" id="setup-main">
         <div class="page-heading">
@@ -90,10 +90,12 @@
           </div>
           <div class="path-hint-row"><p id="path-hint">可选择文件夹，也可以直接粘贴安装路径。</p><button class="text-button" id="save-path-button" data-action="save-path" hidden>使用此目录<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button></div>
 
-          <div class="preparation-note"><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span><div><strong id="prepare-note-title">首次使用，自动准备本地资料</strong><p id="prepare-note-detail">自动核对存档结构与资源配置，完成后进入工作台。</p></div></div>
+          <div class="preparation-note"><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span><div><strong id="prepare-note-title">首次使用，自动准备本地资料</strong><p id="prepare-note-detail">自动核对存档结构与资源配置；检测到游戏更新后会自动重新准备。</p></div></div>
           <div class="start-actions"><button class="button primary start-button" id="start-button" data-action="start"><span id="start-label">准备并打开工坊</span><svg class="icon" id="start-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="button-spinner" id="start-spinner" hidden></span></button><button class="button demo-button" id="demo-button" data-action="demo"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span id="demo-label">先体验演示</span></button></div>
           <p class="demo-hint">演示使用示例存档，随时可以体验。</p>
         </section>
+
+        <div class="game-update-notice" id="game-update-notice" hidden role="status"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span></span></div>
 
         <section class="progress-card" id="progress-card" hidden aria-labelledby="progress-heading" aria-live="polite">
           <div class="progress-heading"><div><span class="eyebrow">GETTING THINGS READY</span><h3 id="progress-heading">正在准备你的工坊</h3></div><span class="progress-percent" id="progress-percent">0<small>%</small></span></div>
@@ -112,6 +114,7 @@
   </div>
 
   <section id="workbench-view" class="workbench-view" hidden aria-label="存档工作台">
+    <div class="game-update-notice" id="shell-update-notice" hidden role="status"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span></span><button class="text-button" data-action="start">重新准备<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
     <header class="shell-bar"><button class="shell-brand" data-action="settings" title="打开启动设置"><svg class="brand-symbol" aria-hidden="true"><use href="#i-sun"/></svg><strong>黎明工坊</strong><span class="shell-divider"></span><span id="shell-mode">本地存档</span></button><div class="shell-actions"><span class="shell-status"><i class="status-dot"></i>本地运行中</span><button class="shell-button" data-action="backups" title="打开存档备份"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>备份</span></button><button class="shell-button" data-action="browser" title="在默认浏览器中打开"><svg class="icon" aria-hidden="true"><use href="#i-external"/></svg><span>浏览器打开</span></button><button class="shell-button" data-action="settings"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg><span>启动设置</span></button></div></header>
     <div class="frame-wrap"><iframe id="workbench-frame" title="黎明门前的吹笛人存档工作台" allow="clipboard-write" referrerpolicy="no-referrer"></iframe><div class="frame-loading" id="frame-loading"><span class="loading-orbit"></span><h2>正在打开你的工坊</h2><p>载入本地存档与物品资料…</p><button class="text-button" data-action="settings">返回启动设置</button></div></div>
   </section>

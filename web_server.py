@@ -449,6 +449,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.json({'app': 'dawn-atelier', 'ready': True,'demo':DEMO,'compatibility':COMPATIBILITY})
             elif route == '/api/bootstrap':
                 self.json({'app': 'dawn-atelier', 'token': TOKEN, 'saves': saved_games(),
+                           'desktop_origin': getattr(self.server, 'desktop_origin', None),
                            'version':'2.1','runtime':game_runtime.status(),'demo':DEMO,
                            'stats': read_json('unpacked/configs/index.json'),
                            'resources': read_json('unpacked/resources/summary.json'),

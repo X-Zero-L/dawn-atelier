@@ -29,6 +29,9 @@ button svg { pointer-events: none; }
 h1, h2, h3, p { margin: 0; }
 ::selection { background: #d7e3cf; }
 .icon-definitions { position: absolute; width: 0; height: 0; overflow: hidden; }
+.game-update-notice { display: flex; align-items: center; gap: 10px; padding: 14px 18px; margin-top: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--green-soft); color: var(--green); font-size: 12px; line-height: 1.6; }
+.game-update-notice > span { flex: 1; }
+#shell-update-notice { margin: 0; border-radius: 0; flex-shrink: 0; }
 .icon { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
 .brand-symbol { width: 43px; height: 46px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .home-view { display: grid; grid-template-columns: 326px minmax(0, 1fr); min-height: 100vh; }

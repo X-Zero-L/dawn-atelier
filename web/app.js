@@ -43,6 +43,7 @@ const date = v => new Date(v).toLocaleString('zh-CN', {month:'2-digit',day:'2-di
 const state = {boot:null, items:[], page:'home', save:null, saveName:null, group:'common', pending:new Map(),
   itemQuery:'', itemCategory:'全部物品', itemPage:0, fieldQuery:'', fieldPage:0, table:'ItemConfig', tableQuery:'', tablePage:0,
   favorites:new Set(JSON.parse(localStorage.getItem('dawn-favorites') || '[]')), editing:null, routeGeneration:0, selectedItem:null};
+const desktopUpdate = {requests: 0, token: null, lastInput: 0};
 const NAV = [
   ['home','工坊总览','sun',''],['presets','一键方案','star','NEW'],['saves','存档编辑','sliders',''],['items','物品图鉴','grid',''],
   ['library','数据资料库','book',''],['exports','导出与备份','archive',''],
@@ -55,10 +56,14 @@ const TABLE_LABELS = {ItemConfig:'物品',FarmCropConfig:'作物',RecipeConfig:'
 Object.assign(TABLE_LABELS,{AchievementConfig:'成就',ActionEnum:'动作编号',AlchemyProductConfig:'炼金产物',AlchemySeedConfig:'炼金种子',BagTagConfig:'背包分类',BlackJackCardConfig:'卡牌',BlackJackCardEffectConfig:'卡牌效果',BlackJackGameConfig:'牌局',BlackJackGoldCageConfig:'金笼',CGHandBookConfig:'CG 图鉴',Condition:'条件',DailyTips:'每日提示',DailyTipsConfig:'提示配置',EffectConfig:'效果',EventConfig:'事件',FarmLabelConfig:'农田标签',FavorFactionConfig:'阵营好感',FishingPoolConfig:'鱼池',FishingToolConfig:'钓鱼工具',FunctionEnum:'功能编号',FunctionManageConfig:'功能管理',GameStatsEnumConfig:'统计编号',GlobalParamString:'全局参数',GridGroupConfig:'格子组',GuestBubbleConfig:'顾客气泡',GuestBubbleGroupConfig:'顾客气泡组',GuestGroupConfig:'顾客分组',HandBookConfig:'手册',IllustrationConfig:'图鉴',IllustrationForceConfig:'图鉴势力',ItemGroupConfig:'物品组',MapAreaUnlockConfig:'区域解锁',MapAtmosphereControlConfig:'地图氛围',MapAtmosphereController:'氛围控制器',MapConfig:'地图',MapRegionUnlockConfig:'地图区域解锁',MapShopThemeConfig:'店铺主题',NPCEscrowConfig:'NPC 寄存',OrderGroupConfig:'订单组',PortraitConfig:'头像',PuzzleConfig:'谜题',QTEAreaLogicTable:'QTE 区域逻辑',QTEAreaTable:'QTE 区域',QTEConfig:'QTE 配置',QTEData:'QTE 数据',QTEPointerTable:'QTE 指针',RelicEffectConfig:'遗物效果',RelicExtractConfig:'遗物提取',RelicFactionConfig:'遗物阵营',RelicGroupConfig:'遗物组',ScheduleConfig:'日程',ShopBaseConfig:'店铺基础',ShopItemConfig:'商店物品',SoundConfig:'声音',StaffBackpackConfig:'员工背包',StaffSettingConfig:'员工设置',SubtitlesConfig:'字幕',VortexConfig:'漩涡'});
 
 async function api(path, body) {
+  if (desktopUpdate.token) throw new Error('游戏资料正在更新，请稍候。');
+  desktopUpdate.requests += 1;
+  try {
   const response = await fetch(path, body ? {method:'POST',headers:{'Content-Type':'application/json','X-Dawn-Token':state.boot.token},body:JSON.stringify(body)} : {});
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || '暂时无法完成操作。');
   return data;
+  } finally { desktopUpdate.requests -= 1; }
 }
 function hydrateIcons(scope=document) { scope.querySelectorAll('[data-icon]').forEach(n => {n.innerHTML=I(n.dataset.icon);}); }
 function toast(message, error=false) { const t=document.createElement('div');t.className='toast'+(error?' error':'');t.textContent=message;$('#toast-region').append(t);setTimeout(()=>t.remove(),4500); }
@@ -205,6 +210,23 @@ $('#theme-button').addEventListener('click',()=>{document.body.classList.toggle(
 document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();$('#global-query').focus();$('#global-query').select();}if(event.key==='Escape'&&!$('#item-drawer').hidden)closeDrawer();if(event.key==='Tab'&&!$('#item-drawer').hidden){const all=[...$('#item-drawer').querySelectorAll('button,summary,[tabindex="0"]')];if(!all.length)return;const first=all[0],last=all.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
 window.addEventListener('hashchange',route);
 window.addEventListener('beforeunload',event=>{if(state.pending.size){event.preventDefault();event.returnValue='';}});
+document.addEventListener('input', () => { desktopUpdate.lastInput = Date.now(); });
+window.addEventListener('message', event => {
+  if (window.parent === window || event.source !== window.parent || !state.boot?.desktop_origin || event.origin !== state.boot.desktop_origin) return;
+  const {type, token} = event.data || {};
+  if (typeof token !== 'string' || !/^[a-f0-9]{32}$/.test(token)) return;
+  if (type === 'dawn-update-resume' && token === desktopUpdate.token) {
+    desktopUpdate.token = null;
+    document.body.inert = false;
+  }
+  if (type !== 'dawn-update-check') return;
+  const editing = state.pending.size || presetUI.history.length || document.querySelector('dialog[open]') || desktopUpdate.requests ||
+    document.activeElement?.matches('input, textarea, select, [contenteditable="true"]') || Date.now() - desktopUpdate.lastInput < 2000;
+  const ready = !editing;
+  if (ready) { desktopUpdate.token = token; document.body.inert = true; }
+  event.source.postMessage({type: 'dawn-update-idle', token, ready,
+    message: state.pending.size || presetUI.history.length ? '游戏已更新。当前编辑记录会保留；可点击重新准备，或关闭工坊后自动处理。' : '游戏已更新，关闭当前编辑窗口后会自动重新准备。'}, event.origin);
+});
 if(localStorage.getItem('dawn-theme')==='dark')document.body.classList.add('dark');
 hydrateIcons();
 (async()=>{try{$('#connection').innerHTML='<i class="status-dot"></i> 正在连接…';const [boot,items,presets]=await Promise.all([api('/api/bootstrap'),api('/api/items'),api('/api/presets')]);state.boot=boot;state.items=items;presetUI.catalog=presets;if(boot.demo){document.body.classList.add('demo-mode');document.querySelector('.workspace').insertAdjacentHTML('afterbegin','<div class="demo-banner">演示模式 · 合成存档与示例配置，修改只作用于演示副本。</div>');}$('#connection').innerHTML='<i class="status-dot"></i> 本地已连接';await route();}catch(e){$('#connection').textContent='连接已断开';$('#main').innerHTML=empty('工坊暂时没有连接上',`${e.message} 请通过“启动网页工作台”快捷方式重新打开。`,'info');}})();

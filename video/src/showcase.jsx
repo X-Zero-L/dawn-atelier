@@ -147,7 +147,7 @@ function Desktop() {
   const activeStep = f < 98 ? 0 : 1;
   const steps = [
     {title: '解压双击', detail: '打开 DawnAtelier.exe'},
-    {title: '自动准备', detail: '选好游戏，自动整理资料'},
+    {title: '更新检测', detail: '游戏更新后，空闲时自动准备'},
     {title: '独立窗口', detail: '准备完成，即可进入工坊'},
   ];
   return <>
@@ -163,7 +163,7 @@ function Desktop() {
     </div>
     <div style={{opacity: interpolate(f,[5,26],[0,1],clamp), transform: `translateY(${interpolate(f,[5,38],[22,0],clamp)}px)`}}>
       <Window asset="desktop" left={698} top={175} width={1136} height={833} desktop/>
-      <div style={{opacity: preparing}}><Window asset="desktop-preparing" left={698} top={175} width={1136} height={833} desktop/></div>
+      <div style={{opacity: preparing}}><Window asset="desktop-updating" left={698} top={175} width={1136} height={833} desktop/></div>
     </div>
   </>;
 }

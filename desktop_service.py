@@ -31,10 +31,15 @@ class DesktopService:
         self._mode = None
         self._active_url = None
         self._ready_file = None
+        self._workbench_session = None
+        self._external_workbench = False
+        self._attempted_updates = set()
+        self._auto_prepare_active = False
         self._progress = {'percent': 0, 'stage': 'idle', 'message': '选择游戏，开始准备', 'detail': ''}
         self._config = read_config()
         self._game_dir = self._detect_game()
         self._prepared = self._is_prepared()
+        self._reset_update_watch()
         if self._prepared:
             self._progress.update(percent=100, stage='ready', message='工坊准备就绪')
 
@@ -79,6 +84,9 @@ class DesktopService:
             pass
         return {'version': app_version(), 'game_dir': self._game_dir, 'detected': bool(self._game_dir),
                 'prepared': self._prepared, 'data_dir': str(USER_ROOT), 'busy': self._busy,
+                'auto_prepare': self._auto_prepare_active,
+                'game_update': dict(self._game_update), 'workbench_session': self._workbench_session,
+                'external_workbench': self._external_workbench,
                 'progress': dict(self._progress), 'error': self._error, 'mode': self._mode,
                 'active_url': self._active_url, 'last_prepared': self._config.get('last_prepared'),
                 'compatibility': compatibility}
@@ -86,6 +94,82 @@ class DesktopService:
     def status(self):
         with self._lock:
             return self._state()
+
+    def _reset_update_watch(self):
+        self._update_baseline = None
+        self._update_candidate = None
+        self._update_seen_at = 0
+        self._update_checked_at = None
+        self._game_update = {'phase': 'idle', 'message': '', 'token': ''}
+        # A failed preparation removes readiness. Keep the previous successful
+        # identity separately so a later game update can still be detected.
+        previous = self._config.get('last_prepared_install')
+        try:
+            previous = json.loads((self._data_root() / 'desktop-ready.json').read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            pass
+        if not isinstance(previous, dict) or not self._game_dir:
+            return
+        files = previous.get('files')
+        if (str(previous.get('game_dir', '')).casefold() == self._game_dir.casefold() and
+                isinstance(files, list) and len(files) == 4 and all(
+                    isinstance(row, list) and len(row) == 2 and all(type(value) is int for value in row) for row in files)):
+            self._update_baseline = {'game_dir': self._game_dir, 'files': files}
+
+    def check_game_update(self):
+        """Observe local files only; polling never starts or stops a process."""
+        with self._lock:
+            if not self._update_baseline or self._busy or self._closing:
+                return self._state()
+            now = time.monotonic()
+            if self._update_checked_at is not None and now - self._update_checked_at < 1:
+                return self._state()
+            self._update_checked_at = now
+            try:
+                current = installation_stamp(self._game_dir)
+            except (OSError, ValueError):
+                self._prepared = False
+                self._update_candidate = None
+                self._game_update = {'phase': 'waiting', 'message': '游戏文件暂不可读取，正在等待更新完成。', 'token': ''}
+                return self._state()
+            if current == self._update_baseline['files'] and self._is_prepared():
+                self._prepared = True
+                self._update_candidate = None
+                self._game_update = {'phase': 'idle', 'message': '', 'token': ''}
+                return self._state()
+            self._prepared = False
+            if (self._game_dir.casefold(), json.dumps(current)) in self._attempted_updates:
+                return self._state()
+            if current != self._update_candidate:
+                self._update_candidate = current
+                self._update_seen_at = now
+                self._game_update = {'phase': 'waiting', 'message': '检测到游戏文件变化，正在等待更新完成。', 'token': secrets.token_hex(16)}
+            elif now - self._update_seen_at >= 6:
+                self._game_update.update(phase='ready', message='检测到游戏更新，空闲时将自动重新准备资料。')
+            return self._state()
+
+    def refresh_game_update(self, token):
+        """Called after the launcher has checked that its editor is idle."""
+        with self._lock:
+            self._idle()
+            if (self._mode == 'demo' or self._external_workbench or self._game_update['phase'] != 'ready' or
+                    token != self._game_update['token'] or not token):
+                return self._state()
+            try:
+                current = installation_stamp(self._game_dir)
+            except (OSError, ValueError):
+                current = None
+            if current != self._update_candidate or current is None:
+                self._update_checked_at = None
+                return self.check_game_update()
+            self._attempted_updates.add((self._game_dir.casefold(), json.dumps(current)))
+            self._config['last_prepared_install'] = self._update_baseline
+            write_config(self._config)
+            self._game_update.update(phase='preparing', message='正在自动准备更新后的游戏资料。')
+            def refresh():
+                self._prepare()
+                self._launch('game')
+            return self._start(refresh, '检测到游戏更新，正在自动准备资料', automatic=True)
 
     def _idle(self):
         if self._busy or self._closing:
@@ -105,6 +189,7 @@ class DesktopService:
             self._config['game_dir'] = self._game_dir
             write_config(self._config)
             self._prepared = self._is_prepared()
+            self._reset_update_watch()
             self._error = ''
             self._progress = {'percent': 100 if self._prepared else 0, 'stage': 'ready' if self._prepared else 'idle',
                               'message': '工坊准备就绪' if self._prepared else '已找到游戏，可以开始准备', 'detail': ''}
@@ -118,10 +203,11 @@ class DesktopService:
                                                    directory=self._game_dir or str(Path.home()))
         return self.set_game(selected[0]) if selected else self.status()
 
-    def _start(self, work, message):
+    def _start(self, work, message, automatic=False):
         with self._lock:
             self._idle()
             self._busy = True
+            self._auto_prepare_active = automatic
             self._error = ''
             self._progress = {'percent': 4, 'stage': 'starting', 'message': message, 'detail': ''}
             def execute():
@@ -130,10 +216,13 @@ class DesktopService:
                 except Exception as exc:
                     with self._lock:
                         self._error = str(exc)
+                        if automatic:
+                            self._game_update.update(phase='failed', message='自动准备未完成，请查看原因后重试。')
                         self._progress.update(stage='error', message='这一步还没有完成', detail='可以重试，或打开日志查看详情。')
                 finally:
                     with self._lock:
                         self._busy = False
+                        self._auto_prepare_active = False
             self._worker = threading.Thread(target=execute, name='dawn-desktop-operation', daemon=True)
             self._worker.start()
             return self._state()
@@ -163,7 +252,14 @@ class DesktopService:
     def prepare(self):
         if not self._game_dir:
             raise ValueError('先选择游戏目录，再开始准备。')
-        return self._start(self._prepare, '正在检查游戏版本')
+        with self._lock:
+            self._idle()
+            try:
+                self._attempted_updates.add((self._game_dir.casefold(), json.dumps(installation_stamp(self._game_dir))))
+            except (OSError, ValueError):
+                pass
+            self._game_update = {'phase': 'idle', 'message': '', 'token': ''}
+            return self._start(self._prepare, '正在检查游戏版本')
 
     def _prepare(self):
         self._stop_service()
@@ -206,10 +302,12 @@ class DesktopService:
         with self._lock:
             self._config = read_config()
             self._config['last_prepared'] = now
+            self._config['last_prepared_install'] = {'game_dir': self._game_dir, 'files': initial_stamp}
             write_config(self._config)
             self._prepared = self._is_prepared()
             if not self._prepared:
                 raise ValueError('准备结果缺少必要文件，请重试。')
+            self._reset_update_watch()
         self._progress_to(100, 'ready', '准备完成，可以进入工坊', '今后双击打开即可继续使用。')
 
     def launch(self, mode):
@@ -259,6 +357,7 @@ class DesktopService:
                     if health.get('app') == 'dawn-atelier' and bool(health.get('demo')) == (mode == 'demo') and info.get('session') == launch_id:
                         with self._lock:
                             self._active_url = url
+                            self._workbench_session = launch_id
                             self._mode = mode
                             self._config['desktop_port_' + mode] = info['port']
                             write_config(self._config)
@@ -289,6 +388,8 @@ class DesktopService:
                 child.wait(timeout=5)
         self._child = None
         self._active_url = None
+        self._workbench_session = None
+        self._external_workbench = False
         self._mode = None
         if self._ready_file:
             self._ready_file.unlink(missing_ok=True)
@@ -314,6 +415,7 @@ class DesktopService:
     def open_browser(self):
         if not self._active_url:
             raise ValueError('请先打开工坊。')
+        self._external_workbench = True
         webbrowser.open(self._active_url)
         return {'ok': True}
 
