@@ -472,6 +472,13 @@ class UpdatePackageChecks(unittest.TestCase):
             updates.stage_release(self.release, link)
         self.assertEqual(list(external.iterdir()), [])
 
+    def test_windows_alias_spelling_is_accepted_only_for_same_directory(self):
+        with patch.object(Path, 'resolve', return_value=self.root / 'long-name'), patch.object(Path, 'samefile', return_value=True):
+            self.assertEqual(updates._directory(self.root), self.root)
+        with patch.object(Path, 'resolve', return_value=self.root / 'other-directory'), patch.object(Path, 'samefile', return_value=False):
+            with self.assertRaises(updates.UpdateError):
+                updates._directory(self.root)
+
 
 if __name__ == '__main__':
     unittest.main()

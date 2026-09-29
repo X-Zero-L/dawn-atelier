@@ -269,7 +269,11 @@ def _directory(path, create=False):
             info = _check_link(component)
         if not stat.S_ISDIR(info.st_mode):
             raise UpdateError('更新目录路径中包含非目录文件。')
-    if directory.resolve() != directory:
+    # Windows may expand a legitimate 8.3 alias (for example RUNNER~1) to
+    # its long name. Reparse points were rejected above; compare identity
+    # instead of treating a different spelling as a redirected directory.
+    resolved = directory.resolve()
+    if resolved != directory and not directory.samefile(resolved):
         raise UpdateError('更新目录被重定向到了其他位置。')
     return directory
 
