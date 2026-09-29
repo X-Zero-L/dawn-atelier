@@ -6,6 +6,7 @@
     "desktop",
     "desktop-preparing",
     "desktop-updating",
+    "desktop-app-update",
     "overview",
     "presets",
     "builder",

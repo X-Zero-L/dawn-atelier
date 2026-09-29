@@ -6,10 +6,10 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.5.0', game_dir: '', detected: false, prepared: false,
+    version: '2.6.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
-    error: '', mode: null, active_url: null, last_prepared: null, auto_prepare: false, game_update: null,
+    error: '', mode: null, active_url: null, last_prepared: null, auto_prepare: false, game_update: null, app_update: null,
   };
   let api = null;
   let pendingRequest = false;
@@ -27,6 +27,7 @@
   let assignedSession = null;
   let updateChecking = false;
   let updateWaitMessage = '';
+  let appUpdateWaitMessage = '';
   let currentView = 'home';
   let toastTimer = null;
   let frameTimer = null;
@@ -113,6 +114,21 @@
     const selected = Boolean(state.game_dir);
     const active = Boolean(trustedWorkbenchUrl(state.active_url));
     const error = localError || state.error;
+    const software = state.app_update || {};
+    const softwareReady = software.phase === 'ready';
+    const softwareMessage = softwareReady && (state.external_workbench || state.mode === 'demo')
+      ? '新版已准备。当前工作台会保留，退出编辑后可完成更新。'
+      : softwareReady && !software.automatic ? '新版已下载并校验，点击“更新并重启”即可安装。'
+      : softwareReady && appUpdateWaitMessage ? appUpdateWaitMessage : software.message || '启动后自动检查新版';
+    setText('app-update-message', softwareMessage);
+    setText('app-update-version', software.version ? `v${software.version}` : '');
+    element('auto-update-enabled').checked = software.automatic !== false;
+    element('auto-update-enabled').disabled = busy || !api || software.supported === false;
+    element('app-update-progress').hidden = software.phase !== 'downloading';
+    element('app-update-progress').value = software.percent || 0;
+    element('install-app-update').hidden = !softwareReady;
+    element('shell-app-update-notice').hidden = !softwareReady;
+    element('shell-app-update-notice').querySelector('span').textContent = `工坊 v${software.version || ''} · ${softwareMessage}`;
     const update = state.game_update;
     const updateMessage = update?.phase === 'ready'
       ? state.mode === 'demo' ? '游戏已更新。演示可继续使用，返回游戏时重新准备。' : state.external_workbench ? '游戏已更新。请保留浏览器中的编辑，完成后点击重新准备。' : updateWaitMessage || update.message
@@ -122,9 +138,10 @@
       element(id).querySelector('span').textContent = updateMessage;
     }
     document.body.classList.toggle('preparing', state.busy);
+    document.body.classList.toggle('has-active-workbench', active);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.5.0'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.6.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -151,13 +168,14 @@
     const unit = document.createElement('small');
     unit.textContent = '%';
     element('progress-percent').append(unit);
-    setText('progress-heading', state.auto_prepare ? '正在更新游戏资料' : autoLaunchIntent ? '正在准备你的工坊' : state.mode === 'demo' ? '正在打开演示工坊' : showAfterLaunch || /launch|serve/.test(state.progress?.stage || '') ? '正在打开你的工坊' : '正在准备本地资料');
+    setText('progress-heading', software.phase === 'installing' ? '正在更新黎明工坊' : state.auto_prepare ? '正在更新游戏资料' : autoLaunchIntent ? '正在准备你的工坊' : state.mode === 'demo' ? '正在打开演示工坊' : showAfterLaunch || /launch|serve/.test(state.progress?.stage || '') ? '正在打开你的工坊' : '正在准备本地资料');
     setText('progress-message', state.progress?.message || '正在处理，请稍候…');
     setText('progress-detail', state.progress?.detail || '');
     element('progress-detail').hidden = !state.progress?.detail;
     const step = progressStep(percent);
     ['step-read', 'step-prepare', 'step-launch'].forEach((id, index) => {
       element(id).className = index < step ? 'done' : index === step ? 'active' : '';
+      element(id).lastChild.textContent = (software.phase === 'installing' ? ['下载校验', '保留旧版', '重启工坊'] : ['读取资料', '整理图鉴', '打开工坊'])[index];
     });
 
     element('error-card').hidden = !error || error === dismissedError;
@@ -172,6 +190,7 @@
       if (action === 'prepare') button.disabled ||= !selected;
       if (action === 'save-path') button.disabled ||= !gamePath.value.trim();
       if (action === 'resume' || action === 'browser') button.disabled ||= !active;
+      if (action === 'check-app-update') button.disabled ||= software.supported === false || ['checking', 'downloading', 'installing'].includes(software.phase);
     });
     updateFrame();
   }
@@ -206,6 +225,7 @@
     polling = true;
     const revision = stateRevision;
     try {
+      await api.check_app_update();
       const next = await api.check_game_update();
       if (revision === stateRevision) acceptState(next);
     } catch (error) {
@@ -215,7 +235,8 @@
     } finally {
       polling = false;
       maybeAutoLaunch();
-      void maybeAutoRefresh();
+      if (state.app_update?.phase === 'ready' && state.app_update.automatic) void installSoftwareUpdate(false);
+      else void maybeAutoRefresh();
       schedulePoll();
     }
   }
@@ -234,10 +255,35 @@
             event.data?.type !== 'dawn-update-idle' || event.data.token !== token) return;
         finish(event.data);
       };
-      const timer = setTimeout(() => finish({ready: false, message: '游戏已更新，等待工作台空闲后自动准备。'}), 2500);
+      const timer = setTimeout(() => finish({ready: false, message: '等待工作台空闲后继续更新。'}), 2500);
       window.addEventListener('message', receive);
       frame.contentWindow.postMessage({type: 'dawn-update-check', token}, origin);
     });
+  }
+
+  async function installSoftwareUpdate(manual) {
+    if (!api || showcase || updateChecking || isBusy() || pathDirty || polling || state.app_update?.phase !== 'ready') return;
+    if (state.external_workbench || !manual && state.mode === 'demo') {
+      if (manual) showToast('请先保留浏览器中的编辑，关闭工坊后重新打开以完成更新。');
+      return;
+    }
+    const token = state.app_update.token;
+    const origin = state.active_url ? new URL(state.active_url).origin : null;
+    updateChecking = true;
+    try {
+      const result = await editorIdleForUpdate(token);
+      if (!result.ready) {
+        appUpdateWaitMessage = '新版已准备，正在编辑的内容会保留。工作台空闲后会自动更新。';
+        if (manual) showToast('先保存或处理待编辑的内容，再完成更新。');
+        render(); return;
+      }
+      if (isBusy() || state.app_update?.token !== token || pathDirty || !manual && !state.app_update.automatic) return;
+      const next = await request('install_app_update', [token]);
+      if (next?.app_update?.phase === 'installing') showView('home');
+    } finally {
+      if (origin && state.app_update?.phase !== 'installing') frame.contentWindow.postMessage({type: 'dawn-update-resume', token}, origin);
+      updateChecking = false;
+    }
   }
 
   async function maybeAutoRefresh() {
@@ -334,6 +380,8 @@
     if (action === 'dismiss-error') { dismissedError = localError || state.error; render(); return; }
     if (!api) return;
     if (action === 'start') { await start(); return; }
+    if (action === 'check-app-update') { await request('check_app_update', [true]); return; }
+    if (action === 'install-app-update') { await installSoftwareUpdate(true); return; }
     if (action === 'demo') { if (!isBusy()) await launch('demo'); return; }
     if (action === 'save-path') { if (!isBusy()) await savePath(); return; }
     if (action === 'choose') {
@@ -363,6 +411,9 @@
     pathDirty = normalizePath(gamePath.value) !== normalizePath(state.game_dir);
     render();
   });
+  element('auto-update-enabled').addEventListener('change', event => {
+    void request('set_auto_update', [event.target.checked]);
+  });
   gamePath.addEventListener('keydown', event => {
     if (event.key === 'Enter' && !isBusy()) { event.preventDefault(); void savePath(); }
   });
@@ -380,11 +431,12 @@
     localError = '';
     dismissedError = '';
     await poll();
+    if (connected) await api.confirm_update_start();
   }
 
   async function init() {
     const scene = new URLSearchParams(location.search).get('showcase');
-    if (['welcome', 'preparing', 'updating'].includes(scene) && ['http:', 'https:'].includes(location.protocol)) {
+    if (['welcome', 'preparing', 'updating', 'app-update'].includes(scene) && ['http:', 'https:'].includes(location.protocol)) {
       try {
         const response = await fetch('/api/health', {cache: 'no-store'});
         const health = response.ok ? await response.json() : null;
@@ -394,8 +446,11 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.5.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
-            prepared: false, data_dir: '', busy: scene !== 'welcome', auto_prepare: scene === 'updating',
+            version: '2.6.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            prepared: false, data_dir: '', busy: ['preparing', 'updating'].includes(scene), auto_prepare: scene === 'updating',
+            app_update: scene === 'app-update'
+              ? {phase: 'downloading', version: '2.6.1', percent: 68, message: '正在下载并校验新版…', automatic: true, supported: true}
+              : {phase: 'current', version: '2.6.0', message: '已是最新版本', automatic: true, supported: true},
             game_update: scene === 'updating' ? {phase: 'preparing', message: '检测到游戏更新，正在自动准备资料。', token: ''} : null,
             progress: scene === 'updating'
               ? {percent: 68, stage: 'catalogue', message: '正在更新物品、炼金与角色资料', detail: '游戏更新已检测，准备完成后会自动打开工坊。'}

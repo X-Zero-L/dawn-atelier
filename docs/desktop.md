@@ -32,22 +32,32 @@
 
 存档页与方案页通过 `/api/saves` 获取当前列表。页面可见时定时刷新，下拉框聚焦、展开及窗口恢复焦点时立即刷新；已选文件内容变化只提示重新读取，不直接替换正在编辑的快照。手动重读先保留原 SHA 对应草稿，再读取新快照。
 
+## 工坊自身更新
+
+`app_update.py` 在独立线程中检查官方仓库的稳定 Release，常规检查间隔六小时，失败后等待三十分钟；手动检查有十秒防重复限制。源码模式不下载或替换程序。自动更新偏好保存在用户数据目录的 `updates/settings.json`。
+
+`update_packages.py` 仅接受官方 HTTPS 下载地址，检查 API 提供的 SHA-256、大小、包内外清单、每个文件的哈希及 Windows x64 程序格式，拒绝越界路径、符号链接、重复文件和异常展开大小。全部验证完成后才发布下载完成标记。
+
+`updates_install.py` 从文件清单保留上一版，独立助手等待旧进程结束，再启动新版本。新版本完成启动页桥接后写入带单次令牌的回执，助手验证回执再切换 `active.json`。启动失败或超时会恢复上一版并记录失败版本，避免反复自动尝试。原入口在后续启动时校验并转向有效的新版本。
+
+自动安装复用编辑器的空闲确认，保留未导出的草稿和打开的编辑窗口。浏览器工作台已打开时不自动重启。所有程序版本与回滚副本均位于 `updates/`；游戏文件和用户存档不参与替换。
+
 ## 构建
 
 在 Windows x64、Python 3.11 下运行：
 
 ```powershell
-python scripts/build-windows.py --expected-version v2.5.0
+python scripts/build-windows.py --expected-version v2.6.0
 ```
 
 脚本自动创建隔离环境、安装固定依赖、构建窗口版 EXE、检查打包文件，并输出：
 
 ```text
 dist/windows/
-  DawnAtelier-2.5.0-windows-x64.zip
-  DawnAtelier-2.5.0-windows-x64.sha256
-  DawnAtelier-2.5.0-windows-x64.manifest.json
-  DawnAtelier-2.5.0-windows-x64.dependencies.json
+  DawnAtelier-2.6.0-windows-x64.zip
+  DawnAtelier-2.6.0-windows-x64.sha256
+  DawnAtelier-2.6.0-windows-x64.manifest.json
+  DawnAtelier-2.6.0-windows-x64.dependencies.json
   SHA256SUMS-windows.txt
 ```
 

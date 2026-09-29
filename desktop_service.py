@@ -11,9 +11,11 @@ import time
 from urllib.request import build_opener, ProxyHandler, Request
 from urllib.parse import urlparse
 import webbrowser
+import sys
 
 from app_paths import APP_ROOT, USER_ROOT, LOG_ROOT, app_version, read_config, write_config, task_command, find_game
 from compatibility import inspect_game, installation_stamp, profiles, require_prepared, begin_preparation
+from app_update import AppUpdates
 
 
 class DesktopService:
@@ -26,6 +28,13 @@ class DesktopService:
         self._prepare_process = None
         self._closing = False
         self._window = None
+        self._update_exit = False
+        self._update_job = None
+        self._restart_mode = None
+        self._browser_mode = False
+        self._close_window = None
+        self._boot_ticket = None
+        self._app_updates = AppUpdates()
         self._error = ''
         self._busy = False
         self._mode = None
@@ -87,6 +96,7 @@ class DesktopService:
                 'auto_prepare': self._auto_prepare_active,
                 'game_update': dict(self._game_update), 'workbench_session': self._workbench_session,
                 'external_workbench': self._external_workbench,
+                'app_update': self._app_updates.status(), 'update_exit': self._update_exit,
                 'progress': dict(self._progress), 'error': self._error, 'mode': self._mode,
                 'active_url': self._active_url, 'last_prepared': self._config.get('last_prepared'),
                 'compatibility': compatibility}
@@ -94,6 +104,67 @@ class DesktopService:
     def status(self):
         with self._lock:
             return self._state()
+
+    def check_app_update(self, force=False):
+        self._app_updates.check(force)
+        return self.status()
+
+    def set_auto_update(self, enabled):
+        self._app_updates.set_automatic(enabled)
+        return self.status()
+
+    def install_app_update(self, token):
+        with self._lock:
+            self._idle()
+            if self._external_workbench:
+                raise ValueError('请先保留浏览器中的编辑，关闭工坊后重新打开以完成更新。')
+            if self._close_window is None:
+                raise ValueError('桌面窗口尚未就绪，请稍后重试。')
+            stage = self._app_updates.take_stage(token)
+            mode = self._mode
+            def install():
+                from updates_install import prepare_handoff
+                job = None
+                try:
+                    job = prepare_handoff(stage, USER_ROOT, Path(sys.executable), mode, self._browser_mode)
+                    log = LOG_ROOT / 'app-update.log'
+                    with log.open('ab') as output:
+                        helper = self._popen(task_command('update', '--job', str(job), '--home', str(USER_ROOT)),
+                                             stdout=output, stderr=output)
+                    ready = job.with_suffix('.helper-ready')
+                    for _ in range(100):
+                        if ready.is_file():
+                            break
+                        if helper.poll() is not None:
+                            raise ValueError('更新助手未能启动，当前版本已保留。')
+                        time.sleep(.1)
+                    else:
+                        raise ValueError('更新助手启动超时，当前版本已保留。')
+                    self._stop_service()
+                    self._update_job = job
+                    self._update_exit = True
+                    self._app_updates.close()
+                    self._progress_to(100, 'updating', '新版已准备，正在重启工坊')
+                    self._close_window()
+                except Exception:
+                    if job is not None:
+                        job.with_suffix('.cancelled').write_text('cancelled\n', encoding='utf-8')
+                    self._update_exit = False
+                    self._app_updates.install_failed('更新未完成，当前版本已保留。请打开日志后重试。')
+                    raise
+            return self._start(install, '正在准备工坊更新')
+
+    def confirm_update_start(self):
+        """The visible launcher has connected its bridge and rendered state."""
+        if self._boot_ticket:
+            from updates_install import acknowledge_start
+            acknowledge_start(self._boot_ticket, USER_ROOT, Path(sys.executable), app_version())
+            self._boot_ticket = None
+        mode = self._restart_mode
+        self._restart_mode = None
+        if mode and (mode == 'demo' or self._prepared):
+            self.launch(mode)
+        return {'ok': True}
 
     def _reset_update_watch(self):
         self._update_baseline = None
@@ -430,5 +501,6 @@ class DesktopService:
         except Exception:
             self._closing = False
             raise
+        self._app_updates.close()
         # Do not interrupt a preparation subprocess midway through writing its
         # local cache. Native closing is blocked while preparation is busy.

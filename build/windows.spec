@@ -60,6 +60,7 @@ hiddenimports = [
     "read_manifest", "decode_bundles", "decode_tables", "extract_unity",
     "dump_currency", "inspect_meta", "webview.platforms.winforms",
     "webview.platforms.edgechromium",
+    "app_update", "update_packages", "updates_install",
 ]
 
 analysis = Analysis(

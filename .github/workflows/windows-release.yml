@@ -118,6 +118,16 @@ jobs:
             gh release create $tag --target $env:RELEASE_SOURCE_SHA --title "黎明工坊 $tag · Windows 桌面版" --notes-file $notesPath --latest
             if ($LASTEXITCODE -ne 0) { throw 'Could not create the release.' }
           }
-          gh release upload $tag @files --clobber
+          $existing = gh release view $tag --json assets | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Could not inspect existing release assets.' }
+          $names = @($existing.assets | ForEach-Object { $_.name })
+          $expected = @($files | ForEach-Object { Split-Path -Leaf $_ })
+          $present = @($expected | Where-Object { $names -contains $_ })
+          if ($present.Count -eq $expected.Count) {
+            Write-Output 'The verified Windows download is already attached; preserving published checksums.'
+            exit 0
+          }
+          if ($present.Count -ne 0) { throw 'Windows release assets are incomplete; refusing to overwrite existing checksums.' }
+          gh release upload $tag @files
           if ($LASTEXITCODE -ne 0) { throw 'Could not upload the Windows package.' }
           Write-Output "Published $base.zip to $tag"

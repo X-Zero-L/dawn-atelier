@@ -46,6 +46,8 @@ def internal_task(name, arguments):
         from export_catalogue import main
     elif name == 'art':
         from extract_web_art import main
+    elif name == 'update':
+        from updates_install import main
     else:
         raise SystemExit('Unknown internal task.')
     main()
@@ -96,6 +98,8 @@ def browser_fallback(service):
     from tkinter import filedialog, messagebox, ttk
     import webbrowser
     app = tk.Tk()
+    service._browser_mode = True
+    service._close_window = lambda: app.after(0, app.destroy)
     app.title('黎明工坊 · 启动')
     app.geometry('650x480')
     app.minsize(570, 430)
@@ -138,8 +142,19 @@ def browser_fallback(service):
     demo.pack(side='left')
     ttk.Button(buttons, text='安装 WebView2', command=lambda: webbrowser.open('https://developer.microsoft.com/microsoft-edge/webview2/')).pack(side='right')
     ttk.Button(app, text='打开数据与备份文件夹', command=lambda: service.open_folder('data')).pack(anchor='w', padx=34)
+    update_status = tk.StringVar(value='')
+    tk.Label(app, textvariable=update_status, bg='#f6f3e9', fg='#697b68', wraplength=575,
+             justify='left').pack(anchor='w', padx=34, pady=(8, 0))
+    ttk.Button(app, text='检查工坊更新', command=lambda: service.check_app_update(True)).pack(anchor='w', padx=34)
     def refresh():
+        service.check_app_update()
         current = service.check_game_update()
+        software = current.get('app_update', {})
+        update_status.set(software.get('message', ''))
+        if not current['busy'] and not current['active_url'] and software.get('automatic') and software.get('phase') == 'ready':
+            service.install_app_update(software['token'])
+            app.after(700, refresh)
+            return
         update = current.get('game_update', {})
         if not current['busy'] and not current['active_url'] and update.get('phase') == 'ready':
             current = service.refresh_game_update(update['token'])
@@ -167,6 +182,7 @@ def browser_fallback(service):
         except Exception as exc:
             messagebox.showerror('工作台仍在运行', str(exc), parent=app)
     app.protocol('WM_DELETE_WINDOW', close)
+    app.after(100, service.confirm_update_start)
     refresh()
     app.mainloop()
 
@@ -184,13 +200,26 @@ def main():
     parser.add_argument('--demo', action='store_true', help='Open the desktop in demonstration mode')
     parser.add_argument('--browser', action='store_true', help='Use the native browser-mode launcher')
     parser.add_argument('--home', type=Path, help='Use a separate workspace for this launch')
+    parser.add_argument('--update-ticket', type=Path, help=argparse.SUPPRESS)
+    parser.add_argument('--resume-mode', '--resume', dest='resume_mode', choices=('game', 'demo'), help=argparse.SUPPRESS)
+    parser.add_argument('--skip-app-update', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.home:
         os.environ['DAWN_HOME'] = str(args.home.expanduser().resolve())
-    from app_paths import APP_ROOT, USER_ROOT, LOG_ROOT, app_version
+    from app_paths import APP_ROOT, USER_ROOT, LOG_ROOT, app_version, FROZEN
+    if FROZEN and not args.update_ticket and not args.skip_app_update:
+        from updates_install import redirect_to_active
+        if redirect_to_active(USER_ROOT, Path(sys.executable), sys.argv[1:]):
+            return
     from desktop_service import DesktopService
     session_handle = instance_guard(USER_ROOT)
     service = DesktopService()
+    service._boot_ticket = args.update_ticket
+    if args.update_ticket:
+        service._restart_mode = 'demo' if args.demo else args.resume_mode
+    service._browser_mode = args.browser
+    if args.skip_app_update:
+        service._app_updates.automatic = False
     if args.browser or not has_webview_runtime():
         browser_fallback(service)
         return
@@ -207,7 +236,10 @@ def main():
     window = webview.create_window('黎明工坊 · 黎明门前的吹笛人', str(APP_ROOT / 'desktop/index.html'),
         js_api=service, width=1440, height=940, min_size=(1000, 700), background_color='#f6f3e9')
     service._window = window
+    service._close_window = window.destroy
     def closing(*_):
+        if service._update_exit:
+            return True
         if service.status()['busy']:
             window.create_confirmation_dialog('请稍候', '当前操作还在进行，完成后即可关闭。')
             return False
@@ -222,8 +254,12 @@ def main():
         return True
     window.events.closing += closing
     def startup():
+        if args.update_ticket:
+            return
         if args.demo:
             service.launch('demo')
+        elif args.resume_mode and (args.resume_mode == 'demo' or service._prepared):
+            service.launch(args.resume_mode)
     try:
         webview.start(startup, gui='edgechromium', private_mode=False,
                       storage_path=str(USER_ROOT / 'webview'), icon=str(APP_ROOT / 'build/assets/dawn-atelier.ico'),
