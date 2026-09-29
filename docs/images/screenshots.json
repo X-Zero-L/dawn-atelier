@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T15:47:06.108Z",
+  "generatedAt": "2026-09-29T15:53:28.066Z",
   "syntheticDemo": true,
   "source": {
-    "commit": "302addb311fff672503d7cab7a538d43de070223",
+    "commit": "d22bb2c7e5ad2505b2d99550a528692a685a944d",
     "dirty": false,
-    "fingerprint": "871c8b3fd0d55338aae387b9f322126d094944b9e8da4cd3645bc0f1e7eb699e",
+    "fingerprint": "00116623f2530db96db3846a91ff78fccdfc1214e14db5f5aa1916ea82dd39e3",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -189,7 +189,7 @@
       ],
       [
         "update_packages.py",
-        "1789ac4916c3e1c47aeee0a8939dd1ab0756adbd1c3edf857109538a69f3fd96"
+        "8e496ba70a965fc326deba50fdb5fce4c7ffa37b04fa5ade4621c8a04158ddb4"
       ],
       [
         "updates_install.py",
@@ -2055,104 +2055,104 @@
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "03bbc406b5ddf67dc76c844fc1217b92f5b5263e5c785a86284e92fe1b190319",
-      "bytes": 161468,
+      "sha256": "110844b704e66f08179aa2788709f9f380f95f15b40c9b7a0f8d44fcd0b04d13",
+      "bytes": 161439,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "7b25d2e13cfdef199f0e4795c473f02658294b68becc18fa0d98db659c6d60a9",
-      "bytes": 413498,
+      "sha256": "1eea06bca96205664db70898d7e3cda84dd36e010a993e8e06b501ad7555c31c",
+      "bytes": 413247,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "216060a8a03c17a92ca9c63a4279f6fd29a52aa4308dd3d53ed170d34272ccc0",
-      "bytes": 457247,
+      "sha256": "56f539cd0ef68592680a231aeb178268898ceec9af54563fa156d6a4c19692d8",
+      "bytes": 457224,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "8023b2e984dbbf83b3a7693681147a7cab8cb8fac4f138a37ee3f21c764e3753",
-      "bytes": 473570,
+      "sha256": "c64e7385048ad3430067d3b7f7dbf3f41bfb5aa6c26c7d7b4c1d42be307075af",
+      "bytes": 473525,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "b62a361d2076a0e6f88cf4bf13060ed503b4ec05cfe6efb374ccb39d5af91443",
-      "bytes": 146408,
+      "sha256": "f64ef3553b7a7fec946e91d30973cfb4c4b0595d8aaa6169688048eca14d3dcf",
+      "bytes": 146298,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "539b58fe4a7079c5270c5b0b11138b7d04d41140d9c3e69d6554b0d7cdd6409a",
-      "bytes": 122334,
+      "sha256": "e87ef1e2c0ab4d5dc2de81677ea40546628bfdc66f589b405e8aec8d211e6601",
+      "bytes": 122229,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "618ec1dbfe3318d800ddb3efd533d042c92af3cc476ef7cabce35c6874a2c321",
-      "bytes": 186000,
+      "sha256": "96ae3d44fed4839df1995f317267ca7de6a5de7e129e51b12df0ae2683b36faa",
+      "bytes": 185883,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "870ee423db831e987d9defb1e3c3617f03acfe4982796e450a80ee99f9c7fe0d",
-      "bytes": 281159,
+      "sha256": "2465f8c28c748f1c865ad363889eea5f4e23148d3a533ab95dea9b828b150eb0",
+      "bytes": 281083,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "8f8cd176081df910210b7542b762e2b1af68b8b653544c1d4be348069c64b0f1",
-      "bytes": 177754,
+      "sha256": "b7fd85e245c256ceb367072ab14d060536fca026169ca141ee7bebe54af380ba",
+      "bytes": 177644,
       "route": "saves"
     },
     "favor-preview": {
       "file": "favor-preview.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "02bf62d84851bb1b793ad24630aec61b21b5ac41e592f04489f86bfd462b747b",
-      "bytes": 315555,
+      "sha256": "ccab38fb27e4f126b1aab0de5c0100b6c847e4d0080ffbdd632cce75b71df29e",
+      "bytes": 315438,
       "route": "saves"
     },
     "workshop": {
       "file": "workshop.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "c0617159cd9c107b08c466a225e0584e98d534ba4e0eea14b5ef583998f065a6",
-      "bytes": 151380,
+      "sha256": "7262458417ea310335d42502b22b3dc24bce62b1156c17bdcdf33adeb8d67622",
+      "bytes": 151263,
       "route": "saves"
     },
     "progression-preview": {
       "file": "progression-preview.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "faf97c95a434144c147cb64ded9840bfb26bd6138d13f4ae4ffbe2e537ba7582",
-      "bytes": 276457,
+      "sha256": "52754d12e87605731acd3afeaf791f829c8a00da73af5a12d69924cd1aba9065",
+      "bytes": 276353,
       "route": "saves"
     },
     "alchemy-unlocks": {
       "file": "alchemy-unlocks.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "1b9f2a049252d326ec5a2aa8259a561244c871735d395abcad5f91b8f2fff2d8",
-      "bytes": 232119,
+      "sha256": "0f56867b00187b36b5371117cfa8d3c8d1491088fba4dfe3483b515a1377dc4b",
+      "bytes": 232019,
       "route": "saves"
     },
     "items": {
@@ -2167,24 +2167,24 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "d4f56b463b117bf65a787517681230b4b162434e756b80646a14e4a374380358",
-      "bytes": 328208,
+      "sha256": "666a70175111e8cbb8f4c7d81a0a4bcbaf16b0225e1b0dee8805581145cfd00b",
+      "bytes": 327951,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "8509cff0c847771c1b27613b173ac08ece7eddf1d68adb36ad7c85e8544ca4b6",
-      "bytes": 355155,
+      "sha256": "8f4e400c38a1f7051724e24d24d9eb288f2a93303a9fc226167f6910509d65d4",
+      "bytes": 355054,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "be2c52ff094d8ac648c41d9c568d44d334a2c9f459de1da422d5d554d8fb4ff3",
-      "bytes": 127752,
+      "sha256": "727fabad2d842a58c1cc2f03c57c4f10d6cc65df90eb9e3f920195ef95f04436",
+      "bytes": 127675,
       "route": "presets"
     },
     "mobile": {
