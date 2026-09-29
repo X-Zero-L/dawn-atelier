@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T21:19:06.782Z",
+  "generatedAt": "2026-09-29T13:48:00.332Z",
   "gameTitle": "黎明门前的吹笛人",
   "source": {
-    "commit": "111169273181a94ac55f64a077546b75e73f596e",
+    "commit": "c46f734016d7bbb34657a56d9f9bc4739af75841",
     "dirty": false,
-    "fingerprint": "0075e8b0559798efda5a829bea70f6e5c0e78f0a138b8c7f724060648891c306",
+    "fingerprint": "1463b33d3837a7fd9650476d4d776397991fe6696c10dd4cbe9a1bfeed8113f1",
     "files": [
       [
         ".github/workflows/refresh-media.yml",
@@ -21,7 +21,7 @@
       ],
       [
         "compatibility.py",
-        "29ff5711f64f9edb01ff5696cf25dc2a00aa0395408b581d718064e27bab5743"
+        "dc4b5c534f7561918419e673a5e05c30e65fb4e9cb75ccc523ddcdf8b95ff528"
       ],
       [
         "demo_data.py",
@@ -33,7 +33,7 @@
       ],
       [
         "desktop/index.html",
-        "f2ac84f004927b7d35aa1e9dc4664114600b50270628ca9ac966e43a8f45ab11"
+        "5e7fb40778ab9711e85c42ddc46e20e587d44aadca63542aac1ed20cb60deed6"
       ],
       [
         "desktop/launcher.css",
@@ -41,11 +41,11 @@
       ],
       [
         "desktop/launcher.js",
-        "d673eb411f4beb6724b30f1265445f3c4513990069bd772d71cdfd224f9c0444"
+        "02226cf71578429aa33e0981790cd3be329eb31656213b32055d2017a371485c"
       ],
       [
         "desktop_service.py",
-        "d5346365ee2eae391b52926ac01d1e5fbce303195fbcd9a7b3d7cb3a973793f7"
+        "236f0f70fcc57c9ebc684e79ac5cb5f87894ead6e72e07e02f68046eba54e041"
       ],
       [
         "export_catalogue.py",
@@ -116,6 +116,10 @@
         "35f5f66cc812220f10a31641b7929ef66c7e2d7f840445300ba51e90d2454786"
       ],
       [
+        "schemas/compatibility/2026-09-29-717.json",
+        "543823698e0d8eaf4de6f7ae0c299c147fce82a961eb8ec4c57b6ac7e8ac39e6"
+      ],
+      [
         "schemas/thepiper-2026-09-25/config_schema.json",
         "3cbc82c6653785e8d1783aafd102ace078db64f8d218c81dda750a0fc205d77d"
       ],
@@ -140,8 +144,20 @@
         "81632ce7c4c68eba9b55aa2377ad928b369d23f222cc4d1f7e2ac14f703597cd"
       ],
       [
+        "schemas/thepiper-2026-09-29/config_schema.json",
+        "cb94d09450312b6bfbf3040a3be8fdae40af8896bfba6f5703fc73ce04c81252"
+      ],
+      [
+        "schemas/thepiper-2026-09-29/enums.json",
+        "37ac893309340cda2189ce871e837b0930da0920e0ab647c1367b54a169e08e1"
+      ],
+      [
+        "schemas/thepiper-2026-09-29/save_schema.json",
+        "997e93b314504db51cc0089a8d50c84d0d6bde177c7381485a3a4fe5436c9cb4"
+      ],
+      [
         "scripts/build-windows.py",
-        "80c28c7bb9cb29bad1fa409dd7f0e495cfcf07f49a21bf36dca41f4d64e73c5c"
+        "cd1ce171b4e7a5913acbe9deca5f4e85640b73aafc61a02c3f648fa945cccb28"
       ],
       [
         "scripts/capture-demo.mjs",
@@ -169,7 +185,7 @@
       ],
       [
         "version.json",
-        "76e993f5cd819811db3fb97ef753aa05130148f63c51a8911101fdb2c25d7839"
+        "9f705ae5a1972ce08631754765167ea6edeb00a09c77da98ab39f17e062a236e"
       ],
       [
         "video/package-lock.json",
@@ -1995,120 +2011,120 @@
       "file": "desktop.png",
       "width": 1280,
       "height": 900,
-      "sha256": "78b09531509d7a7ee6c9df14b761c55a7a7eb30696bb95fd7be8dbb9e7474ff8",
-      "bytes": 94850,
+      "sha256": "72ef2b270258287bb626b6022afa5025c7f21aac6275108ac928325c65f7d25a",
+      "bytes": 94790,
       "route": "desktop"
     },
     "desktop-preparing": {
       "file": "desktop-preparing.png",
       "width": 1280,
       "height": 900,
-      "sha256": "8aa24156690977893f7c006df00493030d39c51cb29bf5df4ffd0a45c94d279e",
-      "bytes": 91492,
+      "sha256": "a247e9a7da1e56b21c38a69d6dd1c5786218c144cb9d474b47b356bd6db4a4c8",
+      "bytes": 91438,
       "route": "desktop-preparing"
     },
     "overview": {
       "file": "overview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "6b12e63b0396873d797b883ba9906c05ba1e47c8593f94c4f9dcacf31af45fdd",
-      "bytes": 161429,
+      "sha256": "356dc403609ce8ec580f6136741aff7d332d746283552b48992d1acb2be4ef67",
+      "bytes": 161404,
       "route": "home"
     },
     "presets": {
       "file": "presets.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "f42306112a93e013ea88ad047897143a9f58dcf0f84ad117b46eba8eddbbac44",
-      "bytes": 413201,
+      "sha256": "35feb0b9fc68896c9a313be5315174752fe627da697ec92f4df4264c5cec03c1",
+      "bytes": 413245,
       "route": "presets"
     },
     "builder": {
       "file": "builder.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "a46e48ab482bb142af198168598ca2145ed1cc0af6e2d411d768aa32c280bd99",
-      "bytes": 457168,
+      "sha256": "ea1882866bfa2d935d280d06a83321ad12971a2d6ebf1cb04e05cef7a020af8e",
+      "bytes": 457187,
       "route": "presets"
     },
     "preview": {
       "file": "preview.png",
       "width": 1600,
       "height": 1930,
-      "sha256": "94789d5fa3d4226070dde2339b408a2bb7296164ba4161180974f927a6f70f96",
-      "bytes": 473464,
+      "sha256": "d75fa2339566fad4c352dfe4944b9aaef409780d066593438d2f45e8c05ced37",
+      "bytes": 473503,
       "route": "presets"
     },
     "inventory": {
       "file": "inventory.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "31f8a68bfcddbf2467bc6ba8c1eb144a36ba258d30b457abad7e6efa550970c1",
-      "bytes": 146162,
+      "sha256": "e2ba4e865f0273343f2f4641dcb58e4a9339b670686c5f1146308424d6dac140",
+      "bytes": 146250,
       "route": "saves"
     },
     "tools": {
       "file": "tools.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "0ea230085145fb404b9159ac3e2381a8bcc5115c143901e84a6f11a1881b19fe",
-      "bytes": 122094,
+      "sha256": "e9651a3d98c6af35682bd0ac452ff5690f4b6c1cc0e59c02f3b77f3a2f65d3ff",
+      "bytes": 122184,
       "route": "saves"
     },
     "alchemy": {
       "file": "alchemy.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "847eec7d2277605304f668a47531049c35c432d1b1fad7c0e9165e463aee86dd",
-      "bytes": 185726,
+      "sha256": "a4474bc0bb96efa8efb8a88cf1666b602486293f4a92151f801dc6b99a035c05",
+      "bytes": 185821,
       "route": "saves"
     },
     "alchemy-preview": {
       "file": "alchemy-preview.png",
       "width": 1600,
       "height": 1200,
-      "sha256": "4008303f758a99ad1414031649174fc60a0ef2c1883a1f01b095c18514006ed9",
-      "bytes": 281105,
+      "sha256": "4bc764107df0662b62301711bce17118c9909c28ab22d7ce7a4bf6077af32468",
+      "bytes": 281142,
       "route": "saves"
     },
     "relationships": {
       "file": "relationships.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "b05d5aad4b34592dcbfe2eceaf78644821cf1c0f5ad6269b08dd8d571aa54a8f",
-      "bytes": 177499,
+      "sha256": "7bb4d87a73453da72ffd8c06c93725723e20a68c864d0e7cfc5a3887236cfef7",
+      "bytes": 177591,
       "route": "saves"
     },
     "favor-preview": {
       "file": "favor-preview.png",
       "width": 1600,
       "height": 1470,
-      "sha256": "61ed7ab30733d3e1d10e45ad764c1c6696777ea7207a9d56af317e1d21cb50f7",
-      "bytes": 315463,
+      "sha256": "a80bd268b5ca0ffd7eb825327240f668a0f79f279e316f4dbe6491651eefe342",
+      "bytes": 315486,
       "route": "saves"
     },
     "workshop": {
       "file": "workshop.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "e10fbf8eef761e47e6903f5d2113f85f12a5be24e43689a532a203b4558a8874",
-      "bytes": 151119,
+      "sha256": "030dbff248e97f3774ca6c3b565f397143137e457081805ab49d3f5a4c184bb3",
+      "bytes": 151212,
       "route": "saves"
     },
     "progression-preview": {
       "file": "progression-preview.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "5ecba5fd22d4a45cab22683b0519b3106b6aafd77c79e090763626f8f3e44d73",
-      "bytes": 276368,
+      "sha256": "8fb507ec116800933a9d1384717a6b9a8f5f4389698ec93701f3986c8e7dd21a",
+      "bytes": 276407,
       "route": "saves"
     },
     "alchemy-unlocks": {
       "file": "alchemy-unlocks.png",
       "width": 1600,
       "height": 1450,
-      "sha256": "11786ecfdba1a42c5bb69da2d12a6286570dae524afd43a4eef809057feafb70",
-      "bytes": 231877,
+      "sha256": "5e246861ea7aba3effc53afd61570d078c51fc9d723689a485feb85451966f27",
+      "bytes": 231964,
       "route": "saves"
     },
     "items": {
@@ -2123,24 +2139,24 @@
       "file": "super-supply.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "311201d498f7d4543fcf90a424d29c3a980d1aba2229227d8ce5cfe504366111",
-      "bytes": 327888,
+      "sha256": "7a2b89c1ff635149e3963da3f46bee32e3832c5ffb96fb67b2fdde2720a06222",
+      "bytes": 327948,
       "route": "presets"
     },
     "super-supply-preview": {
       "file": "super-supply-preview.png",
       "width": 1600,
       "height": 1300,
-      "sha256": "bd86c24b284fefa43e323a82b129fa607310caa8cea62446235dab62b0cf6e0b",
-      "bytes": 355002,
+      "sha256": "ccd43f3d9c206a0c19a49da769c408aa58a1ad15d602e14ed5257c68100f93fd",
+      "bytes": 355062,
       "route": "presets"
     },
     "super-supply-mobile": {
       "file": "super-supply-mobile.png",
       "width": 430,
       "height": 1060,
-      "sha256": "fc8ae53a5d20f4a0ff0aa8c64c2edbb997811a5ffbabb59878a63a4b60c25b66",
-      "bytes": 127582,
+      "sha256": "857b13d478e98dfd0dad01a50515f0191d464d0b227aec917234feae515517f6",
+      "bytes": 127585,
       "route": "presets"
     },
     "mobile": {
@@ -2163,16 +2179,16 @@
   },
   "files": {
     "dawn-atelier-demo.mp4": {
-      "bytes": 16208347,
-      "sha256": "48dde8de1bb182ad811bf939305993c9c7354ac160b913ea1c39ccccc7f2d81e"
+      "bytes": 16212373,
+      "sha256": "67dc205684025704bcb424078fea90f72a77c63d8c631332088be6fc3198a692"
     },
     "dawn-atelier-demo.gif": {
-      "bytes": 6542623,
-      "sha256": "ea63a6b4ed458dc578e482fe78fd9cf5ffb06e242d88796abe71ec9e9f349d2a"
+      "bytes": 6553639,
+      "sha256": "4075ae35fc7df8308b8afa338ff96d1cb8c9abb41567849f5545462f6a6ae1bc"
     },
     "dawn-atelier-poster.png": {
-      "bytes": 252881,
-      "sha256": "28a16158437b24611ecdce8cd2c97f1e995f6ef0a68c65772875b31ec3140cc1"
+      "bytes": 252918,
+      "sha256": "f99bf3dcfded729a0fdf74e03c026bb10921a0f31d9b52119dc51d7895c5d563"
     }
   }
 }
