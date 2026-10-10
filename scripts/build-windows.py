@@ -32,6 +32,7 @@ WEB_FILES = {
     "index.html", "app.js", "presets-ui.js", "style.css", "presets.css", "progression-ui.js", "progression.css", "save-refresh.js",
     "brand/emblem.svg", "brand/botanical.svg",
     "adapters-ui.js", "adapters.css",
+    "game.html", "game.js", "game.css",
 }
 DESKTOP_FILES = {"index.html", "launcher.css", "launcher.js"}
 
@@ -234,6 +235,10 @@ def inspect_payload(directory):
         "_internal/schemas/thepiper-2026-10-08/config_schema.json",
         "_internal/schemas/thepiper-2026-10-08/enums.json",
         "_internal/schemas/compatibility/2026-10-08-1009.json",
+        "_internal/schemas/blazblue/resource-contract.json",
+        "_internal/web/game.html",
+        "_internal/web/game.js",
+        "_internal/web/game.css",
         "_internal/build/assets/dawn-atelier.ico",
         "_internal/webview/lib/Microsoft.Web.WebView2.Core.dll",
         "_internal/webview/lib/Microsoft.Web.WebView2.WinForms.dll",

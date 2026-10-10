@@ -1,6 +1,6 @@
 # Dawn Atelier video
 
-A 59-second showcase for 黎明工坊, the Windows desktop save editor for 《黎明门前的吹笛人》. Screens show desktop launch, synthetic demonstration data, progression preparation, staged editor previews, and the game adapter catalogue.
+A 64-second showcase for 黎明工坊, the Windows desktop save editor for 《黎明门前的吹笛人》 and 《苍翼：混沌效应》. Screens show desktop launch, synthetic demonstration data, progression preparation, staged editor previews, and the game adapter catalogue.
 
 ## Reproduce
 
@@ -18,7 +18,7 @@ npm run poster
 
 Required inputs are listed in `scripts/media-config.json`: desktop launch, preparation and updates; the workbench gallery; alchemy resources and unlock conditions; workshop growth; corresponding change previews; and the game adapter catalogue. Desktop screenshots are 1280 × 900 and appear as complete viewports.
 
-The render is **1920 × 1080**, **30 fps**, **1770 frames**, H.264, CRF 18, YUV 4:2:0. Output goes to ignored `out/`. `src/timeline.json` defines the composition duration, chapter timing, poster frame, and representative sample frames. `src/index.jsx` and the composition consume that same file. A different destination can be passed directly:
+The render is **1920 × 1080**, **30 fps**, **1920 frames**, H.264, CRF 18, YUV 4:2:0. Output goes to ignored `out/`. `src/timeline.json` defines the composition duration, chapter timing, poster frame, and representative sample frames. `src/index.jsx` and the composition consume that same file. A different destination can be passed directly:
 
 ```sh
 npx remotion render src/index.jsx DawnAtelier path/to/demo.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p

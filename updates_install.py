@@ -133,7 +133,7 @@ def prepare_handoff(stage, home: Path, current_exe: Path, mode=None, browser=Fal
     previous_version = _current_version(current_exe)
     if parse_version(version) <= parse_version(previous_version):
         raise ValueError('待安装版本必须比当前版本更新。')
-    if mode not in (None, 'game', 'demo') or not isinstance(browser, bool):
+    if mode not in (None, 'game', 'demo', 'blazblue') or not isinstance(browser, bool):
         raise ValueError('更新后的启动方式无效。')
     if not re.fullmatch('[0-9a-f]{64}', stage['sha256']):
         raise ValueError('下载校验记录无效。')
@@ -170,7 +170,7 @@ def _job(path, home):
     if (job.get('format') != _FORMAT or not re.fullmatch('[0-9a-f]{64}', str(job.get('nonce', '')))
             or type(job.get('parent_pid')) is not int or job['parent_pid'] <= 0
             or type(job.get('parent_created')) is not int
-            or job.get('mode') not in (None, 'game', 'demo') or type(job.get('browser')) is not bool
+            or job.get('mode') not in (None, 'game', 'demo', 'blazblue') or type(job.get('browser')) is not bool
             or not re.fullmatch('[0-9a-f]{64}', str(job.get('sha256', '')))):
         raise ValueError('更新重启记录无效。')
     new = _owned(job['directory'], home)
@@ -317,7 +317,7 @@ def redirect_to_active(home, current_exe, arguments: list) -> bool:
                 value = argument.partition('=')[2]
             else:
                 continue
-            if value in ('game', 'demo'):
+            if value in ('game', 'demo', 'blazblue'):
                 mode = value
         _launch(new / 'DawnAtelier.exe', home, _mode_flags({'mode': mode, 'browser': '--browser' in arguments}))
         return True

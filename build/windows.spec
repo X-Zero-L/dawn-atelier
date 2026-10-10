@@ -22,6 +22,9 @@ RESOURCE_FILES = [
     "web/save-refresh.js",
     "web/adapters-ui.js",
     "web/adapters.css",
+    "web/game.html",
+    "web/game.js",
+    "web/game.css",
     "web/brand/emblem.svg",
     "web/brand/botanical.svg",
     "desktop/index.html",
@@ -43,6 +46,7 @@ RESOURCE_FILES = [
     "schemas/compatibility/2026-09-28-1042.json",
     "schemas/compatibility/2026-09-29-717.json",
     "schemas/compatibility/2026-10-08-1009.json",
+    "schemas/blazblue/resource-contract.json",
     "version.json",
     "NOTICE.md",
     "build/assets/dawn-atelier.ico",
@@ -68,6 +72,7 @@ hiddenimports = [
     "webview.platforms.edgechromium",
     "app_update", "update_packages", "updates_install",
     "atelier", "atelier.cli", "atelier.reference", "workbench", "piper_adapter", "piper_editor",
+    "blazblue_adapter", "blazblue_codec", "blazblue_install", "blazblue_demo", "game_workbench", "process_guard",
 ]
 
 analysis = Analysis(

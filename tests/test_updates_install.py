@@ -170,6 +170,16 @@ class UpdateHandoffChecks(unittest.TestCase):
         self.launch.assert_called_once_with(self.new / 'DawnAtelier.exe', self.home,
             ['--update-ticket', str(self.job), '--resume', 'game', '--browser'])
 
+    def test_second_game_mode_survives_update_handoff(self):
+        self.prepare(mode='blazblue')
+        def launch(*_):
+            self.receipt()
+            return self.child
+        self.launch.side_effect=launch
+        self.assertTrue(updates.run_handoff(self.job,self.home))
+        self.launch.assert_called_once_with(self.new/'DawnAtelier.exe',self.home,
+            ['--update-ticket',str(self.job),'--resume','blazblue'])
+
     def test_successful_manual_retry_unskips_the_working_version(self):
         self.prepare()
         updates._mark_failed(self.home, '2.7.0')

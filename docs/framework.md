@@ -7,6 +7,7 @@
 | 适配器 | 用途 | 支持范围 |
 | --- | --- | --- |
 | `thepiper`：《黎明门前的吹笛人》（The Piper of Dawn） | 实际游戏适配 | 现有桌面和网页工作台、物品补给、好感计算、条件准备、备份与导出 |
+| `blazblue`：苍翼：混沌效应 | 实际游戏适配 | AP、已有解析器、颜色印记与挑战券，独立工作台、预览、备份与导出 |
 | `json-reference` | 可运行的开发示例 | 只接受带专用格式标记的合成 JSON，演示独立编解码与操作校验；只开放导出 |
 
 合成示例不是另一款商业游戏。新游戏需要独立确认存档结构、数值意义、版本证据与写入条件，再编写适配器。框架不会从字段名称自动猜出这些规则。
@@ -161,7 +162,7 @@ registry.register(GameAdapter())
 raise SystemExit(main(registry=registry))
 ```
 
-项目的 `workbench.py` 就是这种入口：注册 `thepiper` 和 `json-reference`。独立的 `python -m atelier` 不加载真实游戏配置，只有合成参考适配器。
+项目的 `workbench.py` 就是这种入口：注册 `thepiper`、`blazblue` 和 `json-reference`。独立的 `python -m atelier` 不加载真实游戏配置，只有合成参考适配器。
 
 ### 3. 保持游戏知识集中
 

@@ -14,6 +14,10 @@ desktop_service.py   资源准备、启动状态与服务生命周期
 web_server.py        本地 API、预览、备份与应用
 atelier/             与游戏无关的快照、计划复核、备份、写入与 CLI
 workbench.py         注册实际游戏与合成参考适配器的命令行入口
+game_workbench.py    独立于 Piper 的字段编辑网页宿主
+blazblue_adapter.py  苍翼资源规则与存档发现
+blazblue_codec.py    LZ4 帧与局部模型修改
+blazblue_install.py  相关游戏脚本和资源的兼容检查
 piper_adapter.py     《黎明门前的吹笛人》的通用接口适配
 piper_editor.py      当前游戏的字段展示、数值转换与反向保留校验
 save_codec.py        具名字段解析与局部字节替换

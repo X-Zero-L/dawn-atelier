@@ -7,11 +7,13 @@ The standalone `python -m atelier` command needs no game files.
 from atelier.cli import main as framework_main
 from atelier.registry import builtins
 from piper_adapter import ThePiperAdapter
+from blazblue_adapter import BlazBlueAdapter
 
 
 def registry():
     result = builtins()
     result.register(ThePiperAdapter())
+    result.register(BlazBlueAdapter())
     return result
 
 

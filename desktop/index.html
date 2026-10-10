@@ -66,7 +66,7 @@
     <div class="setup-workspace">
       <header class="setup-topbar">
         <span class="local-status"><i id="connection-dot" class="status-dot connecting"></i><span id="connection-label">正在连接桌面服务</span></span>
-        <div class="topbar-actions"><span class="version-label" data-version>v2.7.0</span><button class="icon-button" data-action="help" title="使用帮助" aria-label="使用帮助"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button></div>
+        <div class="topbar-actions"><span class="version-label" data-version>v2.8.0</span><button class="icon-button" data-action="help" title="使用帮助" aria-label="使用帮助"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button></div>
       </header>
       <main class="setup-main" id="setup-main">
         <div class="page-heading">
@@ -101,6 +101,12 @@
           <div class="app-update-heading"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg><div><h3 id="app-update-title">工坊更新</h3><p id="app-update-message" role="status">启动后自动检查新版</p></div><span class="pill-version" id="app-update-version"></span></div>
           <progress id="app-update-progress" max="100" value="0" aria-label="新版下载进度" hidden></progress>
           <div class="app-update-actions"><label class="auto-update-toggle"><input type="checkbox" id="auto-update-enabled" checked>自动下载，空闲时更新</label><button class="text-button" data-action="check-app-update">检查更新</button><button class="button secondary compact" data-action="install-app-update" id="install-app-update" hidden>更新并重启<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+        </section>
+
+        <section class="game-card" aria-labelledby="blazblue-title">
+          <div class="card-heading"><div class="step-number">BE</div><div><h3 id="blazblue-title">苍翼：混沌效应</h3><p>BLAZBLUE ENTROPY EFFECT</p></div><span class="selection-badge">新游戏</span></div>
+          <p class="demo-hint">AP、原型体解析器、已有联动解析器与挑战券。自动发现 Steam 本地存档，保存前预览并备份。</p>
+          <button class="button secondary" data-action="blazblue">打开苍翼工作台<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </section>
 
         <section class="progress-card" id="progress-card" hidden aria-labelledby="progress-heading" aria-live="polite">

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101720">
+  <title>苍翼：混沌效应 · 黎明工坊</title>
+  <link rel="stylesheet" href="/game.css"><script src="/game.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#"><span class="brand-mark">A</span>ATELIER<span class="brand-divider"></span><span class="brand-cn">黎明工坊</span></a><div class="local"><i></i>LOCAL SAVE WORKBENCH <span id="version"></span></div></header>
+  <main>
+    <div id="demo-note" class="notice" hidden>演示模式 · 合成存档与示例数值，仅可导出副本。</div>
+    <section class="hero"><div><p class="eyebrow">BLAZBLUE ENTROPY EFFECT</p><h1>苍翼<span>：混沌效应</span></h1><p class="lead">为下一次意识训练，做好准备。</p><div class="hero-tags"><span>本地存档</span><span>修改先预览</span><span>原档自动备份</span></div></div><div class="orbit" aria-hidden="true"><div class="orbit-core">BE<span>ENTROPY / EFFECT</span></div></div></section>
+    <div class="status-line"><span><i class="cyan-dot"></i> <span id="status">正在连接本地工作台…</span></span><button class="text-button" id="history-button">导出与备份 ↗</button></div>
+    <section class="save-bar" aria-label="选择存档"><div class="save-label"><span class="section-index">01</span><div><h2>选择进度</h2><p>读取游戏中已保存的本地进度</p></div></div><div class="save-controls"><select id="save-select" aria-label="选择本地存档"><option>正在读取…</option></select><button id="refresh-list" class="button">刷新列表</button><button id="reload-save" class="button">重新读取</button></div></section>
+    <div id="stale" class="notice warning" hidden>游戏中已保存新的进度。当前草稿仍保留，请重新读取存档并核对修改。</div>
+    <div id="error" class="notice error" role="alert" hidden></div>
+    <section id="empty" class="empty" hidden><span>◇</span><h2>还没有发现可编辑的存档</h2><p>在游戏中完成一次保存，再点击“刷新列表”。</p></section>
+    <div id="editor" hidden>
+      <div class="section-heading"><div><p class="eyebrow">YOUR NEXT RUN</p><h2>一键准备</h2></div><span class="muted">已有数量高于目标时保留</span></div>
+      <section id="presets" class="preset-grid" aria-label="一键预设"></section>
+      <div class="section-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h2>资源与成长</h2></div><label class="search"><span>⌕</span><input id="search" placeholder="搜索名称或编号" aria-label="搜索可修改项"></label></div>
+      <nav id="groups" class="tabs" aria-label="资源分组"></nav><section id="fields" class="field-grid" aria-label="可修改项"></section>
+      <section class="notes"><div><span class="section-index">i</span><h2>这份存档，可以怎样调整</h2></div><ul id="notes"></ul></section>
+      <details class="details"><summary>存档摘要与适配范围 <span>＋</span></summary><div id="summary"></div></details>
+    </div>
+    <footer><span>你的进度，保存在你的电脑。</span><span>DAWN ATELIER · LOCAL FIRST</span></footer>
+  </main>
+  <aside id="pending" class="pending" hidden><div><strong id="pending-count"></strong><span>原始存档尚未修改</span></div><div><button class="button" id="clear">清空清单</button><button class="button primary" id="review">预览并保存 →</button></div></aside>
+  <dialog id="review-dialog"><div class="dialog-heading"><div><p class="eyebrow">REVIEW YOUR CHANGES</p><h2>确认这次调整</h2></div><button class="icon-button close" aria-label="关闭">×</button></div><div id="review-content"></div></dialog>
+  <dialog id="history-dialog"><div class="dialog-heading"><div><p class="eyebrow">EVERY CHANGE, KEPT SAFE</p><h2>导出与备份</h2></div><button class="icon-button close" aria-label="关闭">×</button></div><div id="history-content"></div></dialog>
+  <div id="toasts" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -10,6 +10,10 @@ const base = process.env.DAWN_DEMO_URL || 'http://127.0.0.1:8767';
 if (!['127.0.0.1', 'localhost'].includes(new URL(base).hostname)) throw new Error('Capture is limited to a localhost demo.');
 const health = await (await fetch(base + '/api/health')).json();
 if (!health.demo) throw new Error('Start the synthetic demo before capturing public screenshots.');
+const blazblueBase = process.env.DAWN_BLAZBLUE_DEMO_URL;
+if (!blazblueBase || !['127.0.0.1', 'localhost'].includes(new URL(blazblueBase).hostname)) throw new Error('Set DAWN_BLAZBLUE_DEMO_URL to the local synthetic second-game server.');
+const blazblueHealth = await (await fetch(blazblueBase + '/api/health')).json();
+if (!blazblueHealth.demo || blazblueHealth.game !== 'blazblue-demo') throw new Error('BlazBlue captures require synthetic example saves.');
 const snapshot = await sourceSnapshot();
 const output = path.resolve(process.env.DAWN_CAPTURE_DIR || path.join(ROOT, 'docs/images'));
 const candidates = [process.env.CHROME_PATH, ...(process.platform === 'win32' ? [
@@ -94,6 +98,11 @@ async function openPage(route, width = 1600, height = 1200, mobile = false) {
   await client.send('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: 1, mobile});
   await client.send('Emulation.setTimezoneOverride', {timezoneId: 'Asia/Shanghai'});
   await client.send('Emulation.setLocaleOverride', {locale: 'zh-CN'});
+  if (route.startsWith('blazblue')) {
+    await client.send('Page.navigate', {url: blazblueBase});
+    await waitFor(page, `!!document.querySelector('.field') && !document.querySelector('#demo-note').hidden`);
+    return page;
+  }
   if (route.startsWith('desktop')) {
     const scene = route === 'desktop' ? 'welcome' : route === 'desktop-app-update' ? 'app-update' : route === 'desktop-updating' ? 'updating' : 'preparing';
     await client.send('Page.navigate', {url: base + '/desktop/index.html?showcase=' + scene});
@@ -125,7 +134,8 @@ async function capture(page, name) {
 
 async function closePage(page) {
   // Only browser drafts are cleared. Export and apply are never clicked.
-  if (!page.route.startsWith('desktop')) await evaluate(page, `document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); state.pending.clear(); persistDraft(); presetUI.history = []; renderPending();`);
+  if (page.route.startsWith('blazblue')) await evaluate(page, `document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); state.pending.clear(); persist();`);
+  else if (!page.route.startsWith('desktop')) await evaluate(page, `document.querySelectorAll('dialog[open]').forEach(dialog => dialog.close()); state.pending.clear(); persistDraft(); presetUI.history = []; renderPending();`);
   await browser.send('Target.closeTarget', {targetId: page.targetId});
 }
 
@@ -160,6 +170,18 @@ try {
   const overview = await openPage('home');
   await capture(overview, 'overview');
   await closePage(overview);
+
+  const blazblue = await openPage('blazblue', 1600, 1300);
+  await capture(blazblue, 'blazblue');
+  await click(blazblue, '[data-preset="starter"]');
+  await click(blazblue, '#review');
+  await waitFor(blazblue, `document.querySelector('#runtime-note')?.textContent.includes('演示模式')`);
+  await capture(blazblue, 'blazblue-preview');
+  await closePage(blazblue);
+  const blazblueMobile = await openPage('blazblue-mobile', 430, 1420, true);
+  if (await evaluate(blazblueMobile, `document.documentElement.scrollWidth > innerWidth`)) throw new Error('BlazBlue mobile page overflows horizontally.');
+  await capture(blazblueMobile, 'blazblue-mobile');
+  await closePage(blazblueMobile);
 
   const adapters = await openPage('adapters', 1600, 1440);
   await capture(adapters, 'adapters');

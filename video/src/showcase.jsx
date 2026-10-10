@@ -89,6 +89,7 @@ const COPY = {
   progression: {name: '成长条件准备', title: ['条件备好，', '回游戏解锁。'], description: ['准备炼金成本与工坊条件，', '让游戏处理解锁和升级奖励。'], asset: 'workshop', view: 'content', detailAsset: 'alchemy-unlocks', detailFrom: 95, detailView: 'content', tags: ['金币 · 点数 · 材料', '前置条件清单'], marker: 'GROW THROUGH THE GAME'},
   review: {name: '预览与备份', title: ['每次调整，', '都先看清楚。'], description: ['逐项核对修改前后的差异，', '导出副本，自动备份原档。'], asset: 'preview', view: 'modal', tags: ['变更预览', '原档备份'], marker: 'MAKE EVERY CHANGE CLEAR'},
   adapters: {name: '游戏与扩展', title: ['下一段冒险，', '留一个位置。'], description: ['查看当前游戏的适配功能，', '通过开发指南接入其他游戏。'], asset: 'adapters', view: 'content', tags: ['当前游戏功能', '合成格式参考示例'], marker: 'THE NEXT ADVENTURE'},
+  blazblue: {name: '苍翼：混沌效应', title: ['为下一次训练，', '做好准备。'], description: ['AP、原型体解析器与已有资源，', '预览后保存，自动备份原档。'], asset: 'blazblue', view: 'full', tags: ['独立游戏工作台', '已有资源补给'], marker: 'BLAZBLUE ENTROPY EFFECT'},
   outro: {name: '黎明工坊', type: 'outro'},
 };
 

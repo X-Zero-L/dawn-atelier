@@ -6,7 +6,7 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.7.0', game_dir: '', detected: false, prepared: false,
+    version: '2.8.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
     error: '', mode: null, active_url: null, last_prepared: null, auto_prepare: false, game_update: null, app_update: null,
@@ -60,7 +60,7 @@
     // The iframe stays mounted. Opening settings must preserve its draft and UI.
     document.body.classList.toggle('in-workbench', currentView === 'workbench');
     document.title = currentView === 'workbench'
-      ? `黎明工坊 · ${state.mode === 'demo' ? '演示模式' : '黎明门前的吹笛人'}`
+      ? `黎明工坊 · ${state.mode === 'demo' ? '演示模式' : state.mode === 'blazblue' ? '苍翼：混沌效应' : '黎明门前的吹笛人'}`
       : '黎明工坊 · 黎明门前的吹笛人';
   }
 
@@ -141,7 +141,7 @@
     document.body.classList.toggle('has-active-workbench', active);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.7.0'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.8.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -287,7 +287,7 @@
   }
 
   async function maybeAutoRefresh() {
-    if (!api || showcase || updateChecking || isBusy() || pathDirty || polling || state.external_workbench || state.mode === 'demo' || state.game_update?.phase !== 'ready') return;
+    if (!api || showcase || updateChecking || isBusy() || pathDirty || polling || state.external_workbench || ['demo','blazblue'].includes(state.mode) || state.game_update?.phase !== 'ready') return;
     const token = state.game_update.token;
     const origin = state.active_url ? new URL(state.active_url).origin : null;
     updateChecking = true;
@@ -295,7 +295,7 @@
       const result = await editorIdleForUpdate(token);
       if (!result.ready) { updateWaitMessage = result.message; render(); return; }
       // A foreground action may have changed the session during the handshake.
-      if (isBusy() || state.game_update?.token !== token || state.mode === 'demo') return;
+      if (isBusy() || state.game_update?.token !== token || ['demo','blazblue'].includes(state.mode)) return;
       const next = await request('refresh_game_update', [token]);
       if (next?.auto_prepare) showView('home');
     } finally {
@@ -383,6 +383,7 @@
     if (action === 'check-app-update') { await request('check_app_update', [true]); return; }
     if (action === 'install-app-update') { await installSoftwareUpdate(true); return; }
     if (action === 'demo') { if (!isBusy()) await launch('demo'); return; }
+    if (action === 'blazblue') { if (!isBusy()) await launch('blazblue'); return; }
     if (action === 'save-path') { if (!isBusy()) await savePath(); return; }
     if (action === 'choose') {
       if (isBusy() || !confirmSwitch('更换游戏目录后，需要重新准备本地资料。')) return;
@@ -446,11 +447,11 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.7.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            version: '2.8.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
             prepared: false, data_dir: '', busy: ['preparing', 'updating'].includes(scene), auto_prepare: scene === 'updating',
             app_update: scene === 'app-update'
-              ? {phase: 'downloading', version: '2.7.1', percent: 68, message: '正在下载并校验新版…', automatic: true, supported: true}
-              : {phase: 'current', version: '2.7.0', message: '已是最新版本', automatic: true, supported: true},
+              ? {phase: 'downloading', version: '2.8.1', percent: 68, message: '正在下载并校验新版…', automatic: true, supported: true}
+              : {phase: 'current', version: '2.8.0', message: '已是最新版本', automatic: true, supported: true},
             game_update: scene === 'updating' ? {phase: 'preparing', message: '检测到游戏更新，正在自动准备资料。', token: ''} : null,
             progress: scene === 'updating'
               ? {percent: 68, stage: 'catalogue', message: '正在更新物品、炼金与角色资料', detail: '游戏更新已检测，准备完成后会自动打开工坊。'}

@@ -61,7 +61,7 @@ async function captureScreenshots() {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), 'dawn-atelier-media-'));
   const staging = path.join(temporary, 'screenshots');
   const python = await pythonCommand();
-  let server, serverError, serverText = '', serverLog = '';
+  let server, blazblueServer, serverError, serverText = '', serverLog = '';
   try {
     console.log(`1/5 Starting a fresh synthetic demo and capturing all ${CONFIG.screenshots.length} views…`);
     const bootstrap = 'import web_server; s=web_server.ThreadingHTTPServer(("127.0.0.1",0),web_server.Handler); print("DAWN_MEDIA_PORT="+str(s.server_port),flush=True); s.serve_forever()';
@@ -80,8 +80,21 @@ async function captureScreenshots() {
       await delay(100);
     }
     if (!port) throw new Error('Demo did not start within 20 seconds. ' + serverLog);
+    const ready = path.join(temporary, 'blazblue-ready.json');
+    blazblueServer = spawn(python, ['-X', 'utf8', 'game_workbench.py', '--demo', '--port', '0', '--ready-file', ready], {
+      cwd: ROOT, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
+      env: {...process.env, DAWN_HOME: path.join(temporary, 'blazblue')},
+    });
+    blazblueServer.on('error', error => { serverError = error; });
+    blazblueServer.stderr.on('data', data => { serverLog += data; });
+    let blazbluePort;
+    for (let i = 0; i < 200; i++) {
+      if (serverError || blazblueServer.exitCode !== null) throw new Error('BlazBlue demo startup failed: ' + (serverError?.message || serverLog));
+      try { blazbluePort = (await readJson(ready)).port; break; } catch { await delay(100); }
+    }
+    if (!blazbluePort) throw new Error('BlazBlue demo startup timed out.');
     await run(process.execPath, [path.join(ROOT, 'scripts/capture-demo.mjs')], {
-      env: {DAWN_DEMO_URL: `http://127.0.0.1:${port}`, DAWN_CAPTURE_DIR: staging},
+      env: {DAWN_DEMO_URL: `http://127.0.0.1:${port}`, DAWN_BLAZBLUE_DEMO_URL: `http://127.0.0.1:${blazbluePort}`, DAWN_CAPTURE_DIR: staging},
     });
     const capture = await readJson(path.join(staging, 'screenshots.json'));
     if (!capture.syntheticDemo || CONFIG.screenshots.some(name => !capture.screenshots[name])) throw new Error('Capture did not produce the complete demo gallery.');
@@ -90,6 +103,10 @@ async function captureScreenshots() {
     await fs.copyFile(path.join(staging, 'screenshots.json'), path.join(gallery, 'screenshots.json'));
     return capture;
   } finally {
+    if (blazblueServer && blazblueServer.exitCode === null) {
+      blazblueServer.kill();
+      for (let i = 0; i < 50 && blazblueServer.exitCode === null && !blazblueServer.signalCode; i++) await delay(100);
+    }
     if (server && server.exitCode === null) {
       server.kill();
       for (let i = 0; i < 50 && server.exitCode === null && !server.signalCode; i++) await delay(100);

@@ -41,12 +41,13 @@ async function renderAdapters() {
           ).join('')}</ol>
         </section>
 
+        <section class="adapter-save-flow"><div class="adapter-flow-heading">${I('layers')}<div><h2>苍翼：混沌效应</h2><p>AP、解析器、已有颜色印记与挑战券。打开启动设置中的“苍翼工作台”，使用独立存档与备份。</p></div></div><a class="text-button" href="https://github.com/X-Zero-L/dawn-atelier/blob/main/docs/blazblue.md" target="_blank" rel="noopener noreferrer">查看使用说明 ${I('arrowUpRight')}</a></section>
         <section class="adapter-extension" aria-labelledby="adapter-extension-title">
           <div class="adapter-extension-intro"><span class="eyebrow">THE NEXT ADVENTURE</span><h2 id="adapter-extension-title">让下一款游戏，<br>拥有自己的工坊。</h2><p>复用预览、备份与保存流程，<br>为每款游戏编写合适的修改规则。</p><a class="text-button" href="${adapterGuideURL}" target="_blank" rel="noopener noreferrer">阅读接入指南 ${I('arrowUpRight')}</a></div>
           <div class="adapter-reference"><div class="adapter-reference-top"><span class="adapter-reference-symbol">${I('code')}</span><span class="pill gold">开发示例 · 合成数据</span></div><h3>JSON 参考工程</h3><p>一个可运行的最小示例：读取金币、生成预览、导出修改副本。它演示另一种存档格式，不对应实际游戏。</p><div class="adapter-code-row"><code>${E(adapterExampleCommand)}</code><button type="button" class="icon-button" data-adapter-copy aria-label="复制创建合成存档的命令" title="复制命令">${I('copy')}</button></div><span class="adapter-reference-footnote">${I('file')}在源码目录运行，仅创建示例文件</span></div>
         </section>
 
-        <details class="adapter-developer-notes"><summary><span>${I('layers')}开发者接入说明</span>${I('chevron')}</summary><div><p>目前完整支持的实际游戏为《黎明门前的吹笛人》。新增游戏需要确认存档格式、数值规则和版本兼容，再接入对应的界面。</p><div class="adapter-developer-grid"><article><h3>游戏规则独立</h3><p>金币编码、物品上限与解锁条件由各自的适配器处理。</p></article><article><h3>保存流程复用</h3><p>快照、预览校验、备份与操作记录由通用模块处理。</p></article><article><h3>数据按游戏区分</h3><p>独立管理每款游戏的配置、备份与导出，保留现有工坊数据。</p></article></div><p class="adapter-scope-note">当前框架处理本地存档。实时内存修改、多文件存档事务与第三方插件安装尚未提供。</p></div></details>
+        <details class="adapter-developer-notes"><summary><span>${I('layers')}开发者接入说明</span>${I('chevron')}</summary><div><p>已接入《黎明门前的吹笛人》和《苍翼：混沌效应》的已确认功能。新增游戏需要确认存档格式、数值规则和版本兼容，再接入对应的界面。</p><div class="adapter-developer-grid"><article><h3>游戏规则独立</h3><p>金币编码、物品上限与解锁条件由各自的适配器处理。</p></article><article><h3>保存流程复用</h3><p>快照、预览校验、备份与操作记录由通用模块处理。</p></article><article><h3>数据按游戏区分</h3><p>独立管理每款游戏的配置、备份与导出，保留现有工坊数据。</p></article></div><p class="adapter-scope-note">当前框架处理本地存档。实时内存修改、多文件存档事务与第三方插件安装尚未提供。</p></div></details>
       </div>`;
     $('[data-adapter-copy]')?.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(adapterExampleCommand); toast('示例命令已复制。'); }

@@ -1,6 +1,6 @@
 # 黎明工坊：领域模型
 
-黎明工坊是本地存档编辑器。当前面向玩家的完整适配为《黎明门前的吹笛人》（The Piper of Dawn）。`atelier` 模块提供可复用的存档编辑流程，`json-reference` 用合成格式演示第二个适配器，不对应商业游戏。
+黎明工坊是本地存档编辑器。已接入《黎明门前的吹笛人》（The Piper of Dawn）与《苍翼：混沌效应》（BlazBlue Entropy Effect）的已确认功能。`atelier` 模块提供可复用的存档编辑流程，`json-reference` 使用合成格式，不对应商业游戏。
 
 ## 术语
 
@@ -38,6 +38,8 @@
 | 模块 | 负责的知识 |
 | --- | --- |
 | `atelier/` | 适配器契约、快照、计划、提交、通用 CLI 与合成格式参考实现 |
+| `blazblue_adapter.py`、`blazblue_codec.py`、`blazblue_install.py` | 苍翼资源规则、压缩与模型编解码、相关游戏资源的兼容证据 |
+| `game_workbench.py` | 按适配器字段显示与提交的本地工作台 |
 | `piper_adapter.py`、`piper_editor.py`、`workbench.py` | 现有游戏的适配器、独立编辑逻辑和应用级注册入口 |
 | `save_codec.py`、`inventory.py`、`presets.py`、`favor.py`、`progression.py` | 《黎明门前的吹笛人》的存档结构与业务规则 |
 | `compatibility.py`、`native_layout.py`、`prepare.py` | 该游戏的版本证据、结构核对与本机资源准备 |

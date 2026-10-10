@@ -50,6 +50,8 @@ def internal_task(name, arguments):
         from updates_install import main
     elif name == 'workbench':
         from workbench import main
+    elif name == 'game-workbench':
+        from game_workbench import main
     else:
         raise SystemExit('Unknown internal task.')
     result = main()
@@ -144,6 +146,7 @@ def browser_fallback(service):
     start.pack(side='left', padx=(0, 12))
     demo = ttk.Button(buttons, text='体验演示', command=lambda: begin('demo'))
     demo.pack(side='left')
+    ttk.Button(buttons, text='苍翼工作台', command=lambda: begin('blazblue')).pack(side='left', padx=12)
     ttk.Button(buttons, text='安装 WebView2', command=lambda: webbrowser.open('https://developer.microsoft.com/microsoft-edge/webview2/')).pack(side='right')
     ttk.Button(app, text='打开数据与备份文件夹', command=lambda: service.open_folder('data')).pack(anchor='w', padx=34)
     update_status = tk.StringVar(value='')
@@ -205,7 +208,7 @@ def main():
     parser.add_argument('--browser', action='store_true', help='Use the native browser-mode launcher')
     parser.add_argument('--home', type=Path, help='Use a separate workspace for this launch')
     parser.add_argument('--update-ticket', type=Path, help=argparse.SUPPRESS)
-    parser.add_argument('--resume-mode', '--resume', dest='resume_mode', choices=('game', 'demo'), help=argparse.SUPPRESS)
+    parser.add_argument('--resume-mode', '--resume', dest='resume_mode', choices=('game', 'demo', 'blazblue'), help=argparse.SUPPRESS)
     parser.add_argument('--skip-app-update', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.home:

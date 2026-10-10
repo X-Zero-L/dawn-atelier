@@ -3,7 +3,7 @@
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "durationInFrames": 1770,
+  "durationInFrames": 1920,
   "posterFrame": 225,
   "sampleFrames": {
     "intro": 84,
@@ -21,20 +21,74 @@
     "alchemyUnlocks": 1270,
     "review": 1410,
     "adapters": 1560,
-    "outro": 1710
+    "outro": 1860,
+    "blazblue": 1710
   },
   "chapters": [
-    {"key": "intro", "from": 0, "duration": 150},
-    {"key": "desktop", "from": 135, "duration": 195},
-    {"key": "presets", "from": 315, "duration": 165},
-    {"key": "supply", "from": 465, "duration": 225},
-    {"key": "sediment", "from": 675, "duration": 180},
-    {"key": "inventory", "from": 840, "duration": 120},
-    {"key": "relationships", "from": 945, "duration": 105},
-    {"key": "tools", "from": 1035, "duration": 105},
-    {"key": "progression", "from": 1125, "duration": 195},
-    {"key": "review", "from": 1305, "duration": 195},
-    {"key": "adapters", "from": 1485, "duration": 165},
-    {"key": "outro", "from": 1635, "duration": 135}
+    {
+      "key": "intro",
+      "from": 0,
+      "duration": 150
+    },
+    {
+      "key": "desktop",
+      "from": 135,
+      "duration": 195
+    },
+    {
+      "key": "presets",
+      "from": 315,
+      "duration": 165
+    },
+    {
+      "key": "supply",
+      "from": 465,
+      "duration": 225
+    },
+    {
+      "key": "sediment",
+      "from": 675,
+      "duration": 180
+    },
+    {
+      "key": "inventory",
+      "from": 840,
+      "duration": 120
+    },
+    {
+      "key": "relationships",
+      "from": 945,
+      "duration": 105
+    },
+    {
+      "key": "tools",
+      "from": 1035,
+      "duration": 105
+    },
+    {
+      "key": "progression",
+      "from": 1125,
+      "duration": 195
+    },
+    {
+      "key": "review",
+      "from": 1305,
+      "duration": 195
+    },
+    {
+      "key": "adapters",
+      "from": 1485,
+      "duration": 165
+    },
+    {
+      "key": "blazblue",
+      "from": 1635,
+      "duration": 165
+    },
+    {
+      "key": "outro",
+      "from": 1785,
+      "duration": 135
+    }
   ]
 }

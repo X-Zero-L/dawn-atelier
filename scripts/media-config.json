@@ -26,7 +26,10 @@
     "super-supply-preview",
     "super-supply-mobile",
     "adapters",
-    "adapters-mobile"
+    "adapters-mobile",
+    "blazblue",
+    "blazblue-preview",
+    "blazblue-mobile"
   ],
   "snapshotVersion": 1,
   "mediaFiles": [

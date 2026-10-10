@@ -62,6 +62,8 @@ class DesktopService:
         return path.resolve() if path.is_absolute() else (USER_ROOT / path).resolve()
 
     def _data_root(self, mode='game'):
+        if mode == 'blazblue':
+            return USER_ROOT / 'data/games/blazblue'
         return USER_ROOT / 'data/demo' if mode == 'demo' else self._path('data_dir', 'data/game')
 
     def _is_prepared(self):
@@ -162,7 +164,7 @@ class DesktopService:
             self._boot_ticket = None
         mode = self._restart_mode
         self._restart_mode = None
-        if mode and (mode == 'demo' or self._prepared):
+        if mode and (mode in ('demo', 'blazblue') or self._prepared):
             self.launch(mode)
         return {'ok': True}
 
@@ -190,7 +192,7 @@ class DesktopService:
     def check_game_update(self):
         """Observe local files only; polling never starts or stops a process."""
         with self._lock:
-            if not self._update_baseline or self._busy or self._closing:
+            if not self._update_baseline or self._busy or self._closing or self._mode == 'blazblue':
                 return self._state()
             now = time.monotonic()
             if self._update_checked_at is not None and now - self._update_checked_at < 1:
@@ -223,7 +225,7 @@ class DesktopService:
         """Called after the launcher has checked that its editor is idle."""
         with self._lock:
             self._idle()
-            if (self._mode == 'demo' or self._external_workbench or self._game_update['phase'] != 'ready' or
+            if (self._mode in ('demo', 'blazblue') or self._external_workbench or self._game_update['phase'] != 'ready' or
                     token != self._game_update['token'] or not token):
                 return self._state()
             try:
@@ -310,6 +312,11 @@ class DesktopService:
         # The desktop uses its saved settings; inherited CLI save overrides must
         # not make a new packaged instance silently edit a different directory.
         env.pop('PIPER_SAVE_DIR', None)
+        env.pop('BLAZBLUE_SAVE_DIR', None)
+        if self._config.get('blazblue_game_dir'):
+            env['BLAZBLUE_GAME_DIR'] = str(self._config['blazblue_game_dir'])
+        if self._config.get('blazblue_save_dir'):
+            env['BLAZBLUE_SAVE_DIR'] = str(self._config['blazblue_save_dir'])
         return env
 
     def _popen(self, command, **kwargs):
@@ -382,7 +389,7 @@ class DesktopService:
         self._progress_to(100, 'ready', '准备完成，可以进入工坊', '今后双击打开即可继续使用。')
 
     def launch(self, mode):
-        if mode not in ('game', 'demo'):
+        if mode not in ('game', 'demo', 'blazblue'):
             raise ValueError('请选择游戏模式或演示模式。')
         if mode == 'game':
             self._prepared = self._is_prepared()
@@ -396,8 +403,8 @@ class DesktopService:
         self._stop_service()
         ready = LOG_ROOT / ('service-' + secrets.token_hex(8) + '.json')
         self._ready_file = ready
-        port = str(self._config.get('desktop_port_' + mode) or (18767 if mode == 'demo' else 18766))
-        command = task_command('serve', '--port', port, '--fallback-port', '--ready-file', str(ready))
+        port = str(self._config.get('desktop_port_' + mode) or (18768 if mode == 'blazblue' else 18767 if mode == 'demo' else 18766))
+        command = task_command('game-workbench' if mode == 'blazblue' else 'serve', '--port', port, '--fallback-port', '--ready-file', str(ready))
         if mode == 'demo':
             command.append('--demo')
         launch_id = secrets.token_hex(24)

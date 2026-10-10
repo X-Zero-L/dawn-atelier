@@ -282,6 +282,17 @@ class GameUpdateChecks(unittest.TestCase):
         self.assertEqual(service.status()['error'], '')
         self.assertFalse(service.status()['auto_prepare'])
 
+    def test_second_game_uses_separate_data_and_skips_piper_update_watch(self):
+        service=self.service()
+        service._mode='blazblue'
+        self.assertEqual(service._data_root('blazblue'),self.home/'data/games/blazblue')
+        self.change_install(b'Piper updated while using another game')
+        self.assertEqual(service.check_game_update()['game_update']['phase'],'idle')
+        service._prepared=False
+        with patch.object(service,'_start') as start:
+            service.launch('blazblue')
+        start.assert_called_once()
+
     def test_config_keeps_baseline_when_failed_preparation_removes_markers(self):
         service = self.service()
         baseline = service._update_baseline
