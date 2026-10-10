@@ -1,0 +1,14 @@
+{
+  "id": "blazblue-local-packs-v1",
+  "reviewed_steam_build": 25627491,
+  "resources": {
+    "data/js/core/datasave.ab": "a338bbaaf6cb4eeec8eaa406f35d1fcdd98ff91346e6043069f8a1568edb51bb",
+    "data/js/server/model/player.ab": "ec1d0aad4a3ad428d87462259e3c3459879cbd5dd8921976e9882a5850017732",
+    "data/js/archive/archivestrategy.ab": "7ba0d1894e806e569b5580d9182c3a0f2a3779ae798ed5f93a144dc6c9be6ea1",
+    "data/js/server/model/playersplitstruct.ab": "de9250fb03ab4ab866c7145285165ae2736409c0d7e21a5012ecea374a573532",
+    "data/js/archive/archiveio.ab": "63862628b05dbf442d8205b1e6bd1d1f582d7c6c5534a85ea74ac3bfb8b4ec99",
+    "data/js/server/resource/handlers.ab": "0bccf7fc2ab4410076333ac4b389f0d62aac546bcea8a85cb9c96434a2d870bc",
+    "data/xlsx/itemconf.ab": "a9b9e08e5dc3555eac2d819da7ee171b2f979f172fb5a252739ec74c461fdf90",
+    "data/js/gen/pbdef.ab": "dc8ed5d6bd62cf3eca3be8bebe20945a8eec29fe29f81acfa23bada012101c90"
+  }
+}
