@@ -64,10 +64,11 @@ def runtime_status():
 
 
 class BlazBlueAdapter(Adapter):
-    descriptor=GameDescriptor('blazblue','苍翼：混沌效应','1',(
+    descriptor=GameDescriptor('blazblue','苍翼：混沌效应','2',(
         Capability('resources','AP 与解析器','调整已有资源数量，准备下一次训练。'),
         Capability('crossover','联动与挑战资源','核对已有解析器与挑战券，保留剧情和到期时间。'),
         Capability('presets','一键资源准备','补到目标数量，预览后导出或备份应用。'),
+        Capability('actors','角色解析准备','查看 17 位角色记录，按未解锁清单计算解析器。'),
     ))
     notes=[
         '只列出存档中已存在、含义已确认的资源。缺少的物品不会凭空新增。',
@@ -104,8 +105,9 @@ class BlazBlueAdapter(Adapter):
         return document,models,fields
 
     def inspect(self, data):
+        from blazblue_actors import overview
         document,models,fields=self._parse(data)
-        return {'fields':fields,'summary':{'游戏':'苍翼：混沌效应','存档模型':len(models),
+        return {**overview(models,fields),'fields':fields,'summary':{'游戏':'苍翼：混沌效应','存档模型':len(models),
                 '已确认可修改项':len(fields),'压缩文件字节数':len(data),'解压后字节数':len(document.payload),
                 '存档格式':'LZ4 / protobuf · 玩家独立资源包'},'notes':self.notes}
 

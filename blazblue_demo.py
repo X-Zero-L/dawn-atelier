@@ -16,6 +16,8 @@ def sample():
         return message(1,b''.join(message(1,scalar(1,ident)+message(2,scalar(1,ident)+scalar(2,count)+(scalar(3,0) if item else b''))) for ident,count in values))
     models={'ModelPlayer':message(1,b'AutoSave'),'ModelPlayerNewCurrencyPack':pack([(1,12500)]),
             'ModelPlayerNewItemPack':pack([(4001,3),(9001,12),(4091,1),(4092,1),(6001,2)],True),
+            'ModelPlayerNewBaseActorPack':message(1,b''.join(message(1,scalar(1,ident)+message(2,scalar(1,ident)+scalar(2,1700000000))) for ident in (100101,101101))),
+            'ModelPlayerNewExtraState':message(1,b''),
             'ExampleUnknownData':b'preserve this model'}
     payload=message(1,b'AutoSave')+b''.join(message(2,message(1,key.encode())+message(2,value)) for key,value in models.items())
     return SaveDocument(b'',b'',0x7c,0x40).encode(payload)

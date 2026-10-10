@@ -173,6 +173,9 @@ try {
 
   const blazblue = await openPage('blazblue', 1600, 1300);
   await capture(blazblue, 'blazblue');
+  await evaluate(blazblue, "document.querySelector('#actor-section').scrollIntoView(); window.scrollBy(0,-24)");
+  await capture(blazblue, 'blazblue-actors');
+  await evaluate(blazblue, 'window.scrollTo(0,0)');
   await click(blazblue, '[data-preset="starter"]');
   await click(blazblue, '#review');
   await waitFor(blazblue, `document.querySelector('#runtime-note')?.textContent.includes('演示模式')`);

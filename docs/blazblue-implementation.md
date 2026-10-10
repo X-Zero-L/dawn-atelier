@@ -34,8 +34,17 @@ LZ4 Frame 解压后是 protobuf 模型容器。根消息 tag 2 为重复模型�
 
 ## 兼容与宿主
 
-`schemas/blazblue/resource-contract.json` 仅记录已审阅的八项资源身份与 SHA-256。兼容检查按当前 merge 索引读取这些资源，不使用固定文件序号或偏移，不锁定 Steam 构建号。相同规则可接受资源重排；相关脚本或配置改变则停止写入。
+`schemas/blazblue/resource-contract.json` 仅记录已审阅的十四项资源身份与 SHA-256。兼容检查按当前 merge 索引读取这些资源，不使用固定文件序号或偏移，不锁定 Steam 构建号。相同规则可接受资源重排；相关脚本或配置改变则停止写入。
 
 `game_workbench.py` 从适配器接收字段、预设、存档发现和运行状态，通过 `atelier.Editor` 生成和提交方案。它不导入 Piper 的配置、物品或编解码器。两款游戏分别使用自己的数据目录。网页只监听本机，检查 Host、Origin 和每次启动的请求令牌，桌面来源使用精确地址。
 
 字段界面当前面向已确认的整数资源；复杂角色实例、关联数据和多文件事务需要独立契约，不能把它们强行表示为普通计数器。
+
+
+## 角色解析准备
+
+当前配置共 17 位角色。PC 的 SceneUIHeroSelect 在资源满足后请求 ApiResourceConvert，转换规则为 StateLimit，每个角色最多兑换一次。普通角色每位消耗 1 个原型体解析器；两位联动角色分别消耗自己的解析器。
+
+ChangeBaseActor 除创建 ID 与时间记录外，还调用任务、主线目标、头像配色和音乐检查。因此本工具读取 ModelPlayerNewBaseActorPack 的拥有记录、ModelPlayerNewExtraState 的兑换次数，仅规划资源数量，不直接插入角色。角色缺失但已有兑换次数时提示在游戏内核对，不重置记录。
+
+4 位 DLC 角色由 ContentUnlockUtil 与 CheckActor 检查对应 DLC；不满足条件的角色记录会被移除。已有角色不等于当前拥有 DLC，工具不从本地记录伪造该判定。

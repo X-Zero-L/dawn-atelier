@@ -1,0 +1,138 @@
+[
+  {
+    "id": 101101,
+    "name": "白面",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 102501,
+    "name": "九重",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 103501,
+    "name": "枣麻衣",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 102901,
+    "name": "琥珀响音",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 103401,
+    "name": "Es",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 102801,
+    "name": "Λ-No.11-",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 100301,
+    "name": "诺爱儿",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 100101,
+    "name": "拉格纳",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 100501,
+    "name": "桃儿卡卡",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 100201,
+    "name": "如月琴恩",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 100401,
+    "name": "雷其儿",
+    "kind": "DLC",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": 3085820
+  },
+  {
+    "id": 103701,
+    "name": "艾希",
+    "kind": "联动",
+    "cost_target": "item:4091",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 101401,
+    "name": "哈札马",
+    "kind": "DLC",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": 3422870
+  },
+  {
+    "id": 102201,
+    "name": "芭烈特",
+    "kind": "DLC",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": 3681910
+  },
+  {
+    "id": 103801,
+    "name": "枭首者",
+    "kind": "联动",
+    "cost_target": "item:4092",
+    "cost_count": 1,
+    "steam_dlc": null
+  },
+  {
+    "id": 103101,
+    "name": "黑铁直人",
+    "kind": "DLC",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": 4212180
+  },
+  {
+    "id": 101801,
+    "name": "白金",
+    "kind": "普通",
+    "cost_target": "item:4001",
+    "cost_count": 1,
+    "steam_dlc": null
+  }
+]

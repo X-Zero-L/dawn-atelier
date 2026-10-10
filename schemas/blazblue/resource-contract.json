@@ -1,5 +1,5 @@
 {
-  "id": "blazblue-local-packs-v1",
+  "id": "blazblue-local-packs-v2",
   "reviewed_steam_build": 25627491,
   "resources": {
     "data/js/core/datasave.ab": "a338bbaaf6cb4eeec8eaa406f35d1fcdd98ff91346e6043069f8a1568edb51bb",
@@ -9,6 +9,12 @@
     "data/js/archive/archiveio.ab": "63862628b05dbf442d8205b1e6bd1d1f582d7c6c5534a85ea74ac3bfb8b4ec99",
     "data/js/server/resource/handlers.ab": "0bccf7fc2ab4410076333ac4b389f0d62aac546bcea8a85cb9c96434a2d870bc",
     "data/xlsx/itemconf.ab": "a9b9e08e5dc3555eac2d819da7ee171b2f979f172fb5a252739ec74c461fdf90",
-    "data/js/gen/pbdef.ab": "dc8ed5d6bd62cf3eca3be8bebe20945a8eec29fe29f81acfa23bada012101c90"
+    "data/js/gen/pbdef.ab": "dc8ed5d6bd62cf3eca3be8bebe20945a8eec29fe29f81acfa23bada012101c90",
+    "data/xlsx/resourceconvertconf.ab": "b7d62214e82aff4f728e7769fd13c991ccb416125ddd538023e222612882b131",
+    "data/js/core/util.ab": "bf57df01b40b9ead67bbf6c33d7cebf189b058a56466019bf726ed3e1a72ad62",
+    "data/js/gameplay/battlebreedprepare/sceneuiheroselect.ab": "faa92144730c5ffa658aae19ba70a4f9ac7584ddee851e6f2d560a39bed627e9",
+    "data/xlsx/contentunlockconf.ab": "8d42e50f8e71072e53ecbac7b51f8e8b413029babad6d39acff369f1dfd756a3",
+    "data/js/gameplay/battlebreedprepare/battleprepareutil.ab": "37ed9170adc27c592a581e4c6f1d533a4c9a121740f485ddc247f38f6a5c0046",
+    "data/xlsx/baseactorconf.ab": "ddf6874b5372290d5cd3479066cb1717e0249f244d7c770f3b0320a6f3e6f07c"
   }
 }

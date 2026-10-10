@@ -139,6 +139,31 @@ class BlazBlueChecks(unittest.TestCase):
         with patch.dict('os.environ',{'BLAZBLUE_SAVE_DIR':str(self.root)}):
             self.assertEqual(discover_saves(),[self.source])
 
+    def test_actor_preparation_counts_remaining_characters_without_writing_ownership(self):
+        from blazblue_demo import sample as actor_sample
+        data=actor_sample()
+        details=self.adapter.inspect(data)
+        self.assertEqual((details['actor_plan']['owned'],details['actor_plan']['total']),(2,17))
+        self.assertEqual(details['actor_plan']['targets']['item:4001'],9)
+        self.assertEqual(len([r for r in details['actors'] if r['kind']=='DLC']),4)
+        operations=[{'action':'set','target':key,'value':value} for key,value in details['actor_plan']['targets'].items()]
+        modified=self.adapter.transform(data,operations)
+        before=read_modules(decode_save(data).payload);after=read_modules(decode_save(modified).payload)
+        self.assertEqual(before['ModelPlayerNewBaseActorPack'],after['ModelPlayerNewBaseActorPack'])
+        self.assertEqual(before['ModelPlayerNewExtraState'],after['ModelPlayerNewExtraState'])
+        self.assertEqual(self.adapter.inspect(modified)['actor_plan']['owned'],2)
+
+    def test_used_exchange_with_missing_actor_is_reported_without_reset(self):
+        from blazblue_demo import sample as actor_sample
+        from blazblue_codec import replace_module
+        document=decode_save(actor_sample())
+        record=message(1,number(1,102501)+message(2,number(1,1)))
+        payload=replace_module(document.payload,'ModelPlayerNewExtraState',message(1,record))
+        details=self.adapter.inspect(document.encode(payload))
+        row=next(r for r in details['actors'] if r['id']==102501)
+        self.assertEqual(row['status'],'需在游戏内核对')
+        self.assertEqual(details['actor_plan']['targets']['item:4001'],8)
+
 
 if __name__=='__main__':
     unittest.main()

@@ -236,6 +236,7 @@ def inspect_payload(directory):
         "_internal/schemas/thepiper-2026-10-08/enums.json",
         "_internal/schemas/compatibility/2026-10-08-1009.json",
         "_internal/schemas/blazblue/resource-contract.json",
+        "_internal/schemas/blazblue/actors.json",
         "_internal/web/game.html",
         "_internal/web/game.js",
         "_internal/web/game.css",

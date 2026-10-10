@@ -76,7 +76,7 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | `super-supply-preview.png` | 铜锭补足与铁金锭新增 |
 | `super-supply-mobile.png` | 超级补给窄屏入口 |
 | `adapters.png` | 当前游戏功能、共同保存流程与合成格式开发示例 |
-| `blazblue.png`、`blazblue-preview.png`、`blazblue-mobile.png` | 苍翼合成资源、修改预览和窄屏工作台 |
+| `blazblue.png`、`blazblue-actors.png`、`blazblue-preview.png`、`blazblue-mobile.png` | 苍翼合成资源、修改预览和窄屏工作台 |
 | `adapters-mobile.png` | 游戏与扩展窄屏布局 |
 
 `scripts/media-config.json` 是完整截图集合；`video/src/timeline.json` 定义时长、封面帧与抽样帧。`docs/images/screenshots.json` 和 `docs/media-manifest.json` 记录本次来源及文件哈希。生成过程中源代码发生变化会中止，缺少图片不会回退到旧图。

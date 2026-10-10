@@ -47,6 +47,7 @@ RESOURCE_FILES = [
     "schemas/compatibility/2026-09-29-717.json",
     "schemas/compatibility/2026-10-08-1009.json",
     "schemas/blazblue/resource-contract.json",
+    "schemas/blazblue/actors.json",
     "version.json",
     "NOTICE.md",
     "build/assets/dawn-atelier.ico",
@@ -73,6 +74,7 @@ hiddenimports = [
     "app_update", "update_packages", "updates_install",
     "atelier", "atelier.cli", "atelier.reference", "workbench", "piper_adapter", "piper_editor",
     "blazblue_adapter", "blazblue_codec", "blazblue_install", "blazblue_demo", "game_workbench", "process_guard",
+    "blazblue_actors",
 ]
 
 analysis = Analysis(

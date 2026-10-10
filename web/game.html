@@ -19,6 +19,13 @@
     <div id="editor" hidden>
       <div class="section-heading"><div><p class="eyebrow">YOUR NEXT RUN</p><h2>一键准备</h2></div><span class="muted">已有数量高于目标时保留</span></div>
       <section id="presets" class="preset-grid" aria-label="一键预设"></section>
+      <section id="actor-section" class="actor-section" hidden aria-labelledby="actor-heading">
+        <div class="section-heading"><div><p class="eyebrow">CHARACTER ROSTER</p><h2 id="actor-heading">角色与解析准备</h2></div><button id="prepare-actors" class="button primary">补足未解锁角色的解析资源 →</button></div>
+        <p id="actor-message" class="dialog-note"></p>
+        <p class="dialog-note">准备资源后，回游戏选择角色并执行解析，正常触发任务、奖励与解锁动画。DLC 可用状态由游戏确认。</p>
+        <div id="actor-costs" class="actor-costs"></div>
+        <div id="actor-grid" class="actor-grid"></div>
+      </section>
       <div class="section-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h2>资源与成长</h2></div><label class="search"><span>⌕</span><input id="search" placeholder="搜索名称或编号" aria-label="搜索可修改项"></label></div>
       <nav id="groups" class="tabs" aria-label="资源分组"></nav><section id="fields" class="field-grid" aria-label="可修改项"></section>
       <section class="notes"><div><span class="section-index">i</span><h2>这份存档，可以怎样调整</h2></div><ul id="notes"></ul></section>

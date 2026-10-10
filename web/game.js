@@ -28,8 +28,19 @@ function renderSave(){
   $('#presets').innerHTML=state.boot.presets.map((p,index)=>`<button class="preset" data-preset="${escapeHTML(p.id)}"><span class="preset-number">PRESET / 0${index+1}</span><span class="arrow">↗</span><strong>${escapeHTML(p.title)}</strong><p>${escapeHTML(p.description)}</p></button>`).join('');
   $('#notes').innerHTML=(state.save.notes||state.boot.notes).map(n=>`<li>${escapeHTML(n)}</li>`).join('');
   $('#summary').innerHTML=Object.entries(state.save.summary||{}).map(([k,v])=>`<div class="summary-row"><span>${escapeHTML(k)}</span><span>${escapeHTML(v)}</span></div>`).join('');
+  renderActors();
   $('#status').textContent=`${state.save.title} · 已读取 ${state.save.fields.length} 项可修改资源`;
   renderFields();pending();
+}
+function renderActors(){
+  const actors=state.save?.actors||[],plan=state.save?.actor_plan;
+  $('#actor-section').hidden=!actors.length;
+  if(!actors.length)return;
+  $('#actor-message').textContent=plan.message;
+  $('#prepare-actors').disabled=!Object.keys(plan.targets).length;
+  $('#prepare-actors').textContent=Object.keys(plan.targets).length?'补足未解锁角色的解析资源 →':'没有可准备的角色资源';
+  $('#actor-costs').innerHTML=(plan.requirements||[]).map(r=>`<span>${escapeHTML(r.label)} · 总计 ${r.required} · 当前 ${format(r.owned)} · 缺 ${r.missing}</span>`).join('');
+  $('#actor-grid').innerHTML=actors.map(a=>`<article class="actor-card ${a.owned?'owned':'locked'}"><div class="actor-card-heading"><span class="actor-monogram" aria-hidden="true">${escapeHTML(a.name.slice(0,1))}</span><div><h3>${escapeHTML(a.name)}</h3><small>${escapeHTML(a.kind)}角色 · ${a.id}</small></div></div><strong>${escapeHTML(a.status)}</strong><p>${escapeHTML(a.detail)}</p></article>`).join('');
 }
 async function refreshSaves(){
   if(!state.boot)return;
@@ -90,6 +101,15 @@ document.addEventListener('click',async event=>{
     if(target.dataset.set){const input=[...document.querySelectorAll('[data-value]')].find(n=>n.dataset.value===target.dataset.set);if(input.value.trim()==='')throw new Error('请填写目标数量。');setValue(target.dataset.set,Number(input.value));toast('已加入修改清单。');return;}
     if(target.dataset.preset){const preset=state.boot.presets.find(p=>p.id===target.dataset.preset);let added=0,missing=0;for(const [key,value]of Object.entries(preset.targets)){const field=state.save.fields.find(f=>f.id===key);if(!field){missing++;continue;}const next=Math.max(field.value,Math.min(field.max,Math.max(value,state.pending.get(key)||0)));if(next!==field.value){state.pending.set(key,next);added++;}}resetPlan();renderFields();pending();toast(`${added} 项已加入清单${missing?'；'+missing+' 项因存档没有记录而跳过':''}。`);return;}
     if(target.dataset.remove){state.pending.delete(target.dataset.remove);pending();renderFields();if(state.pending.size)await review();else $('#review-dialog').close();return;}
+    if(target.id==='prepare-actors'){
+      let count=0;
+      for(const [key,value] of Object.entries(state.save.actor_plan.targets)){
+        const field=state.save.fields.find(f=>f.id===key);if(!field)continue;
+        const next=Math.max(field.value,Math.min(field.max,Math.max(value,state.pending.get(key)||0)));
+        if(next!==field.value){state.pending.set(key,next);count++;}
+      }
+      resetPlan();renderFields();pending();toast(count?`${count} 项解析资源已加入清单。保存后回游戏执行角色解析。`:'解析资源已满足目标，回游戏选择角色并解析即可。');return;
+    }
     const actions={'refresh-list':async()=>{await refreshSaves();if(!state.save)await loadSave();toast('存档列表已刷新。');},'reload-save':loadSave,'review':review,'history-button':history,'refresh-runtime':runtime,'export-save':()=>commit('export'),'apply-save':()=>commit('apply'),'clear':()=>{state.pending.clear();resetPlan();renderFields();pending();}};
     if(actions[target.id])await actions[target.id]();
   }catch(e){toast(e.message);}
