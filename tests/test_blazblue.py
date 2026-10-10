@@ -137,7 +137,8 @@ class BlazBlueChecks(unittest.TestCase):
         for name in ('CloudData','1.bak','1.tmp','0'):
             (self.root/name).write_bytes(b'ignore')
         with patch.dict('os.environ',{'BLAZBLUE_SAVE_DIR':str(self.root)}):
-            self.assertEqual(discover_saves(),[self.source])
+            # Hosted Windows runners may provide TEMP through an 8.3 alias.
+            self.assertEqual(discover_saves(),[self.source.resolve()])
 
     def test_actor_preparation_counts_remaining_characters_without_writing_ownership(self):
         from blazblue_demo import sample as actor_sample
