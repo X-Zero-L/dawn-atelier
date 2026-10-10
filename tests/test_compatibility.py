@@ -161,6 +161,26 @@ class CompatibilityChecks(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder, self.assertRaises(ValueError):
             compatibility.install_schema({'schema':'../outside'},folder)
 
+    def test_october_profile_and_canonical_aliases_keep_confirmed_mappings(self):
+        profile = next(row for row in compatibility.profiles() if row['id']=='2026-10-08-1009')
+        self.assertEqual(len(profile['serializers']), 291)
+        for name in ('save_schema.json', 'config_schema.json', 'enums.json'):
+            schema=json.loads((compatibility.SCHEMAS/profile['schema']/name).read_text(encoding='utf-8'))
+            for key in ('GameAssembly_sha256', 'global_metadata_sha256'):
+                self.assertEqual(schema['source'][key], profile[key])
+        baseline=json.loads((compatibility.BASELINE/'config_schema.json').read_text(encoding='utf-8'))
+        expected={(typ['name'],field['protobuf_tag']):field for typ in baseline['types'] for field in typ['fields']}
+        with tempfile.TemporaryDirectory() as folder:
+            compatibility.install_schema(profile, folder)
+            actual=json.loads((Path(folder)/'schema/config_schema.json').read_text(encoding='utf-8'))
+            fields=[(typ['name'],field) for typ in actual['types'] for field in typ['fields']]
+            self.assertEqual(len(fields), 857)
+            for name,field in fields:
+                old=expected[(name,field['protobuf_tag'])]
+                self.assertEqual((field['name'],field['type_text'],field['wire_type']),
+                                 (old['name'],old['type_text'],old['wire_type']))
+                self.assertNotEqual(field['source_name'],field['name'])
+
     def test_installing_schema_does_not_mark_failed_preparation_ready(self):
         with tempfile.TemporaryDirectory() as folder:
             report=Path(folder)/'compatibility.json'

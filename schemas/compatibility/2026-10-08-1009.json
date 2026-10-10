@@ -1,0 +1,2047 @@
+{
+  "id": "2026-10-08-1009",
+  "schema": "thepiper-2026-10-08",
+  "metadata_version": 31,
+  "GameAssembly_sha256": "b22a9f877f3c3945fc39b0a0c6ed078309ff9ca50f0c96552c45f7fa6b9530c0",
+  "global_metadata_sha256": "7ab0a93455d6d9dab89f553bb04041883071fcc2dbdc7d380d3cd29e94a549f6",
+  "contract_sha256": "ecd39b3d5970316e6a8d7fc5b983451045dcf077aebb8bf50dca2020b1af7752",
+  "serializers": [
+    {
+      "type": "SaveLoadSystem.AlchemyData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 2592,
+      "sha256": "fc77279d3324e234ba9a03855dcd2603ea59d24d9fdadf4be1ba40341f8f3edf"
+    },
+    {
+      "type": "SaveLoadSystem.AllArtifactData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 976,
+      "sha256": "d8545a6e4a426d723676886cb0675c4a06cbff9b7fdacb8d686f28d7078ca019"
+    },
+    {
+      "type": "SaveLoadSystem.AllArtifactPropertyData",
+      "ordinal": 52,
+      "method": "Serialize",
+      "length": 5600,
+      "sha256": "c7df2670a2905f23dc188e3b98022b024024c985c76905cfbb54015398ac5d82"
+    },
+    {
+      "type": "SaveLoadSystem.AllAttributeData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "5bc12a1df5f38108e1698b7b60ebabac80c62bf93710fb2854f05f0e83069593"
+    },
+    {
+      "type": "SaveLoadSystem.AllBlueprintData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "1437da3495419b30ad9ba1f203c832c501e41632b23d591bb7d74828f3feb32b"
+    },
+    {
+      "type": "SaveLoadSystem.AllBuffData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "8750fddd28f12e0eb548404b8aac291892610b00b04c4e94f1b93579a5edead0"
+    },
+    {
+      "type": "SaveLoadSystem.AllCalendarData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 800,
+      "sha256": "ab0ffb8d1de14d5be719f6eaa4ef818699d22f348a825f05784d0cb8df78eb65"
+    },
+    {
+      "type": "SaveLoadSystem.AllFertilizerData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "b931b249b1bbd7635b3c8b6a9ad9cb2891dec95fde3362669a0b6b33978872ad"
+    },
+    {
+      "type": "SaveLoadSystem.AllMapData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1264,
+      "sha256": "4c6e4b0be9fb7673f8b33828454e065db8f3641886ccb8a79a32b78056a2713e"
+    },
+    {
+      "type": "SaveLoadSystem.AllMissionData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1728,
+      "sha256": "40f14486438e2923be2b13a71beaae62a9d525a0f4a1fbff8e9d0335288d5ba0"
+    },
+    {
+      "type": "SaveLoadSystem.AllOprToolData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "d3a18579faa4463e6ed0e6aded9e9fe544b6bebe508e1f3afddf748941516302"
+    },
+    {
+      "type": "SaveLoadSystem.OrderSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 2672,
+      "sha256": "5d8969f05be534b2339b40cc26c2edb4b1a8d9c1834e686cae2bc2b3c94c22e9"
+    },
+    {
+      "type": "SaveLoadSystem.AllSeedSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1520,
+      "sha256": "b89ce88e5848fd4ee2e2aaa58ed41037546300df5209de0ed9a768a40fa1757d"
+    },
+    {
+      "type": "SaveLoadSystem.SeedSaveData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "b2b06124400f9c6ef2831e106ceae91df82853cce02d976d042a64aac26d62e7"
+    },
+    {
+      "type": "SaveLoadSystem.HybridSeedSaveData",
+      "ordinal": 10,
+      "method": "Serialize",
+      "length": 816,
+      "sha256": "7ba2c881b56abe4a9bd5d009c96d6851919bf6533aaa7c81190763562e0ee8c5"
+    },
+    {
+      "type": "SaveLoadSystem.StaffSeedSaveData",
+      "ordinal": 10,
+      "method": "Serialize",
+      "length": 736,
+      "sha256": "08ab82412057e0a22b2adcd60b13b74f5f8fdbdb6431f2a1cf35a7503c6f7225"
+    },
+    {
+      "type": "SaveLoadSystem.AllStaffData",
+      "ordinal": 37,
+      "method": "Serialize",
+      "length": 4032,
+      "sha256": "9a3d17be19924907325d14ddf3251a57c9a8952f8699557ce05de5d841c865cf"
+    },
+    {
+      "type": "SaveLoadSystem.AllVertexData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "272f5c94496b4c7352acb5aa0c5a89f7f824d340a54c26b289959eda915b7359"
+    },
+    {
+      "type": "SaveLoadSystem.BacktrackingStatisticsData",
+      "ordinal": 14,
+      "method": "Serialize",
+      "length": 4320,
+      "sha256": "46c13df4e61dd0e05fb29baa2ad33c98c3d13e7b542de194f53042b2fca4e96c"
+    },
+    {
+      "type": "SaveLoadSystem.BagData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1344,
+      "sha256": "80e1980d1209a78be3fdd4b13532f3513ce30a3f62ce69c9349c77ea6ca70847"
+    },
+    {
+      "type": "SaveLoadSystem.BlackJackData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1504,
+      "sha256": "52226b95b50f0fe588616bd9720288b01306af49879f47a636c7381b4a61e5bf"
+    },
+    {
+      "type": "SaveLoadSystem.BuildingData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1728,
+      "sha256": "e5cb6c01cf9e197a8f41e966e482beb181ca8b1b765bf8cbed5b287efcd0f934"
+    },
+    {
+      "type": "SaveLoadSystem.CGHandbookData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "784984d547a9192e93de89167ff6323ae2af0db779432da71a63783d95fb9453"
+    },
+    {
+      "type": "SaveLoadSystem.FavorData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1408,
+      "sha256": "5c87604a4052f51c69213d5ef69d83b9e165fe52dc4a4f91c32c99643c2c2188"
+    },
+    {
+      "type": "SaveLoadSystem.FishToolData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1296,
+      "sha256": "cd0be1fa0482c355970e34e067d71d7d34ec3d721fbaaaae66698cbba4d8fb14"
+    },
+    {
+      "type": "SaveLoadSystem.GameSaveData",
+      "ordinal": 14,
+      "method": "Serialize",
+      "length": 7664,
+      "sha256": "4883baefa75f2fe9591baefa139936145013e1ac441e44f8aa42ed514f180661"
+    },
+    {
+      "type": "SaveLoadSystem.GameStatsSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 656,
+      "sha256": "cd871c4d32410c644b3fd4bf7f451b6a75083f0379622d86367f5223e541b765"
+    },
+    {
+      "type": "SaveLoadSystem.GlobalSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 432,
+      "sha256": "fb2a12c68994e9214b36a95d2e901c835f45007883fd81c555b2b4bc5978c52d"
+    },
+    {
+      "type": "SaveLoadSystem.HybridData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 864,
+      "sha256": "394a52902ae36c9b7d09fe52fee8fb285c4bfa8a29501204837cbde5bfec9b3e"
+    },
+    {
+      "type": "SaveLoadSystem.IllustrationData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1088,
+      "sha256": "beab415af488046721f2b6bd2c0d097bf2a32fcf152a74f617583ce60aa2c549"
+    },
+    {
+      "type": "SaveLoadSystem.FarmMapData",
+      "ordinal": 17,
+      "method": "Serialize",
+      "length": 5952,
+      "sha256": "29d0085193758b36d133eb003009ff6b34b2e5c417d71e472ca1b65b8dc0a8c5"
+    },
+    {
+      "type": "SaveLoadSystem.FarmFieldBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 1536,
+      "sha256": "f3fb5d85d1c07169926a2f2110a5c084c9463028fa06a53e0a0923a792d2633a"
+    },
+    {
+      "type": "SaveLoadSystem.FarmStaffCropBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 448,
+      "sha256": "29b69fcfb092a94dea16b2d269ccba2179ed859d46b1acc0b7b58fd434a29b7d"
+    },
+    {
+      "type": "SaveLoadSystem.FarmCropBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 2304,
+      "sha256": "977f78448ce319a4659d999135d4ff189e354a3a89cc91ef32cac1897d3c4ac4"
+    },
+    {
+      "type": "SaveLoadSystem.ProcessProductBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 928,
+      "sha256": "685fa0a38ef848325e8c0db08bd1781b4f1a2111534af6c55c41f7ce44061ed9"
+    },
+    {
+      "type": "SaveLoadSystem.EnvReformBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 448,
+      "sha256": "bf26fe5d35289b60581643d871c209ce506462556d9afba0975fb461c624ecfc"
+    },
+    {
+      "type": "SaveLoadSystem.WaterToolBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 400,
+      "sha256": "bc081a1c0531189f561c27bd20849410d38de323bb045fe59f6a6c4243c0282d"
+    },
+    {
+      "type": "SaveLoadSystem.HybridBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 1216,
+      "sha256": "ff1fb2323f70d48468ee8b9f22243337c38b23de88f7af68d1eefa70a939d2a1"
+    },
+    {
+      "type": "SaveLoadSystem.ApartmentBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 736,
+      "sha256": "0917ccdb0d1cc32246c714fd07c65cede0f6b2bd207188ac2b4fc6ad42f013b1"
+    },
+    {
+      "type": "SaveLoadSystem.FreeAlchemyBuildingData",
+      "ordinal": 11,
+      "method": "Serialize",
+      "length": 1536,
+      "sha256": "4d756dbc7fca00392c052faeaabd610e3e1532330ca0b7f955c4abd5811e59dd"
+    },
+    {
+      "type": "SaveLoadSystem.ProductData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1664,
+      "sha256": "90bbed76bf33ca48c68cb19b88e624a1b58b5e934c9a24c66a6ea2432a2d9169"
+    },
+    {
+      "type": "SaveLoadSystem.WorkShopMapData",
+      "ordinal": 13,
+      "method": "Serialize",
+      "length": 1760,
+      "sha256": "9bb6f6aa57cfd07d40e8a2b03cb913e2ff71e741ffcef3c088565709b1b3ed01"
+    },
+    {
+      "type": "SaveLoadSystem.MissionTreeData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1248,
+      "sha256": "dfc5b9a8224718669fd781457ddea375d9f8c19408fefe1cdb4dc995d4c2cf3c"
+    },
+    {
+      "type": "SaveLoadSystem.NPCShopData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 2288,
+      "sha256": "3e54248132a8a1dbddc842105f88b62c3d8d427d0bfe4ebdf3b9bc7736ffcf7b"
+    },
+    {
+      "type": "SaveLoadSystem.PlotSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 640,
+      "sha256": "124b02acb17116756dd517f90f0c921a8b450bd621efdb0a8e2ac723ac3615ad"
+    },
+    {
+      "type": "SaveLoadSystem.ScheduleData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1424,
+      "sha256": "59c2202871204e2c233e85517447abd446984251bde284b0c1ae151acbe90996"
+    },
+    {
+      "type": "SaveLoadSystem.StatisticData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1808,
+      "sha256": "cac08bbc1e58f1552aa1259f0212888b682b034dcb944c4c35c6f02c8f6a90cd"
+    },
+    {
+      "type": "SaveLoadSystem.UnitDataAssembly",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1520,
+      "sha256": "39726f5a64db95fcd15474cdf4d922c35066d2d9e9556d3c9cb411d723736478"
+    },
+    {
+      "type": "SaveLoadSystem.UnitSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 672,
+      "sha256": "1aec3e6220ff1ea2b2f747dc1ad030d00823785938e4a10861cd4c769a6343f4"
+    },
+    {
+      "type": "SaveLoadSystem.ShopGuestSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 1312,
+      "sha256": "9eb04cdd223eac787a2c2e8ccf8fe02ffab4c60c9a1807c0ac2f836bbb26d3cc"
+    },
+    {
+      "type": "SaveLoadSystem.StaffUnitSaveData",
+      "ordinal": 12,
+      "method": "Serialize",
+      "length": 896,
+      "sha256": "67b09073ba23ea25e2ddb836deba43b6137ed4b1d3e81f02c4937cb72203135a"
+    },
+    {
+      "type": "SaveLoadSystem.FarmCropRecordData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 592,
+      "sha256": "9f58e1d60230b9ec4a36437b209e2748d7aa5d662ba0a0bbaf3343b4ec992dce"
+    },
+    {
+      "type": "SaveLoadSystem.VertexData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 368,
+      "sha256": "4edff3b62c2475a1a9e21e1a107157a8a4c7055495f06db03357240f6411f386"
+    },
+    {
+      "type": "SaveLoadSystem.GeneGroupData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "af03ad40adc201101a8076a0fa111bbca0793ec5a0049be135f7f47c9a44ed15"
+    },
+    {
+      "type": "SaveLoadSystem.GenePoolData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1216,
+      "sha256": "5913a7d22d70917ee2e9ba06b82a1c6a0f7e92cee12da8d2e2acb1e34a07dfea"
+    },
+    {
+      "type": "SaveLoadSystem.HybridCompleteData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 752,
+      "sha256": "e7a37213417af61e6d3d66723d6c855cac5de02b5f31cba487c9c6d9cbd835c5"
+    },
+    {
+      "type": "SaveLoadSystem.HybridGridData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "1b677109be498db30d18ec837eba4fd5033cd658fa07fbab83a593716c82b3c5"
+    },
+    {
+      "type": "SaveLoadSystem.HybridDoingEntityData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 544,
+      "sha256": "31bc7038e4344873a43da36b0c0c16197d80b6690897ef487fee7a826cc074c4"
+    },
+    {
+      "type": "SaveLoadSystem.BlueprintData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1152,
+      "sha256": "4d6a09965021a26d9769960a96cc745efdc8cba72c2e6e0e7ba3cfc8df1e8384"
+    },
+    {
+      "type": "SaveLoadSystem.BlueprintBuildingData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 672,
+      "sha256": "12afff42718de881bc88a3a332a4924e72bcf50fa911ca9bece9f52b4bcd4135"
+    },
+    {
+      "type": "SaveLoadSystem.BuffData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1040,
+      "sha256": "867945cce4e5912e10db55b7ff566deefca17fb30a699ad802d286631aaaa12d"
+    },
+    {
+      "type": "SaveLoadSystem.BuffActionArgs",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "a97c3c69820f1406da92b21813079b1d115477b7a6031d4781e54ee63dfe7078"
+    },
+    {
+      "type": "SaveLoadSystem.BuffCaster",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 672,
+      "sha256": "6c09d57db66b062c09479085fc844df0bcab8f36da8f35db7d5366d3544aa524"
+    },
+    {
+      "type": "SaveLoadSystem.FertilizerData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "13e673a0dfbc226a51e7432fa6afd87f681e71bea27c1c1780a000892dfbd304"
+    },
+    {
+      "type": "SaveLoadSystem.TalentAbilityEffectData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 704,
+      "sha256": "e0cc385a6ccebc3d8bf6822ccdaa0b038d903ce4627bb076e870446520b693ca"
+    },
+    {
+      "type": "SaveLoadSystem.DayStatisticData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1936,
+      "sha256": "bf5442c9d57a60fa31640bbc4fcae35d0f4cdc0a108b69e50935d2fee58feca7"
+    },
+    {
+      "type": "SaveLoadSystem.DayStatisticsHistoryEntryData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 480,
+      "sha256": "1035d4589bac6390d5bbd662c9e3c6480374e69619db40eeeae869f3cfc9c6c7"
+    },
+    {
+      "type": "SaveLoadSystem.NPCEscrowData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 752,
+      "sha256": "29b6c9b8bba956e476246a220f023c505c0523805a558ea854527b4f84a4c019"
+    },
+    {
+      "type": "SaveLoadSystem.NPCShopItemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 784,
+      "sha256": "d6aeb69ffc54b865c355a09488c006f3095c76adc5ccee1ef086da366bf530f8"
+    },
+    {
+      "type": "SaveLoadSystem.AttributeData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "53a6e20ac61cddb007b4061a099008fbaee9e1399360e776df02c3b770c0113e"
+    },
+    {
+      "type": "SaveLoadSystem.ItemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 432,
+      "sha256": "daf398cc1ab09f89595c0ebe57f41b1cb6b412db48f7316f86623b501b2bbed5"
+    },
+    {
+      "type": "SaveLoadSystem.MapSpawnBuildingCmdData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "b28c30cfa8ad3397d58dff61c75721c9aa0957d72853c924888bafe3f2598e57"
+    },
+    {
+      "type": "SaveLoadSystem.MapData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 240,
+      "sha256": "f5c594a315b5aceab1512d09cd35cc39d29d039fff1b9addab913a74939e8f4f"
+    },
+    {
+      "type": "SaveLoadSystem.ShelfBuildingData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 832,
+      "sha256": "03e349f7ac7832d6d8a6369da4afeff91cef3a3fc643fbde5e35a2bb1244b162"
+    },
+    {
+      "type": "SaveLoadSystem.ShelfShopGood",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 368,
+      "sha256": "7cd50f327e20d339239d5971e30ac2e8d6d15b75287fd4149a4c7e6ff2b32f85"
+    },
+    {
+      "type": "SaveLoadSystem.FarmFieldAttributeData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "e6667e2a0bf3266808bd49ffa8a3e48510082cbe1bbfd39886e9a71ad9147350"
+    },
+    {
+      "type": "SaveLoadSystem.FarmFieldStateData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1328,
+      "sha256": "ae87da35797712a8ab429463ede3cc2b06a1abf11f2588e1490b24bc6765d6f0"
+    },
+    {
+      "type": "SaveLoadSystem.FarmEnvWrapperData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 464,
+      "sha256": "6e9f073f8ca13b2b703d8b97c56e6eac5b040f73892c6afb0b896fd137867aff"
+    },
+    {
+      "type": "SaveLoadSystem.ProcessItemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 464,
+      "sha256": "c82982d9850d43fa1cfd2edb873ac6c1826958be94e7a5f1d2fa11a6ec612b0b"
+    },
+    {
+      "type": "SaveLoadSystem.FreeAlchemyItemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 400,
+      "sha256": "02aaebf5d072c56844a51af205d1df69f5e3ba27feda7a636012fa2022e8ed10"
+    },
+    {
+      "type": "SaveLoadSystem.FreeAlchemyResultItemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 400,
+      "sha256": "d060923faf5174234c2f3e9af58ed3647b32212aeddb2cd328d068a94cb0b064"
+    },
+    {
+      "type": "SaveLoadSystem.DestroyBuildingRecordData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 784,
+      "sha256": "fa0df1197dcb9192c651c1b9584c9ed802a266bb5bb46a735bec280f67980685"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 768,
+      "sha256": "25fef0d842f671c5f99ea8044e9e9893a349f83b7fdfb50f4949a4aaee56e652"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactEffectData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "ccd5edc86e0eed97c4b6340cb299ea7eb80e4514effe00ebc2d8d84cd5ccd7eb"
+    },
+    {
+      "type": "SaveLoadSystem.ShopData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 784,
+      "sha256": "8102a4cc6bced515bda6f83a96f609e1531cbedd0e83cb2172be6065609da9c1"
+    },
+    {
+      "type": "SaveLoadSystem.ShopStatsData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 2320,
+      "sha256": "ec961e353d90adfc0a27ba53735fb810232283099cb353e20f4728ae559fa283"
+    },
+    {
+      "type": "SaveLoadSystem.ShopTradeRecord",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 368,
+      "sha256": "313cc3f885104dd7d481514102570fe0e6f41d72f2a8f118f6daa55e053253b8"
+    },
+    {
+      "type": "SaveLoadSystem.MissionData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 928,
+      "sha256": "61f0d835f7548fcc3b0dc9c5cac2d2b596c89b5ee98bdd5163d9babc2201a128"
+    },
+    {
+      "type": "SaveLoadSystem.Vector2Int",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "ad2c4f35ab98942a7fcc79ce0260c0ca59705e7433dfed77adfb5096a5d4dd3f"
+    },
+    {
+      "type": "SaveLoadSystem.Vector3Int",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "e6998730a689493cae067d488119d4ef2d58f2305032958fbb61a9a954d0d183"
+    },
+    {
+      "type": "SaveLoadSystem.SaveParamVector3",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 416,
+      "sha256": "4124b08b4394dc77cc5fd6f3b2568b24bf8bbcc8f0a6cc6a023560f3ee3a46ab"
+    },
+    {
+      "type": "SaveLoadSystem.ClutterBuildingData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 448,
+      "sha256": "ff586ab87542401669dd26dfdcb37f83dc1422a4d13f3c91a34b6b1c04e622b4"
+    },
+    {
+      "type": "SaveLoadSystem.MapAreaData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1040,
+      "sha256": "1b509c41d8d60a4e871be00219f44005a0036106c3986e50f9b2795b25784757"
+    },
+    {
+      "type": "SaveLoadSystem.ClutterTimeTick",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 368,
+      "sha256": "686685a61f7afd5cfbd6e39ec0d08f57538adb52fded09ebeb554f4079951fa6"
+    },
+    {
+      "type": "SaveLoadSystem.GameStatsData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "83ed233f673d13135160cc2a3208ce1f4a99b2827ac1b2c0b3b0c05168dc3231"
+    },
+    {
+      "type": "SaveLoadSystem.OrderData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1120,
+      "sha256": "0e3664d009ff75b9ab1ade0595bb6d0eabcea9d2736a5000a12f3099e633e431"
+    },
+    {
+      "type": "SaveLoadSystem.OrderGroupData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "d817d7e1c3c89e654f18a4e904aa9f0d587d850c5050e06e0b700fe85ac77d5e"
+    },
+    {
+      "type": "SaveLoadSystem.FavorNPCData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1264,
+      "sha256": "ec40c45f68a35d8f25b725cdd1803072eb87d8c58291f0fd6632368c64e53a63"
+    },
+    {
+      "type": "SaveLoadSystem.FavorFactionData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 784,
+      "sha256": "88d097e1ad8055792c0be1d473bcfe49f387c49c8e47bc0b6f324c3f01d0316d"
+    },
+    {
+      "type": "SaveLoadSystem.OprToolData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "ca24d0d173eeeb827d0e0701f22bf22256e53392085cbe20f0b6122d6c854754"
+    },
+    {
+      "type": "SaveLoadSystem.FishPoolData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 624,
+      "sha256": "d0071199c70ab4bdea199f811b0304020d46be3ba61e6a56612788fd96532406"
+    },
+    {
+      "type": "SaveLoadSystem.StaffData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 2960,
+      "sha256": "110bd6faf50850008489aab8e7358ae25c3f3ef884cfe7ccd2d56c040730848e"
+    },
+    {
+      "type": "SaveLoadSystem.WorkStationData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1936,
+      "sha256": "e0279916e763314a38400270d45766e739a3be8389732a8965380c2d56c66fe0"
+    },
+    {
+      "type": "SaveLoadSystem.FarmSeedQueueItem",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 400,
+      "sha256": "8f3bf4979d671c65025b0b2410699da8a890188f3b07ef08522de6a380546a42"
+    },
+    {
+      "type": "SaveLoadSystem.FarmFertilizerQueueItem",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "411180efd5fb1c6b0ff7c648031c48ae2e4644cfd08269f3313f9369adea1046"
+    },
+    {
+      "type": "SaveLoadSystem.FarmSeedQueue",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 704,
+      "sha256": "7d21a5d9de2b33ff97f7e77359541d76e2e197c702ecacc70abbea7b81f4d8fa"
+    },
+    {
+      "type": "SaveLoadSystem.FarmWorkStationData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1264,
+      "sha256": "1af430e7f515e4f537e5d84cdab181ebf143ab44e417c919050275f8c0580bac"
+    },
+    {
+      "type": "SaveLoadSystem.ProductionQueueItem",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 544,
+      "sha256": "2b2fa13e72083720309d145973ce83b3ba165fc110ee27bc839df583b66a3271"
+    },
+    {
+      "type": "SaveLoadSystem.ReservedMaterialData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "7d980e02bb5d59f4608d21712c2c1f0d50c38e257d0d96ed6f080e10df975727"
+    },
+    {
+      "type": "SaveLoadSystem.ProductionWorkStationData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1312,
+      "sha256": "9c8950a80381fb86537640a3de6934ab32a25167a740f0d9115f4cb3fc46ed18"
+    },
+    {
+      "type": "SaveLoadSystem.ProductionQueueData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 976,
+      "sha256": "9cff4d714393a593fee6ca61c35fd5a9a80f1b8cff71768fd590e62ea4a8aabe"
+    },
+    {
+      "type": "SaveLoadSystem.DemandDrivenSystemData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 832,
+      "sha256": "52b1aa68bf634fd748bb8a0a811a3a1abc81e9f47f93814402154c9a10c1fe6f"
+    },
+    {
+      "type": "SaveLoadSystem.WorkReservationData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 464,
+      "sha256": "a17574081f0f1aaaf1933a28e9bc84fb759ba5148d3acb4b95ae08faa337b5ef"
+    },
+    {
+      "type": "SaveLoadSystem.WorkRequirementData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "56544e0f8e7458386430db9289ba3371390308602daf750e3652b13b0c4feb3f"
+    },
+    {
+      "type": "SaveLoadSystem.StaffBackPackGridData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "582d0481d10235cdf81bfb8169e376c08866e75830f4730facf49efe307286cc"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactPropertyHandlerData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "8b71dbf49b91a30e255718fd7155b89b81a4b8a0183640c78741d459e995e500"
+    },
+    {
+      "type": "SaveLoadSystem.SimpleDictionaryData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 800,
+      "sha256": "53a9f20af1e7302f6bf3dc61d23465725d5ede2b1e712ca0b49d1e454db15c0f"
+    },
+    {
+      "type": "SaveLoadSystem.FieldDictionaryData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 800,
+      "sha256": "a6befd0cc45167cbf09e5b7d71d1d3f5818b604b55afa8af1d9f9b173c7a9034"
+    },
+    {
+      "type": "SaveLoadSystem.CropYieldModifierData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "51619e0747744f597b3a216e4c3d4bb7f379089e5c0d2124a044f2716364d441"
+    },
+    {
+      "type": "SaveLoadSystem.CropEnvModifierData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 400,
+      "sha256": "882fe4d8cd6cbb97e082643c9f2bbc72c70c3707b13d89e6fec761c0111427a2"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactPropertyGrowthSpeedWrapperData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 432,
+      "sha256": "ff2712662e8ca67a912b485bfe933e706391cfd74a21ee11eb07c42c00c42445"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactPropertySpeedCollectionData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 704,
+      "sha256": "8802940074b87c3217891df2a236172508b7fd2cfcaeb883179ec4015bb0bcaf"
+    },
+    {
+      "type": "SaveLoadSystem.CropHarvestProbabilityWrapperData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1232,
+      "sha256": "6d82dbfec77b35f459a5b9c2486c4adbf1e9525b737a94a07430404a2cfd27ea"
+    },
+    {
+      "type": "SaveLoadSystem.SimpleModifierData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 2192,
+      "sha256": "f2444c4e6d9a088979197012f5392482ef1b7d1aa2932d2a3d81e74028904a62"
+    },
+    {
+      "type": "SaveLoadSystem.ComplexModifierContainerData.ProbabilityPercentageDataEntry",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 320,
+      "sha256": "4ac6cb6ba5759dc5f77367a06cd400ad621351ec8c1c884274d734688ee87e02"
+    },
+    {
+      "type": "SaveLoadSystem.ComplexModifierContainerData.ProbabilityPoolDataEntry.PoolValue",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "5d4a9b1ae3923d049392611a8a0c4166952a9f39f90b9462cdd98c2054a32a8a"
+    },
+    {
+      "type": "SaveLoadSystem.ComplexModifierContainerData.ProbabilityPoolDataEntry",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 704,
+      "sha256": "c9924dd65a644673714ade6713f92ce01c241551504b43ed66b7b79f594a211b"
+    },
+    {
+      "type": "SaveLoadSystem.ComplexModifierContainerData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1104,
+      "sha256": "1439c78d2ab3d36b1509f586cf3b8ee361fe12b8d5c8ffb1cd82ce7f2f2006cd"
+    },
+    {
+      "type": "SaveLoadSystem.AllModifiersData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1088,
+      "sha256": "705d539fa02502edc719cbc5345e0a6754a32454a765fe51b998d22b0dbda92f"
+    },
+    {
+      "type": "SaveLoadSystem.GuestExtraBuyParamData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "14f14a70f58a684b8a881dc30dbbbb092f8972d4161013896ddb279bb534b965"
+    },
+    {
+      "type": "SaveLoadSystem.SimpleIntData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 240,
+      "sha256": "b48f0fe0b63ffb465dc1a5c79f3d4384279115370e10e820eb1341a0659f0f06"
+    },
+    {
+      "type": "SaveLoadSystem.IntKeyIntValueData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "6d7ddab4b605af327d36cb08e351ebc6f0bf1b7451ee62762eb15ed0fde89b8f"
+    },
+    {
+      "type": "SaveLoadSystem.IntListData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 560,
+      "sha256": "e429c6406d5055847e9127d5c58b575b638eb3f034dfbe720752cd73d398f1ee"
+    },
+    {
+      "type": "SaveLoadSystem.ArtifactPropertyValueData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "cf88fcbb11a055d15db2e853897293e55449d5f78c93665d106498f8b19cbd6d"
+    },
+    {
+      "type": "SaveLoadSystem.CropTypeGrowthRateData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1264,
+      "sha256": "58cfd8234accaf59229f70ba5d3169ecf413ddce6eed2786c8eb21b1907417a3"
+    },
+    {
+      "type": "SaveLoadSystem.DailyTurnoverRecordData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 288,
+      "sha256": "fbb6643244ec4e60b3f4680107b36d62b6dc953ccedeefdfb651cd8e5c23d2a8"
+    },
+    {
+      "type": "SaveLoadSystem.BacktrackingRecordData",
+      "ordinal": 9,
+      "method": "Serialize",
+      "length": 1760,
+      "sha256": "142e5eeae24da81703c6ecae4e74a048b51624bc73c1963b3346565f23be00cb"
+    },
+    {
+      "type": "Example.AchievementConfig",
+      "ordinal": 8,
+      "method": "gmp",
+      "length": 784,
+      "sha256": "e8312e49e91a055de8ba41debdb7ea693520baee997d0f04e97f6c414b49a931"
+    },
+    {
+      "type": "Example.iv",
+      "ordinal": 5,
+      "method": "gmx",
+      "length": 976,
+      "sha256": "bd6fb9ce6cbb265d9af6a480e994c7e6d1b57f6a9f80f84e5d5e864ef2e881df"
+    },
+    {
+      "type": "Example.ActionEnum",
+      "ordinal": 8,
+      "method": "gni",
+      "length": 320,
+      "sha256": "cee38313532ffd624b34f31aa6744afff2e7a2145e2d982eb26bac006d78c886"
+    },
+    {
+      "type": "Example.iw",
+      "ordinal": 5,
+      "method": "gnq",
+      "length": 976,
+      "sha256": "388b04145744b4a4b86a8b17ba9d2890db37a19a176a9bdb97d2a759b528d906"
+    },
+    {
+      "type": "Example.AlchemyLevelConfig",
+      "ordinal": 8,
+      "method": "gob",
+      "length": 2128,
+      "sha256": "026b8d4591a9b6ed848beec0ffdad4cfb59cfd8a0a9cc8db716d03805b86dfda"
+    },
+    {
+      "type": "Example.iy",
+      "ordinal": 5,
+      "method": "goj",
+      "length": 976,
+      "sha256": "fb7bcb61d7f92e47f7fbfaca5ae5a50aab8b5d9ed46142e169e525f27f376fe2"
+    },
+    {
+      "type": "Example.AlchemyProductConfig",
+      "ordinal": 8,
+      "method": "gou",
+      "length": 1856,
+      "sha256": "a37292a8f38b216c3ada3affda5865ac2c8fbaf9db70b4d0fcdb16d44cdf4a95"
+    },
+    {
+      "type": "Example.iz",
+      "ordinal": 5,
+      "method": "gpc",
+      "length": 976,
+      "sha256": "c63b7f9a68a7a7992518cf3f38be9b7de29f320dcecb34b2ed9b0debff0b3d22"
+    },
+    {
+      "type": "Example.AlchemySeedConfig",
+      "ordinal": 8,
+      "method": "gpn",
+      "length": 608,
+      "sha256": "e34b471f8e4b639629e22dfbe8b93ab1fe94fc2dadec385dc0427cd8ea4b951c"
+    },
+    {
+      "type": "Example.ja",
+      "ordinal": 5,
+      "method": "gpv",
+      "length": 976,
+      "sha256": "4f8d0ca75a57c60af64552c4bc4b700eae04fd184085e49b68974505c2750c0f"
+    },
+    {
+      "type": "Example.AlchemyTalentConfig",
+      "ordinal": 8,
+      "method": "gqg",
+      "length": 1312,
+      "sha256": "9cda724c4c8873a9ed17ea20e3cd60a3399cd6c80f1993ac1cbff75d374344b5"
+    },
+    {
+      "type": "Example.jc",
+      "ordinal": 5,
+      "method": "gqo",
+      "length": 976,
+      "sha256": "1119482aa2753af8c3457fb0d3285d04760c6751d6d4f96932ff9cc11333e7b7"
+    },
+    {
+      "type": "Example.AttributesConfig",
+      "ordinal": 8,
+      "method": "gqz",
+      "length": 688,
+      "sha256": "704579c4a3c5f3c3dac460163eda514e8ac7ba5e9ee187ac82221c181147c740"
+    },
+    {
+      "type": "Example.je",
+      "ordinal": 5,
+      "method": "grh",
+      "length": 976,
+      "sha256": "985d487fb58141d3452e7837cc21bf378c90afa734b04a25135e26a0a91dc3e2"
+    },
+    {
+      "type": "Example.BagTagConfig",
+      "ordinal": 8,
+      "method": "grs",
+      "length": 864,
+      "sha256": "da4e7801f1b49de8e52a593b1a64b9dc45b5f27769c04797b31de60e25045706"
+    },
+    {
+      "type": "Example.jh",
+      "ordinal": 5,
+      "method": "gsa",
+      "length": 976,
+      "sha256": "dae16a5fd3310dcc3340dd5e39d3fbabea190b2dbfa7bbcb1919de32ff7f9bb8"
+    },
+    {
+      "type": "Example.BlackJackCardConfig",
+      "ordinal": 8,
+      "method": "gsl",
+      "length": 896,
+      "sha256": "51d60725708727b5ef38c5fb8873da2ca3e7c1fe03e789a79cebe7c71f59cbdb"
+    },
+    {
+      "type": "Example.ji",
+      "ordinal": 5,
+      "method": "gst",
+      "length": 976,
+      "sha256": "4b64b81ea314f91d42a33a6901c6b271d06ea7325efbae4ba60d0c2b8f397340"
+    },
+    {
+      "type": "Example.BlackJackCardEffectConfig",
+      "ordinal": 8,
+      "method": "gte",
+      "length": 672,
+      "sha256": "d283b53fed7d4462b9a03be419e3741bb59aa6d3fc8cb853ba7f3fd1c33a3706"
+    },
+    {
+      "type": "Example.jl",
+      "ordinal": 5,
+      "method": "gtm",
+      "length": 976,
+      "sha256": "0fef319feadec7828bd4d7818d03c371a08729b271c1d95ee3d978a6d919504e"
+    },
+    {
+      "type": "Example.BlackJackGameConfig",
+      "ordinal": 8,
+      "method": "gtx",
+      "length": 1728,
+      "sha256": "93aa1b025352a25ef0219e93de419c271f74cbd86bb35b4d1d2686a672874da7"
+    },
+    {
+      "type": "Example.jo",
+      "ordinal": 5,
+      "method": "guf",
+      "length": 976,
+      "sha256": "516d8a505f580093ad61fe80b003e3cc90086f54881582994d8063dd2ac81ef8"
+    },
+    {
+      "type": "Example.BlackJackGoldCageConfig",
+      "ordinal": 8,
+      "method": "guq",
+      "length": 976,
+      "sha256": "16048e26676e81fdc1dd5d11e5c882498d43b3bc80f94edaa6299fd7177ccf80"
+    },
+    {
+      "type": "Example.jq",
+      "ordinal": 5,
+      "method": "guy",
+      "length": 976,
+      "sha256": "1c5bc458363dac13646bd3a06703451b65040fa17dfc265080577b744c7ca7f1"
+    },
+    {
+      "type": "Example.BuffConfig",
+      "ordinal": 8,
+      "method": "gvj",
+      "length": 3168,
+      "sha256": "2662ca679e97062549b8cf886ac8942920dd4de4620fc08b3cdb08f2cd72cbe4"
+    },
+    {
+      "type": "Example.jr",
+      "ordinal": 5,
+      "method": "gvr",
+      "length": 976,
+      "sha256": "b63bab143b43027e8fc8f46968e57b229ad6ecc2cdde6a2ec8b43be9ad97882c"
+    },
+    {
+      "type": "Example.BuildingConfig",
+      "ordinal": 8,
+      "method": "gwc",
+      "length": 2656,
+      "sha256": "de25a66269c3204f29f9dca2f65f50a342f957a0efad57ac274c5dc33e2d7144"
+    },
+    {
+      "type": "Example.jy",
+      "ordinal": 5,
+      "method": "gwk",
+      "length": 976,
+      "sha256": "f3ee30b433c99bee48c9205144cb0c18eeaee6efdfc65808bf4ace97b9d2023a"
+    },
+    {
+      "type": "Example.CGHandBookConfig",
+      "ordinal": 8,
+      "method": "gwv",
+      "length": 560,
+      "sha256": "574b0759f0233393e43c4466386720ed4067c6f0d706dcf6d9abec9ddff23180"
+    },
+    {
+      "type": "Example.kd",
+      "ordinal": 5,
+      "method": "gxd",
+      "length": 976,
+      "sha256": "de758fa48482f324b9facf24c9486fe29e10e468ee843b3e09c57d77e72b5a43"
+    },
+    {
+      "type": "Example.Condition",
+      "ordinal": 8,
+      "method": "gxo",
+      "length": 1376,
+      "sha256": "351da8a9653c7db0336788ef3b9fab5415c1a1f36f7d855ff49e0ea5f98d3192"
+    },
+    {
+      "type": "Example.ke",
+      "ordinal": 5,
+      "method": "gxw",
+      "length": 976,
+      "sha256": "fe73764747b5e6ef912e30da2f51c0de05c6a9ad695391d8816f7d022c3f5b6c"
+    },
+    {
+      "type": "Example.Conversation",
+      "ordinal": 8,
+      "method": "gyh",
+      "length": 1120,
+      "sha256": "8d1f4ed998eb1e35562f8cdd741d11af9f255d9c348012d542bcea12d6f2f369"
+    },
+    {
+      "type": "Example.kg",
+      "ordinal": 5,
+      "method": "gyp",
+      "length": 976,
+      "sha256": "be6fde995c21556a0a05566469efa0a009b52e0f700d5ae0fdbbd2ed12311bb5"
+    },
+    {
+      "type": "Example.DailyTipsConfig",
+      "ordinal": 8,
+      "method": "gza",
+      "length": 496,
+      "sha256": "6ca3ed5d2ea628404362ef3fae7ee0097830c9d0162ee2c34431ae03a327e8e9"
+    },
+    {
+      "type": "Example.kj",
+      "ordinal": 5,
+      "method": "gzi",
+      "length": 976,
+      "sha256": "f5e7fbb18142820e8ea86cc20ede5576d1c7d8a69fa3ed36d42ad34800d7950d"
+    },
+    {
+      "type": "Example.EffectConfig",
+      "ordinal": 8,
+      "method": "gzt",
+      "length": 384,
+      "sha256": "f22c41a9d1b428fc31060b355b5869f4cf38998d8d73236193717d11c2c7fae8"
+    },
+    {
+      "type": "Example.kl",
+      "ordinal": 5,
+      "method": "hab",
+      "length": 976,
+      "sha256": "5db9dc7ab081cb7d7f01526d6a839054a67df054f1f0c51aa28151f5781a7c5d"
+    },
+    {
+      "type": "Example.EventConfig",
+      "ordinal": 8,
+      "method": "ham",
+      "length": 1872,
+      "sha256": "b6fec1d0d3d249c078234d6262ec1458ea6e26b43a2ed6f6a59548d785512c49"
+    },
+    {
+      "type": "Example.km",
+      "ordinal": 5,
+      "method": "hau",
+      "length": 976,
+      "sha256": "8096b3c3e0e73dc6cfc5ec358b332ba7f734227c274ac81d1ffb2226c0f419b0"
+    },
+    {
+      "type": "Example.FarmCropConfig",
+      "ordinal": 8,
+      "method": "hbf",
+      "length": 2656,
+      "sha256": "cf3b1204043c88a2459284e1738375025a84ff099db7e9bdecefd3430c4b44d9"
+    },
+    {
+      "type": "Example.kp",
+      "ordinal": 5,
+      "method": "hbn",
+      "length": 976,
+      "sha256": "9c6e40a97e4306a9989d6ef498aa9661a823587f10487e463f4d9fdc82013cb2"
+    },
+    {
+      "type": "Example.FarmGeneConfig",
+      "ordinal": 8,
+      "method": "hby",
+      "length": 1328,
+      "sha256": "30b879619b98c27de988dc642537c7a7bc38663ecb79098b9e32745c7c61bf3c"
+    },
+    {
+      "type": "Example.kr",
+      "ordinal": 5,
+      "method": "hcg",
+      "length": 976,
+      "sha256": "79ece3cf479c27246b71a33c514562bbf006e91e053201d41a34de99b46179cd"
+    },
+    {
+      "type": "Example.FarmLabelConfig",
+      "ordinal": 8,
+      "method": "hcr",
+      "length": 496,
+      "sha256": "152d8813d1a92d036d5ed6cbb444948a1b8d42fa9611ff2139505f781f8b6b53"
+    },
+    {
+      "type": "Example.kt",
+      "ordinal": 5,
+      "method": "hcz",
+      "length": 976,
+      "sha256": "ffb04fbfad481e248177b6cc02469f1b314742de9b2df637499b41c65702084b"
+    },
+    {
+      "type": "Example.FavorFactionConfig",
+      "ordinal": 8,
+      "method": "hdk",
+      "length": 2416,
+      "sha256": "8343a596f2056aed3c07300a9dd72a7669d3af359f754d712281b47de1d149e4"
+    },
+    {
+      "type": "Example.kw",
+      "ordinal": 5,
+      "method": "hds",
+      "length": 976,
+      "sha256": "f80081d18021f8cb0941ee6cc2dacbda5cbc4c92a360f0a4bb2e144ca4507dbf"
+    },
+    {
+      "type": "Example.FavorNPCConfig",
+      "ordinal": 8,
+      "method": "hed",
+      "length": 4352,
+      "sha256": "725f64f2af0005f0ea0f146856961f8c8efb7bcaa7ca145a87a73f978d854932"
+    },
+    {
+      "type": "Example.kx",
+      "ordinal": 5,
+      "method": "hel",
+      "length": 976,
+      "sha256": "102d631a52375eaafed1635fd440d1858019b4d9917097b95fbf8343f5a1be25"
+    },
+    {
+      "type": "Example.FishConfig",
+      "ordinal": 8,
+      "method": "hew",
+      "length": 1872,
+      "sha256": "171b6bed7fbd6d206f97f8c2ccba95a5c3d8d19dce908cf41ee2f6796837734b"
+    },
+    {
+      "type": "Example.ky",
+      "ordinal": 5,
+      "method": "hfe",
+      "length": 976,
+      "sha256": "915c3d9f54d00907dd00e381f846e7b1bf50174741f20f03f30226cb4dd87932"
+    },
+    {
+      "type": "Example.FishingPoolConfig",
+      "ordinal": 8,
+      "method": "hfp",
+      "length": 1776,
+      "sha256": "8fcfeff9fbe0d7f98e5668a49d00b66eef84de16341c7946d5baba92e0c335f9"
+    },
+    {
+      "type": "Example.lb",
+      "ordinal": 5,
+      "method": "hfx",
+      "length": 976,
+      "sha256": "b8922bbc42464b466908b5dd484811d275f8a8d40026bab9b52ac12e52838c78"
+    },
+    {
+      "type": "Example.FishingToolConfig",
+      "ordinal": 8,
+      "method": "hgi",
+      "length": 1152,
+      "sha256": "e3d5348a75cef246c74151f39c81cc6d7cdbb3d1eafee3c6da8f7f738ea0b34e"
+    },
+    {
+      "type": "Example.lc",
+      "ordinal": 5,
+      "method": "hgq",
+      "length": 976,
+      "sha256": "20ab237fd6a224a046336aaaa5ad64cb9c5f17c0a8fd34212951fa0f51316675"
+    },
+    {
+      "type": "Example.FunctionEnum",
+      "ordinal": 8,
+      "method": "hhb",
+      "length": 320,
+      "sha256": "2382b4cbaaeb0c6b859661e06fbea60b9f13a1c54c0682e4f1ab08d7c4075618"
+    },
+    {
+      "type": "Example.le",
+      "ordinal": 5,
+      "method": "hhj",
+      "length": 976,
+      "sha256": "3d3862b4cefe72dfc1cac7409e36ec5107399a618873a50637ae857de489e6e9"
+    },
+    {
+      "type": "Example.FunctionManageConfig",
+      "ordinal": 8,
+      "method": "hhu",
+      "length": 640,
+      "sha256": "705ea1a72cc6a8f53e17dc34e242b4073cec3c076ce1de397ec39c0e077569d5"
+    },
+    {
+      "type": "Example.lg",
+      "ordinal": 5,
+      "method": "hic",
+      "length": 976,
+      "sha256": "388c085bfa6379c39aded1fc65f44dc2dd9799b933710a783aef066703359f87"
+    },
+    {
+      "type": "Example.GameStatsEnumConfig",
+      "ordinal": 8,
+      "method": "hin",
+      "length": 640,
+      "sha256": "3709359cb5e388ba05e9a004df1b0853f0aec9dc1517054753f85227f1ebc321"
+    },
+    {
+      "type": "Example.li",
+      "ordinal": 5,
+      "method": "hiv",
+      "length": 976,
+      "sha256": "29c47b06b23318f4749b2048e8de85bbe9a6c1a00a2d78b65e0b8bcbf3849a5e"
+    },
+    {
+      "type": "Example.GlobalParamString",
+      "ordinal": 8,
+      "method": "hjg",
+      "length": 480,
+      "sha256": "d1a533d93acf17edd05fc7c0d62b7b79a2fcb38f8ca72cbc81048ce052a747c1"
+    },
+    {
+      "type": "Example.lk",
+      "ordinal": 5,
+      "method": "hjo",
+      "length": 1024,
+      "sha256": "ca592926d78d4434693298464e11545bd2102e63a46bb6607c5209694f9c888c"
+    },
+    {
+      "type": "Example.GridGroupConfig",
+      "ordinal": 8,
+      "method": "hjz",
+      "length": 1968,
+      "sha256": "4b08d73a44387939f6e708b62cd56500fe5546e3150945a70dc6e0a49bc8e9a7"
+    },
+    {
+      "type": "Example.ll",
+      "ordinal": 5,
+      "method": "hkh",
+      "length": 976,
+      "sha256": "025ae30b8592cad9d93763531427da54b36f134ccca5fccae1fb8d7f9c660f40"
+    },
+    {
+      "type": "Example.GuestBubbleConfig",
+      "ordinal": 8,
+      "method": "hks",
+      "length": 672,
+      "sha256": "b804084402b896ff6827cb16da10470e9b4287f3a8f8e2320f5bd41e35de9807"
+    },
+    {
+      "type": "Example.lm",
+      "ordinal": 5,
+      "method": "hla",
+      "length": 976,
+      "sha256": "aab30d197ddbd6918ee8f7600b5aa8a967100d9b56824a07d1a8ce1078d3336b"
+    },
+    {
+      "type": "Example.GuestBubbleGroupConfig",
+      "ordinal": 8,
+      "method": "hll",
+      "length": 400,
+      "sha256": "11a54ca593d97c42b58c199ae499011ca653af6b22c596ac7d87382e1901d3ae"
+    },
+    {
+      "type": "Example.lo",
+      "ordinal": 5,
+      "method": "hlt",
+      "length": 976,
+      "sha256": "ac38c8f5f197cc0dc220d33dc40d37ba86ee05e76c272f4fb93237f131f5e969"
+    },
+    {
+      "type": "Example.GuestGroupConfig",
+      "ordinal": 8,
+      "method": "hme",
+      "length": 912,
+      "sha256": "bef72eb54f7ef760e8aa396891ac537a0c5e42c525c3c3d35d1a701e5efc147f"
+    },
+    {
+      "type": "Example.lp",
+      "ordinal": 5,
+      "method": "hmm",
+      "length": 976,
+      "sha256": "2ecd6acfde8584e8657460e10e1a54c8fee5095f381fea591c276bc6b11a9b92"
+    },
+    {
+      "type": "Example.HandBookConfig",
+      "ordinal": 8,
+      "method": "hmx",
+      "length": 1200,
+      "sha256": "0b849fbaa42274529868f246e4288931743667f3ce0734f5a8259105bd1e32b9"
+    },
+    {
+      "type": "Example.lq",
+      "ordinal": 5,
+      "method": "hnf",
+      "length": 976,
+      "sha256": "47bd1a9af4f2d14ace0d0a645725eafa6438f772b39403f05d9dbaf3aebe5e64"
+    },
+    {
+      "type": "Example.IllustrationConfig",
+      "ordinal": 8,
+      "method": "hnq",
+      "length": 1120,
+      "sha256": "a1286d74b2a6ab2652cbd22a36f083fbc11396565e45034155bfc6836aa24ecf"
+    },
+    {
+      "type": "Example.ls",
+      "ordinal": 5,
+      "method": "hny",
+      "length": 976,
+      "sha256": "e55952af5dfd78b08023a9dfe1fbc884a8bcfe2824026d9032e339130d836807"
+    },
+    {
+      "type": "Example.IllustrationForceConfig",
+      "ordinal": 8,
+      "method": "hoj",
+      "length": 1328,
+      "sha256": "204df5f8e7d5865603ad2a92ab15652979261984708873c9a5598134e38ea86a"
+    },
+    {
+      "type": "Example.lt",
+      "ordinal": 5,
+      "method": "hor",
+      "length": 976,
+      "sha256": "fdb528c3cd2699bddaf0ea2f098ec549bb66e8738e3d40a366f74970f5c4105f"
+    },
+    {
+      "type": "Example.ItemConfig",
+      "ordinal": 8,
+      "method": "hpc",
+      "length": 1408,
+      "sha256": "a4c87cc5cc40f967f2b24088a540c5b53f1fc753c71ae95e36420fa180e9f62e"
+    },
+    {
+      "type": "Example.lv",
+      "ordinal": 5,
+      "method": "hpk",
+      "length": 976,
+      "sha256": "fd247091816a9a87a035e8620bc8b1e78691c80dcb1e6ce5509538e3060f9ac2"
+    },
+    {
+      "type": "Example.ItemGroupConfig",
+      "ordinal": 8,
+      "method": "hpv",
+      "length": 1360,
+      "sha256": "5c8d99a8a12f3077a6b4afd8cbac959061809981354b59b019fb281f55b38129"
+    },
+    {
+      "type": "Example.ma",
+      "ordinal": 5,
+      "method": "hqd",
+      "length": 976,
+      "sha256": "154f3315a6028aeb35f07a3472800f7de573c3855936e55f4837834544091fb4"
+    },
+    {
+      "type": "Example.Language",
+      "ordinal": 8,
+      "method": "hqo",
+      "length": 720,
+      "sha256": "cd032e82583453e0df8962cdeedc164543c94f2484b2c60590b03e96bcd9f0ce"
+    },
+    {
+      "type": "Example.mc",
+      "ordinal": 5,
+      "method": "hqw",
+      "length": 976,
+      "sha256": "c950cee193c1d53150753d1d8bfcc4b09390ed7d3a996a35a218f0f142446abd"
+    },
+    {
+      "type": "Example.LanguageTalk",
+      "ordinal": 8,
+      "method": "hrh",
+      "length": 784,
+      "sha256": "19575d205945a803da5278c5a27ea5fce954d00c5886f51cd8976bd6c5411c7c"
+    },
+    {
+      "type": "Example.md",
+      "ordinal": 5,
+      "method": "hrp",
+      "length": 976,
+      "sha256": "72c847bf509c22543a5fb7830907e0337d471651455b0618ef908fdafce43a89"
+    },
+    {
+      "type": "Example.MapAreaUnlockConfig",
+      "ordinal": 8,
+      "method": "hsa",
+      "length": 2576,
+      "sha256": "edf23e128177855ae4e3107d3359e812825c9bc5af8bba2f441b07e0bdd2607c"
+    },
+    {
+      "type": "Example.me",
+      "ordinal": 5,
+      "method": "hsi",
+      "length": 976,
+      "sha256": "17842abd65e38ce1f39a6539e04e8e8bd397d14d8332f1d789d4f292dbb9b7d7"
+    },
+    {
+      "type": "Example.MapAtmosphereControlConfig",
+      "ordinal": 8,
+      "method": "hst",
+      "length": 672,
+      "sha256": "619843b49cc5824efeaabe45ee2d439d4d45e6b37823a1a2c594b33c45dcb5bc"
+    },
+    {
+      "type": "Example.mf",
+      "ordinal": 5,
+      "method": "htb",
+      "length": 976,
+      "sha256": "abbe18f41c73a52bb71f2ceaff8438f134438c18461645c65e8bef7ae9609120"
+    },
+    {
+      "type": "Example.MapConfig",
+      "ordinal": 8,
+      "method": "htm",
+      "length": 3280,
+      "sha256": "1d336666654e0cf15a8c0ef915c4d4bae042481c43edc70f9123263ec6f396d2"
+    },
+    {
+      "type": "Example.mg",
+      "ordinal": 5,
+      "method": "htu",
+      "length": 976,
+      "sha256": "a4ea428f2cd831cf98defcf946d0dac40d75748762290809c6e1d34234d6528f"
+    },
+    {
+      "type": "Example.MapShopThemeConfig",
+      "ordinal": 8,
+      "method": "hug",
+      "length": 816,
+      "sha256": "5d6347e34f06cf6e68333767ead676b55a9d05c7c0591000ad4ab056b4747bde"
+    },
+    {
+      "type": "Example.mi",
+      "ordinal": 5,
+      "method": "huo",
+      "length": 976,
+      "sha256": "454b54034891ae9f09f0cb7cac8919e0c819abc99a49ae18e39b1aa3303f586b"
+    },
+    {
+      "type": "Example.MissionConfig",
+      "ordinal": 8,
+      "method": "huz",
+      "length": 3568,
+      "sha256": "fab4666fc444d7bc36a1990f4d69c260b632e82213cacd2ede422af3a178ca45"
+    },
+    {
+      "type": "Example.mj",
+      "ordinal": 5,
+      "method": "hvh",
+      "length": 976,
+      "sha256": "5066036ccb3e45502facd4e74eefd49d9d2158b985b131fc0831b1939f406bb1"
+    },
+    {
+      "type": "Example.NPCEscrowConfig",
+      "ordinal": 8,
+      "method": "hvs",
+      "length": 2592,
+      "sha256": "73b92ba57b5bc8ca3f68515f9fef4ba6789848d8ea67ade95d2280b55668db4f"
+    },
+    {
+      "type": "Example.mn",
+      "ordinal": 5,
+      "method": "hwa",
+      "length": 976,
+      "sha256": "63d92e18261926efd536a3bf98c16744bb5e5602d8d9db45ef2070474cf3ac87"
+    },
+    {
+      "type": "Example.OrderConfig",
+      "ordinal": 8,
+      "method": "hwl",
+      "length": 2176,
+      "sha256": "43c6daa37a1617e2b1e399a39f52af60c60663a72bf7a97551576bb75fb50b2a"
+    },
+    {
+      "type": "Example.mp",
+      "ordinal": 5,
+      "method": "hwt",
+      "length": 976,
+      "sha256": "8126ec9e6aa8ec8f37c580bd9e93bdfdbf39ea18e54ad0b89599d571f5da379c"
+    },
+    {
+      "type": "Example.OrderGroupConfig",
+      "ordinal": 8,
+      "method": "hxe",
+      "length": 752,
+      "sha256": "a225ac0b3fb9d41c42e03ff1219a081c0748a080f92b766faf6426e1959d40c3"
+    },
+    {
+      "type": "Example.mr",
+      "ordinal": 5,
+      "method": "hxm",
+      "length": 976,
+      "sha256": "e13621c0ea2866978616bc6d1e7a7f5f2904d1e578d5f3abe5f4c6ee94869ef7"
+    },
+    {
+      "type": "Example.PortraitConfig",
+      "ordinal": 8,
+      "method": "hxx",
+      "length": 576,
+      "sha256": "b808b07e376274bc2bb83fdc6b80bd4866424b87548543c67a67d5d1907b5be5"
+    },
+    {
+      "type": "Example.mt",
+      "ordinal": 5,
+      "method": "hyf",
+      "length": 976,
+      "sha256": "3233e764222f79e6b80f7b74508ab638dcfa38c25ebb2b93d6af3a72de4258b6"
+    },
+    {
+      "type": "Example.PuzzleConfig",
+      "ordinal": 8,
+      "method": "hyq",
+      "length": 1120,
+      "sha256": "94f87cc292d01d5e8b0adbf33f97b62c8c2e3d261bf8acaae427244fb0a5e9eb"
+    },
+    {
+      "type": "Example.mv",
+      "ordinal": 5,
+      "method": "hyy",
+      "length": 976,
+      "sha256": "857e01b886a61294723271ecc6ad90b525eff262d00e74b36e401af57c8b5aaf"
+    },
+    {
+      "type": "Example.QTEAreaLogicTable",
+      "ordinal": 8,
+      "method": "hzj",
+      "length": 1520,
+      "sha256": "dd19920efffe34baa508390e10b6978c973f7890b7afbdb189cb01590d7acb8b"
+    },
+    {
+      "type": "Example.mx",
+      "ordinal": 5,
+      "method": "hzr",
+      "length": 976,
+      "sha256": "9f8b320b894a2fccc3c9a52dee9776956dc2b6ca002d4e718e68378de998f3af"
+    },
+    {
+      "type": "Example.QTEAreaTable",
+      "ordinal": 8,
+      "method": "iac",
+      "length": 1584,
+      "sha256": "4874ac8caa3584e59bc75d48d4ba0b1890aa25a07a0602e548ace3bba8c33cbb"
+    },
+    {
+      "type": "Example.nd",
+      "ordinal": 5,
+      "method": "iak",
+      "length": 976,
+      "sha256": "20939439ce8a665c5fe2b2b40247ebcfb4caf657d000d8848779bec7bd5c5c5c"
+    },
+    {
+      "type": "Example.QTEData",
+      "ordinal": 8,
+      "method": "iav",
+      "length": 1952,
+      "sha256": "ef29db49e80594ffa21eba82eb11d4c38b8f577bff5fdc031a94a7dae87ac332"
+    },
+    {
+      "type": "Example.ng",
+      "ordinal": 5,
+      "method": "ibd",
+      "length": 976,
+      "sha256": "2ce2c9fcd5a59d7087f0d26c43391b75904288f6ea4d39527f751cfc12fc7482"
+    },
+    {
+      "type": "Example.QTEPointerTable",
+      "ordinal": 8,
+      "method": "ibo",
+      "length": 432,
+      "sha256": "b1e06b2735c234d38f5e6c21d08352f702ce0c1b00dddc0d32fc689386f70cd4"
+    },
+    {
+      "type": "Example.nj",
+      "ordinal": 5,
+      "method": "ibw",
+      "length": 976,
+      "sha256": "5839b700a2e2c720b220c2f3020a9ea2f4c0bdc50c421e8f8b823847e2a4421d"
+    },
+    {
+      "type": "Example.RecipeConfig",
+      "ordinal": 8,
+      "method": "ich",
+      "length": 1264,
+      "sha256": "9f928d03e1bd2feeaf2284ef971a34c206bdb4fe37a0ed317d4f9674d12b0735"
+    },
+    {
+      "type": "Example.nl",
+      "ordinal": 5,
+      "method": "icp",
+      "length": 976,
+      "sha256": "ec3722be5b5b1e0081919181aadfc317d1fe44a4f0a9b1671de5d565c64fe0c1"
+    },
+    {
+      "type": "Example.RelicEffectConfig",
+      "ordinal": 8,
+      "method": "ida",
+      "length": 1616,
+      "sha256": "736bcefb9f0a2527d5d2d3cec3d4d39d6f3f7e1bbd36e0fbb2b1efb67fa5bcc3"
+    },
+    {
+      "type": "Example.nm",
+      "ordinal": 5,
+      "method": "idi",
+      "length": 976,
+      "sha256": "0c9a360730059b755b6890f8c8cdb7efa8d91968b0697f05747bda7c27788f87"
+    },
+    {
+      "type": "Example.RelicExtractConfig",
+      "ordinal": 8,
+      "method": "idt",
+      "length": 288,
+      "sha256": "a169f272ae8bed11a751aa1aae26edb9aa6ffc97ca4e8321a8396ebe6e2eacb2"
+    },
+    {
+      "type": "Example.np",
+      "ordinal": 5,
+      "method": "iec",
+      "length": 976,
+      "sha256": "9e0b1593acf8d92edc1032f713bc5d655c28f9c4f37941fb80c2bea9087d3569"
+    },
+    {
+      "type": "Example.RelicFactionConfig",
+      "ordinal": 8,
+      "method": "ien",
+      "length": 720,
+      "sha256": "36cdd419730d058321376eb55631937ab040c9928652bea15854bcf88457c5f5"
+    },
+    {
+      "type": "Example.nq",
+      "ordinal": 5,
+      "method": "iev",
+      "length": 976,
+      "sha256": "30d5ece8fb3a3c1ad75d038dae8774576bb21b8bc63e0fccdcec88093393763a"
+    },
+    {
+      "type": "Example.RelicGroupConfig",
+      "ordinal": 8,
+      "method": "ifg",
+      "length": 1040,
+      "sha256": "c9f2c6488a6a96fbf309a6d7c21ac08ce436b715064f73d2a1606517eba396d0"
+    },
+    {
+      "type": "Example.nr",
+      "ordinal": 5,
+      "method": "ifo",
+      "length": 976,
+      "sha256": "47c2d82d0acb984a44dd27e74dab73a28ad99c5180bd6ec94f255860c042d699"
+    },
+    {
+      "type": "Example.RenownLevelConfig",
+      "ordinal": 8,
+      "method": "ifz",
+      "length": 512,
+      "sha256": "e606818387760047e204ed5a4ff573bb653a8e0415b7a39e03c6a0a121320408"
+    },
+    {
+      "type": "Example.ns",
+      "ordinal": 5,
+      "method": "igh",
+      "length": 976,
+      "sha256": "0d05fce1533bd0b0768ba287b03bf28997d623d6ef2dc196f8ca8a63045ed478"
+    },
+    {
+      "type": "Example.ScheduleConfig",
+      "ordinal": 8,
+      "method": "igs",
+      "length": 1744,
+      "sha256": "649237a6de7859f2476172ba1977e50257c7b97877e3c2a449aa2e2b40d08a51"
+    },
+    {
+      "type": "Example.nt",
+      "ordinal": 5,
+      "method": "iha",
+      "length": 976,
+      "sha256": "8cc4bc97c5e233ee84b89d44b3966e8db1e4f347b20a825845631961def426f8"
+    },
+    {
+      "type": "Example.ShopBaseConfig",
+      "ordinal": 8,
+      "method": "ihl",
+      "length": 784,
+      "sha256": "ed6c7a2e1c181af0e5f4d74a0a0f393b4a5cf6d6b7783006a7f05afb09482580"
+    },
+    {
+      "type": "Example.nu",
+      "ordinal": 5,
+      "method": "iht",
+      "length": 976,
+      "sha256": "05d6a5b7c88bd82549a4df4fcc0ea7ee4f562c1ac320b71f880022b75fe54193"
+    },
+    {
+      "type": "Example.ShopItemConfig",
+      "ordinal": 8,
+      "method": "iie",
+      "length": 1264,
+      "sha256": "f70487646f48e1cdf1de32b61f916484105bb26a977504c88c688d3d9ad934c8"
+    },
+    {
+      "type": "Example.nx",
+      "ordinal": 5,
+      "method": "iim",
+      "length": 976,
+      "sha256": "96c23001090008099fd1a3a120cfa159180e707a677dd1c7f57735a3148d60dd"
+    },
+    {
+      "type": "Example.ShopRankConfig",
+      "ordinal": 8,
+      "method": "iix",
+      "length": 4832,
+      "sha256": "b05c5d9e63881e5d85a21d98cb5e91bc43b061e6b6283d69f67b949913431cfe"
+    },
+    {
+      "type": "Example.ny",
+      "ordinal": 5,
+      "method": "ijf",
+      "length": 976,
+      "sha256": "0836caea853b56740de203d542df73ec7dfe45f0d52b33708dcebdd4292cec67"
+    },
+    {
+      "type": "Example.SkillConfig",
+      "ordinal": 8,
+      "method": "ijq",
+      "length": 784,
+      "sha256": "4d125dc45f20ba6913bcb0a11edae7bd92375dd86bba831129e6e8f58b402640"
+    },
+    {
+      "type": "Example.nz",
+      "ordinal": 5,
+      "method": "ijy",
+      "length": 976,
+      "sha256": "feda2f09edde2b7d21eba488f4adb881315ca0441c3b054ce9e531136005b8ae"
+    },
+    {
+      "type": "Example.SoundConfig",
+      "ordinal": 8,
+      "method": "ikj",
+      "length": 544,
+      "sha256": "2d8f08724db03daf37466ad32ef0191e8ba410a2580c1d869d6303c7b95d0d81"
+    },
+    {
+      "type": "Example.ob",
+      "ordinal": 5,
+      "method": "ikr",
+      "length": 976,
+      "sha256": "0c40bf26aa2a0a0803253fd035d7bfc8c1a62a6f70dc348fc5d995234e473e92"
+    },
+    {
+      "type": "Example.StaffBackpackConfig",
+      "ordinal": 8,
+      "method": "ilc",
+      "length": 320,
+      "sha256": "8381a82eae5da779751f62d779b56eeb7c3c6fc6b9bd7af0b7b8c0efc8c4df71"
+    },
+    {
+      "type": "Example.oc",
+      "ordinal": 5,
+      "method": "ilk",
+      "length": 976,
+      "sha256": "27fc95b16e8e6e00755b7b4ffbd715c5982bac4c2cc998313228796c2af10d74"
+    },
+    {
+      "type": "Example.StaffConfig",
+      "ordinal": 8,
+      "method": "ilv",
+      "length": 3072,
+      "sha256": "a5216ef7cb75fb9409e7113a4a1a1406132d1d93fbdca2975b39f09b58ecdca9"
+    },
+    {
+      "type": "Example.od",
+      "ordinal": 5,
+      "method": "imd",
+      "length": 976,
+      "sha256": "892b00e802f53c9f5c70eb2f9f42a172cdfc3721856fe514d1706b3694383e57"
+    },
+    {
+      "type": "Example.StaffSettingConfig",
+      "ordinal": 8,
+      "method": "imp",
+      "length": 1984,
+      "sha256": "8e59f084abf954864e387cd01e01c5151a02ff7203c8281e17293e64de914b9c"
+    },
+    {
+      "type": "Example.og",
+      "ordinal": 5,
+      "method": "imx",
+      "length": 976,
+      "sha256": "dc66eef54b7dbdc73710ae5fe9240c6b423c1f24b626a865ce281a09eb721c9f"
+    },
+    {
+      "type": "Example.StaffWorkConfig",
+      "ordinal": 8,
+      "method": "ini",
+      "length": 704,
+      "sha256": "b60507d0aa129df059ba6bd8b5e4706813ec11c7ee64ddf2318af2b4f7b887d2"
+    },
+    {
+      "type": "Example.oi",
+      "ordinal": 5,
+      "method": "inq",
+      "length": 976,
+      "sha256": "1d0ab2802722c4e703972a631b798543a00fbd70432be88c6cdea78a7a56be82"
+    },
+    {
+      "type": "Example.SubtitlesConfig",
+      "ordinal": 8,
+      "method": "iob",
+      "length": 368,
+      "sha256": "472868ffec481c8ef58277c9a320a62f07fa56e337c3d54ce6868294c6e373d4"
+    },
+    {
+      "type": "Example.ok",
+      "ordinal": 5,
+      "method": "ioj",
+      "length": 976,
+      "sha256": "4d7667b5058f82f00d3dd952090675a5c564de7bfb65925ae940e816f4e23596"
+    },
+    {
+      "type": "Example.ToolUpgradeConfig",
+      "ordinal": 8,
+      "method": "iou",
+      "length": 1120,
+      "sha256": "7394a34524752530eb26a40bf10ad4aae5feb8ded3cfa832e2c66312a2a21393"
+    },
+    {
+      "type": "Example.ol",
+      "ordinal": 5,
+      "method": "ipc",
+      "length": 976,
+      "sha256": "ee551ead4e60db34ac4b4131535eaf593843a0af8edb62b358644f6e43180f6f"
+    },
+    {
+      "type": "Example.UnitConfig",
+      "ordinal": 8,
+      "method": "ipn",
+      "length": 2576,
+      "sha256": "d3056c137982951d9b560e7fe4acf202d4af27855fccf98fbb8ea3fd41f5aa3b"
+    },
+    {
+      "type": "Example.on",
+      "ordinal": 5,
+      "method": "ipv",
+      "length": 976,
+      "sha256": "d989482e5815f78ac525483eccc9bf8837cc4e28bd2fd364dbc730952689fcc9"
+    },
+    {
+      "type": "Example.VortexConfig",
+      "ordinal": 8,
+      "method": "iqg",
+      "length": 784,
+      "sha256": "597cef203056eb595ba5757af4344b6e842cdd1996f24a3a73f37c66ba257f14"
+    },
+    {
+      "type": "Example.op",
+      "ordinal": 5,
+      "method": "iqo",
+      "length": 976,
+      "sha256": "071b68bdaacbae865bce6ba10b98497c5a971b55ad0bd1ada99213955bca9ee9"
+    }
+  ]
+}
