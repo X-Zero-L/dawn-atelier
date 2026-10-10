@@ -1,13 +1,12 @@
 """Inspect, export, or edit explicitly selected fields in a ThePiper save."""
 
 import argparse
-from datetime import datetime
 import hashlib
 import json
 import struct
 from pathlib import Path
 
-from save_codec import ROOT, Schema
+from save_codec import Schema
 from app_config import BACKUP_ROOT
 
 
@@ -16,26 +15,8 @@ def digest(data):
 
 
 def write_modified(source, original, modified, destination):
-    if source.read_bytes() != original:
-        raise RuntimeError('Source save changed since it was opened; reopen it first')
-    backups = BACKUP_ROOT
-    backups.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now().strftime('%Y%m%d-%H%M%S-%f')
-    backup = backups / f'{source.name}.{stamp}.bak'
-    with backup.open('xb') as output:
-        output.write(original)
-    if destination.exists() and destination.resolve() != source.resolve():
-        raise FileExistsError('Output file exists; choose another filename')
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    temporary = destination.with_name(destination.name + '.' + stamp + '.tmp')
-    with temporary.open('xb') as output:
-        output.write(modified)
-    if temporary.read_bytes() != modified:
-        raise RuntimeError('Staged file readback mismatch')
-    if source.read_bytes() != original:
-        raise RuntimeError('Source changed while staging the edit; staged copy retained')
-    temporary.replace(destination)
-    return backup
+    from atelier.transaction import write_modified as write_transaction
+    return write_transaction(source, original, modified, destination, BACKUP_ROOT)
 
 
 def main():

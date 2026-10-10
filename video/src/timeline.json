@@ -3,7 +3,7 @@
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "durationInFrames": 1620,
+  "durationInFrames": 1770,
   "posterFrame": 225,
   "sampleFrames": {
     "intro": 84,
@@ -20,7 +20,8 @@
     "workshop": 1200,
     "alchemyUnlocks": 1270,
     "review": 1410,
-    "outro": 1560
+    "adapters": 1560,
+    "outro": 1710
   },
   "chapters": [
     {"key": "intro", "from": 0, "duration": 150},
@@ -33,6 +34,7 @@
     {"key": "tools", "from": 1035, "duration": 105},
     {"key": "progression", "from": 1125, "duration": 195},
     {"key": "review", "from": 1305, "duration": 195},
-    {"key": "outro", "from": 1485, "duration": 135}
+    {"key": "adapters", "from": 1485, "duration": 165},
+    {"key": "outro", "from": 1635, "duration": 135}
   ]
 }

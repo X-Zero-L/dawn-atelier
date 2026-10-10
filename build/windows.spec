@@ -20,6 +20,8 @@ RESOURCE_FILES = [
     "web/progression-ui.js",
     "web/progression.css",
     "web/save-refresh.js",
+    "web/adapters-ui.js",
+    "web/adapters.css",
     "web/brand/emblem.svg",
     "web/brand/botanical.svg",
     "desktop/index.html",
@@ -34,9 +36,13 @@ RESOURCE_FILES = [
     "schemas/thepiper-2026-09-29/save_schema.json",
     "schemas/thepiper-2026-09-29/config_schema.json",
     "schemas/thepiper-2026-09-29/enums.json",
+    "schemas/thepiper-2026-10-08/save_schema.json",
+    "schemas/thepiper-2026-10-08/config_schema.json",
+    "schemas/thepiper-2026-10-08/enums.json",
     "schemas/compatibility/2026-09-25-1016.json",
     "schemas/compatibility/2026-09-28-1042.json",
     "schemas/compatibility/2026-09-29-717.json",
+    "schemas/compatibility/2026-10-08-1009.json",
     "version.json",
     "NOTICE.md",
     "build/assets/dawn-atelier.ico",
@@ -61,6 +67,7 @@ hiddenimports = [
     "dump_currency", "inspect_meta", "webview.platforms.winforms",
     "webview.platforms.edgechromium",
     "app_update", "update_packages", "updates_install",
+    "atelier", "atelier.cli", "atelier.reference", "workbench", "piper_adapter", "piper_editor",
 ]
 
 analysis = Analysis(

@@ -31,6 +31,7 @@ PRIVATE_EXTENSIONS = {".bundle", ".bytes", ".ress", ".save", ".bak"}
 WEB_FILES = {
     "index.html", "app.js", "presets-ui.js", "style.css", "presets.css", "progression-ui.js", "progression.css", "save-refresh.js",
     "brand/emblem.svg", "brand/botanical.svg",
+    "adapters-ui.js", "adapters.css",
 }
 DESKTOP_FILES = {"index.html", "launcher.css", "launcher.js"}
 
@@ -69,6 +70,7 @@ def ensure_owned_paths():
 
 def source_files():
     files = list(ROOT.glob("*.py"))
+    files.extend((ROOT / "atelier").rglob("*.py"))
     files.extend((ROOT / "research").rglob("*.py"))
     files.extend((ROOT / "schemas").rglob("*.json"))
     for directory in ("build",):
@@ -228,6 +230,10 @@ def inspect_payload(directory):
         "_internal/schemas/thepiper-2026-09-29/config_schema.json",
         "_internal/schemas/thepiper-2026-09-29/enums.json",
         "_internal/schemas/compatibility/2026-09-29-717.json",
+        "_internal/schemas/thepiper-2026-10-08/save_schema.json",
+        "_internal/schemas/thepiper-2026-10-08/config_schema.json",
+        "_internal/schemas/thepiper-2026-10-08/enums.json",
+        "_internal/schemas/compatibility/2026-10-08-1009.json",
         "_internal/build/assets/dawn-atelier.ico",
         "_internal/webview/lib/Microsoft.Web.WebView2.Core.dll",
         "_internal/webview/lib/Microsoft.Web.WebView2.WinForms.dll",

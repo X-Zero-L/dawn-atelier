@@ -12,6 +12,10 @@ app_paths.py         程序资源与用户数据目录
 desktop.py           独立桌面窗口与冻结任务入口
 desktop_service.py   资源准备、启动状态与服务生命周期
 web_server.py        本地 API、预览、备份与应用
+atelier/             与游戏无关的快照、计划复核、备份、写入与 CLI
+workbench.py         注册实际游戏与合成参考适配器的命令行入口
+piper_adapter.py     《黎明门前的吹笛人》的通用接口适配
+piper_editor.py      当前游戏的字段展示、数值转换与反向保留校验
 save_codec.py        具名字段解析与局部字节替换
 presets.py           预设操作和目标计算
 inventory.py         物品补全、种子关联与可逆新增
@@ -32,6 +36,8 @@ docs/images/         文档截图与封面
 ```
 
 数据流、写入顺序和请求限制见 [架构说明](architecture.md)。字段编码、炼金沉淀物属性映射与联动摘要见 [存档结构说明](save-format.md)。
+
+接入其他游戏见 [多游戏框架开发指南](framework.md)。`python workbench.py list` 列出项目适配器；`python -m atelier` 可独立运行合成示例，不需要安装游戏。领域术语见 [CONTEXT](../CONTEXT.md)，接口选择见 [ADR-0001](adr/0001-game-adapters.md)。
 
 炼金解锁与工坊升级的条件、游戏原生调用链和保留不变量见 [成长准备实现依据](progression-implementation.md)。专项检查可运行 `python -m unittest discover -s tests -v`，只操作临时合成存档。
 

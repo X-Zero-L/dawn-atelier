@@ -101,7 +101,7 @@ async function openPage(route, width = 1600, height = 1200, mobile = false) {
     return page;
   }
   await client.send('Page.navigate', {url: base + '/#' + route});
-  const selector = route === 'presets' ? '.preset-card' : route === 'saves' ? '.category-list' : route === 'items' ? '.item-card' : '.hero';
+  const selector = route === 'presets' ? '.preset-card' : route === 'saves' ? '.category-list' : route === 'items' ? '.item-card' : route === 'adapters' ? '.adapter-current' : '.hero';
   await waitFor(page, `!!document.querySelector('${selector}') && !!document.querySelector('.demo-banner')`);
   return page;
 }
@@ -160,6 +160,13 @@ try {
   const overview = await openPage('home');
   await capture(overview, 'overview');
   await closePage(overview);
+
+  const adapters = await openPage('adapters', 1600, 1440);
+  await capture(adapters, 'adapters');
+  await closePage(adapters);
+  const adaptersMobile = await openPage('adapters', 430, 1900, true);
+  await capture(adaptersMobile, 'adapters-mobile');
+  await closePage(adaptersMobile);
 
   const presets = await openPage('presets', 1600, 1930);
   await capture(presets, 'presets');

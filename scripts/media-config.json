@@ -24,7 +24,9 @@
     "progression-preview",
     "super-supply",
     "super-supply-preview",
-    "super-supply-mobile"
+    "super-supply-mobile",
+    "adapters",
+    "adapters-mobile"
   ],
   "snapshotVersion": 1,
   "mediaFiles": [

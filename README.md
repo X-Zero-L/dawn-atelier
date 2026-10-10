@@ -82,7 +82,7 @@
 
 **Windows 10 / 11 64 位，无需安装 Python。**
 
-1. 从 [最新版本](https://github.com/X-Zero-L/dawn-atelier/releases/latest) 下载 **`DawnAtelier-2.6.0-windows-x64.zip`**。
+1. 从 [最新版本](https://github.com/X-Zero-L/dawn-atelier/releases/latest) 下载 **`DawnAtelier-2.7.0-windows-x64.zip`**。
 2. 完整解压，双击 **`DawnAtelier.exe`**。
 3. 确认自动找到的游戏目录，或点击 **选择游戏**。
 4. 点击 **准备并打开工坊**。首次准备完成后，后续可直接进入。
@@ -93,7 +93,7 @@
 
 ![桌面启动器](docs/images/desktop.png)
 
-已核对游戏资源版本 **`2026-09-29-717`**、`2026-09-28-1042` 和 `2026-09-25-1016`。补丁日期变化不会直接阻止使用，程序会检查存档结构、序列化代码和资源配置。详细信息见 [兼容性说明](docs/compatibility.md)。
+已核对游戏资源版本 **`2026-10-08-1009`**、`2026-09-29-717`、`2026-09-28-1042` 和 `2026-09-25-1016`。补丁日期变化不会直接阻止使用，程序会检查存档结构、序列化代码和资源配置。详细信息见 [兼容性说明](docs/compatibility.md)。
 
 ### 游戏更新后自动准备
 
@@ -204,6 +204,14 @@ v2.5.0 及更早版本需先手动下载一次新版一键包。完整解压并�
 [![黎明工坊操作演示](docs/images/demo.gif)](https://github.com/X-Zero-L/dawn-atelier/releases/latest/download/dawn-atelier-demo.mp4)
 
 **[观看完整演示](https://github.com/X-Zero-L/dawn-atelier/releases/latest/download/dawn-atelier-demo.mp4)**，了解超级补给、铜铁金锭补齐、炼金沉淀物调整，以及保存前的修改预览。
+
+## 游戏与扩展
+
+从侧栏打开 **游戏与扩展**，查看当前游戏的可用功能。当前完整支持《黎明门前的吹笛人》，包括 10 月 8 日资源版本；保存时会复核刚刚预览的修改方案，游戏另存新进度后需要重新读取。
+
+![游戏与扩展](docs/images/adapters.png)
+
+想为另一款游戏制作工具，可以复用独立的存档框架、命令行和适配器骨架。项目提供可运行的 JSON 合成示例，演示如何读取、预览和导出。**该示例不代表已支持另一款实际游戏。** 接入方式见 [多游戏框架开发指南](docs/framework.md)。
 
 ## 常见问题
 

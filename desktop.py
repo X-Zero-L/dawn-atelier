@@ -48,9 +48,13 @@ def internal_task(name, arguments):
         from extract_web_art import main
     elif name == 'update':
         from updates_install import main
+    elif name == 'workbench':
+        from workbench import main
     else:
         raise SystemExit('Unknown internal task.')
-    main()
+    result = main()
+    if isinstance(result, int):
+        raise SystemExit(result)
 
 
 def has_webview_runtime():

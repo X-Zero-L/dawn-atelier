@@ -6,7 +6,7 @@
   const gamePath = element('game-path');
   const frame = element('workbench-frame');
   const state = {
-    version: '2.6.0', game_dir: '', detected: false, prepared: false,
+    version: '2.7.0', game_dir: '', detected: false, prepared: false,
     data_dir: '', busy: false,
     progress: {percent: 0, stage: 'idle', message: '选择游戏，开始准备', detail: ''},
     error: '', mode: null, active_url: null, last_prepared: null, auto_prepare: false, game_update: null, app_update: null,
@@ -141,7 +141,7 @@
     document.body.classList.toggle('has-active-workbench', active);
     element('connection-dot').className = `status-dot${connected ? '' : api ? ' disconnected' : ' connecting'}`;
     setText('connection-label', showcase ? '本地桌面应用' : connected ? '本地桌面服务已连接' : api ? '连接中断，正在重试' : '正在连接桌面服务');
-    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.6.0'}`; });
+    document.querySelectorAll('[data-version]').forEach(node => { node.textContent = `v${state.version || '2.7.0'}`; });
 
     if (!pathDirty && document.activeElement !== gamePath) gamePath.value = state.game_dir || '';
     gamePath.disabled = busy || showcase || !api;
@@ -446,11 +446,11 @@
           document.body.classList.add('showcase');
           if (scene === 'preparing') autoLaunchIntent = normalizePath('D:\\Games\\The Piper Of Dawn');
           acceptState({
-            version: '2.6.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
+            version: '2.7.0', game_dir: 'D:\\Games\\The Piper Of Dawn', detected: true,
             prepared: false, data_dir: '', busy: ['preparing', 'updating'].includes(scene), auto_prepare: scene === 'updating',
             app_update: scene === 'app-update'
-              ? {phase: 'downloading', version: '2.6.1', percent: 68, message: '正在下载并校验新版…', automatic: true, supported: true}
-              : {phase: 'current', version: '2.6.0', message: '已是最新版本', automatic: true, supported: true},
+              ? {phase: 'downloading', version: '2.7.1', percent: 68, message: '正在下载并校验新版…', automatic: true, supported: true}
+              : {phase: 'current', version: '2.7.0', message: '已是最新版本', automatic: true, supported: true},
             game_update: scene === 'updating' ? {phase: 'preparing', message: '检测到游戏更新，正在自动准备资料。', token: ''} : null,
             progress: scene === 'updating'
               ? {percent: 68, stage: 'catalogue', message: '正在更新物品、炼金与角色资料', detail: '游戏更新已检测，准备完成后会自动打开工坊。'}

@@ -2,12 +2,10 @@
 
 import argparse
 from datetime import datetime
-from decimal import Decimal, InvalidOperation
 from functools import lru_cache
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-import math
 import mimetypes
 import os
 from pathlib import Path
@@ -15,13 +13,14 @@ import re
 import secrets
 import struct
 import threading
-import time
 from urllib.parse import parse_qs, unquote, urlparse
 import webbrowser
 
-from piper_save import write_modified
-from save_codec import ROOT, Schema
-from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_ROOT, SCHEMA_ROOT, DEMO, GAME_DIR
+from atelier import Editor, Snapshot
+from piper_adapter import ThePiperAdapter
+from save_codec import ROOT
+from app_paths import app_version
+from app_config import DATA_ROOT, ASSET_ROOT, SAVE_DIR, BACKUP_ROOT, MODIFIED_ROOT, DEMO, GAME_DIR
 from compatibility import require_prepared, require_unchanged_install
 
 COMPATIBILITY = None if DEMO else require_prepared(GAME_DIR, DATA_ROOT)
@@ -36,165 +35,12 @@ import game_runtime
 import progression
 
 WEB = ROOT / 'web'
-SCHEMA = Schema()
 TOKEN = secrets.token_urlsafe(32)
 WRITE_LOCK = threading.Lock()
-GROUPS = [
-    ('common', '常用数值', '', 'star'), ('inventory', '背包物品', 'BagSaveData', 'bag'),
-    ('alchemy', '炼金与天赋', 'AlchemySaveData', 'flask'), ('favor', 'NPC 与好感', 'AllFavorData', 'heart'),
-    ('workshop', '工坊成长', progression.SHOP_PATH, 'layers'),
-    ('staff', '员工与工作站', 'AllStaffSaveData', 'users'), ('tools', '工具与钓鱼', 'AllOprToolSaveData', 'tool'),
-    ('farm', '作物与建筑', 'AllMapSaveData', 'sprout'), ('genes', '种子与基因', 'AllHybridData', 'dna'),
-    ('all', '全部字段', '', 'code'),
-]
-LABELS = {'Count':'数量','TalentPoint':'天赋点','Level':'等级','Exp':'经验','favorValue':'好感值',
-          'CurrentSan':'当前 SAN','MaxSan':'最大 SAN','SanCostPerTick':'SAN 消耗','CurrentDurability':'当前耐久',
-          'GrowthTime':'生长时间','receiveGiftsToday':'今日收礼次数','ConfigId':'物品 ID','Name':'名称',
-          'Value':'原始值','IsUnlocked':'已解锁','GameTimeStamp':'游戏时间','LastTimeHour':'上次记录小时',
-          'CurrentWorkID':'当前工作','npcID':'角色 ID','SeedLogicID':'种子记录 ID','Timestamp':'时间记录',
-          'ItemLogicID':'物品记录 ID','OriginalSeedItemID':'原始种子 ID','State':'当前状态',
-          'CurrentLoopRound':'当前轮数','CompletedLoopCount':'已完成轮数','SelectedIndex':'当前选择',
-          'LogicID':'记录 ID','UnitConfigID':'角色配置','StaffConfigID':'员工配置','AttributeId':'属性 ID',
-          'LastGetExp':'上次获得经验','LastLevel':'上次等级','RedPityNoRedCount':'未出红保底次数',
-          'ID':'编号','UnitLogicID':'单位记录 ID','CurrentSettingID':'工作设置','CurrentWorkBuildingID':'工作建筑',
-          'BothMapDuty':'跨地图工作','CustomWork':'自定义工作','MainWorkMapID':'工作地图'}
-
-
-@lru_cache(maxsize=20)
-def read_json(relative):
-    path = DATA_ROOT / relative.removeprefix('unpacked/')
-    if relative.startswith('unpacked/schema/') and not path.exists():
-        path = SCHEMA_ROOT / Path(relative).name
-    return json.loads(path.read_text(encoding='utf-8'))
-
-
-ITEMS = read_json('unpacked/configs/物品目录.json')
-ITEM_BY_ID = {item['id']: item for item in ITEMS}
-ITEM_NAMES = {item['id']: item['name'] for item in ITEMS}
-FRIENDLY = {table: {row['id']: row for row in rows} for table, rows in read_json('unpacked/configs/分类目录.json').items()}
-FRIENDLY['ItemConfig'] = ITEM_BY_ID
-NPC_NAMES = {x['id']: x['name'] for x in read_json('unpacked/configs/分类目录.json').get('UnitConfig', [])}
-ITEM_ENUM = next((x for x in read_json('unpacked/schema/enums.json')['types'] if x['name'] == 'Example.lz'), {})
-ITEM_TYPES = {x['value']: x['name'] for x in ITEM_ENUM.get('values', [])}
-
-
-def item_icon(ident):
-    reference = ITEM_BY_ID.get(ident, {}).get('raw', {}).get('bnov', '')
-    match = re.search(r'Icon_(\d+)$', reference)
-    icon_id = match[1] if match else str(ident)
-    return f'/assets/items/{icon_id}.webp' if (ASSET_ROOT / 'items' / f'{icon_id}.webp').exists() else None
-
-
-def save_path(name):
-    if not re.fullmatch(r'(?:AUTO_)?SAVE_PIPER_\d+\.bytes', name):
-        raise ValueError('请选择有效的游戏存档。')
-    path = SAVE_DIR / name
-    if not path.is_file():
-        raise ValueError('该存档已不存在，请刷新列表。')
-    return path
-
-
-def save_title(name):
-    slot = int(re.search(r'_(\d+)\.bytes$', name)[1]) + 1
-    return ('演示存档' if DEMO else '自动存档' if name.startswith('AUTO_') else '手动存档') + f' {slot:02d}'
-
-
-def value_text(value):
-    if isinstance(value, bool):
-        return 'true' if value else 'false'
-    if isinstance(value, float):
-        return format(value, '.8g')
-    return str(value)
-
-
-def describe_save(name, include_fields=False, snapshot=None):
-    path = save_path(name)
-    data = path.read_bytes() if snapshot is None else snapshot
-    decoded = SCHEMA.decode(data, 'SaveLoadSystem.GameSaveData')
-    gold = next((p['Value'] for p in decoded.get('AllAttributeSaveData', {}).get('AttributeParams', []) if p.get('AttributeId') == 901), 0)
-    rows = list(SCHEMA.leaves(data)) if include_fields else []
-    values = {r['path']: r['value'] for r in rows}
-    sediment_path = presets.sediment_field(values)
-    sediment = next((p['Value'] for p in decoded.get('AllAttributeSaveData', {}).get('AttributeParams', []) if p.get('AttributeId') == 902), None)
-    fields = []
-    for row in rows:
-        route = row['path']
-        parent, _, short = route.rpartition('.')
-        title = LABELS.get(short, short)
-        detail = ' / '.join(route.split('.')[:-1])
-        scale = 1
-        offset = 0
-        icon = None
-        common = False
-        readonly = False
-        readonly_reason = ''
-        group = next((g[0] for g in GROUPS if g[2] and route.startswith(g[2])), 'all')
-        if route.startswith('BagSaveData.ItemDataList['):
-            ident = values.get(parent + '.ConfigId')
-            detail = ITEM_NAMES.get(ident, f'物品 {ident}')
-            icon = item_icon(ident)
-            common = short == 'Count'
-        elif route.startswith('AllFavorData.allNPCData['):
-            ident = values.get(parent + '.npcID')
-            detail = NPC_NAMES.get(ident, f'角色 {ident}')
-            common = short == 'favorValue'
-        elif route.startswith('AllStaffSaveData.StaffList['):
-            detail = values.get(parent + '.Name', '员工')
-            common = short in ('CurrentSan', 'MaxSan')
-        elif route.startswith('AllAttributeSaveData.AttributeParams[') and short == 'Value':
-            ident = values.get(parent + '.AttributeId')
-            title = '金币' if ident == 901 else '炼金沉淀物' if ident == 902 else f'属性 {ident}'
-            scale = 1000 if ident == 901 else 1
-            detail = '当前持有' if ident == 901 else '炼金可用数量' if ident == 902 else f'属性 {ident}'
-            if ident == 902:
-                group = 'alchemy'
-            common = True
-        elif route.startswith('AlchemySaveData.'):
-            detail = '炼金成长'
-            common = short in ('TalentPoint', 'Exp', 'Level')
-            if route.startswith(presets.SEDIMENT_VALUE_PREFIX):
-                title, detail, readonly = '沉淀总量摘要', '随炼金沉淀物总量同步', True
-            elif route.startswith(presets.SEDIMENT_COUNT_PREFIX):
-                title, detail, readonly = '沉淀摘要条目数', '当前游戏版本固定写入 1', True
-            elif short == 'Level' or any(route.startswith('AlchemySaveData.' + member) for member in
-                                         ('UnlockTalentList[', 'UnlockBuilding', 'ActiveStoryTalentList[', 'TalentAbilityEffectList[')):
-                readonly = True
-                readonly_reason = '炼金等级与解锁状态由游戏原生解锁流程维护，请使用“炼金解锁准备”补齐条件。'
-        elif route.startswith(progression.SHOP_PATH + '.'):
-            title = {'CurrentRank': '工坊等级', 'IncomeMetrics': '累计营业额', 'BuildingMetrics': '建筑价值',
-                     'AsetheticMetrics': '美观度', 'FavorabilityMetrics': '总好感快照', 'CurrentIncome': '今日营业额'}.get(short, title)
-            detail = '工坊成长'
-            if short in ('IncomeMetrics', 'CurrentIncome', 'BuildingMetrics', 'AsetheticMetrics'):
-                scale = 1000
-            if short in ('CurrentRank', 'BuildingMetrics', 'AsetheticMetrics', 'FavorabilityMetrics') or '.Unlock' in route:
-                readonly = True
-                readonly_reason = '等级和建筑、配方解锁由游戏升级流程维护；建筑与美观按实际布置重新计算。请使用“工坊升级准备”。'
-        elif route.startswith('AllOprToolSaveData.OprToolDataList['):
-            tool_id = values.get(parent+'.ID')
-            detail = presets.TOOL_NAMES.get(tool_id,'工具占位记录')
-            if short in ('Level','SelectedIndex') and tool_id in presets.TOOL_NAMES:
-                offset=1
-                title='工具等级' if short=='Level' else '使用范围档位'
-        display = value_text(row['value'])
-        if scale != 1:
-            display = format(Decimal(row['value']) / scale, 'f').rstrip('0').rstrip('.') if row['value'] % scale else str(row['value'] // scale)
-        elif offset:
-            display = str(row['value']+offset)
-        fields.append({'path': route, 'label': title, 'detail': detail, 'value': display,
-                       'raw_value': value_text(row['value']), 'type': row['type'], 'kind': row['kind'],
-                       'group': group, 'common': common, 'icon': icon, 'scale': scale,'offset':offset,
-                       'readonly':readonly,'readonly_reason':readonly_reason,'min':0 if route==sediment_path else None,
-                       'max':presets.SEDIMENT_MAX if route==sediment_path else None})
-    return {'name': name, 'title': save_title(name), 'kind': 'auto' if name.startswith('AUTO_') else 'manual',
-            'modified': datetime.fromtimestamp(path.stat().st_mtime).isoformat(timespec='seconds'),
-            'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
-            'gold': format(Decimal(gold) / 1000, 'f'), 'talent': decoded.get('AlchemySaveData', {}).get('TalentPoint', 0),
-            'level': decoded.get('AlchemySaveData', {}).get('Level', 0),
-            'sediment': str(sediment) if sediment is not None else None,
-            'sediment_path': sediment_path,
-            'inventory': len(decoded.get('BagSaveData', {}).get('ItemDataList', [])),
-            'field_count': len(fields), 'fields': fields,
-            'progression': progression.overview(data) if include_fields else None}
+from piper_editor import (GROUPS, SCHEMA as SCHEMA, ITEMS, FRIENDLY, ITEM_TYPES,
+                          read_json, item_icon, save_path, save_title, describe_save, transform_save)
+ADAPTER = ThePiperAdapter()
+EDITOR = Editor(ADAPTER, BACKUP_ROOT)
 
 
 def saved_games():
@@ -257,103 +103,27 @@ def edit_save(body, export=False, apply=False):
     check_installation()
     name = body.get('save', '')
     path = save_path(name)
-    original = path.read_bytes()
-    if hashlib.sha256(original).hexdigest() != body.get('sha256'):
+    snapshot = Snapshot.capture(path)
+    if snapshot.sha256 != body.get('sha256'):
         raise ValueError('存档在游戏中发生了变化。请重新载入后再修改，避免覆盖新进度。')
-    requested = body.get('edits', [])
-    if not isinstance(requested, list) or not 1 <= len(requested) <= 1000:
-        raise ValueError('请选择 1 至 1000 项修改。')
-    original_fields = {f['path']: f for f in SCHEMA.leaves(original)}
-    original_values = {route: field['value'] for route, field in original_fields.items()}
-    sediment_path = presets.sediment_field(original_values)
-    descriptions = {f['path']: f for f in describe_save(name, True, original)['fields']}
-    modified = original
-    changes = []
-    additions = []
-    seen = set()
-    for requested_edit in requested:
-        route = requested_edit.get('path')
-        new_item_id=inventory.parse_virtual_path(route)
-        if new_item_id is not None:
-            if route in seen:
-                raise ValueError('新增列表中包含重复物品。')
-            seen.add(route)
-            additions.append(requested_edit)
-            continue
-        if route not in original_fields or route in seen:
-            raise ValueError('修改清单包含重复或未识别的字段。')
-        seen.add(route)
-        field = original_fields[route]
-        info = descriptions[route]
-        if info.get('readonly'):
-            raise ValueError(info.get('readonly_reason') or '沉淀摘要由总量自动同步，请修改“炼金沉淀物”数量。')
-        text = requested_edit.get('value')
-        if field['type'] == 'bool':
-            if not (isinstance(text, bool) or isinstance(text, str) and text in ('true', 'false')):
-                raise ValueError('布尔值必须为 true 或 false。')
-            value = text is True or text == 'true'
-        elif field['type'] == 'string':
-            if not isinstance(text, str) or len(text) > 8192:
-                raise ValueError('文字长度不符合要求。')
-            value = text
-        elif field['type'] in ('float', 'double'):
-            value = float(text)
-            if not math.isfinite(value):
-                raise ValueError('请输入有限的数字。')
-            if field['type'] == 'float':
-                value = struct.unpack('<f', struct.pack('<f', value))[0]
-        else:
-            number = (Decimal(str(text))-info.get('offset',0)) * info['scale']
-            if not number.is_finite() or number != number.to_integral_value():
-                raise ValueError(f'{info["label"]} 的小数位数不符合要求。')
-            value = int(number)
-            if info['scale'] == 1000 and not 0 <= value <= 999999999000:
-                raise ValueError('金币必须介于 0 和 999999999 之间。')
-            if route == sediment_path and not 0 <= value <= presets.SEDIMENT_MAX:
-                raise ValueError(f'炼金沉淀物必须为 0 至 {presets.SEDIMENT_MAX} 的整数。')
-        modified = SCHEMA.edit(modified, route, value)
-        changes.append({'path': route, 'label': info['label'], 'detail': info['detail'],
-                        'before': info['value'], 'after': value_text(text), 'raw_before': field['value'], 'raw_after': value})
-    sediment_change = next((change for change in changes if change['path'] == sediment_path), None)
-    synchronized = []
-    if sediment_change:
-        for route, value in presets.sediment_summaries(original_values, sediment_change['raw_after']).items():
-            if original_values[route] == value:
-                continue
-            info = descriptions[route]
-            modified = SCHEMA.edit(modified, route, value)
-            synchronized.append(route)
-            changes.append({'path':route,'label':info['label'],'detail':'随炼金沉淀物自动同步',
-                            'before':info['value'],'after':str(value),'raw_before':original_values[route],
-                            'raw_after':value,'automatic':True})
-    modified,inventory_undo,added_records=inventory.append_items(modified,additions)
-    parsed = {f['path']: f['value'] for f in SCHEMA.leaves(modified)}
-    reverted = inventory.undo_additions(modified,inventory_undo)
-    for change in reversed(changes):
-        if parsed[change['path']] != change['raw_after']:
-            raise ValueError('修改后的数值核对未通过。')
-        reverted = SCHEMA.edit(reverted, change['path'], change['raw_before'])
-    if reverted != original:
-        raise ValueError('未修改字段的字节核对未通过，未写入任何存档。')
-    for record in added_records:
-        ident=record['ConfigId']
-        changes.append({'path':inventory.virtual_path(ident),'label':'新增物品',
-                        'detail':ITEM_NAMES.get(ident,str(ident)),
-                        'before':'未拥有','after':str(record['Count']),'operation':'add_item'})
-    response = {'changes': [{k: v for k, v in change.items() if not k.startswith('raw_')} for change in changes],
-                'count': len(changes), 'bytes': len(modified), 'original_preserved': True,
-                'synchronized_fields':synchronized,'new_items':len(added_records)}
+    operations = body.get('edits', [])
+    plan = EDITOR.preview(snapshot, operations)
+    _, response = transform_save(snapshot.data, operations)
+    response.update(plan_id=plan.plan_id, adapter_id=ADAPTER.descriptor.id)
     if export or apply:
+        if body.get('plan_id') != plan.plan_id:
+            raise ValueError('修改方案已变化或尚未预览，请重新查看修改清单后再保存。')
         stamp = datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         destination = path if apply else MODIFIED_ROOT / f'{path.stem}-{stamp}.bytes'
         with WRITE_LOCK:
             check_installation()
-            if apply and (DEMO or not game_runtime.status(fresh=True)['can_apply']):
-                raise ValueError('请先退出 ThePiper，再直接应用。游戏运行时可以导出副本。')
-            backup = write_modified(path, original, modified, destination)
-            report = {'source': name, 'output': destination.name, 'backup': backup.name, 'mode':'apply' if apply else 'export', 'created': datetime.now().isoformat(timespec='seconds'), **response}
-            (BACKUP_ROOT / (backup.name + '.json')).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-        response.update(filename=destination.name, download=None if apply else f'/downloads/{destination.name}', backup=backup.name, mode=report['mode'])
+            report = EDITOR.commit(plan, destination, approval=body['plan_id'], mode='apply' if apply else 'export')
+        response.update(filename=destination.name, download=None if apply else f'/downloads/{destination.name}',
+                        backup=Path(report['backup']).name, mode=report['mode'])
+        if report.get('audit_error'):
+            response['warning'] = '存档已保存并备份，但操作记录写入失败：' + report['audit_error']
+        if report.get('warnings'):
+            response['warning'] = response.get('warning', '') + ' 存档已保存，临时文件暂未清理。'
     return response
 
 
@@ -399,12 +169,13 @@ def enrich_plan(result, body, data):
 
 def export_history():
     history=[]
-    for report_file in sorted((BACKUP_ROOT).glob('*.bak.json'),key=lambda p:p.stat().st_mtime,reverse=True)[:30]:
+    reports = list(BACKUP_ROOT.glob('*.bak.json')) + list(EDITOR.backup_root.glob('*.bak.json'))
+    for report_file in sorted(reports,key=lambda p:p.stat().st_mtime,reverse=True)[:30]:
         try:
             report=json.loads(report_file.read_text(encoding='utf-8'))
             backup=Path(report.get('backup','')).name
-            if not backup or not (BACKUP_ROOT/backup).is_file():continue
-            changes=report.get('changes',report.get('edits',[]))
+            if not backup or not (report_file.parent/backup).is_file():continue
+            changes=report.get('changes',report.get('edits',report.get('operations',[])))
             history.append({'source':Path(report.get('source','')).name,'mode':report.get('mode','export'),
                             'created':report.get('created',datetime.fromtimestamp(report_file.stat().st_mtime).isoformat(timespec='seconds')),
                             'count':report.get('count',len(changes)),'backup':backup,'backup_download':'/backups/'+backup})
@@ -413,7 +184,7 @@ def export_history():
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'DawnAtelier/2.4'
+    server_version = 'DawnAtelier/' + app_version()
 
     def log_message(self, format, *args):
         pass
@@ -450,10 +221,16 @@ class Handler(BaseHTTPRequestHandler):
             elif route == '/api/bootstrap':
                 self.json({'app': 'dawn-atelier', 'token': TOKEN, 'saves': saved_games(),
                            'desktop_origin': getattr(self.server, 'desktop_origin', None),
-                           'version':'2.1','runtime':game_runtime.status(),'demo':DEMO,
+                           'version':app_version(),'adapter':ADAPTER.descriptor.to_dict(),'runtime':game_runtime.status(),'demo':DEMO,
                            'stats': read_json('unpacked/configs/index.json'),
                            'resources': read_json('unpacked/resources/summary.json'),
                            'groups': [{'id': g[0], 'label': g[1], 'icon': g[3]} for g in GROUPS]})
+            elif route == '/api/adapters':
+                from workbench import registry
+                from compatibility import profiles
+                self.json({'active': ADAPTER.descriptor.id, 'adapters': registry().descriptors(),
+                           'compatibility':COMPATIBILITY, 'demo':DEMO,
+                           'reviewed_builds':[profile['id'] for profile in profiles()]})
             elif route == '/api/presets':
                 self.json(presets.catalog())
             elif route == '/api/saves':
@@ -487,13 +264,15 @@ class Handler(BaseHTTPRequestHandler):
                 files = [{'name': p.name, 'bytes': p.stat().st_size,
                           'modified': datetime.fromtimestamp(p.stat().st_mtime).isoformat(timespec='seconds'),
                           'download': '/downloads/' + p.name} for p in sorted(folder.glob('*.bytes'), key=lambda p: p.stat().st_mtime, reverse=True)] if folder.exists() else []
-                backups = list((BACKUP_ROOT).glob('*.bak'))
+                backups = list(BACKUP_ROOT.glob('*.bak')) + list(EDITOR.backup_root.glob('*.bak'))
                 self.json({'files': files, 'backup_count': len(backups),'history':export_history()})
             elif route.startswith('/backups/'):
                 name=route.rsplit('/',1)[-1]
                 if not re.fullmatch(r'(?:AUTO_)?SAVE_PIPER_\d+\.bytes\.\d{8}-\d{6}-\d{6}\.bak',name):
                     raise ValueError('备份文件名无效。')
-                path=BACKUP_ROOT/name
+                path=EDITOR.backup_root/name
+                if not path.is_file():
+                    path=BACKUP_ROOT/name
                 restored_name=name.split('.bytes.')[0]+'.bytes'
                 self.send_bytes(path.read_bytes(),'application/octet-stream',extra={'Content-Disposition':f'attachment; filename="{restored_name}"'})
             elif route.startswith('/downloads/'):
@@ -504,7 +283,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_bytes(path.read_bytes(), 'application/octet-stream', extra={'Content-Disposition': f'attachment; filename="{name}"'})
             else:
                 relative = 'index.html' if route == '/' else route.lstrip('/')
-                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css','progression-ui.js','progression.css','save-refresh.js',
+                if relative not in ('index.html', 'app.js', 'style.css','presets-ui.js','presets.css','progression-ui.js','progression.css','save-refresh.js','adapters-ui.js','adapters.css',
                                     'desktop/index.html','desktop/launcher.js','desktop/launcher.css') and not relative.startswith(('assets/','brand/')):
                     self.json({'error': '页面不存在。'}, 404)
                     return

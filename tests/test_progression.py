@@ -187,7 +187,7 @@ class ProgressionPreparation(unittest.TestCase):
         preview = web_server.edit_save(body)
         self.assertTrue(preview['original_preserved'])
         self.assertGreater(preview['count'], 0)
-        exported = web_server.edit_save(body, export=True)
+        exported = web_server.edit_save({**body, 'plan_id':preview['plan_id']}, export=True)
         self.assertTrue(exported['filename'])
         self.assertEqual((SAVE_DIR / 'SAVE_PIPER_0.bytes').read_bytes(), BASE)
 
@@ -198,6 +198,32 @@ class ProgressionPreparation(unittest.TestCase):
             with self.subTest(route=route), self.assertRaises(ValueError):
                 web_server.edit_save({'save':'SAVE_PIPER_0.bytes','sha256':hashlib.sha256(BASE).hexdigest(),
                                       'edits':[{'path':route,'value':'30'}]})
+
+    def test_write_requires_the_same_preview_and_keeps_game_backup_scope(self):
+        body = {'save':'SAVE_PIPER_0.bytes','sha256':hashlib.sha256(BASE).hexdigest(),
+                'edits':[{'path':'AlchemySaveData.TalentPoint','value':'99'}]}
+        preview = web_server.edit_save(body)
+        self.assertEqual(preview['adapter_id'], 'thepiper')
+        for request in (body, {**body, 'plan_id':'wrong'},
+                        {**body, 'plan_id':preview['plan_id'],
+                         'edits':[{'path':'AlchemySaveData.TalentPoint','value':'100'}]}):
+            with self.assertRaisesRegex(ValueError, '预览'):
+                web_server.edit_save(request, export=True)
+        exported = web_server.edit_save({**body, 'plan_id':preview['plan_id']}, export=True)
+        self.assertEqual(web_server.EDITOR.backup_root.name, 'thepiper')
+        backup = web_server.EDITOR.backup_root / exported['backup']
+        self.assertEqual(backup.read_bytes(), BASE)
+        self.assertTrue(any(row['backup'] == backup.name for row in web_server.export_history()))
+        self.assertEqual((SAVE_DIR / body['save']).read_bytes(), BASE)
+
+    def test_registered_game_adapter_inspects_without_an_http_server(self):
+        from workbench import registry
+        adapter = registry().get('thepiper')
+        self.assertTrue(adapter.inspect(BASE)['fields'])
+        edited = adapter.transform(BASE, [{'path':'AlchemySaveData.TalentPoint','value':'87'}])
+        adapter.validate(BASE, edited, [{'path':'AlchemySaveData.TalentPoint','value':'87'}])
+        with self.assertRaises(ValueError):
+            adapter.validate(BASE, edited, [{'path':'AlchemySaveData.TalentPoint','value':'88'}])
 
 
 def tearDownModule():

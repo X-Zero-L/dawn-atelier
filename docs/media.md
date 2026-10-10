@@ -13,9 +13,9 @@ node scripts/refresh-media.mjs
 流程会自动完成：
 
 1. 使用空的临时目录生成合成存档，在空闲端口启动演示服务。
-2. 使用独立无头浏览器拍摄全部 20 张截图，包含桌面启动、满好感预览、工坊成长与炼金解锁准备。
+2. 使用独立无头浏览器拍摄截图清单中的全部页面，包含桌面更新、满好感预览、工坊成长、炼金解锁准备与游戏扩展。
 3. 将本次截图复制到视频工程，检查图片 SHA-256。
-4. 渲染 54 秒、1920 × 1080、30 fps 的 H.264 视频与封面。
+4. 按时间轴渲染视频与封面：当前为 59 秒、1920 × 1080、30 fps、H.264。
 5. 生成两倍速 GIF、关键帧和拼图。
 6. 更新 README 预览、来源清单与校验值，清理临时服务和浏览器。
 
@@ -55,6 +55,8 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | --- | --- |
 | `desktop.png` | Windows 桌面启动页 |
 | `desktop-preparing.png` | 首次资料准备进度 |
+| `desktop-updating.png` | 游戏更新后的自动准备 |
+| `desktop-app-update.png` | 工坊程序自身更新 |
 | `overview.png` | 工作台首页 |
 | `presets.png` | 超级补给与六组日常方案 |
 | `builder.png` | 参数组合编辑器 |
@@ -73,6 +75,8 @@ node scripts/refresh-media.mjs --publish-only --release latest --commit
 | `super-supply.png` | 超级补给入口 |
 | `super-supply-preview.png` | 铜锭补足与铁金锭新增 |
 | `super-supply-mobile.png` | 超级补给窄屏入口 |
+| `adapters.png` | 当前游戏功能、共同保存流程与合成格式开发示例 |
+| `adapters-mobile.png` | 游戏与扩展窄屏布局 |
 
 `scripts/media-config.json` 是完整截图集合；`video/src/timeline.json` 定义时长、封面帧与抽样帧。`docs/images/screenshots.json` 和 `docs/media-manifest.json` 记录本次来源及文件哈希。生成过程中源代码发生变化会中止，缺少图片不会回退到旧图。
 
